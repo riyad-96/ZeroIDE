@@ -1,5 +1,4 @@
 //! sidebar styling
-
 .sidebar {
   background-color: var(--sidebar-bg);
   border-inline-end: 1px solid var(--sidebar-border-clr);
@@ -9,7 +8,7 @@
   position: relative;
   user-select: none;
   color: var(--sidebar-clr);
-  overflow: hidden;
+  overflow-x: hidden;
 
   transition: 500ms;
 }
@@ -23,10 +22,34 @@
   cursor: pointer;
 }
 
+.sidebar-toggle-btn svg {
+  rect:first-of-type {
+    fill: var(--sidebar-toggle-icon-fill);
+  }
+
+  &:active {
+    scale: 0.9;
+  }
+}
+
 .profile-image {
-  padding-block: 3rem 1.5rem;
+  height: 120px;
+  padding-block-end: 1rem;
   display: flex;
   justify-content: center;
+  align-items: end;
+  transition: 500ms;
+
+  svg {
+    transition: 500ms;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+    &:hover {
+      fill: #fff;
+    }
+  }
 }
 
 .sidebar-menu {
@@ -98,23 +121,29 @@
   background-color: var(--primary-menu-link-hover-bg);
   padding-inline: 0.5rem;
   border-radius: 0 0 0.5rem 0.5rem;
-  transition: padding 200ms;
+  transition: padding 400ms;
 }
 
 .create-new-project-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 0.9rem;
   width: 100%;
   text-align: start;
   padding-block: 0.425rem;
   padding-inline-start: 0.5rem;
   cursor: pointer;
   border-radius: 0.4rem;
+  text-wrap: nowrap;
 
   &:hover {
     color: #fff;
     background-color: var(--sub-menu-link-hover-bg);
+  }
+
+  svg {
+    min-width: 18px;
   }
 }
 
@@ -131,6 +160,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 0.9rem;
     padding-block: 0.425rem;
     padding-inline-start: 0.5rem;
   }
@@ -142,6 +172,10 @@
   &:hover .sub-menu-option-btn {
     color: #fff;
     opacity: 1;
+  }
+
+  svg {
+    min-width: 18px;
   }
 }
 
@@ -161,12 +195,123 @@
   display: grid;
   grid-template-rows: 0fr;
   scale: 0.9;
-  transition: 300ms ease-in-out;
+  transition: 400ms ease-in-out;
 }
 
 .sub-menu {
   overflow: hidden;
 }
+
+//! create project form styling
+.form-background-layer {
+  --form-bg-layer-bg: #0000004f;
+  --input-textarea-bg: #ffffff13;
+  --form-btn-bg: hsl(0, 0%, 15%);
+  --form-btn-hover-bg: hsl(0, 0%, 18%);
+  --every-form-element-border: hsl(0, 0%, 21%);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: #0000004f;
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+}
+
+form {
+  background-color: var(--sidebar-bg);
+  box-sizing: content-box;
+  padding: 2rem;
+  min-width: 400px;
+  border: 1px solid var(--every-form-element-border);
+  border-radius: 0.5rem;
+  user-select: none;
+
+  > div:not(.form-buttons) {
+    display: grid;
+    margin-block-end: 1rem;
+  }
+
+  label {
+    margin-block-end: 0.325rem;
+    color: var(--sidebar-clr);
+  }
+
+  input,
+  textarea {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--input-textarea-bg);
+    color: var(--body-clr);
+    border-radius: 0.5rem;
+    border: 1px solid var(--every-form-element-border);
+  }
+
+  textarea {
+    resize: none;
+    max-height: 200px;
+    height: 150px;
+  }
+
+  textarea::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+  }
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+
+  button {
+    cursor: pointer;
+  }
+
+  button:not(.cancel-btn) {
+    background-color: var(--form-btn-bg);
+    padding-block: 0.5rem 0.4rem;
+    padding-inline: 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.825rem;
+    border: 1px solid var(--every-form-element-border);
+
+    &:hover {
+      background-color: var(--form-btn-hover-bg);
+    }
+  }
+
+  .cancel-btn {
+    font-size: 0.9rem;
+    padding-block: 0.5rem;
+    padding-inline: 0.8rem;
+    text-underline-offset: 2px;
+    text-decoration: underline;
+    transition: 200ms;
+
+    &:hover {
+      text-underline-offset: 6px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -175,6 +320,7 @@
 
 .homepage {
   background-color: var(--homepage-bg);
+  color: #616161;
 }
 
 h1 {

@@ -23,19 +23,20 @@
 }
 
 :root {
-  --body-bg: #0d0d0d;
-  --body-clr: #f0f0f0;
+  --body-bg: hsl(0, 0%, 5%);
+  --body-clr: hsl(0, 0%, 94%);
   
-  --sidebar-bg: #121212;
-  --sidebar-clr: #d4d4d4;
-  --sidebar-border-clr: #222;
+  --sidebar-bg: hsl(0, 0%, 7%);
+  --sidebar-clr: hsl(0, 0%, 83%);
+  --sidebar-border-clr: hsl(0, 0%, 13%);
 
-  --profile-image-svg-fill: #f3f3f3;
+  --sidebar-toggle-icon-fill: hsl(0, 0%, 12%);
+  --profile-image-svg-fill: hsl(0, 0%, 95%);
 
   --primary-menu-link-hover-bg: hsl(0, 0%, 13%);
   --sub-menu-link-hover-bg: hsl(0, 0%, 17%);
   --sub-menu-option-hover-bg: hsl(0, 0%, 20%);
-  --sidebar-footer-clr: #666;
+  --sidebar-footer-clr: hsl(0, 0%, 40%);
 
   --homepage-bg: #0d0d0d;
   --diversion-border-clr: #222;
@@ -51,6 +52,7 @@
 body {
   font-size: 1rem;
   margin: 0;
+  background-color: var(--body-bg);
   color: var(--body-clr);
 }
 

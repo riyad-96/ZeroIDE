@@ -17,6 +17,15 @@
   min-width: 250px;
 }
 
+//! Profile Image toggle
+.profile-image.enlarge {
+  height: 150px;
+  svg {
+    width: 80px;
+    height: 80px;
+  }
+}
+
 
 //! Sub menu toggle
 .project-menu.show {
@@ -47,3 +56,6 @@
     padding-block: 0.5rem;
   }
 }
+
+
+//! create new project utilities
