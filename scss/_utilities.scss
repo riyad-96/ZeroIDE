@@ -54,8 +54,27 @@
 
   .sub-menu {
     padding-block: 0.5rem;
+    filter: unset;
   }
 }
 
 
 //! create new project utilities
+.form-background-layer.appear {
+  opacity: 1;
+  display: grid;
+
+  form {
+    translate: 0 0px;
+  }
+}
+
+@starting-style{
+  .form-background-layer.appear {
+    opacity: 0;
+
+    form {
+      translate: 0 20px;
+    }
+  }
+}
