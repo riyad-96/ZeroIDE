@@ -26,7 +26,6 @@
   }
 }
 
-
 //! Sub menu toggle
 .project-menu.show {
   background-color: var(--primary-menu-link-hover-bg);
@@ -38,13 +37,18 @@
     }
   }
 
+  > div:first-of-type {
+    border-radius: 0.5rem 0.5rem 0 0;
+    border-block-end: 1px solid var(--slick-border-clr);
+  }
+
+  // .sub-menu-btn {
+  //   border-inline-start: 1px solid var(--slick-border-clr);
+  // }
+
   .sub-menu-btn svg {
     rotate: -180deg;
     animation: blinking 1.5s infinite;
-  }
-
-  > div:first-of-type {
-    border-radius: 0.5rem 0.5rem 0 0;
   }
 
   .grid-smooth-height {
@@ -58,7 +62,6 @@
   }
 }
 
-
 //! create new project utilities
 .form-background-layer.appear {
   opacity: 1;
@@ -69,7 +72,7 @@
   }
 }
 
-@starting-style{
+@starting-style {
   .form-background-layer.appear {
     opacity: 0;
 
@@ -77,4 +80,34 @@
       translate: 0 20px;
     }
   }
+}
+
+@keyframes created {
+  0% {
+    translate: 0 -20px;
+    opacity: 0;
+    outline: 2px solid hsl(0, 0%, 80%);
+    scale: 0.6;
+  }
+  50% {
+    // outline: 2px solid hsl(0, 0%, 45%);
+    translate: 0 0;
+    scale: 0.99;
+  }
+  80% {
+    outline: 2px solid hsl(0, 0%, 70%);
+  }
+  100% {
+    opacity: 1;
+    outline: 1px solid hsl(0, 0%, 13%);
+    scale: 1;
+  }
+}
+
+.project-list-item.created {
+  animation-name: created;
+  animation-timing-function: ease;
+  animation-delay: 400ms;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }

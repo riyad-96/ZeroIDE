@@ -13,6 +13,10 @@
   transition: 500ms;
 }
 
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
 .sidebar-toggle-btn {
   position: absolute;
   right: 10px;
@@ -48,12 +52,6 @@
   }
 }
 
-.sidebar-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 .primary-menu {
   margin-inline: 0.5rem;
   margin-block: 0.525rem;
@@ -69,10 +67,12 @@
   padding-inline: 0.525rem;
   padding-block: 0.425rem;
   border-radius: 0.5rem;
+  border: 1px solid transparent;
 
   &:hover {
     color: var(--white);
     background-color: var(--primary-menu-link-hover-bg);
+    border: 1px solid var(--slick-border-clr);
   }
 
   svg {
@@ -80,18 +80,28 @@
   }
 }
 
+.project-menu {
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid var(--slick-border-clr)
+  }
+}
+
+.project-menu .primary-menu-link {
+  padding-block: 0;
+  border: 1px solid transparent;
+}
+
 .project-menu > div:first-of-type {
   display: flex;
   align-items: center;
   border-radius: 0.5rem;
   overflow: hidden;
-  border: 1px solid transparent;
-
-  &:hover {
-    border: 1px solid var(--sidebar-border-clr);
-  }
+  height: 40.5px;
+  border-block-end: 1px solid transparent;
 
   a {
+    height: 100%;
     border-radius: unset;
     flex-grow: 1;
   }
@@ -100,7 +110,7 @@
 .sub-menu-btn {
   display: grid;
   place-items: center;
-  height: 38.5px;
+  height: 100%;
   padding-inline: 0.325rem;
   cursor: pointer;
 
@@ -119,6 +129,12 @@
   border-radius: 0 0 0.5rem 0.5rem;
   filter: blur(2px);
   transition: 400ms;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.sub-menu::-webkit-scrollbar {
+  display: none;
 }
 
 .create-new-project-btn {
@@ -134,7 +150,8 @@
   border-radius: 0.4rem;
   text-wrap: nowrap;
   background-color: hsl(0, 0%, 15%);
-  
+  border: 1px solid var(--slick-border-clr);
+
   &:hover {
     color: var(--white);
     background-color: var(--sub-menu-link-hover-bg);
@@ -149,9 +166,12 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding-inline-end: 0.2rem;
   border-radius: 0.4rem;
-  margin-block-start: 2px;
+  margin-block: 5px;
+  opacity: 0;
+  border: 1px solid transparent;
+  position: relative;
+  z-index: 5;
 
   a {
     flex-grow: 1;
@@ -160,12 +180,19 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.8rem;
-    padding-block: 0.425rem;
+    padding-block: 0.525rem;
     padding-inline-start: 0.5rem;
   }
+
+  span {
+    outline: none;
+    padding-inline-end: 0.2rem;
+  }
+
   &:hover {
     color: var(--white);
     background-color: var(--sub-menu-link-hover-bg);
+    border: 1px solid var(--slick-border-clr);
   }
 
   &:hover .sub-menu-option-btn {
@@ -178,12 +205,29 @@
   }
 }
 
+.sub-menu-options {
+  position: absolute;
+  bottom: calc(50% + 20px);
+  right: 0;
+  z-index: 5;
+  translate: 0 50%;
+
+  display: grid;
+  border: 1px solid var(--slick-border-clr);
+
+  button {
+    display: flex;
+  }
+}
+
 .sub-menu-option-btn {
   box-sizing: content-box;
   border-radius: 50%;
   padding: 0.25rem;
-  opacity: 0;
+  // opacity: 0;
   transition: opacity 200ms;
+  margin-inline-end: 0.25rem;
+  background-color: var(--sub-menu-option-hover-bg);
 
   &:hover {
     background-color: var(--sub-menu-option-hover-bg);
@@ -197,18 +241,8 @@
   transition: 400ms ease-in-out;
 }
 
-.sub-menu {
-  overflow: hidden;
-}
-
 //! create project form styling
 .form-background-layer {
-  --form-bg-layer-bg: hsla(0, 0%, 0%, 0.31);
-  --input-textarea-bg: hsla(0, 0%, 100%, 0.075);
-  --form-btn-bg: hsl(0, 0%, 15%);
-  --form-btn-hover-bg: hsl(0, 0%, 18%);
-  --every-form-element-border: hsl(0, 0%, 21%);
-
   position: fixed;
   top: 0;
   left: 0;
@@ -230,7 +264,7 @@ form {
   box-sizing: content-box;
   padding: 2rem;
   min-width: 400px;
-  border: 1px solid var(--every-form-element-border);
+  border: 1px solid var(--slick-border-clr);
   border-radius: 0.5rem;
   user-select: none;
   translate: 0 -20px;
@@ -255,7 +289,7 @@ form {
     background-color: var(--input-textarea-bg);
     color: var(--body-clr);
     border-radius: 0.5rem;
-    border: 1px solid var(--every-form-element-border);
+    border: 1px solid var(--slick-border-clr);
   }
 
   textarea {
@@ -285,7 +319,7 @@ form {
     padding-inline: 0.8rem;
     border-radius: 0.5rem;
     font-size: 0.825rem;
-    border: 1px solid var(--every-form-element-border);
+    border: 1px solid var(--slick-border-clr);
 
     &:hover {
       background-color: var(--form-btn-hover-bg);
@@ -298,28 +332,13 @@ form {
     padding-inline: 0.8rem;
     text-underline-offset: 2px;
     text-decoration: underline;
-    transition: 200ms;
+    transition: text-underline-offset 200ms;
 
     &:hover {
       text-underline-offset: 6px;
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //! Homepage styling
 
