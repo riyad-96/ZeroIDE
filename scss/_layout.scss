@@ -1,0 +1,33 @@
+main {
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+
+}
+
+.side-bar {
+  min-height: 100%;
+}
+
+.homepage {
+  flex-grow: 1;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track{
+    background-color: red;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: hotpink;
+    border: 2px solid green;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+}

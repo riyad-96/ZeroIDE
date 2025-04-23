@@ -1,0 +1,49 @@
+.blinking-rect {
+  animation: blinking 2s infinite;
+}
+
+@keyframes blinking {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+//! Sidebar toggle
+.sidebar.show {
+  min-width: 250px;
+}
+
+
+//! Sub menu toggle
+.project-menu.show {
+  background-color: var(--primary-menu-link-hover-bg);
+
+  .primary-menu-link,
+  .sub-menu-btn {
+    &:hover {
+      background-color: var(--sub-menu-option-hover-bg);
+    }
+  }
+
+  .sub-menu-btn svg {
+    rotate: -180deg;
+    animation: blinking 1.5s infinite;
+  }
+
+  > div:first-of-type {
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .grid-smooth-height {
+    scale: 1;
+    grid-template-rows: 1fr;
+  }
+
+  .sub-menu {
+    padding-block: 0.5rem;
+  }
+}
