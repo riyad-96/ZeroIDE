@@ -149,7 +149,7 @@
   cursor: pointer;
   border-radius: 0.4rem;
   text-wrap: nowrap;
-  background-color: hsl(0, 0%, 15%);
+  background-color: var(--create-new-project-btn-bg);
   border: 1px solid var(--slick-border-clr);
 
   &:hover {
@@ -406,7 +406,7 @@ form {
 
   .delete-messages > span {
     font-size: 0.9rem;
-    color: hsl(0, 0%, 64%);
+    color: var(--delete-message-modal-suggested-span);
   }
 
   p {
@@ -454,23 +454,3 @@ form {
   }
 }
 
-//! Homepage styling
-
-.homepage {
-  background-color: var(--homepage-bg);
-  color: #616161;
-}
-
-h1 {
-  font-size: 3.5rem;
-  background: var(--h1-clr);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  margin: 0;
-}
-
-// p{
-//   margin: 0;
-// }

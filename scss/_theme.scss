@@ -1,0 +1,34 @@
+:root {
+  --white: hsl(0, 0%, 100%);
+  --body-bg: hsl(0, 0%, 5%);
+  --body-clr: hsl(0, 0%, 90%);
+  
+  //!sidebar all colors ----
+  --sidebar-bg: hsl(0, 0%, 7%);
+  --sidebar-clr: hsl(0, 0%, 83%);
+  --sidebar-border-clr: hsl(0, 0%, 13%);
+  --sidebar-toggle-icon-fill: hsl(0, 0%, 12%);
+  --profile-image-svg-fill: hsl(0, 0%, 95%);
+  --primary-menu-link-hover-bg: hsl(0, 0%, 13%);
+  --sub-menu-link-hover-bg: hsl(0, 0%, 17%);
+  --sub-menu-option-hover-bg: hsl(0, 0%, 20%);
+  --sidebar-footer-clr: hsl(0, 0%, 40%);
+  --create-new-project-btn-bg: hsl(0, 0%, 15%);
+
+  --form-bg-layer-bg: hsla(0, 0%, 0%, 0.31);
+  --input-textarea-bg: hsla(0, 0%, 100%, 0.075);
+  --form-btn-bg: hsl(0, 0%, 15%);
+  --form-btn-hover-bg: hsl(0, 0%, 18%);
+  --slick-border-clr: hsl(0, 0%, 21%);
+
+  --delete-message-modal-suggested-span: hsl(0, 0%, 64%);
+
+  --global-scrollbar-track-bg: hsl(0, 0%, 7%);
+  --global-scrollbar-thumb-bg: hsl(0, 0%, 35%);
+  --global-scrollbar-thumb-hover-bg: hsl(0, 0%, 50%);
+
+  --homepage-bg: #0d0d0d;
+  --diversion-border-clr: #222;
+
+  --h1-clr: linear-gradient(to right, hsl(0, 0%, 100%), hsl(0, 0%, 53%));
+}
