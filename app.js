@@ -15,14 +15,22 @@ const createOpenBtn = document.querySelector('.create-open-btn');
 
 const createNewBtn = document.querySelector('.create-new-project-btn');
 
+//! -----
 const savedProjects =
   JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+//! -----
 const projectList = document.querySelector('.project-list');
 const projectTitleInput = document.getElementById('project-title');
 const projectDescriptionInput = document.getElementById('project-description');
 
+const deleteModal = document.querySelector('.delete-confirmation-modal');
+const deleteModalContent = document.querySelector('.delete-modal-content');
+const deleteCancelBtn = document.querySelector('.dlt-cancel-btn');
+const deleteConfirmBtn = document.querySelector('.dlt-confirm-btn');
+const dltModCurrTitle = document.querySelector('.delete-messages p span');
+
 //! sidebar programs ---------
-// sidebar toggle ----
+//! sidebar toggle ----
 sidebarToggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('show');
   profileImage.classList.toggle('enlarge');
@@ -32,7 +40,7 @@ sidebarToggleBtn.addEventListener('click', () => {
   }
 });
 
-// sub menu toggle ----
+//! sub menu toggle ----
 subMenuBtn.addEventListener('click', () => {
   projectMenu.classList.toggle('show');
   projectTitleInput.focus();
@@ -40,16 +48,51 @@ subMenuBtn.addEventListener('click', () => {
 
 //! Create new projects programs ----------
 const allCancelMethod = [createNewBtn, formBgLayer, cancelBtn, createBtn];
-// toggle form when needed
+//! toggle form when needed
 allCancelMethod.forEach((btn) =>
   btn.addEventListener('click', () => {
     formBgLayer.classList.toggle('appear');
   })
 );
-// assigning default behaviors
+
+//! delete modal programs
+deleteModalContent.addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+
+//! cancel delete
+function closeDeleteModal() {
+  deleteModal.classList.toggle('appear');
+}
+deleteCancelBtn.addEventListener('click', closeDeleteModal);
+deleteModal.addEventListener('click', closeDeleteModal);
+
+//! delete single project
+let currentId = null;
+deleteConfirmBtn.addEventListener('click', () => {
+  const itemIndex = savedProjects.findIndex((p) => p.id === currentId);
+  if (itemIndex !== -1) {
+    savedProjects.splice(itemIndex, 1);
+    localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
+    const allProjectItems = document.querySelectorAll('.project-list-item');
+    allProjectItems.forEach((item) => {
+      const link = item.querySelector('a');
+      if (link && link.href.includes(`#${currentId}`)) {
+        item.remove();
+      }
+    });
+  }
+  closeDeleteModal();
+});
+
+//! assigning default behaviors of createnew project form
 createNewBtn.addEventListener('click', () => projectTitleInput.focus());
 
 projectTitleInput.addEventListener('keydown', (e) => {
+  if (e.ctrlKey & (e.key === 'Enter')) {
+    e.preventDefault();
+    createBtn.click();
+  }
   if (e.key === 'Enter') {
     e.preventDefault();
     projectDescriptionInput.focus();
@@ -71,13 +114,13 @@ form.addEventListener('submit', (e) => {
 });
 //! -------------------------
 
-// Loads all saved projects
+//! Loads all saved projects
 function loadAllSavedProjects() {
   savedProjects.forEach((p) => createNewProject(p.id, p.name));
 }
 loadAllSavedProjects();
 
-// Create project list items
+//! Create project list items
 function createNewProject(id, name) {
   const div = document.createElement('div');
   div.classList.add('project-list-item');
@@ -95,22 +138,89 @@ function createNewProject(id, name) {
                     viewBox="0 -960 960 960" width="20px" fill="currentColor">
                     <path
                       d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z" />
-                  </svg>`;
-  const projectName = div.querySelector('span')
+                  </svg>
+                  <div class="sub-menu-options">
+                    <button aria-label="rename button" title="Rename project">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                        fill="currentColor">
+                        <path
+                          d="M15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89H6.41421L15.7279 9.57627ZM17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785L17.1421 8.16206ZM7.24264 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L7.24264 20.89Z">
+                        </path>
+                      </svg>
+                    </button>
+                    <button aria-label="delete button" title="Delete project"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+                        fill="currentColor">
+                        <path
+                          d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z">
+                        </path>
+                      </svg></button>
+                  </div>`;
+  //! options button functionality
+  const options = div.querySelector('.sub-menu-options');
   const optionBtn = div.querySelector('.sub-menu-option-btn');
   optionBtn.addEventListener('click', () => {
-    
-  })
+    options.classList.toggle('show');
+  });
+  function removeOptions() {
+    setTimeout(() => {
+      options.classList.remove('show');
+    }, 50);
+  }
+  options.addEventListener('mouseleave', removeOptions);
+  div.addEventListener('mouseleave', removeOptions);
+
+  //! Rename project
+  const renameBtn = options.querySelector('button:first-of-type');
+  const projectName = div.querySelector('span');
+  const link = div.querySelector('a');
+
+  renameBtn.addEventListener('click', () => {
+    projectName.setAttribute('contenteditable', 'true');
+    projectName.focus();
+    projectName.style.outline = '2px solid rgba(124, 124, 124, 0.486)';
+    projectName.style.cursor = 'text';
+    const prevLink = link.href;
+    link.removeAttribute('href');
+
+    projectName.addEventListener('blur', () => {
+      projectName.removeAttribute('contenteditable');
+      projectName.style.outline = 'none';
+      projectName.style.cursor = 'inherit';
+      link.setAttribute('href', prevLink);
+
+      const itemIndex = savedProjects.findIndex((p) => p.id === id);
+      if (itemIndex !== -1) {
+        savedProjects[itemIndex].name = projectName.textContent.trim();
+        localStorage.setItem(
+          'all-saved-projects',
+          JSON.stringify(savedProjects)
+        );
+      }
+    });
+  });
+
+  //! delete projects
+  const deleteBtn = options.querySelector('button:last-of-type');
+  deleteBtn.addEventListener('click', () => {
+    deleteModal.classList.toggle('appear');
+    dltModCurrTitle.textContent = projectName.textContent;
+    currentId = id;
+  });
 
   projectList.prepend(div);
 }
-// save to local storage
+
+//! delete projects
+// function deleteSingleProject() {
+// }
+
+//! save to local storage
 function saveToLocalStorage(id, name, des) {
   const newProject = { id, name, des: des };
   savedProjects.push(newProject);
   localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
 }
-// click to create and save
+//! click to create and save
 createBtn.addEventListener('click', () => {
   const id = Date.now();
   const name = projectTitleInput.value.trim() || 'Untitled';

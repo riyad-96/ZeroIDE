@@ -42,10 +42,6 @@
     border-block-end: 1px solid var(--slick-border-clr);
   }
 
-  // .sub-menu-btn {
-  //   border-inline-start: 1px solid var(--slick-border-clr);
-  // }
-
   .sub-menu-btn svg {
     rotate: -180deg;
     animation: blinking 1.5s infinite;
@@ -72,6 +68,15 @@
   }
 }
 
+.delete-confirmation-modal.appear {
+  opacity: 1;
+  display: grid;
+
+  .delete-confirmation-buttons {
+    translate: 0 0px;
+  }
+}
+
 @starting-style {
   .form-background-layer.appear {
     opacity: 0;
@@ -79,6 +84,12 @@
     form {
       translate: 0 20px;
     }
+  }
+
+}
+@starting-style {
+  .delete-confirmation-modal.appear {
+    opacity: 0;
   }
 }
 
@@ -90,7 +101,6 @@
     scale: 0.6;
   }
   50% {
-    // outline: 2px solid hsl(0, 0%, 45%);
     translate: 0 0;
     scale: 0.99;
   }
@@ -110,4 +120,8 @@
   animation-delay: 400ms;
   animation-duration: 1s;
   animation-fill-mode: forwards;
+}
+
+.sub-menu-options.show {
+  display: flex;
 }
