@@ -19,10 +19,18 @@
 
 //! Profile Image toggle
 .profile-image.enlarge {
-  height: 150px;
+  height: 170px;
+
+  .display-profile-img {
+    width: 80px;
+    height: 80px;
+    outline-width: 2px;
+  }
+
   svg {
     width: 80px;
     height: 80px;
+    scale: 1.2;
   }
 }
 
@@ -54,7 +62,7 @@
 
   .sub-menu {
     padding-block: 0.5rem;
-    filter: unset;
+    opacity: 1;
   }
 }
 
@@ -71,9 +79,16 @@
 .delete-confirmation-modal.appear {
   opacity: 1;
   display: grid;
+}
 
-  .delete-confirmation-buttons {
-    translate: 0 0px;
+.profile-img-modal.appear {
+  opacity: 1;
+  display: grid;
+}
+
+@starting-style {
+  .profile-img-modal.appear {
+    opacity: 0;
   }
 }
 

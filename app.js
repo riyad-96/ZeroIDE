@@ -2,11 +2,21 @@
 const sidebar = document.querySelector('.sidebar');
 const sidebarToggleBtn = document.querySelector('.sidebar-toggle-btn');
 
+// profile image related variables
 const profileImage = document.querySelector('.profile-image');
+const profileImgModal = document.querySelector('.profile-img-modal');
+profileImgModal
+  .querySelector('.img-modal-container')
+  .addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+const closeImgBtn = document.querySelector('.close-img-btn');
 
+// menu toggle related variables
 const projectMenu = document.querySelector('.project-menu');
 const subMenuBtn = document.querySelector('.sub-menu-btn');
 
+// create new project related variables
 const formBgLayer = document.querySelector('.form-background-layer');
 const form = document.querySelector('form');
 const cancelBtn = document.querySelector('.cancel-btn');
@@ -15,7 +25,7 @@ const createOpenBtn = document.querySelector('.create-open-btn');
 
 const createNewBtn = document.querySelector('.create-new-project-btn');
 
-//! -----
+//! main saved projects variable -----
 const savedProjects =
   JSON.parse(localStorage.getItem('all-saved-projects')) || [];
 //! -----
@@ -23,14 +33,27 @@ const projectList = document.querySelector('.project-list');
 const projectTitleInput = document.getElementById('project-title');
 const projectDescriptionInput = document.getElementById('project-description');
 
+// project delete related variables
 const deleteModal = document.querySelector('.delete-confirmation-modal');
 const deleteModalContent = document.querySelector('.delete-modal-content');
 const deleteCancelBtn = document.querySelector('.dlt-cancel-btn');
 const deleteConfirmBtn = document.querySelector('.dlt-confirm-btn');
 const dltModCurrTitle = document.querySelector('.delete-messages p span');
 
-//! sidebar programs ---------
-//! sidebar toggle ----
+//! profile image prgrams -----
+const sidebarImgDiv = document.querySelector('.display-profile-img');
+const imgInput = document.getElementById('imgInput');
+const imgModArr = [profileImgModal, sidebarImgDiv,closeImgBtn];
+
+function toggleImgModal() {
+  profileImgModal.classList.toggle('appear');
+}
+imgModArr.forEach(element => {
+  element.addEventListener('click', toggleImgModal)
+})
+
+//! sidebar programs ------
+//! sidebar toggle
 sidebarToggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('show');
   profileImage.classList.toggle('enlarge');
@@ -40,13 +63,13 @@ sidebarToggleBtn.addEventListener('click', () => {
   }
 });
 
-//! sub menu toggle ----
+//! sub menu toggle
 subMenuBtn.addEventListener('click', () => {
   projectMenu.classList.toggle('show');
   projectTitleInput.focus();
 });
 
-//! Create new projects programs ----------
+//! Create new projects programs
 const allCancelMethod = [createNewBtn, formBgLayer, cancelBtn, createBtn];
 //! toggle form when needed
 allCancelMethod.forEach((btn) =>
@@ -181,6 +204,13 @@ function createNewProject(id, name) {
     projectName.style.cursor = 'text';
     const prevLink = link.href;
     link.removeAttribute('href');
+
+    projectName.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        projectName.blur();
+      }
+    });
 
     projectName.addEventListener('blur', () => {
       projectName.removeAttribute('contenteditable');
