@@ -7,7 +7,7 @@
   <title>Code editor</title>
   <link rel="shortcut icon" href="./assets/images/favicon.svg" type="image/x-icon">
 
-  <link rel="stylesheet" href="./styles/main.css">
+  <link rel="stylesheet" href="./dist/main.css">
   <script src="./app.js" defer></script>
 </head>
 
@@ -45,7 +45,18 @@
 
       <ul class="sidebar-menu">
         <li class="primary-menu">
-          <a class="primary-menu-link" href="">
+          <a class="primary-menu-link" href="#home-page">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path
+                d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM19 19V9.97815L12 4.53371L5 9.97815V19H19Z">
+              </path>
+            </svg>
+            <span>Home</span>
+          </a>
+        </li>
+
+        <li class="primary-menu">
+          <a class="primary-menu-link" href="#profile-page">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
               <path
                 d="M12 14V16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM14.5946 18.8115C14.5327 18.5511 14.5 18.2794 14.5 18C14.5 17.7207 14.5327 17.449 14.5945 17.1886L13.6029 16.6161L14.6029 14.884L15.5952 15.4569C15.9883 15.0851 16.4676 14.8034 17 14.6449V13.5H19V14.6449C19.5324 14.8034 20.0116 15.0851 20.4047 15.4569L21.3971 14.8839L22.3972 16.616L21.4055 17.1885C21.4673 17.449 21.5 17.7207 21.5 18C21.5 18.2793 21.4673 18.551 21.4055 18.8114L22.3972 19.3839L21.3972 21.116L20.4048 20.543C20.0117 20.9149 19.5325 21.1966 19.0001 21.355V22.5H17.0001V21.3551C16.4677 21.1967 15.9884 20.915 15.5953 20.5431L14.603 21.1161L13.6029 19.384L14.5946 18.8115ZM18 19.5C18.8284 19.5 19.5 18.8284 19.5 18C19.5 17.1716 18.8284 16.5 18 16.5C17.1716 16.5 16.5 17.1716 16.5 18C16.5 18.8284 17.1716 19.5 18 19.5Z">
@@ -56,8 +67,9 @@
         </li>
 
         <li class="primary-menu">
-          <a class="primary-menu-link" href="">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <a class="primary-menu-link" href="#settings-page">
+            <svg class="settings-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+              fill="currentColor">
               <path
                 d="M2 11.9998C2 11.1353 2.1097 10.2964 2.31595 9.49631C3.40622 9.55283 4.48848 9.01015 5.0718 7.99982C5.65467 6.99025 5.58406 5.78271 4.99121 4.86701C6.18354 3.69529 7.66832 2.82022 9.32603 2.36133C9.8222 3.33385 10.8333 3.99982 12 3.99982C13.1667 3.99982 14.1778 3.33385 14.674 2.36133C16.3317 2.82022 17.8165 3.69529 19.0088 4.86701C18.4159 5.78271 18.3453 6.99025 18.9282 7.99982C19.5115 9.01015 20.5938 9.55283 21.6841 9.49631C21.8903 10.2964 22 11.1353 22 11.9998C22 12.8643 21.8903 13.7032 21.6841 14.5033C20.5938 14.4468 19.5115 14.9895 18.9282 15.9998C18.3453 17.0094 18.4159 18.2169 19.0088 19.1326C17.8165 20.3043 16.3317 21.1794 14.674 21.6383C14.1778 20.6658 13.1667 19.9998 12 19.9998C10.8333 19.9998 9.8222 20.6658 9.32603 21.6383C7.66832 21.1794 6.18354 20.3043 4.99121 19.1326C5.58406 18.2169 5.65467 17.0094 5.0718 15.9998C4.48848 14.9895 3.40622 14.4468 2.31595 14.5033C2.1097 13.7032 2 12.8643 2 11.9998ZM6.80385 14.9998C7.43395 16.0912 7.61458 17.3459 7.36818 18.5236C7.77597 18.8138 8.21005 19.0652 8.66489 19.2741C9.56176 18.4712 10.7392 17.9998 12 17.9998C13.2608 17.9998 14.4382 18.4712 15.3351 19.2741C15.7899 19.0652 16.224 18.8138 16.6318 18.5236C16.3854 17.3459 16.566 16.0912 17.1962 14.9998C17.8262 13.9085 18.8225 13.1248 19.9655 12.7493C19.9884 12.5015 20 12.2516 20 11.9998C20 11.7481 19.9884 11.4981 19.9655 11.2504C18.8225 10.8749 17.8262 10.0912 17.1962 8.99982C16.566 7.90845 16.3854 6.65378 16.6318 5.47605C16.224 5.18588 15.7899 4.93447 15.3351 4.72552C14.4382 5.52844 13.2608 5.99982 12 5.99982C10.7392 5.99982 9.56176 5.52844 8.66489 4.72552C8.21005 4.93447 7.77597 5.18588 7.36818 5.47605C7.61458 6.65378 7.43395 7.90845 6.80385 8.99982C6.17376 10.0912 5.17754 10.8749 4.03451 11.2504C4.01157 11.4981 4 11.7481 4 11.9998C4 12.2516 4.01157 12.5015 4.03451 12.7493C5.17754 13.1248 6.17376 13.9085 6.80385 14.9998ZM12 14.9998C10.3431 14.9998 9 13.6567 9 11.9998C9 10.343 10.3431 8.99982 12 8.99982C13.6569 8.99982 15 10.343 15 11.9998C15 13.6567 13.6569 14.9998 12 14.9998ZM12 12.9998C12.5523 12.9998 13 12.5521 13 11.9998C13 11.4475 12.5523 10.9998 12 10.9998C11.4477 10.9998 11 11.4475 11 11.9998C11 12.5521 11.4477 12.9998 12 12.9998Z">
               </path>
@@ -68,7 +80,7 @@
 
         <li class="primary-menu project-menu show">
           <div>
-            <a class="primary-menu-link" href="">
+            <a class="primary-menu-link" href="#projects-page">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                 <path
                   d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 7V19H20V7H4Z">
@@ -97,7 +109,7 @@
               <div class="project-list">
                 <!-- new projects goes here -->
 
-                <!-- <div class="project-list-item created">
+                <div class="project-list-item created">
                   <a href="">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
                       fill="currentColor">
@@ -105,7 +117,7 @@
                         d="M21 8V20.9932C21 21.5501 20.5552 22 20.0066 22H3.9934C3.44495 22 3 21.556 3 21.0082V2.9918C3 2.45531 3.4487 2 4.00221 2H14.9968L21 8ZM19 9H14V4H5V20H19V9Z">
                       </path>
                     </svg>
-                    <span>project name</span>
+                    <span>permanent project</span>
                   </a>
 
                   <svg class="sub-menu-option-btn" xmlns="http://www.w3.org/2000/svg" height="20px"
@@ -123,14 +135,14 @@
                         </path>
                       </svg>
                     </button>
-                    <button aria-label="delete button" title="Delete project"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                        fill="currentColor">
+                    <button aria-label="delete button" title="Delete project"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                         <path
                           d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z">
                         </path>
                       </svg></button>
                   </div>
-                </div> -->
+                </div>
 
               </div>
             </div>
@@ -139,89 +151,47 @@
       </ul>
     </aside>
 
-    <div class="homepage">
-      <section class="header-section">
-        <h1>Your Code Editor</h1>
-        <p>Write. Run. Save. Built for developers who want freedom and fun.</p>
-        <button>Open Editor</button>
-      </section>
+    <div class="all-pages">
+      <div class="home-page each-page" id="home-page">
+        <section class="header-section">
+          <h1>Your Code Editor</h1>
+          <p>Write. Run. Save. Built for developers who want freedom and fun.</p>
+          <button>Open Editor</button>
+        </section>
 
-      <section class="feature-info-section">
-        <h2>Information about a few features.</h2>
-        <div class="feature-card">
-          <div>
-            <h3>Real-time Preview</h3>
-            <p>Instantly see what your code does, no refresh needed.</p>
-          </div>
+        <section class="feature-info-section">
+          <h2>Information about a few features.</h2>
+          <div class="feature-card">
+            <div>
+              <h3>Real-time Preview</h3>
+              <p>Instantly see what your code does, no refresh needed.</p>
+            </div>
 
-          <div>
-            <h3>Local Storage</h3>
-            <p>Your code stays safe in the browser--evern after reboots!</p>
-          </div>
+            <div>
+              <h3>Local Storage</h3>
+              <p>Your code stays safe in the browser--evern after reboots!</p>
+            </div>
 
-          <div>
-            <h3>Minimal, Powerful UI</h3>
-            <p>No distractions. Just you and your code.</p>
+            <div>
+              <h3>Minimal, Powerful UI</h3>
+              <p>No distractions. Just you and your code.</p>
+            </div>
           </div>
-        </div>
-      </section>
-      <!-- <section class="feature-info-section">
-        <h2>Information about a few features.</h2>
-        <div class="feature-card">
-          <div>
-            <h3>Real-time Preview</h3>
-            <p>Instantly see what your code does, no refresh needed.</p>
-          </div>
+        </section>
 
-          <div>
-            <h3>Local Storage</h3>
-            <p>Your code stays safe in the browser--evern after reboots!</p>
-          </div>
+      </div>
 
-          <div>
-            <h3>Minimal, Powerful UI</h3>
-            <p>No distractions. Just you and your code.</p>
-          </div>
-        </div>
-      </section>
-      <section class="feature-info-section">
-        <h2>Information about a few features.</h2>
-        <div class="feature-card">
-          <div>
-            <h3>Real-time Preview</h3>
-            <p>Instantly see what your code does, no refresh needed.</p>
-          </div>
+      <!-- <div class="profile-page each-page" id="profile-page">
+        <h2>this is profile page</h2>
+      </div>
 
-          <div>
-            <h3>Local Storage</h3>
-            <p>Your code stays safe in the browser--evern after reboots!</p>
-          </div>
+      <div class="settings-page each-page" id="settings-page">
+        <h2>this is settings page</h2>
+      </div>
 
-          <div>
-            <h3>Minimal, Powerful UI</h3>
-            <p>No distractions. Just you and your code.</p>
-          </div>
-        </div>
-      </section>
-      <section class="feature-info-section">
-        <h2>Information about a few features.</h2>
-        <div class="feature-card">
-          <div>
-            <h3>Real-time Preview</h3>
-            <p>Instantly see what your code does, no refresh needed.</p>
-          </div>
-
-          <div>
-            <h3>Local Storage</h3>
-            <p>Your code stays safe in the browser--evern after reboots!</p>
-          </div>
-
-          <div>
-            <h3>Minimal, Powerful UI</h3>
-            <p>No distractions. Just you and your code.</p>
-          </div>
-        </div>
-      </section> -->
+      <div class="projects-page each-page" id="projects-page">
+        <h2>this is projects page</h2>
+      </div> -->
     </div>
   </main>
 

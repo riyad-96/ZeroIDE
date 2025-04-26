@@ -3,77 +3,61 @@
 }
 
 @keyframes blinking {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
   }
   50% {
     opacity: 0.6;
   }
 }
-
-//! Sidebar toggle
 .sidebar.show {
   min-width: 250px;
 }
 
-//! Profile Image toggle
 .profile-image.enlarge {
   height: 170px;
-
-  .display-profile-img {
-    width: 80px;
-    height: 80px;
-    outline-width: 2px;
-  }
-
-  svg {
-    width: 80px;
-    height: 80px;
-    scale: 1.2;
-  }
+}
+.profile-image.enlarge .display-profile-img {
+  width: 80px;
+  height: 80px;
+  outline-width: 2px;
+}
+.profile-image.enlarge svg {
+  width: 80px;
+  height: 80px;
+  scale: 1.2;
 }
 
-//! Sub menu toggle
 .project-menu.show {
   background-color: var(--primary-menu-link-hover-bg);
-
-  .primary-menu-link,
-  .sub-menu-btn {
-    &:hover {
-      background-color: var(--sub-menu-option-hover-bg);
-    }
-  }
-
-  > div:first-of-type {
-    border-radius: 0.5rem 0.5rem 0 0;
-    border-block-end: 1px solid var(--slick-border-clr);
-  }
-
-  .sub-menu-btn svg {
-    rotate: -180deg;
-    animation: blinking 1.5s infinite;
-  }
-
-  .grid-smooth-height {
-    scale: 1;
-    grid-template-rows: 1fr;
-  }
-
-  .sub-menu {
-    padding-block: 0.5rem;
-    opacity: 1;
-  }
+}
+.project-menu.show .primary-menu-link:hover,
+.project-menu.show .sub-menu-btn:hover {
+  background-color: var(--sub-menu-option-hover-bg);
+}
+.project-menu.show > div:first-of-type {
+  border-radius: 0.5rem 0.5rem 0 0;
+  border-block-end: 1px solid var(--slick-border-clr);
+}
+.project-menu.show .sub-menu-btn svg {
+  rotate: -180deg;
+  animation: blinking 1.5s infinite;
+}
+.project-menu.show .grid-smooth-height {
+  scale: 1;
+  grid-template-rows: 1fr;
+}
+.project-menu.show .sub-menu {
+  padding-block: 0.5rem;
+  opacity: 1;
 }
 
-//! create new project utilities
 .form-background-layer.appear {
   opacity: 1;
   display: grid;
-
-  form {
-    translate: 0 0px;
-  }
+}
+.form-background-layer.appear form {
+  translate: 0 0px;
 }
 
 .delete-confirmation-modal.appear {
@@ -91,23 +75,19 @@
     opacity: 0;
   }
 }
-
 @starting-style {
   .form-background-layer.appear {
     opacity: 0;
-
-    form {
-      translate: 0 20px;
-    }
   }
-
+  .form-background-layer.appear form {
+    translate: 0 20px;
+  }
 }
 @starting-style {
   .delete-confirmation-modal.appear {
     opacity: 0;
   }
 }
-
 @keyframes created {
   0% {
     translate: 0 -20px;
@@ -128,7 +108,6 @@
     scale: 1;
   }
 }
-
 .project-list-item.created {
   animation-name: created;
   animation-timing-function: ease;
@@ -139,4 +118,17 @@
 
 .sub-menu-options.show {
   display: flex;
+}
+
+@keyframes rotateSettingSvg {
+  100% {
+    rotate: 360deg;
+  }
+}
+
+.settings-svg {
+  animation: rotateSettingSvg;
+  animation-duration: 30s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
