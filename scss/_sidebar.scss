@@ -1,8 +1,8 @@
 .sidebar {
   background-color: var(--sidebar-bg);
   border-inline-end: 1px solid var(--sidebar-border-clr);
-  min-width: 57px;
-  max-width: 57px;
+  min-width: 60px;
+  max-width: 60px;
   position: relative;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -147,12 +147,13 @@ button:disabled:hover {
 .primary-menu-link {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 3rem;
   font-size: 1rem;
   padding-inline: 0.525rem;
   padding-block: 0.425rem;
   border-radius: 0.5rem;
   border: 1px solid transparent;
+  transition: gap 400ms, background-color 200ms;
 }
 .primary-menu-link:hover {
   color: var(--white);

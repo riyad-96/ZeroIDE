@@ -12,6 +12,10 @@
 }
 .sidebar.show {
   min-width: 250px;
+
+  .primary-menu-link{
+    gap: 1rem;
+  }
 }
 
 .profile-image.enlarge {
@@ -39,6 +43,8 @@
   border-radius: 0.5rem 0.5rem 0 0;
   border-block-end: 1px solid var(--slick-border-clr);
 }
+
+
 .project-menu.show .sub-menu-btn svg {
   rotate: -180deg;
   animation: blinking 1.5s infinite;
@@ -131,4 +137,10 @@
   animation-duration: 30s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+}
+
+//! Pages navigation related utilities
+.primary-menu-link.focused{
+  background-color: var(--primary-menu-link-hover-bg);
+  border: 1px solid var(--slick-border-clr);
 }

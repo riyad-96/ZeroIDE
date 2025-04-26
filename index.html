@@ -12,9 +12,9 @@
 </head>
 
 <body>
-  <!-- pushed -->
+
   <main>
-    <aside class="sidebar show">
+    <aside class="sidebar">
       <div class="sidebar-toggle-btn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
           <rect width="100" height="100" rx="20" fill="#000" />
@@ -24,7 +24,7 @@
         </svg>
       </div>
 
-      <div class="profile-image enlarge">
+      <div class="profile-image">
         <div class="display-profile-img">
           <svg fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="64px" viewBox="-4.55 -4.55 54.63 54.63"
@@ -43,9 +43,10 @@
         <!-- <input type="file" accept="image/*" id="imgInput"> -->
       </div>
 
+      <!-- Sidebar menu -->
       <ul class="sidebar-menu">
         <li class="primary-menu">
-          <a class="primary-menu-link" href="#home-page">
+          <a class="primary-menu-link focused" href="#home-page" data-curr-page="home-page">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
               <path
                 d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM19 19V9.97815L12 4.53371L5 9.97815V19H19Z">
@@ -56,7 +57,7 @@
         </li>
 
         <li class="primary-menu">
-          <a class="primary-menu-link" href="#profile-page">
+          <a class="primary-menu-link" href="#profile-page" data-curr-page="profile-page">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
               <path
                 d="M12 14V16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM14.5946 18.8115C14.5327 18.5511 14.5 18.2794 14.5 18C14.5 17.7207 14.5327 17.449 14.5945 17.1886L13.6029 16.6161L14.6029 14.884L15.5952 15.4569C15.9883 15.0851 16.4676 14.8034 17 14.6449V13.5H19V14.6449C19.5324 14.8034 20.0116 15.0851 20.4047 15.4569L21.3971 14.8839L22.3972 16.616L21.4055 17.1885C21.4673 17.449 21.5 17.7207 21.5 18C21.5 18.2793 21.4673 18.551 21.4055 18.8114L22.3972 19.3839L21.3972 21.116L20.4048 20.543C20.0117 20.9149 19.5325 21.1966 19.0001 21.355V22.5H17.0001V21.3551C16.4677 21.1967 15.9884 20.915 15.5953 20.5431L14.603 21.1161L13.6029 19.384L14.5946 18.8115ZM18 19.5C18.8284 19.5 19.5 18.8284 19.5 18C19.5 17.1716 18.8284 16.5 18 16.5C17.1716 16.5 16.5 17.1716 16.5 18C16.5 18.8284 17.1716 19.5 18 19.5Z">
@@ -67,7 +68,7 @@
         </li>
 
         <li class="primary-menu">
-          <a class="primary-menu-link" href="#settings-page">
+          <a class="primary-menu-link" href="#settings-page" data-curr-page="home-page">
             <svg class="settings-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
               fill="currentColor">
               <path
@@ -78,10 +79,11 @@
           </a>
         </li>
 
-        <li class="primary-menu project-menu show">
+        <!-- Sub menu starts here -->
+        <li class="primary-menu project-menu">
           <div>
-            <a class="primary-menu-link" href="#projects-page">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <a class="primary-menu-link" data-curr-page="home-page" href="#projects-page">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="23" height="23" fill="currentColor">
                 <path
                   d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 7V19H20V7H4Z">
                 </path>
@@ -151,49 +153,57 @@
       </ul>
     </aside>
 
+    <!-- ! ---- All other page starts here ---- -->
     <div class="all-pages">
+      <!-- ! Home page -->
       <div class="home-page each-page" id="home-page">
-        <section class="header-section">
-          <h1>Your Code Editor</h1>
-          <p>Write. Run. Save. Built for developers who want freedom and fun.</p>
-          <button>Open Editor</button>
-        </section>
+        <div class="body">
+          <div class="home-page-wrapper page-wrapper">
+            <!-- home page contents -->
 
-        <section class="feature-info-section">
-          <h2>Information about a few features.</h2>
-          <div class="feature-card">
-            <div>
-              <h3>Real-time Preview</h3>
-              <p>Instantly see what your code does, no refresh needed.</p>
-            </div>
 
-            <div>
-              <h3>Local Storage</h3>
-              <p>Your code stays safe in the browser--evern after reboots!</p>
-            </div>
 
-            <div>
-              <h3>Minimal, Powerful UI</h3>
-              <p>No distractions. Just you and your code.</p>
-            </div>
           </div>
-        </section>
-
+        </div>
       </div>
 
-      <!-- <div class="profile-page each-page" id="profile-page">
-        <h2>this is profile page</h2>
+      <!-- ! Profile page -->
+      <div class="profile-page each-page" id="profile-page">
+        <div class="body">
+          <div class="profile-page-wrapper page-wrapper">
+            <!-- profile page contents -->
+
+            
+
+          </div>
+        </div>
       </div>
 
+      <!-- ! Settings page -->
       <div class="settings-page each-page" id="settings-page">
-        <h2>this is settings page</h2>
+        <div class="body">
+          <div class="settings-page-wrapper page-wrapper">
+            <!-- settings page contents -->
+
+
+          </div>
+        </div>
       </div>
 
+      <!-- ! Projects page -->
       <div class="projects-page each-page" id="projects-page">
-        <h2>this is projects page</h2>
-      </div> -->
+        <div class="body">
+          <div class="projects-page-wrapper page-wrapper">
+            <!-- projects page contents -->
+
+
+          </div>
+        </div>
+      </div>
     </div>
   </main>
+
+
 
   <!--! UI components -->
   <!-- profile image modal -->

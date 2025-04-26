@@ -260,3 +260,27 @@ createBtn.addEventListener('click', () => {
   projectTitleInput.value = '';
   projectDescriptionInput.value = '';
 });
+
+
+//! All pages navigation programs
+const allPrimaryLink = document.querySelectorAll('.primary-menu-link')
+console.log(allPrimaryLink)
+
+window.addEventListener('hashchange', () =>{
+  const hash = location.hash.replace('#', '')
+  // console.log(hash)
+
+  allPrimaryLink.forEach(link => {
+    const hrefHash = link.hash.replace('#', '')
+    const isFocused = hash === hrefHash
+    
+    link.classList.toggle('focused', isFocused)
+  })
+
+  const page = document.getElementById(hash)
+  if(page)  {
+    page.scrollIntoView({behavior: 'smooth'})
+  } else {
+    document.getElementById('home-page').scrollIntoView({behavior: 'smooth'})
+  }
+})
