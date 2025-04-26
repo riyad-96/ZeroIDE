@@ -719,7 +719,7 @@ form textarea::-webkit-scrollbar {
 .each-page .body {
   width: 100%;
   height: 100%;
-  border: 1px solid yellow;
+  border: 1px solid var(--slick-border-clr);
   border-radius: 0.525rem;
   overflow: hidden;
   font-size: 2rem;
