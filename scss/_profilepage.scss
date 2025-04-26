@@ -1,0 +1,47 @@
+.profile-page-wrapper {
+  border: 1px solid yellow;
+  max-width: 1200px;
+  margin-inline: auto;
+  margin-block-start: 1rem;
+  display: flex;
+  box-sizing: content-box;
+  padding: 1rem;
+}
+
+.profile-bios {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid red;
+
+  h2 {
+    font-weight: 400;
+    margin: 0;
+    font-size: 1.625rem;
+    line-height: 1.2lh;
+    letter-spacing: -1px;
+  }
+  h3 {
+    font-weight: 200;
+    margin: 0;
+    font-size: 1.125rem;
+    opacity: 0.5;
+    line-height: 1.1lh;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+.profile-activity-tab {
+  flex-grow: 1;
+  border: 1px solid green;
+  overflow-x: hidden;
+}
+
+
+
+.profile-image-container {
+  img {
+    max-width: 100%;
+  }
+}

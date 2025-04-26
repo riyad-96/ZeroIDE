@@ -1,3 +1,13 @@
+const allFormInDOM = document.querySelectorAll('form');
+allFormInDOM.forEach((form) => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
+  form.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+});
+
 //! ----- Variables -----
 const sidebar = document.querySelector('.sidebar');
 const sidebarToggleBtn = document.querySelector('.sidebar-toggle-btn');
@@ -18,7 +28,6 @@ const subMenuBtn = document.querySelector('.sub-menu-btn');
 
 // create new project related variables
 const formBgLayer = document.querySelector('.form-background-layer');
-const form = document.querySelector('form');
 const cancelBtn = document.querySelector('.cancel-btn');
 const createBtn = document.querySelector('.create-btn');
 const createOpenBtn = document.querySelector('.create-open-btn');
@@ -43,14 +52,14 @@ const dltModCurrTitle = document.querySelector('.delete-messages p span');
 //! profile image prgrams -----
 const sidebarImgDiv = document.querySelector('.display-profile-img');
 const imgInput = document.getElementById('imgInput');
-const imgModArr = [profileImgModal, sidebarImgDiv,closeImgBtn];
+const imgModArr = [profileImgModal, sidebarImgDiv, closeImgBtn];
 
 function toggleImgModal() {
   profileImgModal.classList.toggle('appear');
 }
-imgModArr.forEach(element => {
-  element.addEventListener('click', toggleImgModal)
-})
+imgModArr.forEach((element) => {
+  element.addEventListener('click', toggleImgModal);
+});
 
 //! sidebar programs ------
 //! sidebar toggle
@@ -127,13 +136,6 @@ projectDescriptionInput.addEventListener('keydown', (e) => {
     e.preventDefault();
     createBtn.click();
   }
-});
-
-form.addEventListener('click', (e) => {
-  e.stopPropagation();
-});
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
 });
 //! -------------------------
 
@@ -261,26 +263,83 @@ createBtn.addEventListener('click', () => {
   projectDescriptionInput.value = '';
 });
 
-
 //! All pages navigation programs
-const allPrimaryLink = document.querySelectorAll('.primary-menu-link')
-console.log(allPrimaryLink)
+const allPrimaryLink = document.querySelectorAll('.primary-menu-link');
 
-window.addEventListener('hashchange', () =>{
-  const hash = location.hash.replace('#', '')
-  // console.log(hash)
+function pageChangeUpdate() {
+  const hash = location.hash.replace('#', '');
 
-  allPrimaryLink.forEach(link => {
-    const hrefHash = link.hash.replace('#', '')
-    const isFocused = hash === hrefHash
-    
-    link.classList.toggle('focused', isFocused)
-  })
+  allPrimaryLink.forEach((link) => {
+    const hrefHash = link.hash.replace('#', '');
+    const isFocused = hash === hrefHash;
+    link.classList.toggle('focused', isFocused);
+  });
 
-  const page = document.getElementById(hash)
-  if(page)  {
-    page.scrollIntoView({behavior: 'smooth'})
+  const page = document.getElementById(hash);
+  if (page) {
+    page.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
-    document.getElementById('home-page').scrollIntoView({behavior: 'smooth'})
+    document.getElementById('home-page').scrollIntoView({ behavior: 'smooth' });
   }
+}
+
+window.addEventListener('hashchange', pageChangeUpdate);
+window.addEventListener('DOMContentLoaded', pageChangeUpdate);
+
+//! Profile page updation programs
+// basic info about user
+const savedProfileAboutInfo =
+  JSON.parse(localStorage.getItem('profile-data')) || {};
+const profileAbout = document.querySelector('.profile-about');
+const profileNameInput = document.getElementById('profile-name');
+const profileUsernamInput = document.getElementById('profile-username');
+const pronounsOptions = document.getElementById('pronouns-options');
+console.log(savedProfileAboutInfo);
+
+const editProfileBtn = document.querySelector('.edit-profile-button');
+
+function loadProfileAbout() {
+  const name = document.querySelector('.profile-name-show');
+  const username = document.querySelector('.profile-username-show');
+  const pronouns = document.querySelector('.profile-pronouns-show');
+
+  name.textContent = savedProfileAboutInfo.name || 'your name';
+  username.textContent = savedProfileAboutInfo.username || 'user-name';
+  pronouns.textContent =
+    savedProfileAboutInfo.pronouns !== 'none'
+      ? ' · ' + savedProfileAboutInfo.pronouns
+      : '';
+}
+loadProfileAbout();
+
+// save profile info
+const profileEditSaveBtn = document.querySelector(
+  '.profile-edit-info-save-btn'
+);
+profileEditSaveBtn.addEventListener('click', () => {
+  savedProfileAboutInfo.name = profileNameInput.value.trim();
+  savedProfileAboutInfo.username = profileUsernamInput.value.trim();
+  savedProfileAboutInfo.pronouns = pronounsOptions.value.trim();
+  localStorage.setItem('profile-data', JSON.stringify(savedProfileAboutInfo));
+
+  setTimeout(() => {
+    loadProfileAbout();
+  }, 500);
+});
+
+// cancel profile info and load
+const profileInfoCancelBtn = document.querySelector(
+  '.profile-edit-info-cancel-btn'
+);
+function loadCancelProfileInfo() {
+  profileNameInput.value = savedProfileAboutInfo.name;
+  profileUsernamInput.value = savedProfileAboutInfo.username;
+  pronounsOptions.value = savedProfileAboutInfo.pronouns;
+}
+console.log(profileInfoCancelBtn);
+profileInfoCancelBtn.addEventListener('click', loadCancelProfileInfo);
+window.addEventListener('DOMContentLoaded', loadCancelProfileInfo)
+// ----------------
+document.body.addEventListener('click', e => {
+  console.log(e.target)
 })

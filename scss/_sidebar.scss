@@ -122,12 +122,12 @@
   font-size: 0.9rem;
   padding-block: 0.325rem;
   padding-inline: 0.725rem;
-  background-color: var(--form-btn-bg);
+  background-color: var(--global-button-bg);
   border: 1px solid var(--slick-border-clr);
   border-radius: 0.5rem;
 }
 .img-buttons button:hover {
-  background-color: var(--form-btn-hover-bg);
+  background-color: var(--global-button-hover-bg);
 }
 
 button:disabled {
@@ -135,7 +135,7 @@ button:disabled {
   cursor: not-allowed;
 }
 button:disabled:hover {
-  background-color: var(--form-btn-bg);
+  background-color: var(--global-button-bg);
 }
 
 .primary-menu {
@@ -377,7 +377,7 @@ button:disabled:hover {
   display: none;
 }
 
-form {
+.form-background-layer form {
   background-color: var(--sidebar-bg);
   box-sizing: content-box;
   padding: 2rem;
@@ -428,7 +428,7 @@ form textarea::-webkit-scrollbar {
   cursor: pointer;
 }
 .form-buttons button:not(.cancel-btn) {
-  background-color: var(--form-btn-bg);
+  background-color: var(--global-button-bg);
   padding-block: 0.4rem 0.3rem;
   padding-inline: 0.8rem;
   border-radius: 0.5rem;
@@ -436,7 +436,7 @@ form textarea::-webkit-scrollbar {
   border: 1px solid var(--slick-border-clr);
 }
 .form-buttons button:not(.cancel-btn):hover {
-  background-color: var(--form-btn-hover-bg);
+  background-color: var(--global-button-hover-bg);
 }
 .form-buttons .cancel-btn {
   font-size: 0.9rem;
@@ -526,6 +526,6 @@ form textarea::-webkit-scrollbar {
   background-color: hsl(0, 100%, 40%);
 }
 .delete-confirmation-buttons .dlt-cancel-btn:hover {
-  background-color: var(--form-btn-hover-bg);
+  background-color: var(--global-button-hover-bg);
 }
 

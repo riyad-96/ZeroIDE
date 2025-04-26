@@ -15,6 +15,16 @@
 }
 @font-face {
   font-family: "Poppins";
+  src: url("../assets/fonts/poppins-v21-latin-300.woff2") format("woff2");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../assets/fonts/poppins-v21-latin-200.woff2") format("woff2");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Poppins";
   src: url("../assets/fonts/poppins-v21-latin-400.woff2") format("woff2");
   font-weight: 400;
 }
@@ -42,12 +52,15 @@ ul {
 
 button {
   border: none;
-  color: inherit;
+  color: var(--global-button-clr);
   background-color: transparent;
   padding: 0;
   margin: 0;
   font-size: 1rem;
   cursor: pointer;
+}
+button:hover {
+  color: var(--white);
 }
 
 a {
@@ -109,16 +122,14 @@ main {
   --profile-img-outline-hover: hsla(0, 0%, 65%, 0.7);
   --form-bg-layer-bg: hsla(0, 0%, 0%, 0.3);
   --input-textarea-bg: hsla(0, 0%, 100%, 0.075);
-  --form-btn-bg: hsl(0, 0%, 15%);
-  --form-btn-hover-bg: hsl(0, 0%, 18%);
   --slick-border-clr: hsl(0, 0%, 21%);
   --delete-message-modal-suggested-span: hsl(0, 0%, 64%);
   --global-scrollbar-track-bg: hsl(0, 0%, 7%);
   --global-scrollbar-thumb-bg: hsl(0, 0%, 35%);
   --global-scrollbar-thumb-hover-bg: hsl(0, 0%, 50%);
-  --homepage-bg: #0d0d0d;
-  --diversion-border-clr: #222;
-  --h1-clr: linear-gradient(to right, hsl(0, 0%, 100%), hsl(0, 0%, 53%));
+  --global-button-clr: hsl(0, 0%, 90%);
+  --global-button-bg: hsl(0, 0%, 15%);
+  --global-button-hover-bg: hsl(0, 0%, 18%);
 }
 
 .sidebar {
@@ -250,13 +261,13 @@ main {
   font-size: 0.9rem;
   padding-block: 0.325rem;
   padding-inline: 0.725rem;
-  background-color: var(--form-btn-bg);
+  background-color: var(--global-button-bg);
   border: 1px solid var(--slick-border-clr);
   border-radius: 0.5rem;
 }
 
 .img-buttons button:hover {
-  background-color: var(--form-btn-hover-bg);
+  background-color: var(--global-button-hover-bg);
 }
 
 button:disabled {
@@ -265,7 +276,7 @@ button:disabled {
 }
 
 button:disabled:hover {
-  background-color: var(--form-btn-bg);
+  background-color: var(--global-button-bg);
 }
 
 .primary-menu {
@@ -528,7 +539,7 @@ button:disabled:hover {
   display: none;
 }
 
-form {
+.form-background-layer form {
   background-color: var(--sidebar-bg);
   box-sizing: content-box;
   padding: 2rem;
@@ -586,7 +597,7 @@ form textarea::-webkit-scrollbar {
 }
 
 .form-buttons button:not(.cancel-btn) {
-  background-color: var(--form-btn-bg);
+  background-color: var(--global-button-bg);
   padding-block: 0.4rem 0.3rem;
   padding-inline: 0.8rem;
   border-radius: 0.5rem;
@@ -595,7 +606,7 @@ form textarea::-webkit-scrollbar {
 }
 
 .form-buttons button:not(.cancel-btn):hover {
-  background-color: var(--form-btn-hover-bg);
+  background-color: var(--global-button-hover-bg);
 }
 
 .form-buttons .cancel-btn {
@@ -699,7 +710,7 @@ form textarea::-webkit-scrollbar {
 }
 
 .delete-confirmation-buttons .dlt-cancel-btn:hover {
-  background-color: var(--form-btn-hover-bg);
+  background-color: var(--global-button-hover-bg);
 }
 
 .all-pages {
@@ -711,7 +722,6 @@ form textarea::-webkit-scrollbar {
 .each-page {
   height: 100vh;
   height: 100svh;
-  border: 1px solid red;
   overflow-y: hidden;
   padding: 0.5rem;
 }
@@ -719,10 +729,10 @@ form textarea::-webkit-scrollbar {
 .each-page .body {
   width: 100%;
   height: 100%;
-  border: 1px solid var(--slick-border-clr);
+  border: 1px solid var(--sidebar-border-clr);
   border-radius: 0.525rem;
   overflow: hidden;
-  font-size: 2rem;
+  background-color: var(--sidebar-bg);
 }
 
 .page-wrapper {
@@ -733,6 +743,49 @@ form textarea::-webkit-scrollbar {
 
 .home-page {
   display: none;
+}
+
+.profile-page-wrapper {
+  border: 1px solid yellow;
+  max-width: 1200px;
+  margin-inline: auto;
+  margin-block-start: 1rem;
+  display: flex;
+  box-sizing: content-box;
+  padding: 1rem;
+}
+
+.profile-bios {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid red;
+}
+.profile-bios h2 {
+  font-weight: 400;
+  margin: 0;
+  font-size: 1.625rem;
+  line-height: 1.2lh;
+  letter-spacing: -1px;
+}
+.profile-bios h3 {
+  font-weight: 200;
+  margin: 0;
+  font-size: 1.125rem;
+  opacity: 0.5;
+  line-height: 1.1lh;
+}
+.profile-bios p {
+  margin: 0;
+}
+
+.profile-activity-tab {
+  flex-grow: 1;
+  border: 1px solid green;
+  overflow-x: hidden;
+}
+
+.profile-image-container img {
+  max-width: 100%;
 }
 
 .blinking-rect {
