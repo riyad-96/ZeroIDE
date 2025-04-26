@@ -294,7 +294,6 @@ const profileAbout = document.querySelector('.profile-about');
 const profileNameInput = document.getElementById('profile-name');
 const profileUsernamInput = document.getElementById('profile-username');
 const pronounsOptions = document.getElementById('pronouns-options');
-console.log(savedProfileAboutInfo);
 
 const editProfileBtn = document.querySelector('.edit-profile-button');
 
@@ -305,7 +304,7 @@ function loadProfileAbout() {
 
   name.textContent = savedProfileAboutInfo.name || 'your name';
   username.textContent = savedProfileAboutInfo.username || 'user-name';
-  pronouns.textContent =
+  pronouns.value =
     savedProfileAboutInfo.pronouns !== 'none'
       ? ' · ' + savedProfileAboutInfo.pronouns
       : '';
@@ -332,14 +331,18 @@ const profileInfoCancelBtn = document.querySelector(
   '.profile-edit-info-cancel-btn'
 );
 function loadCancelProfileInfo() {
-  profileNameInput.value = savedProfileAboutInfo.name;
-  profileUsernamInput.value = savedProfileAboutInfo.username;
+  profileNameInput.value = savedProfileAboutInfo.name
+    ? savedProfileAboutInfo.name
+    : '';
+  profileUsernamInput.value = savedProfileAboutInfo.username
+    ? savedProfileAboutInfo.username
+    : '';
   pronounsOptions.value = savedProfileAboutInfo.pronouns;
 }
-console.log(profileInfoCancelBtn);
+
 profileInfoCancelBtn.addEventListener('click', loadCancelProfileInfo);
-window.addEventListener('DOMContentLoaded', loadCancelProfileInfo)
+window.addEventListener('DOMContentLoaded', loadCancelProfileInfo);
 // ----------------
-document.body.addEventListener('click', e => {
-  console.log(e.target)
-})
+// document.body.addEventListener('click', e => {
+//   console.log(e.target)
+// })
