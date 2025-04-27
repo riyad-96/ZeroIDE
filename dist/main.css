@@ -777,10 +777,32 @@ form textarea::-webkit-scrollbar {
 .profile-informations {
   width: 100%;
   max-width: 300px;
+  padding: 1rem;
 }
 
-.profile-image-container img {
+.profile-image-container {
+  margin-block-end: 1rem;
+}
+
+.p-image {
+  border-radius: 50%;
+  overflow: hidden;
+  outline: 2px solid var(--slick-border-clr);
+  transition: outline-offset 100ms, scale 400ms;
+  cursor: pointer;
+}
+.p-image:hover {
+  outline: 2px solid hsla(0, 0%, 50%, 0.5);
+  outline-offset: 5px;
+  scale: 0.95;
+}
+.p-image img {
+  border-radius: 50%;
   max-width: 100%;
+  transition: scale 300ms;
+}
+.p-image:hover img {
+  scale: 1.05;
 }
 
 .basic-profile-info {
@@ -1043,4 +1065,22 @@ form textarea::-webkit-scrollbar {
 .primary-menu-link.focused {
   background-color: var(--primary-menu-link-hover-bg);
   border: 1px solid var(--slick-border-clr);
+}
+.primary-menu-link.focused svg {
+  animation: jump-up 700ms;
+}
+
+@keyframes jump-up {
+  30% {
+    scale: 0.9;
+  }
+  59% {
+    scale: 1;
+  }
+  60% {
+    translate: 0 -2px;
+  }
+  80% {
+    translate: 0 2px;
+  }
 }

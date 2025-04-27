@@ -143,4 +143,22 @@
 .primary-menu-link.focused{
   background-color: var(--primary-menu-link-hover-bg);
   border: 1px solid var(--slick-border-clr);
+  svg {
+    animation: jump-up 700ms;
+  }
+}
+
+@keyframes jump-up {
+  30% {
+    scale: 0.9;
+  }
+  59%{
+    scale: 1;
+  }
+  60% {
+    translate: 0 -2px;
+  }
+  80% {
+    translate: 0 2px;
+  }
 }

@@ -11,14 +11,36 @@
   width: 100%;
   max-width: 300px;
   // border: 1px solid red;
+  padding: 1rem;
 }
 
 .profile-image-container {
+  margin-block-end: 1rem;
+}
+
+.p-image {
+  border-radius: 50%;
+  overflow: hidden;
+  outline: 2px solid var(--slick-border-clr);
+  transition: outline-offset 100ms, scale 400ms;
+  cursor: pointer;
+
+  &:hover {
+    outline: 2px solid hsl(0, 0%, 50%, 0.5);
+    outline-offset: 5px;
+    scale: 0.95;
+  }
   img {
+    border-radius: 50%;
     max-width: 100%;
+    transition: scale 300ms;
+  }
+  &:hover img {
+    scale: 1.05;
   }
 }
 
+//! Profile basic data styling
 .basic-profile-info {
   border: 1px solid blue;
 }
@@ -49,7 +71,7 @@
   border-radius: 1rem;
   padding: 1.525rem;
 
-  >div {
+  > div {
     background-color: hsl(0, 0%, 50%);
     width: 300px;
     height: 300px;
