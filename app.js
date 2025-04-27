@@ -112,7 +112,7 @@ function closeDeleteModal() {
 }
 deleteCancelBtn.addEventListener('click', closeDeleteModal);
 deleteModal.addEventListener('click', closeDeleteModal);
-
+document.getElementById('dlt-mes-setting-page-link').addEventListener('click', closeDeleteModal)
 //! delete single project
 let currentId = null;
 deleteConfirmBtn.addEventListener('click', () => {
