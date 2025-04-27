@@ -71,6 +71,11 @@ a {
   text-decoration: none;
 }
 
+input,
+textarea,
+select {
+  min-width: 0;
+}
 input:focus, input:focus-visible,
 textarea:focus,
 textarea:focus-visible,
@@ -848,6 +853,9 @@ form textarea::-webkit-scrollbar {
 .profile-edit-form button {
   padding: 0.325rem 0.625rem;
 }
+.profile-edit-form textarea {
+  height: 100px;
+}
 
 .profile-edit-form.active {
   translate: 0 0;
@@ -885,9 +893,6 @@ form textarea::-webkit-scrollbar {
 .profile-edit-form option {
   background: var(--input-textarea-bg);
   color: #111;
-}
-.profile-edit-form option :checked {
-  background: pink;
 }
 
 .blinking-rect {

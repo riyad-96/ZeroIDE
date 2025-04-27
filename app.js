@@ -287,6 +287,10 @@ window.addEventListener('hashchange', pageChangeUpdate);
 window.addEventListener('DOMContentLoaded', pageChangeUpdate);
 
 //! Profile page updation programs
+//profile picture updation
+
+
+// Profile data form updation
 const profileEditForm = document.querySelector('.profile-edit-form');
 const savedProfileAboutInfo =
   JSON.parse(localStorage.getItem('profile-data')) || {};
@@ -310,18 +314,18 @@ profileCancelBtn.addEventListener('click', () => {
   profileEditForm.classList.remove('active');
 });
 // save and load data helper function
-function saveAndLoadProfileInfo() {
-  const showName = document.querySelector('.show-name');
-  const showUsername = document.querySelector('.show-username');
-  const showPronoun = document.querySelector('.show-pronoun');
+const showName = document.querySelector('.show-name');
+const showUsername = document.querySelector('.show-username');
+const showPronoun = document.querySelector('.show-pronoun');
+const profileBio = document.querySelector('.p-bio');
 
-  showName.textContent = savedProfileAboutInfo.name || 'Name';
+function saveAndLoadProfileInfo() {
+  showName.textContent = savedProfileAboutInfo.name || 'name';
   showUsername.textContent = savedProfileAboutInfo.username || 'username';
   showPronoun.textContent = savedProfileAboutInfo.pronoun
     ? ' · ' + savedProfileAboutInfo.pronoun
     : '';
 
-  const profileBio = document.querySelector('.p-bio');
   if (savedProfileAboutInfo.bio) {
     profileBio.innerHTML = '';
     profileBio.style.marginBlockStart = '1rem';
@@ -351,10 +355,8 @@ profileSaveBtn.addEventListener('click', () => {
   });
 
   localStorage.setItem('profile-data', JSON.stringify(savedProfileAboutInfo));
-  setTimeout(() => {
-    saveAndLoadProfileInfo()
-    profileEditForm.classList.remove('active')
-  }, 300);
+  setTimeout(saveAndLoadProfileInfo, 300);
+  profileEditForm.classList.remove('active');
 });
 
 // Load saved profile data on refresh

@@ -90,6 +90,10 @@
   button {
     padding: 0.325rem 0.625rem;
   }
+
+  textarea {
+    height: 100px;
+  }
 }
 
 .profile-edit-form.active {
@@ -127,8 +131,4 @@
 .profile-edit-form option {
   background: var(--input-textarea-bg);
   color: #111;
-
-  :checked {
-    background: pink;
-  }
 }

@@ -76,6 +76,7 @@ a {
 input,
 textarea,
 select {
+  min-width: 0;
   &:focus,
   &:focus-visible {
     outline: 1px solid hsl(0, 0%, 100%, 0.5);
