@@ -212,18 +212,10 @@ main {
   outline: 1px solid var(--profile-img-outline-hover);
 }
 
-.display-profile-img svg {
-  width: 40px;
-  height: 40px;
-  scale: 1.3;
-  border-radius: 50%;
-  border: 1px solid red;
-  transition: 500ms;
-}
-
 .display-profile-img img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
   -o-object-fit: cover;
   object-fit: cover;
 }
@@ -243,6 +235,7 @@ main {
   display: none;
   opacity: 0;
   transition: 300ms allow-discrete;
+  overflow: auto;
 }
 
 .img-modal-container {
@@ -266,6 +259,17 @@ main {
   background-position: center;
   outline: 1px solid hsla(0, 0%, 50%, 0.5);
   outline-offset: 1px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.img-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 
 .img-buttons {
@@ -274,6 +278,9 @@ main {
   justify-content: flex-end;
   margin-block-start: 1.325rem;
   gap: 0.325rem;
+}
+.img-buttons input {
+  display: none;
 }
 
 .img-buttons button {
@@ -307,13 +314,13 @@ button:disabled:hover {
 .primary-menu-link {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
   font-size: 1rem;
   padding-inline: 0.525rem;
   padding-block: 0.425rem;
   border-radius: 0.5rem;
   border: 1px solid transparent;
-  transition: gap 400ms, background-color 200ms;
+  transition: gap 600ms, background-color 200ms;
 }
 
 .primary-menu-link:hover {
@@ -761,10 +768,6 @@ form textarea::-webkit-scrollbar {
   overflow-y: auto;
 }
 
-.home-page {
-  display: none;
-}
-
 .profile-page-wrapper {
   max-width: 1200px;
   margin-inline: auto;
@@ -777,36 +780,45 @@ form textarea::-webkit-scrollbar {
 .profile-informations {
   width: 100%;
   max-width: 300px;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
   padding: 1rem;
 }
 
 .profile-image-container {
   margin-block-end: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-width: 100%;
 }
 
 .p-image {
+  width: 100%;
+  max-width: 250px;
+  min-height: 250px;
   border-radius: 50%;
   overflow: hidden;
-  outline: 2px solid var(--slick-border-clr);
-  transition: outline-offset 100ms, scale 400ms;
-  cursor: pointer;
+  display: flex;
+  outline: 2px solid hsla(0, 0%, 50%, 0.5);
+  transition: scale 400ms, outline-offset 100ms;
 }
 .p-image:hover {
-  outline: 2px solid hsla(0, 0%, 50%, 0.5);
-  outline-offset: 5px;
   scale: 0.95;
+  outline-offset: 5px;
 }
-.p-image img {
-  border-radius: 50%;
-  max-width: 100%;
-  transition: scale 300ms;
-}
-.p-image:hover img {
+.p-image:hover svg, .p-image:hover img {
   scale: 1.05;
 }
-
-.basic-profile-info {
-  border: 1px solid blue;
+.p-image img,
+.p-image svg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: scale 300ms;
 }
 
 .p-name {
@@ -944,12 +956,6 @@ form textarea::-webkit-scrollbar {
   width: 80px;
   height: 80px;
   outline-width: 2px;
-}
-
-.profile-image.enlarge svg {
-  width: 80px;
-  height: 80px;
-  scale: 1.2;
 }
 
 .project-menu.show {
