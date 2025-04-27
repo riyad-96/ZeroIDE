@@ -34,6 +34,7 @@ img {
   display: flex;
   outline: 2px solid hsl(0, 0%, 50%, 0.5);
   transition: scale 400ms, outline-offset 100ms;
+  cursor: pointer;
 
   &:hover {
     scale: 0.95;
