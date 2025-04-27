@@ -287,62 +287,81 @@ window.addEventListener('hashchange', pageChangeUpdate);
 window.addEventListener('DOMContentLoaded', pageChangeUpdate);
 
 //! Profile page updation programs
-// basic info about user
+const profileEditForm = document.querySelector('.profile-edit-form');
 const savedProfileAboutInfo =
   JSON.parse(localStorage.getItem('profile-data')) || {};
-const profileAbout = document.querySelector('.profile-about');
 const profileNameInput = document.getElementById('profile-name');
-const profileUsernamInput = document.getElementById('profile-username');
-const pronounsOptions = document.getElementById('pronouns-options');
+const profileUsernameInput = document.getElementById('profile-username');
+const profileBioInput = document.getElementById('profile-bio');
+const profilePronounInput = document.getElementById('pronouns-options');
 
-const editProfileBtn = document.querySelector('.edit-profile-button');
-
-function loadProfileAbout() {
-  const name = document.querySelector('.profile-name-show');
-  const username = document.querySelector('.profile-username-show');
-  const pronouns = document.querySelector('.profile-pronouns-show');
-
-  name.textContent = savedProfileAboutInfo.name || 'your name';
-  username.textContent = savedProfileAboutInfo.username || 'user-name';
-  pronouns.value =
-    savedProfileAboutInfo.pronouns !== 'none'
-      ? ' · ' + savedProfileAboutInfo.pronouns
-      : '';
-}
-loadProfileAbout();
-
-// save profile info
-const profileEditSaveBtn = document.querySelector(
-  '.profile-edit-info-save-btn'
-);
-profileEditSaveBtn.addEventListener('click', () => {
-  savedProfileAboutInfo.name = profileNameInput.value.trim();
-  savedProfileAboutInfo.username = profileUsernamInput.value.trim();
-  savedProfileAboutInfo.pronouns = pronounsOptions.value.trim();
-  localStorage.setItem('profile-data', JSON.stringify(savedProfileAboutInfo));
-
-  setTimeout(() => {
-    loadProfileAbout();
-  }, 500);
-});
-
-// cancel profile info and load
-const profileInfoCancelBtn = document.querySelector(
+//Edit related buttons variables
+const profileEditBtn = document.querySelector('.profile-edit-button');
+const profileCancelBtn = document.querySelector(
   '.profile-edit-info-cancel-btn'
 );
-function loadCancelProfileInfo() {
-  profileNameInput.value = savedProfileAboutInfo.name
-    ? savedProfileAboutInfo.name
+const profileSaveBtn = document.querySelector('.profile-edit-info-save-btn');
+
+profileEditBtn.addEventListener('click', () => {
+  profileEditForm.classList.add('active');
+});
+
+profileCancelBtn.addEventListener('click', () => {
+  profileEditForm.classList.remove('active');
+});
+// save and load data helper function
+function saveAndLoadProfileInfo() {
+  const showName = document.querySelector('.show-name');
+  const showUsername = document.querySelector('.show-username');
+  const showPronoun = document.querySelector('.show-pronoun');
+
+  showName.textContent = savedProfileAboutInfo.name || 'Name';
+  showUsername.textContent = savedProfileAboutInfo.username || 'username';
+  showPronoun.textContent = savedProfileAboutInfo.pronoun
+    ? ' · ' + savedProfileAboutInfo.pronoun
     : '';
-  profileUsernamInput.value = savedProfileAboutInfo.username
-    ? savedProfileAboutInfo.username
-    : '';
-  pronounsOptions.value = savedProfileAboutInfo.pronouns;
+
+  const profileBio = document.querySelector('.p-bio');
+  if (savedProfileAboutInfo.bio) {
+    profileBio.innerHTML = '';
+    profileBio.style.marginBlockStart = '1rem';
+    const showBio = document.createElement('span');
+    showBio.textContent = savedProfileAboutInfo.bio;
+    profileBio.appendChild(showBio);
+  } else {
+    profileBio.innerHTML = '';
+    profileBio.style.marginBlockStart = '0';
+  }
 }
 
-profileInfoCancelBtn.addEventListener('click', loadCancelProfileInfo);
-window.addEventListener('DOMContentLoaded', loadCancelProfileInfo);
-// ----------------
-// document.body.addEventListener('click', e => {
-//   console.log(e.target)
-// })
+// save profile info
+profileSaveBtn.addEventListener('click', () => {
+  const inputId = [
+    'profile-name',
+    'profile-username',
+    'profile-bio',
+    'pronouns-options',
+  ];
+  inputId.forEach((id) => {
+    const input = document.getElementById(id);
+    const key = input.dataset.key;
+
+    savedProfileAboutInfo[key] = input.value.trim();
+    console.log(savedProfileAboutInfo);
+  });
+
+  localStorage.setItem('profile-data', JSON.stringify(savedProfileAboutInfo));
+  setTimeout(() => {
+    saveAndLoadProfileInfo()
+    profileEditForm.classList.remove('active')
+  }, 300);
+});
+
+// Load saved profile data on refresh
+window.addEventListener('DOMContentLoaded', () => {
+  saveAndLoadProfileInfo();
+  profileNameInput.value = savedProfileAboutInfo.name || '';
+  profileUsernameInput.value = savedProfileAboutInfo.username || '';
+  profileBioInput.value = savedProfileAboutInfo.bio || '';
+  profilePronounInput.value = savedProfileAboutInfo.pronoun || '';
+});

@@ -174,48 +174,59 @@
             <!-- profile page contents -->
 
             <div class="profile-page-wrapper">
-              <div class="profile-bios">
+              <div class="profile-informations">
                 <div class="profile-image-container">
                   <img src="./demo-img.png" alt="">
                 </div>
                 <div class="profile-about">
-                  <h2 class="profile-name-show">Riyad Hasan</h2>
-                  <h3><span class="profile-username-show"></span><span class="profile-pronouns-show"></span></h3>
-                  <p>I'm interested in learing so many things.</p>
-                  <button class="edit-profile-button">Edit profile</button>
+                  <div class="basic-profile-info">
+                    <div class="p-name">
+                      <span class="show-name">--</span>
+                    </div>
+                    <div class="p-username">
+                      <span class="show-username">--</span><span class="show-pronoun">-*</span>
+                    </div>
+                    <div class="p-bio">
+                      <span class="show-bio"></span>
+                    </div>
+                  </div>
+                  <button class="profile-edit-button">Edit profile</button>
                 </div>
               </div>
 
               <div class="profile-activity-tab">
-                this is activity tab bro
+                <div></div>
+                <div></div>
+                <!-- profile edit form -->
                 <form class="profile-edit-form">
                   <div>
                     <label for="profile-name">Name</label>
-                    <input type="text" id="profile-name" placeholder="Name">
+                    <input data-key="name" type="text" id="profile-name" placeholder="Name" autocomplete="off">
                   </div>
 
                   <div>
                     <label for="profile-username">Username</label>
-                    <input type="text" id="profile-username" placeholder="Username">
+                    <input data-key="username" type="text" id="profile-username" placeholder="Username" autocomplete="off">
                   </div>
 
                   <div>
-                    <label for="profile-bios">Bios needs to be implemented</label>
-                    <textarea id="profile-bios"></textarea>
+                    <label for="profile-bio">Bio</label>
+                    <textarea data-key="bio" id="profile-bio" placeholder="Add a bio"></textarea>
                   </div>
 
                   <div>
                     <label for="pronouns-options">Pronouns</label>
-                    <!-- ! options need some styling -->
-                    <select id="pronouns-options">
-                      <option value="none">Don't specify</option>
+                    <select data-key="pronoun" id="pronouns-options">
+                      <option value="">Don't specify</option>
                       <option value="he/him">he/him</option>
                       <option value="she/her">she/her</option>
                     </select>
                   </div>
 
-                  <button class="profile-edit-info-cancel-btn">Cancel</button>
-                  <button class="profile-edit-info-save-btn">Save</button>
+                  <div class="p-form-btns">
+                    <button class="profile-edit-info-cancel-btn">Cancel</button>
+                    <button class="profile-edit-info-save-btn">Save</button>
+                  </div>
                 </form>
               </div>
             </div>
