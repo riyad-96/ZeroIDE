@@ -63,7 +63,7 @@ imgModArr.forEach((element) => {
 
 //! sidebar programs ------
 //! sidebar toggle
-const sideBarStat = localStorage.getItem('sidebar-stat')
+const sideBarStat = localStorage.getItem('sidebar-stat');
 
 sidebarToggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('show');
@@ -72,19 +72,19 @@ sidebarToggleBtn.addEventListener('click', () => {
   if (projectMenu.classList.contains('show')) {
     projectMenu.classList.remove('show');
   }
-  if (sidebar.classList.contains('show')){
-    localStorage.setItem('sidebar-stat', 'open')
+  if (sidebar.classList.contains('show')) {
+    localStorage.setItem('sidebar-stat', 'open');
   } else {
-    localStorage.removeItem('sidebar-stat')
+    localStorage.removeItem('sidebar-stat');
   }
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-  if(sideBarStat) {
-    sidebar.classList.add('show')
-    profileImage.classList.add('enlarge')
+  if (sideBarStat) {
+    sidebar.classList.add('show');
+    profileImage.classList.add('enlarge');
   }
-})
+});
 
 //! sub menu toggle
 subMenuBtn.addEventListener('click', () => {
@@ -294,6 +294,7 @@ function pageChangeUpdate() {
     page.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
     document.getElementById('home-page').scrollIntoView({ behavior: 'smooth' });
+    document.querySelector('.primary-menu-link').classList.add('focused');
   }
 }
 
@@ -351,7 +352,7 @@ function saveNewProfileImage(saveBtn, img) {
     saveBtn.remove();
     setTimeout(() => {
       location.reload();
-    }, 300)
+    }, 300);
   });
 }
 
