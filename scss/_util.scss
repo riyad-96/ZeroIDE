@@ -158,3 +158,9 @@
     translate: 0 2px;
   }
 }
+
+//! Profile page utilities 
+.profile-edit-form.active {
+  translate: 0 0;
+  scale: 1;
+}

@@ -63,6 +63,8 @@ imgModArr.forEach((element) => {
 
 //! sidebar programs ------
 //! sidebar toggle
+const sideBarStat = localStorage.getItem('sidebar-stat')
+
 sidebarToggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('show');
   profileImage.classList.toggle('enlarge');
@@ -70,7 +72,19 @@ sidebarToggleBtn.addEventListener('click', () => {
   if (projectMenu.classList.contains('show')) {
     projectMenu.classList.remove('show');
   }
+  if (sidebar.classList.contains('show')){
+    localStorage.setItem('sidebar-stat', 'open')
+  } else {
+    localStorage.removeItem('sidebar-stat')
+  }
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+  if(sideBarStat) {
+    sidebar.classList.add('show')
+    profileImage.classList.add('enlarge')
+  }
+})
 
 //! sub menu toggle
 subMenuBtn.addEventListener('click', () => {
