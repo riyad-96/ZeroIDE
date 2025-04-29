@@ -403,6 +403,14 @@ function vectorProfileSvg() {
 
 // Profile data form updation
 const profileEditForm = document.querySelector('.profile-edit-form');
+profileEditForm.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+
+    profileEditForm.querySelector('.profile-edit-info-save-btn').click();
+  }
+});
+
 const savedProfileAboutInfo =
   JSON.parse(localStorage.getItem('profile-data')) || {};
 const profileNameInput = document.getElementById('profile-name');
@@ -496,7 +504,16 @@ profileSocialLinkForm.addEventListener('click', (e) => {
     profileSocialLinkForm.classList.remove('active');
     setTimeout(() => {
       showSocialLinks();
-    }, 500)
+    }, 500);
+  }
+});
+
+profileSocialLinkForm.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    console.log('pressing enter brow.');
+
+    profileSocialLinkForm.querySelector('.link-form-save').click();
   }
 });
 
@@ -559,11 +576,14 @@ function createSocialInput() {
           <span>${platform.icon}</span>
           <span>${platform.baseUrl.replace('https://', '')}</span>
         </div>
-        <input id="${platform.id}" placeholder="e.g. user-71" autocomplete="off" maxlength="30">
+        <input id="${
+          platform.id
+        }" placeholder="e.g. user-71" autocomplete="off" maxlength="30">
       </div>
     `;
-    const usernameData = savedProfileAboutInfo.socialUsernameData || {}
-    inputWrapper.querySelector('input').value = usernameData[platform.name] || ''
+    const usernameData = savedProfileAboutInfo.socialUsernameData || {};
+    inputWrapper.querySelector('input').value =
+      usernameData[platform.name] || '';
     socialLinkForm.appendChild(inputWrapper);
   });
 }
@@ -573,21 +593,28 @@ createSocialInput();
 const socialLinkContainer = document.querySelector('.social-link-display');
 
 function showSocialLinks() {
-  socialLinkContainer.innerHTML = ''
+  socialLinkContainer.innerHTML = '';
   const { socialUsernameData = {} } = savedProfileAboutInfo;
-  console.log(socialUsernameData);
 
   socialPlatforms.forEach((platform) => {
     const username = socialUsernameData[platform.name] || '';
     if (username) {
-      const fullUrl = platform.baseUrl + username
+      const fullUrl = platform.baseUrl + username;
       const div = document.createElement('div');
       div.classList.add('each-username-link-container');
       div.innerHTML = `
-        <a href="${fullUrl}" title="${platform.label.replace('username', 'profile link')}" target="_blank">
-          ${platform.icon} <span>${username}</span><span class="profile-url"> - ${fullUrl}</span>
+        <a href="${fullUrl}" title="${platform.label.replace(
+        'username',
+        'profile link'
+      )}" target="_blank">
+          ${
+            platform.icon
+          } <span>${username}</span><span class="profile-url"> - ${fullUrl}</span>
         </a>
-        <button onclick="copySocialProfileLink(this)" title="Copy ${platform.label.replace('username', 'profile link')}" aria-label="Copy link button" data-social-profile-url="${fullUrl}">
+        <button class="url-copy-btn" title="Copy ${platform.label.replace(
+          'username',
+          'profile link'
+        )}" aria-label="Copy link button" data-social-profile-url="${fullUrl}">
           <i class="fa-regular fa-clone"></i>
         </button>`;
 
@@ -597,23 +624,28 @@ function showSocialLinks() {
 }
 showSocialLinks();
 // copy profile link function
-function copySocialProfileLink(btn) {
-  const linkUrl = btn.dataset.socialProfileUrl
-  const textarea = document.createElement('textarea')
-  textarea.value = linkUrl
-  document.body.appendChild(textarea)
-  textarea.select()
-  textarea.setSelectionRange(0, 99999);
-  document.execCommand('copy')
-  document.body.removeChild(textarea)
+let isCopied = false;
 
-  btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
-  setTimeout(() => {
-    btn.innerHTML = `<i class="fa-regular fa-clone"></i>`;
-  }, 1500);
+document.querySelector('.social-links').addEventListener('click', (e) => {
+  const btn = e.target.closest('.url-copy-btn');
+  if (btn && !btn.dataset.copied) {
+    const url = btn.dataset.socialProfileUrl;
+    const tempInput = document.createElement('textarea');
+    tempInput.value = url;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
 
-}
-
+    btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
+    btn.dataset.copied = 'true';
+    setTimeout(() => {
+      btn.innerHTML = `<i class="fa-regular fa-clone"></i>`;
+      delete btn.dataset.copied;
+    }, 1500);
+  }
+});
 
 // save social links to localStorage
 function saveSocialFormLinks() {
