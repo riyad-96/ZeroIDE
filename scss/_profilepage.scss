@@ -56,9 +56,7 @@ img {
 }
 
 //! Profile basic data styling
-// .basic-profile-info {
-//   border: 1px solid blue;
-// }
+
 .p-name {
   font-size: 24px;
   line-height: 1.2lh;
@@ -83,14 +81,7 @@ img {
   overflow-x: hidden;
   position: relative;
   border: 1px solid var(--slick-border-clr);
-  border-radius: 1rem;
-  padding: 1.525rem;
-
-  > div {
-    background-color: hsl(0, 0%, 50%);
-    width: 300px;
-    height: 300px;
-  }
+  min-height: 70vh;
 }
 
 .profile-edit-button {
@@ -109,13 +100,36 @@ img {
   }
 }
 
+//! social tab
+.social-links {
+  padding: 0.525rem 1rem;
+  border: 1px solid var(--slick-border-clr);
+  border-radius: 0.525rem;
+}
+
+.social-links header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-social-link-btn {
+  background-color: var(--global-button-bg);
+  border: 1px solid var(--slick-border-clr);
+  padding: 0 0.425rem;
+  padding-block: 0.125rem 0;
+  border-radius: .325rem;
+  font-size: 0.8325rem;
+}
+
+
+//! profile edit form styling
 .profile-edit-form {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
   width: 100%;
-  height: 100%;
   background-color: var(--sidebar-bg);
   padding: 1.525rem;
   translate: 100% 0;

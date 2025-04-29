@@ -256,9 +256,6 @@ function createNewProject(id, name) {
   projectList.prepend(div);
 }
 
-//! delete projects
-// function deleteSingleProject() {
-// }
 
 //! save to local storage
 function saveToLocalStorage(id, name, des) {
@@ -426,6 +423,7 @@ profileEditBtn.addEventListener('click', () => {
 profileCancelBtn.addEventListener('click', () => {
   profileEditForm.classList.remove('active');
 });
+
 // save and load data helper function
 const showName = document.querySelector('.show-name');
 const showUsername = document.querySelector('.show-username');
@@ -464,7 +462,6 @@ profileSaveBtn.addEventListener('click', () => {
     const key = input.dataset.key;
 
     savedProfileAboutInfo[key] = input.value.trim();
-    console.log(savedProfileAboutInfo);
   });
 
   localStorage.setItem('profile-data', JSON.stringify(savedProfileAboutInfo));
