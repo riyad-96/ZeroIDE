@@ -419,6 +419,15 @@ const profileSaveBtn = document.querySelector('.profile-edit-info-save-btn');
 
 profileEditBtn.addEventListener('click', () => {
   profileEditForm.classList.add('active');
+  if (
+    document
+      .querySelector('.social-links-edit-form-container')
+      .classList.contains('active')
+  ) {
+    document
+      .querySelector('.social-links-edit-form-container')
+      .classList.remove('active');
+  }
 });
 
 profileCancelBtn.addEventListener('click', () => {
@@ -471,6 +480,27 @@ profileSaveBtn.addEventListener('click', () => {
 });
 
 // Social links programs
+const profileSocialLinkForm = document.querySelector(
+  '.social-links-edit-form-container'
+);
+document.querySelector('.add-social-link-btn').addEventListener('click', () => {
+  profileSocialLinkForm.classList.add('active');
+});
+
+profileSocialLinkForm.addEventListener('click', (e) => {
+  if (e.target.classList.contains('link-form-cancel')) {
+    profileSocialLinkForm.classList.remove('active');
+  }
+  if (e.target.classList.contains('link-form-save')) {
+    saveSocialFormLinks();
+    profileSocialLinkForm.classList.remove('active');
+    setTimeout(() => {
+      showSocialLinks();
+    }, 500)
+  }
+});
+
+// All pratforms
 const socialPlatforms = [
   {
     name: 'github',
@@ -512,14 +542,14 @@ const socialPlatforms = [
     id: 'facebook-username',
     label: 'Facebook username',
     icon: '<i class="fa-brands fa-facebook"></i>',
-    baseUrl : 'https://facebook.com/'
+    baseUrl: 'https://facebook.com/',
   },
 ];
 
 // generate social input field
 const socialLinkForm = document.getElementById('social-links-input-container');
 
-function generateSocialInputs() {
+function createSocialInput() {
   socialPlatforms.forEach((platform) => {
     const inputWrapper = document.createElement('div');
     inputWrapper.innerHTML = `
@@ -529,13 +559,73 @@ function generateSocialInputs() {
           <span>${platform.icon}</span>
           <span>${platform.baseUrl.replace('https://', '')}</span>
         </div>
-        <input id="${platform.id}" placeholder="e.g. user-71">
+        <input id="${platform.id}" placeholder="e.g. user-71" autocomplete="off" maxlength="30">
       </div>
     `;
+    const usernameData = savedProfileAboutInfo.socialUsernameData || {}
+    inputWrapper.querySelector('input').value = usernameData[platform.name] || ''
     socialLinkForm.appendChild(inputWrapper);
   });
 }
-generateSocialInputs();
+createSocialInput();
+
+// showing the social links
+const socialLinkContainer = document.querySelector('.social-link-display');
+
+function showSocialLinks() {
+  socialLinkContainer.innerHTML = ''
+  const { socialUsernameData = {} } = savedProfileAboutInfo;
+  console.log(socialUsernameData);
+
+  socialPlatforms.forEach((platform) => {
+    const username = socialUsernameData[platform.name] || '';
+    if (username) {
+      const fullUrl = platform.baseUrl + username
+      const div = document.createElement('div');
+      div.classList.add('each-username-link-container');
+      div.innerHTML = `
+        <a href="${fullUrl}" title="${platform.label.replace('username', 'profile link')}" target="_blank">
+          ${platform.icon} <span>${username}</span><span class="profile-url"> - ${fullUrl}</span>
+        </a>
+        <button onclick="copySocialProfileLink(this)" title="Copy ${platform.label.replace('username', 'profile link')}" aria-label="Copy link button" data-social-profile-url="${fullUrl}">
+          <i class="fa-regular fa-clone"></i>
+        </button>`;
+
+      socialLinkContainer.appendChild(div);
+    }
+  });
+}
+showSocialLinks();
+// copy profile link function
+function copySocialProfileLink(btn) {
+  const linkUrl = btn.dataset.socialProfileUrl
+  const textarea = document.createElement('textarea')
+  textarea.value = linkUrl
+  document.body.appendChild(textarea)
+  textarea.select()
+  textarea.setSelectionRange(0, 99999);
+  document.execCommand('copy')
+  document.body.removeChild(textarea)
+
+  btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
+  setTimeout(() => {
+    btn.innerHTML = `<i class="fa-regular fa-clone"></i>`;
+  }, 1500);
+
+}
+
+
+// save social links to localStorage
+function saveSocialFormLinks() {
+  const data = {};
+
+  socialPlatforms.forEach((platform) => {
+    const input = document.getElementById(`${platform.id}`);
+    data[platform.name] = input.value.trim();
+  });
+  savedProfileAboutInfo.socialUsernameData = data;
+  localStorage.setItem('profile-data', JSON.stringify(savedProfileAboutInfo));
+}
 
 // Load saved profile data on refresh
 window.addEventListener('DOMContentLoaded', () => {

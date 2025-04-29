@@ -89,7 +89,7 @@
   height: 100%;
   max-width: 800px;
   max-height: 700px;
-  background-color: var(--sidebar-border-clr);
+  background-color: var(--form-bg-clr);
   border-radius: 1rem;
   border: 1px solid var(--slick-border-clr);
   padding: 1.5rem;
@@ -387,7 +387,7 @@ button:disabled:hover {
 }
 
 .form-background-layer form {
-  background-color: var(--sidebar-bg);
+  background-color: var(--form-bg-clr);
   box-sizing: content-box;
   padding: 2rem;
   min-width: 400px;
