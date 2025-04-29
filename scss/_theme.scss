@@ -15,6 +15,7 @@
   --profile-img-outline-hover: hsla(0, 0%, 65%, 0.7);
   
   --form-bg-layer-bg: hsla(0, 0%, 0%, 0.3);
+  --form-bg-clr: hsl(0, 0%, 9%);
   --input-textarea-bg: hsla(0, 0%, 100%, 0.075);
   --slick-border-clr: hsl(0, 0%, 21%);
   --delete-message-modal-suggested-span: hsl(0, 0%, 64%);
@@ -27,6 +28,8 @@
   --global-button-clr: hsl(0, 0%, 90%);
   --global-button-bg: hsl(0, 0%, 15%);
   --global-button-hover-bg: hsl(0, 0%, 18%);
+  --global-button-padding: 0.125rem 0.625rem;
+  --global-button-border-radius: 0.325rem;
 
   //! Profile page clrs 
   --p-username-clr: hsl(0, 0%, 50%);

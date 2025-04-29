@@ -112,7 +112,9 @@ function closeDeleteModal() {
 }
 deleteCancelBtn.addEventListener('click', closeDeleteModal);
 deleteModal.addEventListener('click', closeDeleteModal);
-document.getElementById('dlt-mes-setting-page-link').addEventListener('click', closeDeleteModal)
+document
+  .getElementById('dlt-mes-setting-page-link')
+  .addEventListener('click', closeDeleteModal);
 //! delete single project
 let currentId = null;
 deleteConfirmBtn.addEventListener('click', () => {
@@ -255,7 +257,6 @@ function createNewProject(id, name) {
 
   projectList.prepend(div);
 }
-
 
 //! save to local storage
 function saveToLocalStorage(id, name, des) {
@@ -468,6 +469,73 @@ profileSaveBtn.addEventListener('click', () => {
   setTimeout(saveAndLoadProfileInfo, 300);
   profileEditForm.classList.remove('active');
 });
+
+// Social links programs
+const socialPlatforms = [
+  {
+    name: 'github',
+    id: 'github-username',
+    label: 'Github username',
+    icon: '<i class="fa-brands fa-github"></i>',
+    baseUrl: 'https://github.com/',
+  },
+  {
+    name: 'linkedin',
+    id: 'linkedin-username',
+    label: 'LinkedIn username',
+    icon: '<i class="fa-brands fa-linkedin"></i>',
+    baseUrl: 'https://linkedin.com/',
+  },
+  {
+    name: 'codepen',
+    id: 'codepen-username',
+    label: 'Codepen username',
+    icon: '<i class="fa-brands fa-codepen"></i>',
+    baseUrl: 'https://codepen.io/',
+  },
+  {
+    name: 'instagram',
+    id: 'instagram-username',
+    label: 'Instagram username',
+    icon: '<i class="fa-brands fa-instagram"></i>',
+    baseUrl: 'https://instagram.com/',
+  },
+  {
+    name: 'x',
+    id: 'x-username',
+    label: 'X(Twitter) username',
+    icon: '<i class="fa-brands fa-x-twitter"></i>',
+    baseUrl: 'https://x.com/',
+  },
+  {
+    name: 'facebook',
+    id: 'facebook-username',
+    label: 'Facebook username',
+    icon: '<i class="fa-brands fa-facebook"></i>',
+    baseUrl : 'https://facebook.com/'
+  },
+];
+
+// generate social input field
+const socialLinkForm = document.getElementById('social-links-input-container');
+
+function generateSocialInputs() {
+  socialPlatforms.forEach((platform) => {
+    const inputWrapper = document.createElement('div');
+    inputWrapper.innerHTML = `
+      <label for="${platform.id}">${platform.label}</label>
+      <div class="social-link-inputs">
+        <div>
+          <span>${platform.icon}</span>
+          <span>${platform.baseUrl.replace('https://', '')}</span>
+        </div>
+        <input id="${platform.id}" placeholder="e.g. user-71">
+      </div>
+    `;
+    socialLinkForm.appendChild(inputWrapper);
+  });
+}
+generateSocialInputs();
 
 // Load saved profile data on refresh
 window.addEventListener('DOMContentLoaded', () => {

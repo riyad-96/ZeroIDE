@@ -138,6 +138,7 @@ main {
   --create-new-project-btn-bg: hsl(0, 0%, 15%);
   --profile-img-outline-hover: hsla(0, 0%, 65%, 0.7);
   --form-bg-layer-bg: hsla(0, 0%, 0%, 0.3);
+  --form-bg-clr: hsl(0, 0%, 9%);
   --input-textarea-bg: hsla(0, 0%, 100%, 0.075);
   --slick-border-clr: hsl(0, 0%, 21%);
   --delete-message-modal-suggested-span: hsl(0, 0%, 64%);
@@ -147,6 +148,8 @@ main {
   --global-button-clr: hsl(0, 0%, 90%);
   --global-button-bg: hsl(0, 0%, 15%);
   --global-button-hover-bg: hsl(0, 0%, 18%);
+  --global-button-padding: 0.125rem 0.625rem;
+  --global-button-border-radius: 0.325rem;
   --p-username-clr: hsl(0, 0%, 50%);
 }
 
@@ -625,7 +628,7 @@ form textarea::-webkit-scrollbar {
 .form-buttons button:not(.cancel-btn) {
   background-color: var(--global-button-bg);
   padding-block: 0.4rem 0.3rem;
-  padding-inline: 0.8rem;
+  padding-inline: 0.725rem;
   border-radius: 0.5rem;
   font-size: 0.825rem;
   border: 1px solid var(--slick-border-clr);
@@ -885,18 +888,76 @@ img {
   font-size: 0.8325rem;
 }
 
+.social-links-edit-form-container {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--form-bg-clr);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 1.525rem;
+  border-radius: 0.525rem;
+}
+.social-links-edit-form-container > div {
+  display: grid;
+  gap: 1rem;
+}
+
+.social-link-inputs {
+  border: 1px solid var(--slick-border-clr);
+  border-radius: 0.425rem;
+  font-size: 0.825rem;
+  display: flex;
+  align-items: center;
+  margin-block-start: 0.425rem;
+}
+.social-link-inputs > div {
+  display: flex;
+  align-items: center;
+  gap: 0.525rem;
+  margin-inline: 0.5rem;
+}
+.social-link-inputs input {
+  min-width: 0;
+  flex-grow: 1;
+  border-radius: 0 0.325rem 0.325rem 0;
+  border: unset;
+  font-size: 0.925rem;
+  padding: 0.325rem 0.625rem;
+}
+
+.social-link-btn-container.social-link-btn-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social-link-btn {
+  background-color: var(--global-button-bg);
+  border: 1px solid var(--slick-border-clr);
+  border-radius: var(--global-button-border-radius);
+  padding: var(--global-button-padding);
+}
+.social-link-btn:hover {
+  background-color: var(--global-button-hover-bg);
+}
+
 .profile-edit-form {
   position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
   width: 100%;
-  background-color: var(--sidebar-bg);
+  min-height: 100%;
+  background-color: var(--form-bg-clr);
+  border: 1px solid var(--slick-border-clr);
   padding: 1.525rem;
   translate: 100% 0;
   transition: 600ms;
   scale: 0.3;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+  z-index: 2;
 }
 .profile-edit-form input,
 .profile-edit-form textarea,
@@ -917,9 +978,10 @@ img {
   gap: 0.5rem;
 }
 .p-form-btns.p-form-btns button {
-  border-radius: 0.5rem;
+  border-radius: var(--global-button-border-radius);
   background-color: var(--global-button-bg);
   border: 1px solid var(--slick-border-clr);
+  padding: var(--global-button-padding);
 }
 .p-form-btns.p-form-btns button:hover {
   background-color: var(--global-button-hover-bg);

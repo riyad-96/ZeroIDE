@@ -122,6 +122,64 @@ img {
   font-size: 0.8325rem;
 }
 
+.social-links-edit-form-container {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--form-bg-clr);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 1.525rem;
+  border-radius: 0.525rem;
+  
+  >div {
+    display: grid;
+    gap: 1rem;
+  }
+}
+
+.social-link-inputs {
+  border: 1px solid var(--slick-border-clr);
+  border-radius: 0.425rem;
+  font-size: 0.825rem;
+  display: flex;
+  align-items: center;
+  margin-block-start: 0.425rem;
+
+  >div {
+    display: flex;
+    align-items: center;
+    gap: 0.525rem;
+    margin-inline: 0.5rem;
+  }
+
+  input {
+    min-width: 0;
+    flex-grow: 1;
+    border-radius: 0 0.325rem 0.325rem 0;
+    border: unset;
+    font-size: 0.925rem;
+    padding: 0.325rem 0.625rem;
+  }
+}
+
+.social-link-btn-container.social-link-btn-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social-link-btn{
+  background-color: var(--global-button-bg);
+  border: 1px solid var(--slick-border-clr);
+  border-radius: var(--global-button-border-radius);
+  padding: var(--global-button-padding);
+
+  &:hover {
+    background-color: var(--global-button-hover-bg)
+  }
+}
 
 //! profile edit form styling
 .profile-edit-form {
@@ -130,12 +188,15 @@ img {
   left: 0;
   z-index: 2;
   width: 100%;
-  background-color: var(--sidebar-bg);
+  min-height: 100%;
+  background-color: var(--form-bg-clr);
+  border: 1px solid var(--slick-border-clr);
   padding: 1.525rem;
   translate: 100% 0;
   transition: 600ms;
   scale: 0.3;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+  z-index: 2;
 
   input,
   textarea,
@@ -158,9 +219,10 @@ img {
   gap: 0.5rem;
 
   button {
-    border-radius: 0.5rem;
+    border-radius: var(--global-button-border-radius);
     background-color: var(--global-button-bg);
     border: 1px solid var(--slick-border-clr);
+    padding: var(--global-button-padding);
 
     &:hover {
       background-color: var(--global-button-hover-bg);
