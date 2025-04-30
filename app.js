@@ -434,20 +434,24 @@ const profileCancelBtn = document.querySelector(
 const profileSaveBtn = document.querySelector('.profile-edit-info-save-btn');
 
 profileEditBtn.addEventListener('click', () => {
-  profileEditForm.classList.add('active');
-  if (
-    document
-      .querySelector('.social-links-edit-form-container')
-      .classList.contains('active')
-  ) {
-    document
-      .querySelector('.social-links-edit-form-container')
-      .classList.remove('active');
+  const linkForm = document.querySelector('.social-links-edit-form-container')
+  profileEditForm.style.display= 'unset';
+  requestAnimationFrame(() =>  {
+    profileEditForm.classList.add('active');
+  })
+  if (linkForm.classList.contains('active')) {
+    linkForm.classList.remove('active');
+    setTimeout(() => {
+      linkForm.style.display = 'none';
+    }, 600)
   }
 });
 
 profileCancelBtn.addEventListener('click', () => {
   profileEditForm.classList.remove('active');
+  setTimeout(() => {
+    profileEditForm.style.display = 'none';
+  }, 600)
 });
 
 // save and load data helper function
@@ -494,6 +498,9 @@ profileSaveBtn.addEventListener('click', () => {
   setTimeout(saveAndLoadProfileInfo, 300);
   profileEditForm.classList.remove('active');
   toastMessagePopup(profileSaveBtn);
+  setTimeout(() => {
+    profileEditForm.style.display = 'none';
+  }, 600)
 });
 
 // Social links programs
@@ -501,20 +508,28 @@ const profileSocialLinkForm = document.querySelector(
   '.social-links-edit-form-container'
 );
 document.querySelector('.add-social-link-btn').addEventListener('click', () => {
-  profileSocialLinkForm.classList.add('active');
+  profileSocialLinkForm.style.display = 'unset';
+  requestAnimationFrame(() => {
+    profileSocialLinkForm.classList.add('active');
+  })
 });
 
 profileSocialLinkForm.addEventListener('click', (e) => {
   if (e.target.classList.contains('link-form-cancel')) {
     profileSocialLinkForm.classList.remove('active');
+    setTimeout(() => {
+      profileSocialLinkForm.style.display= 'none';
+    }, 600)
   }
   if (e.target.classList.contains('link-form-save')) {
     saveSocialFormLinks();
     profileSocialLinkForm.classList.remove('active');
     toastMessagePopup(e.target);
+
     setTimeout(() => {
       showSocialLinks();
-    }, 500);
+      profileSocialLinkForm.style.display= 'none';
+    }, 600);
   }
 });
 
