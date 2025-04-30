@@ -85,6 +85,10 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
+svg, i {
+  pointer-events: none;
+}
+
 main {
   height: 100vh;
   height: 100svh;
@@ -151,6 +155,35 @@ main {
   --global-button-padding: 0.125rem 0.625rem;
   --global-button-border-radius: 0.325rem;
   --p-username-clr: hsl(0, 0%, 50%);
+}
+
+.all-pages {
+  width: 100%;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  min-height: 100%;
+}
+
+.each-page {
+  height: 100vh;
+  height: 100svh;
+  overflow-y: hidden;
+  padding: 0.5rem;
+}
+
+.each-page .body {
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--sidebar-border-clr);
+  border-radius: 0.525rem;
+  overflow: hidden;
+  background-color: var(--sidebar-bg);
+}
+
+.page-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .sidebar {
@@ -249,7 +282,7 @@ main {
   background-color: var(--form-bg-clr);
   border-radius: 1rem;
   border: 1px solid var(--slick-border-clr);
-  padding: 1.5rem;
+  padding: 0.525rem;
 }
 
 .img-container {
@@ -260,8 +293,6 @@ main {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  outline: 1px solid hsla(0, 0%, 50%, 0.5);
-  outline-offset: 1px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -532,12 +563,14 @@ button:disabled:hover {
 }
 
 .sub-menu-option-btn {
-  box-sizing: content-box;
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  padding: 0.25rem;
   opacity: 0;
   transition: opacity 200ms;
-  margin-inline-end: 0.25rem;
+  margin-inline-end: 0.325rem;
 }
 
 .sub-menu-option-btn:hover {
@@ -741,35 +774,6 @@ form textarea::-webkit-scrollbar {
 
 .delete-confirmation-buttons .dlt-cancel-btn:hover {
   background-color: var(--global-button-hover-bg);
-}
-
-.all-pages {
-  width: 100%;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  min-height: 100%;
-}
-
-.each-page {
-  height: 100vh;
-  height: 100svh;
-  overflow-y: hidden;
-  padding: 0.5rem;
-}
-
-.each-page .body {
-  width: 100%;
-  height: 100%;
-  border: 1px solid var(--sidebar-border-clr);
-  border-radius: 0.525rem;
-  overflow: hidden;
-  background-color: var(--sidebar-bg);
-}
-
-.page-wrapper {
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
 }
 
 .profile-page-wrapper {
@@ -1054,6 +1058,49 @@ img {
 .profile-edit-form option {
   background: var(--input-textarea-bg);
   color: #111;
+}
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  pointer-events: none;
+}
+
+.toast-container div {
+  display: flex;
+  justify-content: center;
+  box-sizing: content-box;
+  height: 0px;
+  margin-block-end: 2px;
+  transition: 200ms;
+}
+.toast-container div span {
+  height: 40px;
+  background-color: hsl(0, 0%, 50%);
+  color: var(--white);
+  font-size: 0.925rem;
+  font-weight: 500;
+  display: grid;
+  place-items: center;
+  padding-inline: 0.725rem;
+  border-radius: 0.425rem;
+  box-shadow: 0 4px 5px hsla(0, 0%, 20%, 0.3);
+  scale: 0.6;
+  opacity: 0;
+  translate: 0 -100%;
+  transition: 250ms;
+}
+
+.toast-container div.active {
+  height: 50px;
+}
+.toast-container div.active span {
+  scale: 1;
+  opacity: 1;
+  translate: 0 0;
 }
 
 .blinking-rect {

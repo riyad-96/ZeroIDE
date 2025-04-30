@@ -1,10 +1,13 @@
 @import "base";
 @import "layout";
 @import "theme";
-@import "sidebar";
+
 @import "allpages";
+@import "sidebar";
 @import "homepage";
 @import "profilepage";
 @import "settingspage";
 @import "projectspage";
+
+@import "uiComponent";
 @import "util";

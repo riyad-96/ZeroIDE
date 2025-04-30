@@ -1,0 +1,50 @@
+
+
+
+//! Toast/Action Popup component stylings
+.toast-container {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  pointer-events: none;
+}
+
+.toast-container div {
+  display: flex;
+  justify-content: center;
+  box-sizing: content-box;
+  height: 0px;
+  margin-block-end: 2px;
+
+  transition: 200ms;
+  
+  span{
+    height: 40px;
+    background-color: hsl(0, 0%, 50%);
+    color: var(--white);
+    font-size: 0.925rem;
+    font-weight: 500;
+    display: grid;
+    place-items: center;
+    padding-inline: 0.725rem;
+    border-radius: 0.425rem;
+    box-shadow: 0 4px 5px hsla(0, 0%, 20%, 0.3);
+
+    scale: 0.6;
+    opacity: 0;
+    translate: 0 -100%;
+    transition: 250ms;
+  }
+}
+
+.toast-container div.active {
+  height: 50px;
+
+  span {
+    scale: 1;
+    opacity: 1;
+    translate: 0 0;
+  }
+}

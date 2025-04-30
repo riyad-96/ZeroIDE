@@ -129,8 +129,9 @@ deleteConfirmBtn.addEventListener('click', () => {
         item.remove();
       }
     });
+    closeDeleteModal();
+    toastMessagePopup(deleteConfirmBtn);
   }
-  closeDeleteModal();
 });
 
 //! assigning default behaviors of createnew project form
@@ -175,11 +176,13 @@ function createNewProject(id, name) {
                     </svg>
                     <span>${name}</span>
                   </a>
-                  <svg class="sub-menu-option-btn" xmlns="http://www.w3.org/2000/svg" height="20px"
+                  <button class="sub-menu-option-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="20px"
                     viewBox="0 -960 960 960" width="20px" fill="currentColor">
                     <path
                       d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z" />
                   </svg>
+                  </button>
                   <div class="sub-menu-options">
                     <button aria-label="rename button" title="Rename project">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
@@ -218,10 +221,11 @@ function createNewProject(id, name) {
   renameBtn.addEventListener('click', () => {
     projectName.setAttribute('contenteditable', 'true');
     projectName.focus();
-    projectName.style.outline = '2px solid rgba(124, 124, 124, 0.486)';
+    projectName.style.outline = '2px solid hsla(0, 0%, 50%, 0.5)';
     projectName.style.cursor = 'text';
     const prevLink = link.href;
     link.removeAttribute('href');
+    link.style.cursor = 'default';
 
     projectName.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
@@ -234,16 +238,18 @@ function createNewProject(id, name) {
       projectName.removeAttribute('contenteditable');
       projectName.style.outline = 'none';
       projectName.style.cursor = 'inherit';
-      link.setAttribute('href', prevLink);
+      // link.setAttribute('href', prevLink);
 
       const itemIndex = savedProjects.findIndex((p) => p.id === id);
       if (itemIndex !== -1) {
         savedProjects[itemIndex].name = projectName.textContent.trim();
-        localStorage.setItem(
-          'all-saved-projects',
-          JSON.stringify(savedProjects)
-        );
+        localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
       }
+
+      setTimeout(() => {
+        link.setAttribute('href', prevLink);
+        link.style.cursor = 'pointer';
+      }, 400)
     });
   });
 
@@ -273,6 +279,7 @@ createBtn.addEventListener('click', () => {
   saveToLocalStorage(id, name, des);
   projectTitleInput.value = '';
   projectDescriptionInput.value = '';
+  toastMessagePopup(createBtn)
 });
 
 //! All pages navigation programs
@@ -383,6 +390,7 @@ downloadImgBtn.addEventListener('click', () => {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    toastMessagePopup(downloadImgBtn)
   }
 });
 
@@ -485,6 +493,7 @@ profileSaveBtn.addEventListener('click', () => {
   localStorage.setItem('profile-data', JSON.stringify(savedProfileAboutInfo));
   setTimeout(saveAndLoadProfileInfo, 300);
   profileEditForm.classList.remove('active');
+  toastMessagePopup(profileSaveBtn);
 });
 
 // Social links programs
@@ -502,6 +511,7 @@ profileSocialLinkForm.addEventListener('click', (e) => {
   if (e.target.classList.contains('link-form-save')) {
     saveSocialFormLinks();
     profileSocialLinkForm.classList.remove('active');
+    toastMessagePopup(e.target);
     setTimeout(() => {
       showSocialLinks();
     }, 500);
@@ -600,21 +610,16 @@ function showSocialLinks() {
     const username = socialUsernameData[platform.name] || '';
     if (username) {
       const fullUrl = platform.baseUrl + username;
+      const icon = platform.icon;
+      const title = platform.label.replace('username','profile link');
+
       const div = document.createElement('div');
       div.classList.add('each-username-link-container');
       div.innerHTML = `
-        <a href="${fullUrl}" title="${platform.label.replace(
-        'username',
-        'profile link'
-      )}" target="_blank">
-          ${
-            platform.icon
-          } <span>${username}</span><span class="profile-url"> - ${fullUrl}</span>
+        <a href="${fullUrl}" title="${title}" target="_blank">
+          ${icon} <span>${username}</span><span class="profile-url"> - ${fullUrl}</span>
         </a>
-        <button class="url-copy-btn" title="Copy ${platform.label.replace(
-          'username',
-          'profile link'
-        )}" aria-label="Copy link button" data-social-profile-url="${fullUrl}">
+        <button data-toast-message="Link Copied !" class="url-copy-btn" title="Copy ${title}" aria-label="Copy link button" data-social-profile-url="${fullUrl}">
           <i class="fa-regular fa-clone"></i>
         </button>`;
 
@@ -624,7 +629,6 @@ function showSocialLinks() {
 }
 showSocialLinks();
 // copy profile link function
-let isCopied = false;
 
 document.querySelector('.social-links').addEventListener('click', (e) => {
   const btn = e.target.closest('.url-copy-btn');
@@ -667,3 +671,36 @@ window.addEventListener('DOMContentLoaded', () => {
   profileBioInput.value = savedProfileAboutInfo.bio || '';
   profilePronounInput.value = savedProfileAboutInfo.pronoun || '';
 });
+
+// ! -------- all confirmation dialogue programs ---------
+const toastContainer = document.querySelector('.toast-container');
+
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-toast-message]');
+  if (btn) {
+    toastMessagePopup(btn);
+  }
+});
+
+function toastMessagePopup(btn) {
+  const message = btn.dataset.toastMessage;
+  const div = document.createElement('div');
+  div.innerHTML = `
+      <span>${message}</span>
+    `;
+  toastContainer.prepend(div);
+
+  requestAnimationFrame(() => {
+    div.classList.add('active');
+  });
+
+  setTimeout(() => {
+    div.classList.remove('active');
+  }, 2000);
+
+  setTimeout(() => {
+    toastContainer.removeChild(div);
+  }, 2200);
+
+  console.log(btn);
+}

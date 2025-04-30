@@ -212,7 +212,7 @@
 
                   <div class="social-link-btn-container">
                     <button class="social-link-btn link-form-cancel">Cancel</button>
-                    <button class="social-link-btn link-form-save">Save</button>
+                    <button class="social-link-btn link-form-save" data-toast-message="Link info saved !">Save</button>
                   </div>
                 </form>
                 <!-- profile edit form -->
@@ -245,7 +245,7 @@
 
                   <div class="p-form-btns">
                     <button title="Click to cancel" class="profile-edit-info-cancel-btn">Cancel</button>
-                    <button title="Click to save" class="profile-edit-info-save-btn">Save</button>
+                    <button title="Click to save" class="profile-edit-info-save-btn" data-toast-message="Profile info saved !">Save</button>
                   </div>
                 </form>
               </div>
@@ -294,7 +294,7 @@
       <div class="img-buttons">
         <input type="file" accept="image/*" id="profile-img-input">
         <button title="Click to Close" class="close-img-btn">Close</button>
-        <button title="Click to download" class="download-img-btn">Download</button>
+        <button title="Click to download" class="download-img-btn" data-toast-message="Download started !">Download</button>
         <button title="Click to Change" class="change-img-btn">Change</button>
       </div>
     </div>
@@ -315,7 +315,7 @@
 
       <div class="form-buttons">
         <button class="cancel-btn">cancel</button>
-        <button class="create-btn">Create</button>
+        <button class="create-btn" data-toast-message="New project created !">Create</button>
         <button class="create-open-btn">Create & open</button>
       </div>
     </form>
@@ -332,11 +332,14 @@
         </div>
         <div class="delete-confirmation-buttons">
           <button class="dlt-cancel-btn">Cancel</button>
-          <button class="dlt-confirm-btn">Delete</button>
+          <button class="dlt-confirm-btn" data-toast-message="Project deleted !">Delete</button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- toast message effect -->
+   <div class="toast-container"></div>
 
 </body>
 

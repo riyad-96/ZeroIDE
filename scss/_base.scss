@@ -83,3 +83,7 @@ select {
     outline-offset: 2px;
   }
 }
+
+svg, i {
+  pointer-events: none;
+}
