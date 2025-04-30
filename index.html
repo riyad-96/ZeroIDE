@@ -245,7 +245,8 @@
 
                   <div class="p-form-btns">
                     <button title="Click to cancel" class="profile-edit-info-cancel-btn">Cancel</button>
-                    <button title="Click to save" class="profile-edit-info-save-btn" data-toast-message="Profile info saved !">Save</button>
+                    <button title="Click to save" class="profile-edit-info-save-btn"
+                      data-toast-message="Profile info saved !">Save</button>
                   </div>
                 </form>
               </div>
@@ -292,10 +293,14 @@
         <!-- profile images show inside this container -->
       </div>
       <div class="img-buttons">
-        <input type="file" accept="image/*" id="profile-img-input">
-        <button title="Click to Close" class="close-img-btn">Close</button>
-        <button title="Click to download" class="download-img-btn" data-toast-message="Download started !">Download</button>
-        <button title="Click to Change" class="change-img-btn">Change</button>
+        <span>Please keep the image file size limited around 2MB(Mega Byte)</span>
+        <div>
+          <input type="file" accept="image/*" id="profile-img-input">
+          <button title="Click to Close" class="close-img-btn">Close</button>
+          <button title="Click to download" class="download-img-btn"
+            data-toast-message="Download started !">Download</button>
+          <button title="Click to Change" class="change-img-btn">Change</button>
+        </div>
       </div>
     </div>
   </div>
@@ -339,7 +344,7 @@
   </div>
 
   <!-- toast message effect -->
-   <div class="toast-container"></div>
+  <div class="toast-container"></div>
 
 </body>
 
