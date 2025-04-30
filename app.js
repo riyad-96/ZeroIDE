@@ -131,6 +131,7 @@ deleteConfirmBtn.addEventListener('click', () => {
     });
     closeDeleteModal();
     toastMessagePopup(deleteConfirmBtn);
+    loadLastFourProject();
   }
 });
 
@@ -246,7 +247,6 @@ function createNewProject(id, name) {
       projectName.removeAttribute('contenteditable');
       projectName.style.outline = 'none';
       projectName.style.cursor = 'inherit';
-      // link.setAttribute('href', prevLink);
 
       const itemIndex = savedProjects.findIndex((p) => p.id === id);
       if (itemIndex !== -1) {
@@ -260,6 +260,7 @@ function createNewProject(id, name) {
       setTimeout(() => {
         link.setAttribute('href', prevLink);
         link.style.cursor = 'pointer';
+        loadLastFourProject();
       }, 400);
     });
   });
@@ -276,8 +277,8 @@ function createNewProject(id, name) {
 }
 
 //! save to local storage
-function saveToLocalStorage(id, name, des) {
-  const newProject = { id, name, des: des };
+function saveToLocalStorage(id, name, des, date) {
+  const newProject = { id, name, des: des, date: date };
   savedProjects.push(newProject);
   localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
 }
@@ -287,10 +288,11 @@ createBtn.addEventListener('click', () => {
   const name = projectTitleInput.value.trim() || 'Untitled';
   const des = projectDescriptionInput.value.trim() || '';
   createNewProject(id, name);
-  saveToLocalStorage(id, name, des);
+  saveToLocalStorage(id, name, des, new Date());
   projectTitleInput.value = '';
   projectDescriptionInput.value = '';
   toastMessagePopup(createBtn);
+  loadLastFourProject();
 });
 
 //! All pages navigation programs
@@ -316,6 +318,11 @@ function pageChangeUpdate() {
 
 window.addEventListener('hashchange', pageChangeUpdate);
 window.addEventListener('DOMContentLoaded', pageChangeUpdate);
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(pageChangeUpdate, 200);
+});
 
 //! Profile page updation programs
 //profile picture updation
@@ -444,25 +451,33 @@ const profileCancelBtn = document.querySelector(
 );
 const profileSaveBtn = document.querySelector('.profile-edit-info-save-btn');
 
+//!------------------------------
+function styleDisplay(el, value) {
+  return (el.style.display = `${value}`);
+}
+function styleTimeoutDisplay(el, value, time) {
+  return setTimeout(() => {
+    el.style.display = `${value}`;
+  }, time);
+}
+//!------------------------------
+
 profileEditBtn.addEventListener('click', () => {
   const linkForm = document.querySelector('.social-links-edit-form-container');
-  profileEditForm.style.display = 'unset';
+  // profileEditForm.style.display = 'unset';
+  styleDisplay(profileEditForm, 'unset');
   requestAnimationFrame(() => {
     profileEditForm.classList.add('active');
   });
   if (linkForm.classList.contains('active')) {
     linkForm.classList.remove('active');
-    setTimeout(() => {
-      linkForm.style.display = 'none';
-    }, 600);
+    styleTimeoutDisplay(linkForm, 'none', 600);
   }
 });
 
 profileCancelBtn.addEventListener('click', () => {
   profileEditForm.classList.remove('active');
-  setTimeout(() => {
-    profileEditForm.style.display = 'none';
-  }, 600);
+  styleTimeoutDisplay(profileEditForm, 'none', 600);
 });
 
 // save and load data helper function
@@ -509,9 +524,7 @@ profileSaveBtn.addEventListener('click', () => {
   setTimeout(saveAndLoadProfileInfo, 300);
   profileEditForm.classList.remove('active');
   toastMessagePopup(profileSaveBtn);
-  setTimeout(() => {
-    profileEditForm.style.display = 'none';
-  }, 600);
+  styleTimeoutDisplay(profileEditForm, 'none', 600);
 });
 
 // Social links programs
@@ -519,7 +532,7 @@ const profileSocialLinkForm = document.querySelector(
   '.social-links-edit-form-container'
 );
 document.querySelector('.add-social-link-btn').addEventListener('click', () => {
-  profileSocialLinkForm.style.display = 'unset';
+  styleDisplay(profileSocialLinkForm, 'unset');
   requestAnimationFrame(() => {
     profileSocialLinkForm.classList.add('active');
   });
@@ -528,27 +541,22 @@ document.querySelector('.add-social-link-btn').addEventListener('click', () => {
 profileSocialLinkForm.addEventListener('click', (e) => {
   if (e.target.classList.contains('link-form-cancel')) {
     profileSocialLinkForm.classList.remove('active');
-    setTimeout(() => {
-      profileSocialLinkForm.style.display = 'none';
-    }, 600);
+    styleTimeoutDisplay(profileSocialLinkForm, 'none', 600);
   }
   if (e.target.classList.contains('link-form-save')) {
     saveSocialFormLinks();
     profileSocialLinkForm.classList.remove('active');
     toastMessagePopup(e.target);
-
     setTimeout(() => {
       showSocialLinks();
-      profileSocialLinkForm.style.display = 'none';
-    }, 600);
+    }, 500);
+    styleTimeoutDisplay(profileSocialLinkForm, 'none', 600);
   }
 });
 
 profileSocialLinkForm.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
-    console.log('pressing enter brow.');
-
     profileSocialLinkForm.querySelector('.link-form-save').click();
   }
 });
@@ -727,6 +735,50 @@ function toastMessagePopup(btn) {
   setTimeout(() => {
     toastContainer.removeChild(div);
   }, 2200);
+}
 
-  console.log(btn);
+//! Load last 4 project data in profile page.
+const recentProjectsContainer = document.querySelector(
+  '.recent-projects-container'
+);
+
+function loadLastFourProject() {
+  const lastFourProjects = savedProjects.slice(-4) || [];
+  recentProjectsContainer.innerHTML = '';
+
+  lastFourProjects.forEach((p) => {
+    if (p) {
+      const date = projectDate(p.date);
+      const div = document.createElement('div');
+      div.classList.add('each-recent-project');
+      div.innerHTML = `
+        <div>
+          ${bookmarkSvg()}
+          <a href="./editor/user.html#${p.id}">${p.name}</a>
+        </div>
+        <span>${p.des}</span>
+        <div>
+          <span>created on ${date}</span>
+        </div>`;
+      recentProjectsContainer.prepend(div);
+    }
+  });
+}
+loadLastFourProject();
+
+function bookmarkSvg() {
+  return `<svg aria-hidden="true" height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+            <path
+              d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z">
+            </path>
+          </svg>`;
+}
+
+function projectDate(date) {
+  const savedDate = new Date(date);
+  return savedDate.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
 }
