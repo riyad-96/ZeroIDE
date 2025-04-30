@@ -221,6 +221,14 @@ function createNewProject(id, name) {
   renameBtn.addEventListener('click', () => {
     projectName.setAttribute('contenteditable', 'true');
     projectName.focus();
+
+    const range = document.createRange();
+    range.selectNodeContents(projectName);
+    range.collapse(false);
+    const select = window.getSelection();
+    select.removeAllRanges();
+    select.addRange(range);
+
     projectName.style.outline = '2px solid hsla(0, 0%, 50%, 0.5)';
     projectName.style.cursor = 'text';
     const prevLink = link.href;
@@ -243,13 +251,16 @@ function createNewProject(id, name) {
       const itemIndex = savedProjects.findIndex((p) => p.id === id);
       if (itemIndex !== -1) {
         savedProjects[itemIndex].name = projectName.textContent.trim();
-        localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
+        localStorage.setItem(
+          'all-saved-projects',
+          JSON.stringify(savedProjects)
+        );
       }
 
       setTimeout(() => {
         link.setAttribute('href', prevLink);
         link.style.cursor = 'pointer';
-      }, 400)
+      }, 400);
     });
   });
 
@@ -279,7 +290,7 @@ createBtn.addEventListener('click', () => {
   saveToLocalStorage(id, name, des);
   projectTitleInput.value = '';
   projectDescriptionInput.value = '';
-  toastMessagePopup(createBtn)
+  toastMessagePopup(createBtn);
 });
 
 //! All pages navigation programs
@@ -390,7 +401,7 @@ downloadImgBtn.addEventListener('click', () => {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    toastMessagePopup(downloadImgBtn)
+    toastMessagePopup(downloadImgBtn);
   }
 });
 
@@ -434,16 +445,16 @@ const profileCancelBtn = document.querySelector(
 const profileSaveBtn = document.querySelector('.profile-edit-info-save-btn');
 
 profileEditBtn.addEventListener('click', () => {
-  const linkForm = document.querySelector('.social-links-edit-form-container')
-  profileEditForm.style.display= 'unset';
-  requestAnimationFrame(() =>  {
+  const linkForm = document.querySelector('.social-links-edit-form-container');
+  profileEditForm.style.display = 'unset';
+  requestAnimationFrame(() => {
     profileEditForm.classList.add('active');
-  })
+  });
   if (linkForm.classList.contains('active')) {
     linkForm.classList.remove('active');
     setTimeout(() => {
       linkForm.style.display = 'none';
-    }, 600)
+    }, 600);
   }
 });
 
@@ -451,7 +462,7 @@ profileCancelBtn.addEventListener('click', () => {
   profileEditForm.classList.remove('active');
   setTimeout(() => {
     profileEditForm.style.display = 'none';
-  }, 600)
+  }, 600);
 });
 
 // save and load data helper function
@@ -500,7 +511,7 @@ profileSaveBtn.addEventListener('click', () => {
   toastMessagePopup(profileSaveBtn);
   setTimeout(() => {
     profileEditForm.style.display = 'none';
-  }, 600)
+  }, 600);
 });
 
 // Social links programs
@@ -511,15 +522,15 @@ document.querySelector('.add-social-link-btn').addEventListener('click', () => {
   profileSocialLinkForm.style.display = 'unset';
   requestAnimationFrame(() => {
     profileSocialLinkForm.classList.add('active');
-  })
+  });
 });
 
 profileSocialLinkForm.addEventListener('click', (e) => {
   if (e.target.classList.contains('link-form-cancel')) {
     profileSocialLinkForm.classList.remove('active');
     setTimeout(() => {
-      profileSocialLinkForm.style.display= 'none';
-    }, 600)
+      profileSocialLinkForm.style.display = 'none';
+    }, 600);
   }
   if (e.target.classList.contains('link-form-save')) {
     saveSocialFormLinks();
@@ -528,7 +539,7 @@ profileSocialLinkForm.addEventListener('click', (e) => {
 
     setTimeout(() => {
       showSocialLinks();
-      profileSocialLinkForm.style.display= 'none';
+      profileSocialLinkForm.style.display = 'none';
     }, 600);
   }
 });
@@ -626,7 +637,7 @@ function showSocialLinks() {
     if (username) {
       const fullUrl = platform.baseUrl + username;
       const icon = platform.icon;
-      const title = platform.label.replace('username','profile link');
+      const title = platform.label.replace('username', 'profile link');
 
       const div = document.createElement('div');
       div.classList.add('each-username-link-container');
