@@ -92,8 +92,8 @@ subMenuBtn.addEventListener('click', () => {
   projectTitleInput.focus();
 });
 
-//! Create new projects programs
-const allCancelMethod = [createNewBtn, formBgLayer, cancelBtn, createBtn];
+//! Create new projects programs --------
+const allCancelMethod = [createNewBtn, formBgLayer, cancelBtn, createBtn, createOpenBtn];
 //! toggle form when needed
 allCancelMethod.forEach((btn) =>
   btn.addEventListener('click', () => {
@@ -168,7 +168,7 @@ function createNewProject(id, name) {
   const div = document.createElement('div');
   div.classList.add('project-list-item');
   div.classList.add('created');
-  div.innerHTML = `<a href="./editor/user.html#${id}">
+  div.innerHTML = `<a href="./editor/user.html#${id}" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
                       fill="currentColor">
                       <path
@@ -278,22 +278,37 @@ function createNewProject(id, name) {
 
 //! save to local storage
 function saveToLocalStorage(id, name, des, date) {
-  const newProject = { id, name, des: des, date: date };
+  const newProject = { id, name, des, date };
   savedProjects.push(newProject);
   localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
 }
-//! click to create and save
-createBtn.addEventListener('click', () => {
+
+//! click to create and save || create open and save
+function handleProjectCreate(isOpening = false) {
   const id = Date.now();
   const name = projectTitleInput.value.trim() || 'Untitled';
-  const des = projectDescriptionInput.value.trim() || '';
+  const des =
+    projectDescriptionInput.value.trim() ||
+    'Add description on Projects page...';
+
   createNewProject(id, name);
   saveToLocalStorage(id, name, des, new Date());
+
   projectTitleInput.value = '';
   projectDescriptionInput.value = '';
-  toastMessagePopup(createBtn);
+
+  toastMessagePopup(!isOpening ? createBtn : createOpenBtn);
   loadLastFourProject();
-});
+
+  if (isOpening) {
+    setTimeout(() => {
+      window.open(`./editor/user.html#${id}`, '_blank');
+    }, 1400);
+  }
+}
+
+createBtn.addEventListener('click', () => handleProjectCreate(false));
+createOpenBtn.addEventListener('click', () => handleProjectCreate(true));
 
 //! All pages navigation programs
 const allPrimaryLink = document.querySelectorAll('.primary-menu-link');
