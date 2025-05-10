@@ -58,6 +58,7 @@ button {
   margin: 0;
   font-size: 1rem;
   cursor: pointer;
+  user-select: none;
 
   &:active {
     opacity: 0.8;

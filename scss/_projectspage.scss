@@ -1,0 +1,50 @@
+.projects-page-wrapper {
+  max-width: 1100px;
+  margin-inline: auto;
+  box-sizing: content-box;
+  padding-inline: 1rem;
+
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.projects-tab {
+  display: flex;
+  gap: 1px;
+  border-radius: 0.225rem;
+  overflow: hidden;
+
+  button {
+    background-color: var(--global-button-bg);
+    padding: var(--global-button-padding);
+    opacity: 0.6;
+    transition: opacity 100ms;
+
+    &:hover {
+      background-color: var(--global-button-hover-bg);
+      opacity: 1;
+    }
+  }
+
+  button.active-tab {
+    background-color: var(--global-button-hover-bg);
+    opacity: 1;
+  }
+}
+
+.start-new-project-btn {
+  background-color: var(--global-button-bg);
+  padding: var(--global-button-padding);
+  border: 1px solid var(--slick-border-clr);
+  border-radius: 0.425rem;
+
+  &:hover {
+    background-color: var(--global-button-hover-bg);
+  }
+}
