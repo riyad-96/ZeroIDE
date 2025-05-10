@@ -217,14 +217,21 @@ main {
   top: 10px;
   display: grid;
   cursor: pointer;
+  transition: scale 50ms;
+  border: 1px solid transparent;
+  border-radius: 0.465rem;
+}
+
+.sidebar-toggle-btn:hover {
+  border: 1px solid var(--slick-border-clr);
+}
+
+.sidebar-toggle-btn:active {
+  scale: 0.94;
 }
 
 .sidebar-toggle-btn svg rect:first-of-type {
   fill: var(--sidebar-toggle-icon-fill);
-}
-
-.sidebar-toggle-btn svg:active {
-  scale: 0.9;
 }
 
 .profile-image {
@@ -834,6 +841,7 @@ img {
   line-height: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
+  word-break: break-all;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   line-clamp: 3;
@@ -881,8 +889,9 @@ img {
 .projects-tab {
   display: flex;
   gap: 1px;
-  border-radius: 0.225rem;
+  border-radius: 0.325rem;
   overflow: hidden;
+  border: 1px solid transparent;
 }
 .projects-tab button {
   background-color: var(--global-button-bg);
@@ -897,6 +906,9 @@ img {
 .projects-tab button.active-tab {
   background-color: var(--global-button-hover-bg);
   opacity: 1;
+}
+.projects-tab:hover {
+  border: 1px solid var(--slick-border-clr);
 }
 
 .start-new-project-btn {
@@ -913,6 +925,7 @@ img {
   display: grid;
   gap: 0.525rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding-block-end: 1rem;
 }
 
 .each-project {
@@ -928,10 +941,12 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 .each-project header a {
   text-decoration: underline;
   font-weight: 300;
+  word-break: break-all;
 }
 .each-project > span {
   margin: 0;
@@ -943,7 +958,7 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   height: 54px;
-  cursor: pointer;
+  word-break: break-all;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   line-clamp: 3;
@@ -955,7 +970,7 @@ img {
   justify-content: space-between;
 }
 .each-project footer span {
-  opacity: 0.7;
+  opacity: 0.6;
   font-size: 0.825rem;
   font-weight: 300;
 }

@@ -23,13 +23,21 @@
   top: 10px;
   display: grid;
   cursor: pointer;
+  transition: scale 50ms;
+  border: 1px solid transparent;
+  border-radius: 0.465rem;
+}
+
+.sidebar-toggle-btn:hover {
+  border: 1px solid var(--slick-border-clr);
+}
+
+.sidebar-toggle-btn:active {
+  scale: 0.94;
 }
 
 .sidebar-toggle-btn svg rect:first-of-type {
   fill: var(--sidebar-toggle-icon-fill);
-}
-.sidebar-toggle-btn svg:active {
-  scale: 0.9;
 }
 
 .profile-image {
@@ -85,6 +93,7 @@
   border: 1px solid transparent;
   transition: gap 600ms, background-color 200ms;
 }
+
 .primary-menu-link:hover {
   color: var(--white);
   background-color: var(--primary-menu-link-hover-bg);
