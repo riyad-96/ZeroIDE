@@ -8,7 +8,7 @@
   z-index: 99;
   background-color: var(--form-bg-layer-bg);
   -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   place-items: center;
   padding: 1.5rem;
   display: none;
@@ -64,7 +64,7 @@
     gap: 0.525rem;
   }
 
-  span{
+  span {
     flex-grow: 1;
     font-size: 0.8125rem;
     opacity: 0.7;
@@ -100,7 +100,7 @@
   height: 100%;
   background-color: var(--form-bg-layer-bg);
   -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   place-items: center;
   padding: 1.5rem;
   opacity: 0;
@@ -112,12 +112,13 @@
   background-color: var(--form-bg-clr);
   box-sizing: content-box;
   padding: 1.525rem;
-  min-width: 400px;
+  width: 100%;
+  max-width: 400px;
   border: 1px solid var(--slick-border-clr);
   border-radius: 0.5rem;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   translate: 0 -20px;
   transition: translate 300ms;
 }
@@ -192,7 +193,7 @@ form textarea::-webkit-scrollbar {
   padding: 1.5rem;
   place-items: center;
   -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   background-color: var(--form-bg-layer-bg);
   opacity: 0;
   transition: 300ms allow-discrete;
@@ -279,8 +280,8 @@ form textarea::-webkit-scrollbar {
   margin-block-end: 2px;
 
   transition: 200ms;
-  
-  span{
+
+  span {
     height: 40px;
     background-color: hsl(0, 0%, 50%);
     color: var(--white);
@@ -305,5 +306,61 @@ form textarea::-webkit-scrollbar {
     scale: 1;
     opacity: 1;
     translate: 0 0;
+  }
+}
+
+//! edit-project-form-modal
+.edit-project-form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  display: grid;
+  place-items: center;
+  background-color: var(--form-bg-layer-bg);
+  backdrop-filter: blur(3px);
+  display: none;
+  opacity: 0;
+  transition-property: display, opacity;
+  transition-behavior: allow-discrete;
+  transition-duration: 300ms;
+}
+
+.edit-project-form-modal form {
+  box-sizing: content-box;
+  background-color: var(--form-bg-clr);
+  padding: 1.525rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 0.5rem;
+  border: 1px solid var(--slick-border-clr);
+  translate: 0 -10px;
+  transition: translate 300ms;
+
+  div:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.425rem;
+    margin-block: 1.525rem 0;
+  }
+
+  button {
+    padding: var(--global-button-padding);
+    background-color: var(--global-button-bg);
+    border: 1px solid var(--slick-border-clr);
+    border-radius: 0.425rem;
+    font-size: 0.925rem;
+    transition: 100ms;
+
+    &:hover {
+      background-color: var(--global-button-hover-bg);
+    }
+  }
+  .project-edit-form-delete-btn:hover {
+    background-color: hsl(0, 73%, 47%);
+    border-color: hsl(0, 73%, 60%);
   }
 }

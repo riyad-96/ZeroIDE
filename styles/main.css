@@ -869,10 +869,13 @@ img {
   font-size: 2rem;
 }
 
-.project-header {
+.project-page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-block-end: 0.725rem;
+  border-block-end: 1px solid hsla(0, 0%, 50%, 0.15);
+  margin-block-end: 1rem;
 }
 
 .projects-tab {
@@ -904,6 +907,65 @@ img {
 }
 .start-new-project-btn:hover {
   background-color: var(--global-button-hover-bg);
+}
+
+.project-page-project-container {
+  display: grid;
+  gap: 0.525rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.each-project {
+  border: 1px solid var(--slick-border-clr);
+  padding: 1rem;
+  display: grid;
+  gap: 0.525rem;
+  border-radius: 0.425rem;
+  background-color: hsla(0, 0%, 50%, 0.1);
+  max-width: 550px;
+}
+.each-project header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.each-project header a {
+  text-decoration: underline;
+  font-weight: 300;
+}
+.each-project > span {
+  margin: 0;
+  opacity: 0.6;
+  font-size: 0.9125rem;
+  font-weight: 200;
+  letter-spacing: 0.3px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 54px;
+  cursor: pointer;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+}
+.each-project footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.each-project footer span {
+  opacity: 0.7;
+  font-size: 0.825rem;
+  font-weight: 300;
+}
+.each-project button {
+  display: grid;
+  place-items: center;
+}
+
+.each-project > span::-webkit-scrollbar {
+  width: 10px;
 }
 
 .profile-img-modal {
@@ -1020,7 +1082,8 @@ img {
   background-color: var(--form-bg-clr);
   box-sizing: content-box;
   padding: 1.525rem;
-  min-width: 400px;
+  width: 100%;
+  max-width: 400px;
   border: 1px solid var(--slick-border-clr);
   border-radius: 0.5rem;
   -webkit-user-select: none;
@@ -1234,6 +1297,59 @@ form textarea::-webkit-scrollbar {
   translate: 0 0;
 }
 
+.edit-project-form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  display: grid;
+  place-items: center;
+  background-color: var(--form-bg-layer-bg);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  display: none;
+  opacity: 0;
+  transition-property: display, opacity;
+  transition-behavior: allow-discrete;
+  transition-duration: 300ms;
+}
+
+.edit-project-form-modal form {
+  box-sizing: content-box;
+  background-color: var(--form-bg-clr);
+  padding: 1.525rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 0.5rem;
+  border: 1px solid var(--slick-border-clr);
+  translate: 0 -10px;
+  transition: translate 300ms;
+}
+.edit-project-form-modal form div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.425rem;
+  margin-block: 1.525rem 0;
+}
+.edit-project-form-modal form button {
+  padding: var(--global-button-padding);
+  background-color: var(--global-button-bg);
+  border: 1px solid var(--slick-border-clr);
+  border-radius: 0.425rem;
+  font-size: 0.925rem;
+  transition: 100ms;
+}
+.edit-project-form-modal form button:hover {
+  background-color: var(--global-button-hover-bg);
+}
+.edit-project-form-modal form .project-edit-form-delete-btn:hover {
+  background-color: hsl(0, 73%, 47%);
+  border-color: hsl(0, 73%, 60%);
+}
+
 .blinking-rect {
   animation: blinking 2s infinite;
 }
@@ -1403,4 +1519,20 @@ form textarea::-webkit-scrollbar {
 .social-links-edit-form-container.active {
   translate: 0 0;
   scale: 1;
+}
+
+.edit-project-form-modal.appear {
+  display: grid;
+  opacity: 1;
+}
+.edit-project-form-modal.appear form {
+  translate: 0 0;
+}
+@starting-style {
+  .edit-project-form-modal.appear {
+    opacity: 0;
+  }
+  .edit-project-form-modal.appear form {
+    translate: 0 10px;
+  }
 }

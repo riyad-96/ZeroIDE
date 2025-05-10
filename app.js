@@ -93,7 +93,13 @@ subMenuBtn.addEventListener('click', () => {
 });
 
 //! Create new projects programs --------
-const allCancelMethod = [createNewBtn, formBgLayer, cancelBtn, createBtn, createOpenBtn];
+const allCancelMethod = [
+  createNewBtn,
+  formBgLayer,
+  cancelBtn,
+  createBtn,
+  createOpenBtn,
+];
 //! toggle form when needed
 allCancelMethod.forEach((btn) =>
   btn.addEventListener('click', () => {
@@ -117,8 +123,10 @@ document
   .addEventListener('click', closeDeleteModal);
 //! delete single project
 let currentId = null;
+
 deleteConfirmBtn.addEventListener('click', () => {
-  const itemIndex = savedProjects.findIndex((p) => p.id === currentId);
+  const itemIndex = savedProjects.findIndex((p) => p.id === Number(currentId));
+  console.log('clicked')
   if (itemIndex !== -1) {
     savedProjects.splice(itemIndex, 1);
     localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
@@ -132,6 +140,7 @@ deleteConfirmBtn.addEventListener('click', () => {
     closeDeleteModal();
     toastMessagePopup(deleteConfirmBtn);
     loadLastFourProject();
+    projectPageProjects();
   }
 });
 
@@ -169,37 +178,37 @@ function createNewProject(id, name) {
   div.classList.add('project-list-item');
   div.classList.add('created');
   div.innerHTML = `<a href="./editor/user.html#${id}" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
-                      fill="currentColor">
-                      <path
-                      d="M21 8V20.9932C21 21.5501 20.5552 22 20.0066 22H3.9934C3.44495 22 3 21.556 3 21.0082V2.9918C3 2.45531 3.4487 2 4.00221 2H14.9968L21 8ZM19 9H14V4H5V20H19V9Z">
-                      </path>
-                    </svg>
-                    <span>${name}</span>
-                  </a>
-                  <button class="sub-menu-option-btn">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="20px"
-                    viewBox="0 -960 960 960" width="20px" fill="currentColor">
-                    <path
-                      d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z" />
-                  </svg>
-                  </button>
-                  <div class="sub-menu-options">
-                    <button aria-label="rename button" title="Rename project">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                        fill="currentColor">
-                        <path
-                          d="M15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89H6.41421L15.7279 9.57627ZM17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785L17.1421 8.16206ZM7.24264 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L7.24264 20.89Z">
-                        </path>
-                      </svg>
-                    </button>
-                    <button aria-label="delete button" title="Delete project"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                        fill="currentColor">
-                        <path
-                          d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z">
-                        </path>
-                      </svg></button>
-                  </div>`;
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
+        fill="currentColor">
+        <path
+        d="M21 8V20.9932C21 21.5501 20.5552 22 20.0066 22H3.9934C3.44495 22 3 21.556 3 21.0082V2.9918C3 2.45531 3.4487 2 4.00221 2H14.9968L21 8ZM19 9H14V4H5V20H19V9Z">
+        </path>
+      </svg>
+      <span>${name}</span>
+    </a>
+    <button class="sub-menu-option-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" height="20px"
+      viewBox="0 -960 960 960" width="20px" fill="currentColor">
+      <path
+        d="M263.79-408Q234-408 213-429.21t-21-51Q192-510 213.21-531t51-21Q294-552 315-530.79t21 51Q336-450 314.79-429t-51 21Zm216 0Q450-408 429-429.21t-21-51Q408-510 429.21-531t51-21Q510-552 531-530.79t21 51Q552-450 530.79-429t-51 21Zm216 0Q666-408 645-429.21t-21-51Q624-510 645.21-531t51-21Q726-552 747-530.79t21 51Q768-450 746.79-429t-51 21Z" />
+    </svg>
+    </button>
+    <div class="sub-menu-options">
+      <button aria-label="rename button" title="Rename project">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+          fill="currentColor">
+          <path
+            d="M15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89H6.41421L15.7279 9.57627ZM17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785L17.1421 8.16206ZM7.24264 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L7.24264 20.89Z">
+          </path>
+        </svg>
+      </button>
+      <button aria-label="delete button" title="Delete project"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+          fill="currentColor">
+          <path
+            d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z">
+          </path>
+        </svg></button>
+    </div>`;
   //! options button functionality
   const options = div.querySelector('.sub-menu-options');
   const optionBtn = div.querySelector('.sub-menu-option-btn');
@@ -261,6 +270,7 @@ function createNewProject(id, name) {
         link.setAttribute('href', prevLink);
         link.style.cursor = 'pointer';
         loadLastFourProject();
+        projectPageProjects();
       }, 400);
     });
   });
@@ -277,8 +287,8 @@ function createNewProject(id, name) {
 }
 
 //! save to local storage
-function saveToLocalStorage(id, name, des, date) {
-  const newProject = { id, name, des, date };
+function saveToLocalStorage(id, name, des, date, favorite) {
+  const newProject = { id, name, des, date, favorite };
   savedProjects.push(newProject);
   localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
 }
@@ -289,16 +299,17 @@ function handleProjectCreate(isOpening = false) {
   const name = projectTitleInput.value.trim() || 'Untitled';
   const des =
     projectDescriptionInput.value.trim() ||
-    'Add description on Projects page...';
+    'Empty description';
 
   createNewProject(id, name);
-  saveToLocalStorage(id, name, des, new Date());
+  saveToLocalStorage(id, name, des, new Date(), false);
 
   projectTitleInput.value = '';
   projectDescriptionInput.value = '';
 
   toastMessagePopup(!isOpening ? createBtn : createOpenBtn);
   loadLastFourProject();
+  projectPageProjects();
 
   if (isOpening) {
     setTimeout(() => {
@@ -769,7 +780,7 @@ function loadLastFourProject() {
       div.innerHTML = `
         <div>
           ${bookmarkSvg()}
-          <a href="./editor/user.html#${p.id}">${p.name}</a>
+          <a href="./editor/user.html#${p.id}" target="_blank">${p.name}</a>
         </div>
         <span>${p.des}</span>
         <div>
@@ -797,3 +808,143 @@ function projectDate(date) {
     year: 'numeric',
   });
 }
+
+//! ----------- Project page programs -----------
+const projectPageHeader = document.querySelector('.project-page-header');
+
+// project page header button programs
+projectPageHeader.addEventListener('click', (e) => {
+  const startNewBtn = e.target.closest('.start-new-project-btn');
+  if (startNewBtn) {
+    formBgLayer.classList.add('appear');
+  }
+});
+
+function heartLineSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path></svg>`;
+}
+function heartFillSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z"></path></svg>`;
+}
+function moreOptSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M5.32943 3.27158C6.56252 2.8332 7.9923 3.10749 8.97927 4.09446C10.1002 5.21537 10.3019 6.90741 9.5843 8.23385L20.293 18.9437L18.8788 20.3579L8.16982 9.64875C6.84325 10.3669 5.15069 10.1654 4.02952 9.04421C3.04227 8.05696 2.7681 6.62665 3.20701 5.39332L5.44373 7.63C6.02952 8.21578 6.97927 8.21578 7.56505 7.63C8.15084 7.04421 8.15084 6.09446 7.56505 5.50868L5.32943 3.27158ZM15.6968 5.15512L18.8788 3.38736L20.293 4.80157L18.5252 7.98355L16.7574 8.3371L14.6361 10.4584L13.2219 9.04421L15.3432 6.92289L15.6968 5.15512ZM8.97927 13.2868L10.3935 14.7011L5.09018 20.0044C4.69966 20.3949 4.06649 20.3949 3.67597 20.0044C3.31334 19.6417 3.28744 19.0699 3.59826 18.6774L3.67597 18.5902L8.97927 13.2868Z"></path></svg>`;
+}
+
+function indexFinder(arr, id) {
+  return arr.findIndex((el) => el.id === Number(id));
+}
+
+const projectPageProjectContainer = document.querySelector(
+  '.project-page-project-container'
+);
+const projectEditFormModal = document.querySelector('.edit-project-form-modal');
+
+//! load projects in projects page
+
+function createProjectPageProjects(arr) {
+  arr.forEach((p) => {
+    const div = document.createElement('div');
+    div.classList.add('each-project');
+    div.innerHTML = `
+      <header class="project-header">
+        <a href="./editor/user.html#${p.id}" target="_blank">${p.name}</a>
+        <button title="Click to edit project" data-project-id="${
+          p.id
+        }" class="edit-projects-button">${moreOptSvg()}</button>
+      </header>
+      <span class="project-page-project-description">
+        ${p.des}
+      </span>
+      <footer>
+        <button data-project-id="${
+          p.id
+        }" class="add-favorite-btn" title="click to add/remove favorite">${
+      p.favorite ? heartFillSvg() : heartLineSvg()
+    }</button>
+        <span>${projectDate(p.date)}</span>
+      </footer>
+    `;
+    projectPageProjectContainer.prepend(div);
+  });
+}
+
+function projectPageProjects(tab) {
+  projectPageProjectContainer.innerHTML = '';
+  if (tab === 'favorite') {
+    createProjectPageProjects(savedProjects.filter((p) => p.favorite === true));
+    return;
+  }
+  createProjectPageProjects(savedProjects);
+}
+
+projectPageProjects();
+
+// tab changing program
+const tabChangeProjectBtn = document.querySelectorAll(
+  '.tab-change-project-btn'
+);
+
+tabChangeProjectBtn.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const dataTab = btn.dataset.projectTab;
+    projectPageProjects(dataTab);
+    tabChangeProjectBtn.forEach((btn) => btn.classList.remove('active-tab'));
+    btn.classList.add('active-tab');
+  });
+});
+
+// open project settings
+projectPageProjectContainer.addEventListener('click', (e) => {
+  //setting btn
+  const settingBtn = e.target.closest('.edit-projects-button');
+  if (settingBtn) {
+    const id = settingBtn.dataset.projectId;
+    const index = indexFinder(savedProjects, id);
+
+    const titleInput = projectEditFormModal.querySelector('input');
+    const desInput = projectEditFormModal.querySelector('textarea');
+    titleInput.value = savedProjects[index].name;
+    desInput.value = savedProjects[index].des;
+    currentId = id
+
+    projectEditFormModal.classList.add('appear');
+  }
+
+  // favorite btn
+  const favoriteBtn = e.target.closest('.add-favorite-btn');
+  if (favoriteBtn) {
+    const id = favoriteBtn.dataset.projectId;
+    const index = indexFinder(savedProjects, id);
+    if (!savedProjects[index].favorite) {
+      favoriteBtn.innerHTML = '';
+      favoriteBtn.innerHTML = heartFillSvg();
+      savedProjects[index].favorite = true;
+      localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
+    } else {
+      favoriteBtn.innerHTML = '';
+      favoriteBtn.innerHTML = heartLineSvg();
+      savedProjects[index].favorite = false;
+      localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
+    }
+  }
+});
+
+projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
+  // cancel btn program
+  const cancelBtn = e.target.closest('.project-edit-form-cancel-btn');
+  if (cancelBtn) {
+    projectEditFormModal.classList.remove('appear');
+  }
+
+  //delete btn program 
+  const deleteBtn = e.target.closest('.project-edit-form-delete-btn')
+  if(deleteBtn) {
+    projectEditFormModal.classList.remove('appear')
+    deleteModal.classList.toggle('appear');
+    dltModCurrTitle.textContent = savedProjects[indexFinder(savedProjects, currentId)].name;
+  }
+});
+
+projectEditFormModal.addEventListener('click', () => {
+  projectEditFormModal.classList.remove('appear');
+});

@@ -169,3 +169,22 @@
   translate: 0 0;
   scale: 1;
 }
+
+//! Projects page utilities
+.edit-project-form-modal.appear {
+  display: grid;
+  opacity: 1;
+
+  form {
+    translate: 0 0;
+  }
+
+  @starting-style {
+    opacity: 0;
+
+    form {
+      translate: 0 10px;
+    }
+  }
+}
+
