@@ -324,15 +324,27 @@ createOpenBtn.addEventListener('click', () => handleProjectCreate(true));
 const allPrimaryLink = document.querySelectorAll('.primary-menu-link');
 
 function pageChangeUpdate() {
-  const hash = location.hash.replace('#', '');
+  const pageId = location.hash.replace('#', '');
 
+  // add focused primary link state
   allPrimaryLink.forEach((link) => {
     const hrefHash = link.hash.replace('#', '');
-    const isFocused = hash === hrefHash;
+    const isFocused = pageId === hrefHash;
     link.classList.toggle('focused', isFocused);
   });
 
-  const page = document.getElementById(hash);
+  // set/remove tabindex
+  const eachPage = document.querySelectorAll('.each-page');
+  document.querySelectorAll('.each-page').forEach((page) => {
+    if(page.id !== pageId) {
+      page.querySelectorAll('a, button, input, select, textarea, div').forEach(el => el.setAttribute('tabindex', '-1'))
+      console.log(page.id)
+    } else {
+      page.querySelectorAll('a, button, input, select, textarea, div').forEach(el => el.removeAttribute('tabindex'))
+    }
+  });
+
+  const page = document.getElementById(pageId);
   if (page) {
     page.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
@@ -340,9 +352,11 @@ function pageChangeUpdate() {
     document.querySelector('.primary-menu-link').classList.add('focused');
   }
 }
+// pageChangeUpdate();
 
 window.addEventListener('hashchange', pageChangeUpdate);
 window.addEventListener('DOMContentLoaded', pageChangeUpdate);
+
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
