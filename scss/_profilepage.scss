@@ -81,7 +81,6 @@ img {
   flex-grow: 1;
   overflow-x: hidden;
   position: relative;
-  // border: 1px solid var(--slick-border-clr);
   min-height: 700px;
 }
 
@@ -187,8 +186,7 @@ img {
 // form
 .social-links-edit-form-container {
   width: 100%;
-  // min-height: 100%;
-  background-color: var(--form-bg-clr);
+  background-color: var(--social-link-form-bg);
   border: 1px solid var(--slick-border-clr);
   position: absolute;
   top: 0;
@@ -261,7 +259,7 @@ img {
   z-index: 2;
   width: 100%;
   // min-height: 100%;
-  background-color: var(--form-bg-clr);
+  background-color: var(--profile-edit-form-bg);
   border: 1px solid var(--slick-border-clr);
   padding: 1.525rem;
   translate: 100% 0;

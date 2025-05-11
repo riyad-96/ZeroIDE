@@ -38,6 +38,7 @@ body {
   margin: 0;
   background-color: var(--body-bg);
   color: var(--body-clr);
+  transition: background-color 400ms;
 }
 
 img {
@@ -80,7 +81,7 @@ select {
   min-width: 0;
   &:focus,
   &:focus-visible {
-    outline: 1px solid hsl(0, 0%, 100%, 0.5);
+    outline: 1px solid hsl(0, 0%, 50%, 0.6);
     outline-offset: 2px;
   }
 }

@@ -11,8 +11,8 @@
 }
 
 .all-settings {
-  --border: 1px solid hsla(0, 0%, 50%, 0.2);
-  border-top: var(--border);
+  
+  border-top: var(--setting-border);
   padding-block-end: 1rem;
 
   h3 {
@@ -20,7 +20,7 @@
     font-weight: 400;
     line-height: 1lh;
     max-width: fit-content;
-    border-block-end: var(--border);
+    border-block-end: var(--setting-border);
     margin-block: 1rem 0.525rem;
     padding-block: 0 0.225rem;
   }
@@ -38,7 +38,7 @@
   flex-grow: 1;
   flex-basis: 0;
   height: 35px;
-  border-radius: 0.325rem;
+  border-radius: var(--global-button-border-radius);
   text-wrap: nowrap;
   padding-inline: 0.525rem;
   opacity: 0.4;

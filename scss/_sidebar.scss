@@ -3,14 +3,14 @@
   background-color: var(--sidebar-bg);
   border-inline-end: 1px solid var(--sidebar-border-clr);
   min-width: 60px;
-  max-width: 60px;
+  width: 60px;
   position: relative;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
   color: var(--sidebar-clr);
   overflow-x: hidden;
-  transition: 500ms;
+  transition:  min-width 500ms, background-color 400ms;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -29,7 +29,7 @@
 }
 
 .sidebar-toggle-btn:hover {
-  border: 1px solid var(--slick-border-clr);
+  border: 1px solid var(--sidebar-toggle-btn-hover-border);
 }
 
 .sidebar-toggle-btn:active {
@@ -95,7 +95,7 @@
 }
 
 .primary-menu-link:hover {
-  color: var(--white);
+  color: var(--primary-link-hover-clr);
   background-color: var(--primary-menu-link-hover-bg);
   border: 1px solid var(--slick-border-clr);
 }
@@ -138,7 +138,7 @@
   cursor: pointer;
 }
 .sub-menu-btn:hover {
-  background-color: var(--primary-menu-link-hover-bg);
+  background-color: var(--sub-menu-button-hover-bg);
 }
 .sub-menu-btn svg {
   transition: 200ms ease-in-out;
@@ -146,7 +146,7 @@
 
 // sub menu styling
 .sub-menu {
-  background-color: var(--primary-menu-link-hover-bg);
+  background-color: var(--sub-menu-bg);
   padding-inline: 0.5rem;
   border-radius: 0 0 0.5rem 0.5rem;
   opacity: 0;
@@ -197,7 +197,7 @@
 }
 .create-new-project-btn:hover {
   color: var(--white);
-  background-color: var(--sub-menu-link-hover-bg);
+  background-color: var(--create-new-project-btn-hover-bg);
 }
 .create-new-project-btn svg {
   min-width: 18px;
@@ -231,7 +231,7 @@
 }
 .project-list-item:hover {
   color: var(--white);
-  background-color: var(--sub-menu-link-hover-bg);
+  background-color: var(--project-list-item-hover-bg);
   border: 1px solid var(--slick-border-clr);
 }
 .project-list-item:hover .sub-menu-option-btn {

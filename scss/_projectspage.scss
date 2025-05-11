@@ -21,9 +21,9 @@
 .projects-tab {
   display: flex;
   gap: 1px;
-  border-radius: 0.325rem;
+  border-radius: var(--global-button-border-radius);
   overflow: hidden;
-  border: 1px solid transparent;
+  border: 1px solid var(--slick-border-clr);
   
   button {
     background-color: var(--global-button-bg);
@@ -41,17 +41,13 @@
     background-color: var(--global-button-hover-bg);
     opacity: 1;
   }
-
-  &:hover {
-    border: 1px solid var(--slick-border-clr);
-  }
 }
 
 .start-new-project-btn {
   background-color: var(--global-button-bg);
   padding: var(--global-button-padding);
   border: 1px solid var(--slick-border-clr);
-  border-radius: 0.425rem;
+  border-radius: var(--global-button-border-radius);
 
   &:hover {
     background-color: var(--global-button-hover-bg);
