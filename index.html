@@ -237,13 +237,13 @@
                 <div class="appearance-setting">
                   <h3>Appearance</h3>
                   <div class="theme-container">
-                    <button class="themes-btn browser-theme active">
+                    <button class="themes-btn active" data-theme-info="default">
                       <span>Browser Default</span>
                     </button>
-                    <button class="themes-btn light-theme">
+                    <button class="themes-btn" data-theme-info="light">
                       <span>Light Theme</span>
                     </button>
-                    <button class="themes-btn dark-theme">
+                    <button class="themes-btn" data-theme-info="dark">
                       <span>Dark Theme</span>
                     </button>
                   </div>
@@ -254,7 +254,7 @@
                   <form class="editor-settings-list">
                     <div>
                       <label for="font-size-input">Font size</label>
-                      <select id="font-size-input">
+                      <select id="font-size-input" class="editor-setting-input">
                         <option value="14">Default (14px)</option>
                         <option value="16">16px</option>
                         <option value="18">18px</option>
@@ -272,7 +272,7 @@
 
                     <div>
                       <label for="tab-indent-size-input">Tab indent size</label>
-                      <select id="tab-indent-size-input">
+                      <select id="tab-indent-size-input" class="editor-setting-input">
                         <option value="2">Default (2 space)</option>
                         <option value="4">4 space</option>
                         <option value="6">6 space</option>

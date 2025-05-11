@@ -808,8 +808,53 @@ function projectDate(date) {
   });
 }
 
-
 //! ----------- Settings page programs -------------
+
+const savedSettings = JSON.parse(localStorage.getItem('settings')) || {};
+
+// Theme programs
+const themeBtns = document.querySelectorAll('.themes-btn');
+const themeContainer = document.querySelector('.theme-container');
+const html = document.documentElement;
+
+const editorSettingInputs = document.querySelectorAll('.editor-setting-input')
+console.log(editorSettingInputs)
+
+function applyTheme(theme) {
+  themeBtns.forEach((btn) => {
+    btn.classList.remove('active');
+    if (btn.dataset.themeInfo === theme) btn.classList.add('active');
+  });
+
+  if (theme === 'default') {
+    html.removeAttribute('data-theme');
+    return;
+  }
+  html.setAttribute('data-theme', theme);
+}
+
+themeContainer.addEventListener('click', (e) => {
+  const themeBtn = e.target.closest('.themes-btn');
+  if (themeBtn) {
+    const theme = themeBtn.dataset.themeInfo;
+
+    setTimeout(() => {
+      applyTheme(theme);
+      document.body.classList.add('no-transitions');
+      setTimeout(() => {
+        document.body.classList.remove('no-transitions');
+      }, 50);
+    }, 50);
+
+    savedSettings.theme = theme;
+    localStorage.setItem('settings', JSON.stringify(savedSettings));
+  }
+});
+
+applyTheme(savedSettings.theme || 'default');
+
+// Editor setting programs
+
 
 
 

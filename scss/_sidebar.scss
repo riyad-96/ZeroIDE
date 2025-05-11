@@ -10,7 +10,7 @@
           user-select: none;
   color: var(--sidebar-clr);
   overflow-x: hidden;
-  transition:  min-width 500ms, background-color 400ms;
+  transition:  min-width 500ms, background-color 0ms;
 }
 
 .sidebar::-webkit-scrollbar {

@@ -193,3 +193,8 @@
 .themes-btn.active {
   opacity: 1;
 }
+
+
+.no-transitions * {
+  transition: none !important;
+}
