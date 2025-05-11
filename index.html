@@ -253,26 +253,27 @@
                   <h3>Editor</h3>
                   <form class="editor-settings-list">
                     <div>
-                      <label for="font-size-input">Font size</label>
-                      <select id="font-size-input" class="editor-setting-input">
-                        <option value="14">Default (14px)</option>
-                        <option value="16">16px</option>
-                        <option value="18">18px</option>
-                        <option value="20">20px</option>
-                        <option value="22">22px</option>
-                        <option value="24">24px</option>
-                        <option value="26">26px</option>
-                        <option value="28">28px</option>
-                        <option value="30">30px</option>
-                        <option value="32">32px</option>
-                        <option value="34">34px</option>
-                        <option value="36">36px</option>
+                      <label for="fontSize">Font size</label>
+                      <select id="fontSize" class="editor-setting-input" data-editor-setting="fontSize">
+                        <option value="12">12 px</option>
+                        <option value="14">Default (14 px)</option>
+                        <option value="16">16 px</option>
+                        <option value="18">18 px</option>
+                        <option value="20">20 px</option>
+                        <option value="22">22 px</option>
+                        <option value="24">24 px</option>
+                        <option value="26">26 px</option>
+                        <option value="28">28 px</option>
+                        <option value="30">30 px</option>
+                        <option value="32">32 px</option>
+                        <option value="34">34 px</option>
+                        <option value="36">36 px</option>
                       </select>
                     </div>
 
                     <div>
-                      <label for="tab-indent-size-input">Tab indent size</label>
-                      <select id="tab-indent-size-input" class="editor-setting-input">
+                      <label for="indentSize">Tab indent size</label>
+                      <select id="indentSize" class="editor-setting-input" data-editor-setting="indentSize">
                         <option value="2">Default (2 space)</option>
                         <option value="4">4 space</option>
                         <option value="6">6 space</option>
@@ -280,10 +281,6 @@
                         <option value="10">10 space</option>
                         <option value="12">12 space</option>
                       </select>
-                    </div>
-
-                    <div>
-                      <button>Save</button>
                     </div>
                   </form>
                 </div>

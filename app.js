@@ -809,16 +809,19 @@ function projectDate(date) {
 }
 
 //! ----------- Settings page programs -------------
-
-const savedSettings = JSON.parse(localStorage.getItem('settings')) || {};
+// All saved settings
+const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
+  theme: 'default',
+  editor: {
+    fontSize: '14',
+    indentSize: '2',
+  },
+};
 
 // Theme programs
 const themeBtns = document.querySelectorAll('.themes-btn');
 const themeContainer = document.querySelector('.theme-container');
 const html = document.documentElement;
-
-const editorSettingInputs = document.querySelectorAll('.editor-setting-input')
-console.log(editorSettingInputs)
 
 function applyTheme(theme) {
   themeBtns.forEach((btn) => {
@@ -853,22 +856,31 @@ themeContainer.addEventListener('click', (e) => {
 
 applyTheme(savedSettings.theme || 'default');
 
-// Editor setting programs
+// Setting programs
+const editorSettingInputs = document.querySelectorAll('.editor-setting-input');
 
+function setEditorSetting(type, size) {
+  savedSettings.editor[type] = size;
+}
 
+function loadEditorSetting(id, value) {
+  document.getElementById(id).value = value;
+}
 
+editorSettingInputs.forEach((input) => {
+  input.addEventListener('input', () => {
+    const type = input.dataset.editorSetting;
+    setEditorSetting(type, input.value.trim());
+    localStorage.setItem('settings', JSON.stringify(savedSettings));
+  });
+});
 
-
-
-
-
-
-
-
-
-
-
-
+editorSettingInputs.forEach((input) => {
+  loadEditorSetting(
+    input.id,
+    savedSettings.editor[input.dataset.editorSetting]
+  );
+});
 
 //! ----------- Project page programs -----------
 const projectPageHeader = document.querySelector('.project-page-header');

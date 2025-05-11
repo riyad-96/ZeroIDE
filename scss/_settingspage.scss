@@ -54,7 +54,7 @@
 }
 
 .editor-settings-list.editor-settings-list {
-  div:not(div:last-child) {
+  div {
     display: flex;
     align-items: center;
     margin-block: 0 0.225rem;
@@ -81,25 +81,6 @@
 
     option {
       color: #111;
-    }
-  }
-
-  div:last-child {
-    display: flex;
-    justify-content: flex-end;
-    margin-block-start: 1rem;
-
-    button {
-      background-color: var(--global-button-bg);
-      border-radius: 0.425rem;
-      border: 1px solid var(--slick-border-clr);
-      max-width: fit-content;
-      padding: var(--global-button-padding);
-      @include font-size;
-
-      &:hover {
-        background-color: var(--global-button-hover-bg);
-      }
     }
   }
 }
