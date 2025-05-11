@@ -231,7 +231,73 @@
         <div class="body">
           <div class="page-wrapper">
             <!-- settings page contents -->
+            <div class="settings-page-wrapper">
+              <h2>Settings</h2>
+              <div class="all-settings">
+                <div class="appearance-setting">
+                  <h3>Appearance</h3>
+                  <div class="theme-container">
+                    <button class="themes-btn browser-theme active">
+                      <span>Browser Default</span>
+                    </button>
+                    <button class="themes-btn light-theme">
+                      <span>Light Theme</span>
+                    </button>
+                    <button class="themes-btn dark-theme">
+                      <span>Dark Theme</span>
+                    </button>
+                  </div>
+                </div>
 
+                <div class="editor-setting">
+                  <h3>Editor</h3>
+                  <form class="editor-settings-list">
+                    <div>
+                      <label for="font-size-input">Font size</label>
+                      <select id="font-size-input">
+                        <option value="14">Default (14px)</option>
+                        <option value="16">16px</option>
+                        <option value="18">18px</option>
+                        <option value="20">20px</option>
+                        <option value="22">22px</option>
+                        <option value="24">24px</option>
+                        <option value="26">26px</option>
+                        <option value="28">28px</option>
+                        <option value="30">30px</option>
+                        <option value="32">32px</option>
+                        <option value="34">34px</option>
+                        <option value="36">36px</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label for="tab-indent-size-input">Tab indent size</label>
+                      <select id="tab-indent-size-input">
+                        <option value="2">Default (2 space)</option>
+                        <option value="4">4 space</option>
+                        <option value="6">6 space</option>
+                        <option value="8">8 space</option>
+                        <option value="10">10 space</option>
+                        <option value="12">12 space</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <button>Save</button>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="project-setting">
+                  <h3>Projects</h3>
+                  <div>
+                    <span>Delete All projects</span>
+                    <button>Delete all</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
 
             <!-- settings page contents ends -->
           </div>
@@ -256,34 +322,6 @@
 
               <div class="project-page-project-container">
                 <!-- projects added through js -->
-                <!-- <div class="each-project">
-                  <header class="project-header">
-                    <a href="">project title</a>
-                    <button>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
-                        fill="currentColor">
-                        <path
-                          d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z">
-                        </path>
-                      </svg>
-                    </button>
-                  </header>
-                  <span class="project-page-project-description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo perferendis pariatur rem minima dolore laudantium doloremque impedit debitis illum, consequuntur molestias velit voluptate ipsam quasi, officiis omnis soluta quod aspernatur nam ut eius, similique corrupti! Repellendus culpa laudantium iure ex tempora, ullam laborum reiciendis quo aperiam magnam
-                  </span>
-                  <footer>
-                    <button>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                        fill="currentColor">
-                        <path
-                          d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z">
-                        </path>
-                      </svg>
-                    </button>
-                    <span>date</span>
-                  </footer>
-                </div> -->
-
               </div>
             </div>
 

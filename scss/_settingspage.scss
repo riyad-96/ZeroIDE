@@ -1,0 +1,125 @@
+.settings-page-wrapper {
+  max-width: 1100px;
+  margin-inline: auto;
+  box-sizing: content-box;
+  padding-inline: 1rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 400;
+  }
+}
+
+.all-settings {
+  --border: 1px solid hsla(0, 0%, 50%, 0.2);
+  border-top: var(--border);
+  padding-block-end: 1rem;
+
+  h3 {
+    margin: 0;
+    font-weight: 400;
+    line-height: 1lh;
+    max-width: fit-content;
+    border-block-end: var(--border);
+    margin-block: 1rem 0.525rem;
+    padding-block: 0 0.225rem;
+  }
+}
+
+.theme-container {
+  display: flex;
+  gap: 0.525rem;
+  flex-wrap: wrap;
+}
+
+.themes-btn {
+  border: 1px solid var(--slick-border-clr);
+  background-color: var(--global-button-bg);
+  flex-grow: 1;
+  flex-basis: 0;
+  height: 35px;
+  border-radius: 0.325rem;
+  text-wrap: nowrap;
+  padding-inline: 0.525rem;
+  opacity: 0.4;
+
+  &:hover {
+    background-color: var(--global-button-hover-bg);
+    opacity: 1;
+  }
+}
+
+@mixin font-size {
+  font-size: 0.925rem;
+}
+
+.editor-settings-list.editor-settings-list {
+  div:not(div:last-child) {
+    display: flex;
+    align-items: center;
+    margin-block: 0 0.225rem;
+
+    > * {
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+  }
+
+  label {
+    margin: 0;
+  }
+
+  select {
+    background-color: var(--input-textarea-bg);
+    color: var(--body-clr);
+    height: 33px;
+    border: 1px solid var(--slick-border-clr);
+    border-radius: 0.425rem;
+    padding-inline: 0.525rem;
+    appearance: none;
+    cursor: pointer;
+
+    option {
+      color: #111;
+    }
+  }
+
+  div:last-child {
+    display: flex;
+    justify-content: flex-end;
+    margin-block-start: 1rem;
+
+    button {
+      background-color: var(--global-button-bg);
+      border-radius: 0.425rem;
+      border: 1px solid var(--slick-border-clr);
+      max-width: fit-content;
+      padding: var(--global-button-padding);
+      @include font-size;
+
+      &:hover {
+        background-color: var(--global-button-hover-bg);
+      }
+    }
+  }
+}
+
+.project-setting {
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button {
+    background-color: var(--global-button-bg);
+    border-radius: 0.425rem;
+    border: 1px solid var(--slick-border-clr);
+    padding: var(--global-button-padding);
+    @include font-size;
+
+    &:hover {
+      background-color: var(--global-button-hover-bg);
+    }
+  }
+}

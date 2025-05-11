@@ -808,6 +808,23 @@ function projectDate(date) {
   });
 }
 
+
+//! ----------- Settings page programs -------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //! ----------- Project page programs -----------
 const projectPageHeader = document.querySelector('.project-page-header');
 
@@ -816,6 +833,7 @@ projectPageHeader.addEventListener('click', (e) => {
   const startNewBtn = e.target.closest('.start-new-project-btn');
   if (startNewBtn) {
     formBgLayer.classList.add('appear');
+    formBgLayer.querySelector('input').focus();
   }
 });
 
