@@ -918,6 +918,9 @@ const deleteAllProjectErrorMessage =
 
 deleteAllProjectBtn.addEventListener('click', () => {
   deleteAllProjectModal.classList.add('appear');
+  setTimeout(() => {
+    deleteAllProjectInput.focus();
+  }, 100)
 });
 
 function removeDeleteAllProjectErrState() {
