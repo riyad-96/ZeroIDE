@@ -1,3 +1,15 @@
+//! disable-interactivity-layer
+.disable-interactivity-layer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999999;
+  background-color: transparent;
+  display: none;
+}
+
 //! Profile Image Modal component stylings
 .profile-img-modal {
   position: fixed;
@@ -362,5 +374,100 @@ form textarea::-webkit-scrollbar {
     color: #fff;
     background-color: hsl(0, 73%, 47%);
     border-color: hsl(0, 73%, 60%);
+  }
+}
+
+//! All project delete form
+.delete-all-project-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background-color: var(--form-bg-layer-bg);
+  
+  display: none;
+  opacity: 0;
+  transition-property: display, opacity;
+  transition-behavior: allow-discrete;
+  transition-duration: 300ms;
+}
+
+.delete-all-project-modal form {
+  background-color: var(--form-bg-clr);
+  box-sizing: content-box;
+  padding: 1.525rem;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 0.5rem;
+  border: 1px solid var(--slick-border-clr);
+
+  translate: 0 -10px;
+  transition: translate 300ms;
+
+  span:first-child {
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: block;
+    padding-block-end: 0.5rem;
+    border-block-end: 1px solid var(--slick-border-clr);
+  }
+
+  .warning-message {
+    background-color:hsl(0, 100%, 60%, 0.13);
+    color:hsl(0, 100%, 45%);
+    font-size: 0.925rem;
+    padding-block: 0.5rem;
+    padding-inline-start: 1rem;
+    border-radius: 0.425rem;
+    display: block;
+    margin-block: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+
+    strong {
+      font-weight: 500;
+    }
+  }
+
+  .delete-project-input-container {
+    margin: 0;
+  }
+
+  .error-message {
+    margin-block: 0.425rem;
+    height: 22px;
+    font-size: 0.855rem;
+    color: hsl(0, 100%, 45%);
+    display: flex;
+    align-items: center;
+    gap: 0.325rem;
+  }
+
+  button {
+    background-color: var(--global-button-bg);
+    padding: var(--global-button-padding);
+    border-radius: var(--global-button-border-radius);
+    border: 1px solid var(--slick-border-clr);
+    transition: 100ms;
+
+    &:hover {
+      background-color: var(--global-button-hover-bg);
+    }
+  }
+
+  .confirm-all-project-delete-btn:hover {
+    background-color: #cf2020;
+    border-color: #e34f4f;
+    color: #fff;
+  }
+
+  .delete-all-project-btn-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.525rem;
   }
 }

@@ -194,7 +194,28 @@
   opacity: 1;
 }
 
-
 .no-transitions * {
   transition: none !important;
+}
+
+.delete-all-project-modal.appear {
+  display: grid;
+  opacity: 1;
+
+  form {
+    translate: 0 0;
+  }
+
+  @starting-style {
+    opacity: 0;
+
+    form {
+      translate: 0 10px;
+    }
+  }
+}
+
+.delete-project-input-container input.error {
+  outline: 1px solid hsl(0, 100%, 45%);
+  outline-offset: 2px;
 }

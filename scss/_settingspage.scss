@@ -98,9 +98,12 @@
     border: 1px solid var(--slick-border-clr);
     padding: var(--global-button-padding);
     @include font-size;
+    transition: 100ms;
 
     &:hover {
-      background-color: var(--global-button-hover-bg);
+      background-color: #cf2020;
+    border-color: #e34f4f;
+    color: #fff;
     }
   }
 }

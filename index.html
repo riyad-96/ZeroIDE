@@ -20,14 +20,14 @@
 
   <main>
     <aside class="sidebar">
-      <div class="sidebar-toggle-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
+      <button class="sidebar-toggle-btn">
+        <svg tabindex="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
           <rect width="100" height="100" rx="20" fill="#000" />
           <path d="M30 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
           <path d="M70 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
           <rect class="blinking-rect" x="47" y="33" width="6" height="35" fill="currentColor" />
         </svg>
-      </div>
+      </button>
 
       <div class="profile-image">
         <div title="Click to preview image" class="display-profile-img all-profile-image-display">
@@ -82,7 +82,7 @@
               </svg>
               <span>Projects</span>
             </a>
-            <button title="click to open projects list" class="sub-menu-btn">
+            <button tabindex="-1" title="click to open projects list" class="sub-menu-btn">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                 <path d="M12 16L6 10H18L12 16Z"></path>
               </svg>
@@ -332,6 +332,9 @@
 
 
   <!--! UI components -->
+<!-- disable interactivity layer -->
+ <div class="disable-interactivity-layer"></div>
+
   <!-- profile image modal -->
   <div class="profile-img-modal">
     <div class="img-modal-container">
@@ -409,6 +412,27 @@
         <button class="project-edit-form-cancel-btn">Cancel</button>
         <button class="project-edit-form-delete-btn">Delete</button>
         <button class="project-edit-form-save-btn">Save</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- all project delete form -->
+  <div class="delete-all-project-modal">
+    <form>
+      <div>
+        <span>Delete all project</span>
+        <span class="warning-message"><strong>Warning:</strong> This action is not reversible. Please be certain.</span>
+      </div>
+      <div class="delete-project-input-container">
+        <label for="delete-all-project-input">
+          To delete, type '<strong>delete all projects</strong>' below:
+        </label>
+        <input type="text" id="delete-all-project-input" maxlength="19" autocomplete="off">
+      </div>
+      <div class="error-message"></div>
+      <div class="delete-all-project-btn-container">
+        <button class="cancel-all-project-delete-btn">Cancel</button>
+        <button data-toast-message="All projects deleted !" class="confirm-all-project-delete-btn">Delete all</button>
       </div>
     </form>
   </div>

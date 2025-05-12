@@ -74,8 +74,12 @@ sidebarToggleBtn.addEventListener('click', () => {
   }
   if (sidebar.classList.contains('show')) {
     localStorage.setItem('sidebar-stat', 'open');
+    subMenuBtn.removeAttribute('tabindex');
+    document.querySelector('.sub-menu').style.display = 'initial'
   } else {
+    subMenuBtn.setAttribute('tabindex', '-1');
     localStorage.removeItem('sidebar-stat');
+    document.querySelector('.sub-menu').style.display = 'none'
   }
 });
 
@@ -83,6 +87,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (sideBarStat) {
     sidebar.classList.add('show');
     profileImage.classList.add('enlarge');
+    subMenuBtn.removeAttribute('tabindex');
   }
 });
 
@@ -336,11 +341,14 @@ function pageChangeUpdate() {
   // set/remove tabindex
   const eachPage = document.querySelectorAll('.each-page');
   document.querySelectorAll('.each-page').forEach((page) => {
-    if(page.id !== pageId) {
-      page.querySelectorAll('a, button, input, select, textarea, div').forEach(el => el.setAttribute('tabindex', '-1'))
-      console.log(page.id)
+    if (page.id !== pageId) {
+      page
+        .querySelectorAll('a, button, input, select, textarea, div')
+        .forEach((el) => el.setAttribute('tabindex', '-1'));
     } else {
-      page.querySelectorAll('a, button, input, select, textarea, div').forEach(el => el.removeAttribute('tabindex'))
+      page
+        .querySelectorAll('a, button, input, select, textarea, div')
+        .forEach((el) => el.removeAttribute('tabindex'));
     }
   });
 
@@ -894,6 +902,84 @@ editorSettingInputs.forEach((input) => {
     input.id,
     savedSettings.editor[input.dataset.editorSetting]
   );
+});
+
+// All project deletion program
+const deleteAllProjectModal = document.querySelector(
+  '.delete-all-project-modal'
+);
+const deleteAllProjectForm = deleteAllProjectModal.querySelector('form');
+const deleteAllProjectInput = document.getElementById(
+  'delete-all-project-input'
+);
+const deleteAllProjectBtn = document.querySelector('.project-setting button');
+const deleteAllProjectErrorMessage =
+  deleteAllProjectModal.querySelector('.error-message');
+
+deleteAllProjectBtn.addEventListener('click', () => {
+  deleteAllProjectModal.classList.add('appear');
+});
+
+function removeDeleteAllProjectErrState() {
+  deleteAllProjectModal.classList.remove('appear');
+  deleteAllProjectInput.classList.remove('error');
+  deleteAllProjectInput.removeEventListener('input', checkDltAllProjectInput);
+  deleteAllProjectInput.value = '';
+  deleteAllProjectErrorMessage.innerHTML = '';
+}
+
+deleteAllProjectModal.addEventListener('click', () => {
+  removeDeleteAllProjectErrState();
+});
+
+function errSvg() {
+  return `<svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16">
+  <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
+    d="M5.30761 1.5L1.5 5.30761L1.5 10.6924L5.30761 14.5H10.6924L14.5 10.6924V5.30761L10.6924 1.5H5.30761ZM5.10051 0C4.83529 0 4.58094 0.105357 4.3934 0.292893L0.292893 4.3934C0.105357 4.58094 0 4.83529 0 5.10051V10.8995C0 11.1647 0.105357 11.4191 0.292894 11.6066L4.3934 15.7071C4.58094 15.8946 4.83529 16 5.10051 16H10.8995C11.1647 16 11.4191 15.8946 11.6066 15.7071L15.7071 11.6066C15.8946 11.4191 16 11.1647 16 10.8995V5.10051C16 4.83529 15.8946 4.58093 15.7071 4.3934L11.6066 0.292893C11.4191 0.105357 11.1647 0 10.8995 0H5.10051ZM8.75 3.75V4.5V8L8.75 8.75H7.25V8V4.5V3.75H8.75ZM8 12C8.55229 12 9 11.5523 9 11C9 10.4477 8.55229 10 8 10C7.44772 10 7 10.4477 7 11C7 11.5523 7.44772 12 8 12Z"></path>
+</svg>`;
+}
+
+function showErrMessage(message) {
+  deleteAllProjectErrorMessage.innerHTML = `${errSvg()} <span>${message}</span>`;
+}
+
+function checkDltAllProjectInput() {
+  if (deleteAllProjectInput.value.trim() === '') {
+    deleteAllProjectInput.classList.add('error');
+    showErrMessage('The verification text is required');
+    return;
+  }
+  if (deleteAllProjectInput.value.trim() !== 'delete all projects') {
+    deleteAllProjectInput.classList.add('error');
+    showErrMessage('The verification text does not match');
+  } else {
+    deleteAllProjectInput.classList.remove('error');
+    deleteAllProjectErrorMessage.innerHTML = '';
+  }
+}
+
+deleteAllProjectForm.addEventListener('click', (e) => {
+  const cancelBtn = e.target.closest('.cancel-all-project-delete-btn');
+  if (cancelBtn) {
+    removeDeleteAllProjectErrState();
+  }
+
+  const confirmBtn = e.target.closest('.confirm-all-project-delete-btn');
+  if (confirmBtn) {
+    if (deleteAllProjectInput.value.trim() !== 'delete all projects') {
+      deleteAllProjectInput.addEventListener('input', checkDltAllProjectInput);
+      checkDltAllProjectInput();
+      deleteAllProjectInput.focus();
+    } else {
+      localStorage.removeItem('all-saved-projects');
+      document.querySelector('.disable-interactivity-layer').style.display = 'block';
+      toastMessagePopup(confirmBtn);
+      deleteAllProjectModal.click();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    }
+  }
 });
 
 //! ----------- Project page programs -----------
