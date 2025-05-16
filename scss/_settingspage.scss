@@ -11,18 +11,17 @@
 }
 
 .all-settings {
-  
   border-top: var(--setting-border);
   padding-block-end: 1rem;
 
   h3 {
     margin: 0;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1lh;
     max-width: fit-content;
-    border-block-end: var(--setting-border);
+    border-block-end: 1px solid hsl(0, 0%, 50%);
     margin-block: 1rem 0.525rem;
-    padding-block: 0 0.225rem;
+    padding-block: 0 0.125rem;
   }
 }
 
