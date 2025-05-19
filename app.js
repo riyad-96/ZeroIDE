@@ -75,11 +75,11 @@ sidebarToggleBtn.addEventListener('click', () => {
   if (sidebar.classList.contains('show')) {
     localStorage.setItem('sidebar-stat', 'open');
     subMenuBtn.removeAttribute('tabindex');
-    document.querySelector('.sub-menu').style.display = 'initial'
+    document.querySelector('.sub-menu').style.display = 'initial';
   } else {
     subMenuBtn.setAttribute('tabindex', '-1');
     localStorage.removeItem('sidebar-stat');
-    document.querySelector('.sub-menu').style.display = 'none'
+    document.querySelector('.sub-menu').style.display = 'none';
   }
 });
 
@@ -360,7 +360,6 @@ function pageChangeUpdate() {
     document.querySelector('.primary-menu-link').classList.add('focused');
   }
 }
-// pageChangeUpdate();
 
 window.addEventListener('hashchange', pageChangeUpdate);
 window.addEventListener('DOMContentLoaded', pageChangeUpdate);
@@ -371,7 +370,45 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(pageChangeUpdate, 200);
 });
 
-//! Profile page updation programs
+//! ----------- Home page programs -------------
+const particleContainer = document.getElementById('particle-container');
+const particleCount = 50;
+
+for (let i = 0; i < particleCount; i++) {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+
+  const size = Math.random() * 5 + 3;
+
+  p.style.width = `${size}px`;
+  p.style.height = `${size}px`;
+  p.style.left = `${Math.random() * 100}%`;
+  p.style.top = `${Math.random() * 100}%`;
+  p.style.opacity = Math.random() * 0.3 + 0.1;
+  p.style.animationDuration = `${Math.random() * 15 + 10}s`;
+  p.style.animationDelay = `${Math.random() * 10}s`;
+  p.style.background = 'var(--particle-bg)';
+
+  particleContainer.appendChild(p);
+}
+
+setTimeout(() => {
+  particleContainer.style.opacity = '1';
+}, 1000);
+
+// Quick launch program
+document.querySelector('.quick-launch-btn').addEventListener('click', () => {
+  handleProjectCreate(true);
+  document.querySelector('.disable-interactivity-layer').style.display = 'block';
+  setTimeout(() => {
+    document.querySelector('.disable-interactivity-layer').style.display =
+      'none';
+  }, 1400);
+});
+
+
+
+//! ----------- Profile page programs -------------
 //profile picture updation
 const savedProfileImg = localStorage.getItem('profile-image');
 const allProfileImgDisplay = document.querySelectorAll(
@@ -920,7 +957,7 @@ deleteAllProjectBtn.addEventListener('click', () => {
   deleteAllProjectModal.classList.add('appear');
   setTimeout(() => {
     deleteAllProjectInput.focus();
-  }, 100)
+  }, 100);
 });
 
 function removeDeleteAllProjectErrState() {
@@ -975,7 +1012,8 @@ deleteAllProjectForm.addEventListener('click', (e) => {
       deleteAllProjectInput.focus();
     } else {
       localStorage.removeItem('all-saved-projects');
-      document.querySelector('.disable-interactivity-layer').style.display = 'block';
+      document.querySelector('.disable-interactivity-layer').style.display =
+        'block';
       toastMessagePopup(confirmBtn);
       deleteAllProjectModal.click();
       setTimeout(() => {
