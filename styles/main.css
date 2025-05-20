@@ -995,7 +995,7 @@ img {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-@media (width < 1160px) {
+@media (width < 760px) {
   .each-username-link-container .profile-url {
     display: none;
   }
@@ -1009,11 +1009,18 @@ img {
   border-radius: var(--global-button-border-radius);
   border: 1px solid var(--slick-border-clr);
 }
-.each-username-link-container:hover {
-  opacity: 1;
+@media (pointer: fine) {
+  .each-username-link-container:hover {
+    opacity: 1;
+  }
+  .each-username-link-container:hover a {
+    translate: 5px 0;
+  }
 }
-.each-username-link-container:hover a {
-  translate: 5px 0;
+@media (width < 650px) {
+  .each-username-link-container {
+    gap: 1rem;
+  }
 }
 
 .each-username-link-container:first-child {
@@ -1514,6 +1521,12 @@ img {
 .img-buttons input {
   display: none;
 }
+@media (pointer: coarse) {
+  .img-buttons {
+    display: grid;
+    gap: 1.425rem;
+  }
+}
 
 .img-buttons button {
   font-size: 0.9rem;
@@ -1539,7 +1552,7 @@ img {
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
   place-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   opacity: 0;
   transition: 300ms allow-discrete;
   display: none;
@@ -1548,7 +1561,7 @@ img {
 .form-background-layer form {
   background-color: var(--form-bg-clr);
   box-sizing: content-box;
-  padding: 1.525rem;
+  padding: 1.425rem;
   width: 100%;
   max-width: 400px;
   border: 1px solid var(--slick-border-clr);
@@ -1558,6 +1571,11 @@ img {
   user-select: none;
   translate: 0 -20px;
   transition: translate 300ms;
+}
+@media (width < 700px) {
+  .form-background-layer form {
+    width: 80%;
+  }
 }
 
 form > div:not(.form-buttons) {
@@ -1650,8 +1668,8 @@ form textarea::-webkit-scrollbar {
   background-color: var(--sidebar-border-clr);
   border-radius: 1rem;
   border: 1px solid var(--slick-border-clr);
-  min-width: 400px;
-  max-width: 450px;
+  width: 100%;
+  max-width: 400px;
   transition: translate 300ms;
 }
 
@@ -1706,9 +1724,11 @@ form textarea::-webkit-scrollbar {
   border: 1px solid var(--slick-border-clr);
   border-radius: 1000px;
   font-size: 0.925rem;
+  font-weight: 500;
 }
 
 .delete-confirmation-buttons .dlt-confirm-btn {
+  color: #fff;
   background-color: hsl(0, 100%, 60%);
 }
 
@@ -1765,6 +1785,7 @@ form textarea::-webkit-scrollbar {
 
 .edit-project-form-modal {
   position: fixed;
+  z-index: 99;
   top: 0;
   left: 0;
   width: 100%;
@@ -1815,6 +1836,11 @@ form textarea::-webkit-scrollbar {
   color: #fff;
   background-color: hsl(0, 73%, 47%);
   border-color: hsl(0, 73%, 60%);
+}
+@media (width < 700px) {
+  .edit-project-form-modal form {
+    width: 80%;
+  }
 }
 
 .delete-all-project-modal {
@@ -2176,5 +2202,12 @@ form textarea::-webkit-scrollbar {
   }
   .social-links {
     padding: 1rem;
+  }
+  .sub-menu-option-btn {
+    cursor: default;
+    opacity: 1;
+  }
+  * {
+    cursor: default !important;
   }
 }

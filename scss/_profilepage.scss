@@ -12,7 +12,6 @@
   width: 100%;
   max-width: 300px;
   max-height: fit-content;
-  // border: 1px solid red;
   padding: 1rem;
 }
 
@@ -155,7 +154,7 @@ img {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    @media(width < 1160px) {
+    @media(width < 760px) {
       display: none;
     }
   }
@@ -170,12 +169,18 @@ img {
     border: 1px solid var(--slick-border-clr);
   }
 
-  &:hover {
-    opacity: 1;
-
-    a {
-      translate: 5px 0;
+  @media(pointer: fine) {
+    &:hover {
+      opacity: 1;
+  
+      a {
+        translate: 5px 0;
+      }
     }
+  }
+
+  @media(width < 650px) {
+    gap: 1rem;
   }
 }
 

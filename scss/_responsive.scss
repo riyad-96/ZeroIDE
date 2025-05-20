@@ -77,4 +77,11 @@
   .social-links {
     padding: 1rem;
   }
+  .sub-menu-option-btn {
+    cursor: default;
+    opacity: 1;
+  }
+  *{
+    cursor: default !important;
+  }
 }
