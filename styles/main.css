@@ -1986,10 +1986,12 @@ form textarea::-webkit-scrollbar {
   justify-content: flex-end;
   align-items: center;
   gap: 0.525rem;
+  margin: 0;
 }
 @media (width < 700px) {
   .delete-all-project-modal form {
     width: 80%;
+    padding: 1.225rem;
   }
 }
 
