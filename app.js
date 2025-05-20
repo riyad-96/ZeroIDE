@@ -34,6 +34,56 @@ const createOpenBtn = document.querySelector('.create-open-btn');
 
 const createNewBtn = document.querySelector('.create-new-project-btn');
 
+//! first load welcome note
+const firstLoadNote = document.querySelector('.first-load-welcome-note')
+const firstLoad = localStorage.getItem('firstLoad')
+
+if(!firstLoad) {
+  firstLoadNote.style.display = 'grid';
+  console.log('first load')
+  gsap.from('.note-content>*', {
+    opacity: 0,
+    x: 500,
+    delay: 0.5,
+    stagger: 0.2,
+    ease: "power1.out",
+    duration: 1
+  })
+}
+
+const initiateBtn = document.querySelector('.note-content>button')
+
+initiateBtn.addEventListener('click', () => {
+  localStorage.setItem('firstLoad', 'loaded')
+  const timeline = gsap.timeline()
+
+  timeline.to('.note-content>*', {
+    opacity: 0,
+    x: -500,
+    delay: 0.1,
+    stagger: -0.2,
+    duration: 1,
+    ease: "power1.in"
+  });
+  timeline.to('.first-load-welcome-note', {
+    x: '-110%',
+    duration: 1,
+    ease: "power1.out"
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 //! main saved projects variable -----
 const savedProjects =
   JSON.parse(localStorage.getItem('all-saved-projects')) || [];
@@ -85,7 +135,7 @@ const sidebarToggleFunc = () => {
       document.querySelector('.sub-menu').style.display = 'none';
     }, 600);
   }
-}
+};
 sidebarToggleBtn.addEventListener('click', sidebarToggleFunc);
 sidebarBgLayer.addEventListener('click', sidebarToggleFunc);
 
@@ -406,14 +456,13 @@ setTimeout(() => {
 // Quick launch program
 document.querySelector('.quick-launch-btn').addEventListener('click', () => {
   handleProjectCreate(true);
-  document.querySelector('.disable-interactivity-layer').style.display = 'block';
+  document.querySelector('.disable-interactivity-layer').style.display =
+    'block';
   setTimeout(() => {
     document.querySelector('.disable-interactivity-layer').style.display =
       'none';
   }, 1400);
 });
-
-
 
 //! ----------- Profile page programs -------------
 //profile picture updation
@@ -517,6 +566,25 @@ function vectorProfileSvg() {
             </g>
           </svg>`;
 }
+
+// Load page first load date
+const firstJoinDate = localStorage.getItem('join-date');
+const joinDateContainer = document.querySelector('.first-join-date');
+
+function setFirstJoinDate(date) {
+  joinDateContainer.textContent = `Joined on ${getDateFunc(date)}`;
+}
+
+function loadFirstJoinDate() {
+  if (!firstJoinDate) {
+    const date = new Date();
+    localStorage.setItem('join-date', date);
+    setFirstJoinDate(date);
+    return;
+  }
+  setFirstJoinDate(firstJoinDate);
+}
+loadFirstJoinDate();
 
 // Profile data form updation
 const profileEditForm = document.querySelector('.profile-edit-form');
@@ -839,7 +907,7 @@ function loadLastFourProject() {
 
   lastFourProjects.forEach((p) => {
     if (p) {
-      const date = projectDate(p.date);
+      const date = getDateFunc(p.date);
       const div = document.createElement('div');
       div.classList.add('each-recent-project');
       div.innerHTML = `
@@ -865,7 +933,7 @@ function bookmarkSvg() {
           </svg>`;
 }
 
-function projectDate(date) {
+function getDateFunc(date) {
   const savedDate = new Date(date);
   return savedDate.toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -1095,7 +1163,7 @@ function createProjectPageProjects(arr) {
         }" class="add-favorite-btn" title="click to add/remove favorite">${
       p.favorite ? heartFillSvg() : heartLineSvg()
     }</button>
-        <span>created on ${projectDate(p.date)}</span>
+        <span>created on ${getDateFunc(p.date)}</span>
       </footer>
     `;
     projectPageProjectContainer.prepend(div);
@@ -1202,4 +1270,3 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
 projectEditFormModal.addEventListener('click', () => {
   projectEditFormModal.classList.remove('appear');
 });
-
