@@ -120,6 +120,10 @@ img {
   padding-block: 0.125rem 0;
   border-radius: 0.325rem;
   font-size: 0.8325rem;
+
+  &:hover {
+    background-color: var(--global-button-hover-bg);
+  }
 }
 
 .social-link-display {
@@ -167,6 +171,10 @@ img {
     height: 25px;
     border-radius: var(--global-button-border-radius);
     border: 1px solid var(--slick-border-clr);
+
+    &:hover {
+    background-color: var(--global-button-hover-bg);
+  }
   }
 
   @media(pointer: fine) {

@@ -962,6 +962,9 @@ img {
   border-radius: 0.325rem;
   font-size: 0.8325rem;
 }
+.add-social-link-btn:hover {
+  background-color: var(--global-button-hover-bg);
+}
 
 .social-link-display {
   display: grid;
@@ -1008,6 +1011,9 @@ img {
   height: 25px;
   border-radius: var(--global-button-border-radius);
   border: 1px solid var(--slick-border-clr);
+}
+.each-username-link-container button:hover {
+  background-color: var(--global-button-hover-bg);
 }
 @media (pointer: fine) {
   .each-username-link-container:hover {
