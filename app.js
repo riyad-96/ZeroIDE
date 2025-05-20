@@ -39,7 +39,6 @@ const firstLoadNote = document.querySelector('.first-load-welcome-note')
 const firstLoad = localStorage.getItem('firstLoad')
 
 if(!firstLoad) {
-  firstLoadNote.style.display = 'grid';
   console.log('first load')
   gsap.from('.note-content>*', {
     opacity: 0,
@@ -50,6 +49,8 @@ if(!firstLoad) {
     duration: 1
   })
 }
+
+if(firstLoad) firstLoadNote.style.display = 'none'
 
 const initiateBtn = document.querySelector('.note-content>button')
 
@@ -67,9 +68,12 @@ initiateBtn.addEventListener('click', () => {
   });
   timeline.to('.first-load-welcome-note', {
     x: '-110%',
-    duration: 1,
-    ease: "power1.out"
+    duration: 3,
+    ease: "expo.out",
   })
+  setTimeout(() => {
+    firstLoadNote.style.display = 'none'
+  }, 3000)
 })
 
 

@@ -1436,11 +1436,11 @@ img {
   height: 100%;
   z-index: 9999999;
   background-color: var(--body-bg);
-  display: none;
+  display: grid;
   place-items: center;
   padding-inline: 1.425rem;
   overflow: hidden;
-  box-shadow: 10px 0 30px hsla(0, 0%, 50%, 0.3);
+  box-shadow: 10px 0 30px hsla(0, 0%, 10%, 0.3);
 }
 
 .first-load-welcome-note > .note-content {
