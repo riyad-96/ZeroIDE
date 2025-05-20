@@ -35,28 +35,28 @@ const createOpenBtn = document.querySelector('.create-open-btn');
 const createNewBtn = document.querySelector('.create-new-project-btn');
 
 //! first load welcome note
-const firstLoadNote = document.querySelector('.first-load-welcome-note')
-const firstLoad = localStorage.getItem('firstLoad')
+const firstLoadNote = document.querySelector('.first-load-welcome-note');
+const firstLoad = localStorage.getItem('firstLoad');
 
-if(!firstLoad) {
-  console.log('first load')
+if (!firstLoad) {
+  console.log('first load');
   gsap.from('.note-content>*', {
     opacity: 0,
     x: 500,
     delay: 0.5,
     stagger: 0.2,
-    ease: "power1.out",
-    duration: 1
-  })
+    ease: 'power1.out',
+    duration: 1,
+  });
 }
 
-if(firstLoad) firstLoadNote.style.display = 'none'
+if (firstLoad) firstLoadNote.style.display = 'none';
 
-const initiateBtn = document.querySelector('.note-content>button')
+const initiateBtn = document.querySelector('.note-content>button');
 
 initiateBtn.addEventListener('click', () => {
-  localStorage.setItem('firstLoad', 'loaded')
-  const timeline = gsap.timeline()
+  localStorage.setItem('firstLoad', 'loaded');
+  const timeline = gsap.timeline();
 
   timeline.to('.note-content>*', {
     opacity: 0,
@@ -64,22 +64,21 @@ initiateBtn.addEventListener('click', () => {
     delay: 0.1,
     stagger: -0.2,
     duration: 1,
-    ease: "power1.in"
+    ease: 'power1.in',
   });
   timeline.to('.first-load-welcome-note', {
     x: '-110%',
     duration: 3,
-    ease: "expo.out",
-  })
+    ease: 'expo.out',
+  });
   setTimeout(() => {
-    firstLoadNote.style.display = 'none'
-  }, 3000)
-})
+    firstLoadNote.style.display = 'none';
+  }, 3000);
 
-
-
-
-
+  const date = new Date()
+  loadJoinDate(getDateFunc(date))
+  localStorage.setItem('join-date', getDateFunc(date))
+});
 
 
 
@@ -575,20 +574,11 @@ function vectorProfileSvg() {
 const firstJoinDate = localStorage.getItem('join-date');
 const joinDateContainer = document.querySelector('.first-join-date');
 
-function setFirstJoinDate(date) {
-  joinDateContainer.textContent = `Joined on ${getDateFunc(date)}`;
+function loadJoinDate(date) {
+  joinDateContainer.textContent = date;
 }
 
-function loadFirstJoinDate() {
-  if (!firstJoinDate) {
-    const date = new Date();
-    localStorage.setItem('join-date', date);
-    setFirstJoinDate(date);
-    return;
-  }
-  setFirstJoinDate(firstJoinDate);
-}
-loadFirstJoinDate();
+loadJoinDate(firstJoinDate || 'Date intentionally removed')
 
 // Profile data form updation
 const profileEditForm = document.querySelector('.profile-edit-form');
