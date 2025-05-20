@@ -1,3 +1,19 @@
+//! Sidebar bg layer 
+.sidebar-bg-layer {
+  display: none;
+  position: fixed;
+  z-index: 8;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--form-bg-layer-bg);
+
+  @media(pointer: fine) {
+    backdrop-filter:blur(3px);
+  }
+}
+
 //! disable-interactivity-layer
 .disable-interactivity-layer {
   width: 100%;

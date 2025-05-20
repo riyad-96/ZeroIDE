@@ -64,10 +64,12 @@ imgModArr.forEach((element) => {
 //! sidebar programs ------
 //! sidebar toggle
 const sideBarStat = localStorage.getItem('sidebar-stat');
+const sidebarBgLayer = document.querySelector('.sidebar-bg-layer');
 
-sidebarToggleBtn.addEventListener('click', () => {
+const sidebarToggleFunc = () => {
   sidebar.classList.toggle('show');
   profileImage.classList.toggle('enlarge');
+  sidebarBgLayer.classList.toggle('appear');
 
   if (projectMenu.classList.contains('show')) {
     projectMenu.classList.remove('show');
@@ -79,15 +81,20 @@ sidebarToggleBtn.addEventListener('click', () => {
   } else {
     subMenuBtn.setAttribute('tabindex', '-1');
     localStorage.removeItem('sidebar-stat');
-    document.querySelector('.sub-menu').style.display = 'none';
+    setTimeout(() => {
+      document.querySelector('.sub-menu').style.display = 'none';
+    }, 600);
   }
-});
+}
+sidebarToggleBtn.addEventListener('click', sidebarToggleFunc);
+sidebarBgLayer.addEventListener('click', sidebarToggleFunc);
 
 window.addEventListener('DOMContentLoaded', () => {
   if (sideBarStat) {
     sidebar.classList.add('show');
     profileImage.classList.add('enlarge');
     subMenuBtn.removeAttribute('tabindex');
+    sidebarBgLayer.classList.add('appear');
   }
 });
 
@@ -1195,3 +1202,4 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
 projectEditFormModal.addEventListener('click', () => {
   projectEditFormModal.classList.remove('appear');
 });
+
