@@ -1,483 +1,452 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code editor</title>
+    <link rel="shortcut icon" href="./assets/images/favicon.svg" type="image/x-icon" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code editor</title>
-  <link rel="shortcut icon" href="./assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/main.css" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <link rel="stylesheet" href="./styles/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./app.js" defer></script>
+  </head>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
-    integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="./app.js" defer></script>
-</head>
-
-<body>
-
-  <div class="first-load-welcome-note">
-    <div class="note-content">
-      <h2>Web based code editor</h2>
-      <p>No setup is required, jump into code.</p>
-      <button title="Initiate Zen Mode">Initiate</button>
+  <body>
+    <div class="first-load-welcome-note">
+      <div class="note-content">
+        <h2>Web based code editor</h2>
+        <p>No setup is required, jump into code.</p>
+        <button title="Initiate Zen Mode">Initiate</button>
+      </div>
     </div>
-  </div>
 
-  <main>
-    <aside class="sidebar">
-      <button class="sidebar-toggle-btn">
-        <svg tabindex="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
-          <rect width="100" height="100" rx="20" fill="#000" />
-          <path d="M30 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
-          <path d="M70 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
-          <rect class="blinking-rect" x="47" y="33" width="6" height="35" fill="currentColor" />
-        </svg>
-      </button>
+    <main>
+      <aside class="sidebar">
+        <button class="sidebar-toggle-btn">
+          <svg tabindex="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
+            <rect width="100" height="100" rx="20" fill="#000" />
+            <path d="M30 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+            <path d="M70 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+            <rect class="blinking-rect" x="47" y="33" width="6" height="35" fill="currentColor" />
+          </svg>
+        </button>
 
-      <div class="profile-image">
-        <div title="Click to preview image" class="display-profile-img all-profile-image-display">
-          <!-- profile images show inside this container -->
+        <div class="profile-image">
+          <div title="Click to preview image" class="display-profile-img all-profile-image-display">
+            <!-- profile images show inside this container -->
+          </div>
         </div>
-      </div>
 
-      <!-- Sidebar menu -->
-      <ul class="sidebar-menu">
-        <li title="Home" class="primary-menu">
-          <a class="primary-menu-link focused" href="#home-page" data-curr-page="home-page">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path
-                d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM19 19V9.97815L12 4.53371L5 9.97815V19H19Z">
-              </path>
-            </svg>
-            <span>Home</span>
-          </a>
-        </li>
-
-        <li title="Profile" class="primary-menu">
-          <a class="primary-menu-link" href="#profile-page" data-curr-page="profile-page">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path
-                d="M12 14V16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM14.5946 18.8115C14.5327 18.5511 14.5 18.2794 14.5 18C14.5 17.7207 14.5327 17.449 14.5945 17.1886L13.6029 16.6161L14.6029 14.884L15.5952 15.4569C15.9883 15.0851 16.4676 14.8034 17 14.6449V13.5H19V14.6449C19.5324 14.8034 20.0116 15.0851 20.4047 15.4569L21.3971 14.8839L22.3972 16.616L21.4055 17.1885C21.4673 17.449 21.5 17.7207 21.5 18C21.5 18.2793 21.4673 18.551 21.4055 18.8114L22.3972 19.3839L21.3972 21.116L20.4048 20.543C20.0117 20.9149 19.5325 21.1966 19.0001 21.355V22.5H17.0001V21.3551C16.4677 21.1967 15.9884 20.915 15.5953 20.5431L14.603 21.1161L13.6029 19.384L14.5946 18.8115ZM18 19.5C18.8284 19.5 19.5 18.8284 19.5 18C19.5 17.1716 18.8284 16.5 18 16.5C17.1716 16.5 16.5 17.1716 16.5 18C16.5 18.8284 17.1716 19.5 18 19.5Z">
-              </path>
-            </svg>
-            <span>Profile</span>
-          </a>
-        </li>
-
-        <li title="Settings" class="primary-menu">
-          <a class="primary-menu-link" href="#settings-page" data-curr-page="home-page">
-            <svg class="settings-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-              fill="currentColor">
-              <path
-                d="M2 11.9998C2 11.1353 2.1097 10.2964 2.31595 9.49631C3.40622 9.55283 4.48848 9.01015 5.0718 7.99982C5.65467 6.99025 5.58406 5.78271 4.99121 4.86701C6.18354 3.69529 7.66832 2.82022 9.32603 2.36133C9.8222 3.33385 10.8333 3.99982 12 3.99982C13.1667 3.99982 14.1778 3.33385 14.674 2.36133C16.3317 2.82022 17.8165 3.69529 19.0088 4.86701C18.4159 5.78271 18.3453 6.99025 18.9282 7.99982C19.5115 9.01015 20.5938 9.55283 21.6841 9.49631C21.8903 10.2964 22 11.1353 22 11.9998C22 12.8643 21.8903 13.7032 21.6841 14.5033C20.5938 14.4468 19.5115 14.9895 18.9282 15.9998C18.3453 17.0094 18.4159 18.2169 19.0088 19.1326C17.8165 20.3043 16.3317 21.1794 14.674 21.6383C14.1778 20.6658 13.1667 19.9998 12 19.9998C10.8333 19.9998 9.8222 20.6658 9.32603 21.6383C7.66832 21.1794 6.18354 20.3043 4.99121 19.1326C5.58406 18.2169 5.65467 17.0094 5.0718 15.9998C4.48848 14.9895 3.40622 14.4468 2.31595 14.5033C2.1097 13.7032 2 12.8643 2 11.9998ZM6.80385 14.9998C7.43395 16.0912 7.61458 17.3459 7.36818 18.5236C7.77597 18.8138 8.21005 19.0652 8.66489 19.2741C9.56176 18.4712 10.7392 17.9998 12 17.9998C13.2608 17.9998 14.4382 18.4712 15.3351 19.2741C15.7899 19.0652 16.224 18.8138 16.6318 18.5236C16.3854 17.3459 16.566 16.0912 17.1962 14.9998C17.8262 13.9085 18.8225 13.1248 19.9655 12.7493C19.9884 12.5015 20 12.2516 20 11.9998C20 11.7481 19.9884 11.4981 19.9655 11.2504C18.8225 10.8749 17.8262 10.0912 17.1962 8.99982C16.566 7.90845 16.3854 6.65378 16.6318 5.47605C16.224 5.18588 15.7899 4.93447 15.3351 4.72552C14.4382 5.52844 13.2608 5.99982 12 5.99982C10.7392 5.99982 9.56176 5.52844 8.66489 4.72552C8.21005 4.93447 7.77597 5.18588 7.36818 5.47605C7.61458 6.65378 7.43395 7.90845 6.80385 8.99982C6.17376 10.0912 5.17754 10.8749 4.03451 11.2504C4.01157 11.4981 4 11.7481 4 11.9998C4 12.2516 4.01157 12.5015 4.03451 12.7493C5.17754 13.1248 6.17376 13.9085 6.80385 14.9998ZM12 14.9998C10.3431 14.9998 9 13.6567 9 11.9998C9 10.343 10.3431 8.99982 12 8.99982C13.6569 8.99982 15 10.343 15 11.9998C15 13.6567 13.6569 14.9998 12 14.9998ZM12 12.9998C12.5523 12.9998 13 12.5521 13 11.9998C13 11.4475 12.5523 10.9998 12 10.9998C11.4477 10.9998 11 11.4475 11 11.9998C11 12.5521 11.4477 12.9998 12 12.9998Z">
-              </path>
-            </svg>
-            <span>Settings</span>
-          </a>
-        </li>
-
-        <!-- Sub menu starts here -->
-        <li class="primary-menu project-menu">
-          <div>
-            <a title="Projects" class="primary-menu-link" data-curr-page="home-page" href="#projects-page">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="23" height="23" fill="currentColor">
-                <path
-                  d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 7V19H20V7H4Z">
-                </path>
+        <!-- Sidebar menu -->
+        <ul class="sidebar-menu">
+          <li title="Home" class="primary-menu">
+            <a class="primary-menu-link focused" href="#home-page" data-curr-page="home-page">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM19 19V9.97815L12 4.53371L5 9.97815V19H19Z"></path>
               </svg>
-              <span>Projects</span>
+              <span>Home</span>
             </a>
-            <button tabindex="-1" title="click to open projects list" class="sub-menu-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path d="M12 16L6 10H18L12 16Z"></path>
+          </li>
+
+          <li title="Profile" class="primary-menu">
+            <a class="primary-menu-link" href="#profile-page" data-curr-page="profile-page">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path
+                  d="M12 14V16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM14.5946 18.8115C14.5327 18.5511 14.5 18.2794 14.5 18C14.5 17.7207 14.5327 17.449 14.5945 17.1886L13.6029 16.6161L14.6029 14.884L15.5952 15.4569C15.9883 15.0851 16.4676 14.8034 17 14.6449V13.5H19V14.6449C19.5324 14.8034 20.0116 15.0851 20.4047 15.4569L21.3971 14.8839L22.3972 16.616L21.4055 17.1885C21.4673 17.449 21.5 17.7207 21.5 18C21.5 18.2793 21.4673 18.551 21.4055 18.8114L22.3972 19.3839L21.3972 21.116L20.4048 20.543C20.0117 20.9149 19.5325 21.1966 19.0001 21.355V22.5H17.0001V21.3551C16.4677 21.1967 15.9884 20.915 15.5953 20.5431L14.603 21.1161L13.6029 19.384L14.5946 18.8115ZM18 19.5C18.8284 19.5 19.5 18.8284 19.5 18C19.5 17.1716 18.8284 16.5 18 16.5C17.1716 16.5 16.5 17.1716 16.5 18C16.5 18.8284 17.1716 19.5 18 19.5Z"
+                ></path>
               </svg>
-            </button>
-          </div>
+              <span>Profile</span>
+            </a>
+          </li>
 
-          <div class="grid-smooth-height">
-            <div class="sub-menu">
-              <button class="create-new-project-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                  <path
-                    d="M15 4H5V20H19V8H15V4ZM3 2.9918C3 2.44405 3.44749 2 3.9985 2H16L20.9997 7L21 20.9925C21 21.5489 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918ZM11 11V8H13V11H16V13H13V16H11V13H8V11H11Z">
-                  </path>
+          <li title="Settings" class="primary-menu">
+            <a class="primary-menu-link" href="#settings-page" data-curr-page="home-page">
+              <svg class="settings-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path
+                  d="M2 11.9998C2 11.1353 2.1097 10.2964 2.31595 9.49631C3.40622 9.55283 4.48848 9.01015 5.0718 7.99982C5.65467 6.99025 5.58406 5.78271 4.99121 4.86701C6.18354 3.69529 7.66832 2.82022 9.32603 2.36133C9.8222 3.33385 10.8333 3.99982 12 3.99982C13.1667 3.99982 14.1778 3.33385 14.674 2.36133C16.3317 2.82022 17.8165 3.69529 19.0088 4.86701C18.4159 5.78271 18.3453 6.99025 18.9282 7.99982C19.5115 9.01015 20.5938 9.55283 21.6841 9.49631C21.8903 10.2964 22 11.1353 22 11.9998C22 12.8643 21.8903 13.7032 21.6841 14.5033C20.5938 14.4468 19.5115 14.9895 18.9282 15.9998C18.3453 17.0094 18.4159 18.2169 19.0088 19.1326C17.8165 20.3043 16.3317 21.1794 14.674 21.6383C14.1778 20.6658 13.1667 19.9998 12 19.9998C10.8333 19.9998 9.8222 20.6658 9.32603 21.6383C7.66832 21.1794 6.18354 20.3043 4.99121 19.1326C5.58406 18.2169 5.65467 17.0094 5.0718 15.9998C4.48848 14.9895 3.40622 14.4468 2.31595 14.5033C2.1097 13.7032 2 12.8643 2 11.9998ZM6.80385 14.9998C7.43395 16.0912 7.61458 17.3459 7.36818 18.5236C7.77597 18.8138 8.21005 19.0652 8.66489 19.2741C9.56176 18.4712 10.7392 17.9998 12 17.9998C13.2608 17.9998 14.4382 18.4712 15.3351 19.2741C15.7899 19.0652 16.224 18.8138 16.6318 18.5236C16.3854 17.3459 16.566 16.0912 17.1962 14.9998C17.8262 13.9085 18.8225 13.1248 19.9655 12.7493C19.9884 12.5015 20 12.2516 20 11.9998C20 11.7481 19.9884 11.4981 19.9655 11.2504C18.8225 10.8749 17.8262 10.0912 17.1962 8.99982C16.566 7.90845 16.3854 6.65378 16.6318 5.47605C16.224 5.18588 15.7899 4.93447 15.3351 4.72552C14.4382 5.52844 13.2608 5.99982 12 5.99982C10.7392 5.99982 9.56176 5.52844 8.66489 4.72552C8.21005 4.93447 7.77597 5.18588 7.36818 5.47605C7.61458 6.65378 7.43395 7.90845 6.80385 8.99982C6.17376 10.0912 5.17754 10.8749 4.03451 11.2504C4.01157 11.4981 4 11.7481 4 11.9998C4 12.2516 4.01157 12.5015 4.03451 12.7493C5.17754 13.1248 6.17376 13.9085 6.80385 14.9998ZM12 14.9998C10.3431 14.9998 9 13.6567 9 11.9998C9 10.343 10.3431 8.99982 12 8.99982C13.6569 8.99982 15 10.343 15 11.9998C15 13.6567 13.6569 14.9998 12 14.9998ZM12 12.9998C12.5523 12.9998 13 12.5521 13 11.9998C13 11.4475 12.5523 10.9998 12 10.9998C11.4477 10.9998 11 11.4475 11 11.9998C11 12.5521 11.4477 12.9998 12 12.9998Z"
+                ></path>
+              </svg>
+              <span>Settings</span>
+            </a>
+          </li>
+
+          <!-- Sub menu starts here -->
+          <li class="primary-menu project-menu">
+            <div>
+              <a title="Projects" class="primary-menu-link" data-curr-page="home-page" href="#projects-page">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="23" height="23" fill="currentColor">
+                  <path d="M12.4142 5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H10.4142L12.4142 5ZM4 7V19H20V7H4Z"></path>
                 </svg>
-                <span>Create new</span>
+                <span>Projects</span>
+              </a>
+              <button tabindex="-1" title="click to open projects list" class="sub-menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M12 16L6 10H18L12 16Z"></path>
+                </svg>
               </button>
-
-              <div class="project-list">
-                <!-- new projects goes here -->
-              </div>
             </div>
-          </div>
-        </li>
-      </ul>
-    </aside>
 
-    <!-- ! ---- All other page starts here ---- -->
-    <div class="all-pages">
-      <!-- ! Home page -->
-      <div class="home-page each-page" id="home-page">
-        <div class="body">
-          <div class="page-wrapper landing-page-wrapper">
-            <!-- home page contents -->
-            <div id="particle-container"></div>
-            <div class="home-page-banner-container">
-              <div class="banners" aria-hidden="true">
-                <div class="banner-track">
-                  <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no
-                    snooping. Your data stays safe and private.<span>•</span></span>
+            <div class="grid-smooth-height">
+              <div class="sub-menu">
+                <button class="create-new-project-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M15 4H5V20H19V8H15V4ZM3 2.9918C3 2.44405 3.44749 2 3.9985 2H16L20.9997 7L21 20.9925C21 21.5489 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918ZM11 11V8H13V11H16V13H13V16H11V13H8V11H11Z"></path>
+                  </svg>
+                  <span>Create new</span>
+                </button>
 
-                  <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no
-                    snooping. Your data stays safe and private.<span>•</span></span>
-
-                  <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no
-                    snooping. Your data stays safe and private.<span>•</span></span>
-
-                  <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no
-                    snooping. Your data stays safe and private. </span>
+                <div class="project-list">
+                  <!-- new projects goes here -->
                 </div>
               </div>
             </div>
+          </li>
+        </ul>
+      </aside>
 
-            <div class="home-page-wrapper">
-              <div class="hero">
-                <h1>Welcome to Your Coding Zen</h1>
-                <p>Write code. See results. No setup, no fluff—just pure focus.</p>
-                <button class="quick-launch-btn">Quick Launch</button>
+      <!-- ! ---- All other page starts here ---- -->
+      <div class="all-pages">
+        <!-- ! Home page -->
+        <div class="home-page each-page" id="home-page">
+          <div class="body">
+            <div class="page-wrapper landing-page-wrapper">
+              <!-- home page contents -->
+              <div id="particle-container"></div>
+              <div class="home-page-banner-container">
+                <div class="banners" aria-hidden="true">
+                  <div class="banner-track">
+                    <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private.<span>•</span></span>
+
+                    <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private.<span>•</span></span>
+
+                    <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private.<span>•</span></span>
+
+                    <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private. </span>
+                  </div>
+                </div>
               </div>
 
-            </div>
+              <div class="home-page-wrapper">
+                <div class="hero">
+                  <h1>Welcome to Your Coding Zen</h1>
+                  <p>Write code. See results. No setup, no fluff—just pure focus.</p>
+                  <button class="quick-launch-btn">Quick Launch</button>
+                </div>
+              </div>
 
-            <!-- home page contents ends -->
+              <!-- home page contents ends -->
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- ! Profile page -->
-      <div class="profile-page each-page" id="profile-page">
-        <div class="body">
-          <div class="page-wrapper">
-            <!-- profile page contents -->
+        <!-- ! Profile page -->
+        <div class="profile-page each-page" id="profile-page">
+          <div class="body">
+            <div class="page-wrapper">
+              <!-- profile page contents -->
 
-            <div class="profile-page-wrapper">
-              <div class="profile-informations">
-                <div class="profile-image-container">
-                  <div title="Click to preview image" class="p-image all-profile-image-display">
-                    <!-- profile images show inside this container -->
-                  </div>
-                </div>
-                <div class="profile-about">
-                  <div class="basic-profile-info">
-                    <div class="p-name">
-                      <span class="show-name">--</span>
-                    </div>
-                    <div class="p-username">
-                      <span class="show-username">--</span><span class="show-pronoun">-*</span>
-                    </div>
-                    <div class="p-bio">
-                      <span class="show-bio"></span>
+              <div class="profile-page-wrapper">
+                <div class="profile-informations">
+                  <div class="profile-image-container">
+                    <div title="Click to preview image" class="p-image all-profile-image-display">
+                      <!-- profile images show inside this container -->
                     </div>
                   </div>
-                  <button title="Click to edit profile info" class="profile-edit-button">Edit profile</button>
-                  <span class="first-join-date">--</span>
-                </div>
-              </div>
-
-              <div class="profile-activity-tab">
-
-                <div class="social-links">
-                  <header>
-                    <span>Social Links</span>
-                    <button class="add-social-link-btn">Edit links</button>
-                  </header>
-                  <div class="social-link-display">
-                    <!-- links are added through js -->
+                  <div class="profile-about">
+                    <div class="basic-profile-info">
+                      <div class="p-name">
+                        <span class="show-name">--</span>
+                      </div>
+                      <div class="p-username"><span class="show-username">--</span><span class="show-pronoun">-*</span></div>
+                      <div class="p-bio">
+                        <span class="show-bio"></span>
+                      </div>
+                    </div>
+                    <button title="Click to edit profile info" class="profile-edit-button">Edit profile</button>
+                    <span class="first-join-date">--</span>
                   </div>
                 </div>
 
-                <div class="recent-projects">
-                  <span>Recent projects</span>
-                  <div class="recent-projects-container">
-                    <!-- projects are adde through js -->
-
-                  </div>
-                </div>
-
-                <!-- social links edit form -->
-                <form class="social-links-edit-form-container">
-                  <div id="social-links-input-container">
-                    <!-- input fields are added through js -->
+                <div class="profile-activity-tab">
+                  <div class="social-links">
+                    <header>
+                      <span>Social Links</span>
+                      <button class="add-social-link-btn">Edit links</button>
+                    </header>
+                    <div class="social-link-display">
+                      <!-- links are added through js -->
+                    </div>
                   </div>
 
-                  <div class="social-link-btn-container">
-                    <button class="social-link-btn link-form-cancel">Cancel</button>
-                    <button class="social-link-btn link-form-save" data-toast-message="Link info saved !">Save</button>
-                  </div>
-                </form>
-                <!-- profile edit form -->
-                <form class="profile-edit-form">
-                  <div>
-                    <label for="profile-name">Name</label>
-                    <input data-key="name" type="text" id="profile-name" placeholder="Name" autocomplete="off"
-                      maxlength="30">
+                  <div class="recent-projects">
+                    <span>Recent projects</span>
+                    <div class="recent-projects-container">
+                      <!-- projects are adde through js -->
+                    </div>
                   </div>
 
-                  <div>
-                    <label for="profile-username">Username</label>
-                    <input data-key="username" type="text" id="profile-username" placeholder="Username"
-                      autocomplete="off" maxlength="20">
-                  </div>
+                  <!-- social links edit form -->
+                  <form class="social-links-edit-form-container">
+                    <div id="social-links-input-container">
+                      <!-- input fields are added through js -->
+                    </div>
 
-                  <div>
-                    <label for="profile-bio">Bio</label>
-                    <textarea data-key="bio" id="profile-bio" placeholder="Add a bio"></textarea>
-                  </div>
-
-                  <div>
-                    <label for="pronouns-options">Pronouns</label>
-                    <select data-key="pronoun" id="pronouns-options">
-                      <option value="">Don't specify</option>
-                      <option value="he/him">he/him</option>
-                      <option value="she/her">she/her</option>
-                    </select>
-                  </div>
-
-                  <div class="p-form-btns">
-                    <button title="Click to cancel" class="profile-edit-info-cancel-btn">Cancel</button>
-                    <button title="Click to save" class="profile-edit-info-save-btn"
-                      data-toast-message="Profile info saved !">Save</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <!-- profile page contents ends -->
-          </div>
-        </div>
-      </div>
-
-      <!-- ! Settings page -->
-      <div class="settings-page each-page" id="settings-page">
-        <div class="body">
-          <div class="page-wrapper">
-            <!-- settings page contents -->
-            <div class="settings-page-wrapper">
-              <h2>Settings</h2>
-              <div class="all-settings">
-                <div class="appearance-setting">
-                  <h3>Appearance</h3>
-                  <div class="theme-container">
-                    <button class="themes-btn active" data-theme-info="default">
-                      <span>Browser Default</span>
-                    </button>
-                    <button class="themes-btn" data-theme-info="light">
-                      <span>Light Theme</span>
-                    </button>
-                    <button class="themes-btn" data-theme-info="dark">
-                      <span>Dark Theme</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="editor-setting">
-                  <h3>Editor</h3>
-                  <form class="editor-settings-list">
+                    <div class="social-link-btn-container">
+                      <button class="social-link-btn link-form-cancel">Cancel</button>
+                      <button class="social-link-btn link-form-save" data-toast-message="Link info saved !">Save</button>
+                    </div>
+                  </form>
+                  <!-- profile edit form -->
+                  <form class="profile-edit-form">
                     <div>
-                      <label for="fontSize">Font size</label>
-                      <select id="fontSize" class="editor-setting-input" data-editor-setting="fontSize">
-                        <option value="12">12 px</option>
-                        <option value="14">14 px (default)</option>
-                        <option value="16">16 px</option>
-                        <option value="18">18 px</option>
-                        <option value="20">20 px</option>
-                        <option value="22">22 px</option>
-                        <option value="24">24 px</option>
-                        <option value="26">26 px</option>
-                        <option value="28">28 px</option>
-                        <option value="30">30 px</option>
-                        <option value="32">32 px</option>
-                        <option value="34">34 px</option>
-                        <option value="36">36 px</option>
-                      </select>
+                      <label for="profile-name">Name</label>
+                      <input data-key="name" type="text" id="profile-name" placeholder="Name" autocomplete="off" maxlength="30" />
                     </div>
 
                     <div>
-                      <label for="indentSize">Tab indent size</label>
-                      <select id="indentSize" class="editor-setting-input" data-editor-setting="indentSize">
-                        <option value="2">2 spaces (default)</option>
-                        <option value="4">4 spaces</option>
-                        <option value="6">6 spaces</option>
-                        <option value="8">8 spaces</option>
-                        <option value="10">10 spaces</option>
-                        <option value="12">12 spaces</option>
+                      <label for="profile-username">Username</label>
+                      <input data-key="username" type="text" id="profile-username" placeholder="Username" autocomplete="off" maxlength="20" />
+                    </div>
+
+                    <div>
+                      <label for="profile-bio">Bio</label>
+                      <textarea data-key="bio" id="profile-bio" placeholder="Add a bio"></textarea>
+                    </div>
+
+                    <div>
+                      <label for="pronouns-options">Pronouns</label>
+                      <select data-key="pronoun" id="pronouns-options">
+                        <option value="">Don't specify</option>
+                        <option value="he/him">he/him</option>
+                        <option value="she/her">she/her</option>
                       </select>
+                    </div>
+
+                    <div class="p-form-btns">
+                      <button title="Click to cancel" class="profile-edit-info-cancel-btn">Cancel</button>
+                      <button title="Click to save" class="profile-edit-info-save-btn" data-toast-message="Profile info saved !">Save</button>
                     </div>
                   </form>
                 </div>
+              </div>
 
-                <div class="project-setting">
-                  <h3>Projects</h3>
-                  <div>
-                    <span>Delete All projects</span>
-                    <button>Delete all</button>
+              <!-- profile page contents ends -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ! Settings page -->
+        <div class="settings-page each-page" id="settings-page">
+          <div class="body">
+            <div class="page-wrapper">
+              <!-- settings page contents -->
+              <div class="settings-page-wrapper">
+                <h2>Settings</h2>
+                <div class="all-settings">
+                  <div class="appearance-setting">
+                    <h3>Appearance</h3>
+                    <div class="theme-container">
+                      <button class="themes-btn active" data-theme-info="default">
+                        <span>Browser Default</span>
+                      </button>
+                      <button class="themes-btn" data-theme-info="light">
+                        <span>Light Theme</span>
+                      </button>
+                      <button class="themes-btn" data-theme-info="dark">
+                        <span>Dark Theme</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="editor-setting">
+                    <h3>Editor</h3>
+                    <form class="editor-settings-list">
+                      <div>
+                        <label for="fontSize">Font size</label>
+                        <select id="fontSize" class="editor-setting-input" data-editor-setting="fontSize">
+                          <option value="12">12 px</option>
+                          <option value="14">14 px (default)</option>
+                          <option value="16">16 px</option>
+                          <option value="18">18 px</option>
+                          <option value="20">20 px</option>
+                          <option value="22">22 px</option>
+                          <option value="24">24 px</option>
+                          <option value="26">26 px</option>
+                          <option value="28">28 px</option>
+                          <option value="30">30 px</option>
+                          <option value="32">32 px</option>
+                          <option value="34">34 px</option>
+                          <option value="36">36 px</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label for="indentSize">Tab indent size</label>
+                        <select id="indentSize" class="editor-setting-input" data-editor-setting="indentSize">
+                          <option value="2">2 spaces (default)</option>
+                          <option value="4">4 spaces</option>
+                          <option value="6">6 spaces</option>
+                          <option value="8">8 spaces</option>
+                          <option value="10">10 spaces</option>
+                          <option value="12">12 spaces</option>
+                        </select>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="project-setting">
+                    <h3>Projects</h3>
+                    <div>
+                      <span>Delete All projects</span>
+                      <button>Delete all</button>
+                    </div>
                   </div>
                 </div>
-
               </div>
-            </div>
 
-            <!-- settings page contents ends -->
+              <!-- settings page contents ends -->
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- ! Projects page -->
-      <div class="projects-page each-page" id="projects-page">
-        <div class="body">
-          <div class="page-wrapper">
-            <!-- projects page contents -->
+        <!-- ! Projects page -->
+        <div class="projects-page each-page" id="projects-page">
+          <div class="body">
+            <div class="page-wrapper">
+              <!-- projects page contents -->
 
-            <div class="projects-page-wrapper">
-              <h2>Projects</h2>
-              <header class="project-page-header">
-                <div class="projects-tab">
-                  <button class="tab-change-project-btn active-tab">All</button>
-                  <button class="tab-change-project-btn" data-project-tab="favorite">Favorite</button>
+              <div class="projects-page-wrapper">
+                <h2>Projects</h2>
+                <header class="project-page-header">
+                  <div class="projects-tab">
+                    <button class="tab-change-project-btn active-tab">All</button>
+                    <button class="tab-change-project-btn" data-project-tab="favorite">Favorite</button>
+                  </div>
+                  <button class="start-new-project-btn">Start new</button>
+                </header>
+
+                <div class="project-page-project-container">
+                  <!-- projects added through js -->
                 </div>
-                <button class="start-new-project-btn">Start new</button>
-              </header>
-
-              <div class="project-page-project-container">
-                <!-- projects added through js -->
               </div>
-            </div>
 
-            <!-- projects page contents ends -->
+              <!-- projects page contents ends -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--! UI components -->
+    <!-- sidebar bg layer -->
+    <div class="sidebar-bg-layer"></div>
+
+    <!-- disable interactivity layer -->
+    <div class="disable-interactivity-layer"></div>
+
+    <!-- profile image modal -->
+    <div class="profile-img-modal">
+      <div class="img-modal-container">
+        <div class="img-container all-profile-image-display">
+          <!-- profile images show inside this container -->
+        </div>
+        <div class="img-buttons">
+          <span>Please keep the image file size limited around 2MB(Mega Byte)</span>
+          <div>
+            <input type="file" accept="image/*" id="profile-img-input" />
+            <button title="Click to Close" class="close-img-btn">Close</button>
+            <button title="Click to download" class="download-img-btn" data-toast-message="Download started !">Download</button>
+            <button title="Click to Change" class="change-img-btn">Change</button>
           </div>
         </div>
       </div>
     </div>
-  </main>
 
-
-
-  <!--! UI components -->
-  <!-- sidebar bg layer -->
-  <div class="sidebar-bg-layer"></div>
-
-  <!-- disable interactivity layer -->
-  <div class="disable-interactivity-layer"></div>
-
-  <!-- profile image modal -->
-  <div class="profile-img-modal">
-    <div class="img-modal-container">
-      <div class="img-container all-profile-image-display">
-        <!-- profile images show inside this container -->
-      </div>
-      <div class="img-buttons">
-        <span>Please keep the image file size limited around 2MB(Mega Byte)</span>
+    <!-- create new project form -->
+    <div class="form-background-layer">
+      <form>
         <div>
-          <input type="file" accept="image/*" id="profile-img-input">
-          <button title="Click to Close" class="close-img-btn">Close</button>
-          <button title="Click to download" class="download-img-btn"
-            data-toast-message="Download started !">Download</button>
-          <button title="Click to Change" class="change-img-btn">Change</button>
+          <label for="project-title">Project title</label>
+          <input type="text" id="project-title" placeholder="One title to rule them all..." autocomplete="off" />
+        </div>
+
+        <div>
+          <label for="project-description">Project description</label>
+          <textarea id="project-description" placeholder="What your project does in a few words..." maxlength="300"></textarea>
+        </div>
+
+        <div class="form-buttons">
+          <button class="cancel-btn">cancel</button>
+          <button class="create-btn" data-toast-message="New project created !">Create</button>
+          <button class="create-open-btn" data-toast-message="Opening new Project !">Create & open</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- delete confirmation -->
+    <div class="delete-confirmation-modal">
+      <div class="delete-modal-content">
+        <h2>Delete Project?</h2>
+        <div>
+          <div class="delete-messages">
+            <p>This will delete '<span>this project title</span>'.</p>
+            <span
+              >Visit
+              <a id="dlt-mes-setting-page-link" href="#settings-page">settings</a>
+              to delete all project.</span
+            >
+          </div>
+          <div class="delete-confirmation-buttons">
+            <button class="dlt-cancel-btn">Cancel</button>
+            <button class="dlt-confirm-btn" data-toast-message="Project deleted !">Delete</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- create new project form -->
-  <div class="form-background-layer">
-    <form>
-      <div>
-        <label for="project-title">Project title</label>
-        <input type="text" id="project-title" placeholder="One title to rule them all..." autocomplete="off">
-      </div>
+    <!-- toast message effect -->
+    <div class="toast-container"></div>
 
-      <div>
-        <label for="project-description">Project description</label>
-        <textarea id="project-description" placeholder="What your project does in a few words..."
-          maxlength="300"></textarea>
-      </div>
-
-      <div class="form-buttons">
-        <button class="cancel-btn">cancel</button>
-        <button class="create-btn" data-toast-message="New project created !">Create</button>
-        <button class="create-open-btn" data-toast-message="Opening new Project !">Create & open</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- delete confirmation -->
-  <div class="delete-confirmation-modal">
-    <div class="delete-modal-content">
-      <h2>Delete Project?</h2>
-      <div>
-        <div class="delete-messages">
-          <p>This will delete '<span>this project title</span>'.</p>
-          <span>Visit <a id="dlt-mes-setting-page-link" href="#settings-page">settings</a> to delete all project.</span>
+    <!-- edit project form -->
+    <div class="edit-project-form-modal">
+      <form>
+        <div>
+          <label for="title-input">Title</label>
+          <input type="text" id="title-input" placeholder="Add Title" autocomplete="off" />
         </div>
-        <div class="delete-confirmation-buttons">
-          <button class="dlt-cancel-btn">Cancel</button>
-          <button class="dlt-confirm-btn" data-toast-message="Project deleted !">Delete</button>
+        <div>
+          <label for="des-input">Description</label>
+          <textarea id="des-input" placeholder="Add description"></textarea>
         </div>
-      </div>
+
+        <div>
+          <button class="project-edit-form-cancel-btn">Cancel</button>
+          <button class="project-edit-form-delete-btn">Delete</button>
+          <button class="project-edit-form-save-btn">Save</button>
+        </div>
+      </form>
     </div>
-  </div>
 
-  <!-- toast message effect -->
-  <div class="toast-container"></div>
-
-  <!-- edit project form -->
-  <div class="edit-project-form-modal">
-    <form>
-      <div>
-        <label for="title-input">Title</label>
-        <input type="text" id="title-input" placeholder="Add Title" autocomplete="off">
-      </div>
-      <div>
-        <label for="des-input">Description</label>
-        <textarea id="des-input" placeholder="Add description"></textarea>
-      </div>
-
-      <div>
-        <button class="project-edit-form-cancel-btn">Cancel</button>
-        <button class="project-edit-form-delete-btn">Delete</button>
-        <button class="project-edit-form-save-btn">Save</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- all project delete form -->
-  <div class="delete-all-project-modal">
-    <form>
-      <div>
-        <span>Delete all project</span>
-        <span class="warning-message"><strong>Warning:</strong> This action is not reversible. Please be certain.</span>
-      </div>
-      <div class="delete-project-input-container">
-        <label for="delete-all-project-input">
-          To delete, type '<strong>delete all projects</strong>' below:
-        </label>
-        <input type="text" id="delete-all-project-input" maxlength="19" autocomplete="off">
-      </div>
-      <div class="error-message"></div>
-      <div class="delete-all-project-btn-container">
-        <button class="cancel-all-project-delete-btn">Cancel</button>
-        <button data-toast-message="All projects deleted !" class="confirm-all-project-delete-btn">Delete all</button>
-      </div>
-    </form>
-  </div>
-
-</body>
-
+    <!-- all project delete form -->
+    <div class="delete-all-project-modal">
+      <form>
+        <div>
+          <span>Delete all project</span>
+          <span class="warning-message"><strong>Warning:</strong> This action is not reversible. Please be certain.</span>
+        </div>
+        <div class="delete-project-input-container">
+          <label for="delete-all-project-input"> To delete, type '<strong>delete all projects</strong>' below: </label>
+          <input type="text" id="delete-all-project-input" maxlength="19" autocomplete="off" />
+        </div>
+        <div class="error-message"></div>
+        <div class="delete-all-project-btn-container">
+          <button class="cancel-all-project-delete-btn">Cancel</button>
+          <button data-toast-message="All projects deleted !" class="confirm-all-project-delete-btn">Delete all</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
