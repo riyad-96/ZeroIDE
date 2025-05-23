@@ -15,11 +15,9 @@ const sidebarToggleBtn = document.querySelector('.sidebar-toggle-btn');
 // profile image related variables
 const profileImage = document.querySelector('.profile-image');
 const profileImgModal = document.querySelector('.profile-img-modal');
-profileImgModal
-  .querySelector('.img-modal-container')
-  .addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
+profileImgModal.querySelector('.img-modal-container').addEventListener('click', (e) => {
+  e.stopPropagation();
+});
 const closeImgBtn = document.querySelector('.close-img-btn');
 
 // menu toggle related variables
@@ -43,14 +41,20 @@ if (!firstLoad) {
   gsap.from('.note-content>*', {
     opacity: 0,
     x: 500,
-    delay: 0.5,
+    delay: 1,
     stagger: 0.2,
     ease: 'power1.out',
     duration: 1,
   });
 }
 
-if (firstLoad) firstLoadNote.style.display = 'none';
+const mainContainer = document.querySelector('main');
+if (!firstLoad) {
+  mainContainer.style.opacity = '0';
+  mainContainer.style.scale = '0.9';
+}
+
+firstLoadNote.style.display = firstLoad ? 'none' : 'grid';
 
 const initiateBtn = document.querySelector('.note-content>button');
 
@@ -75,21 +79,18 @@ initiateBtn.addEventListener('click', () => {
     firstLoadNote.style.display = 'none';
   }, 3000);
 
-  const date = new Date()
-  loadJoinDate(getDateFunc(date))
-  localStorage.setItem('join-date', getDateFunc(date))
+  setTimeout(() => {
+    mainContainer.style.opacity = '1';
+    mainContainer.style.scale = '1';
+  }, 1200);
+
+  const date = new Date();
+  loadJoinDate(getDateFunc(date));
+  localStorage.setItem('join-date', getDateFunc(date));
 });
 
-
-
-
-
-
-
-
 //! main saved projects variable -----
-const savedProjects =
-  JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+const savedProjects = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
 //! -----
 const projectList = document.querySelector('.project-list');
 const projectTitleInput = document.getElementById('project-title');
@@ -158,13 +159,7 @@ subMenuBtn.addEventListener('click', () => {
 });
 
 //! Create new projects programs --------
-const allCancelMethod = [
-  createNewBtn,
-  formBgLayer,
-  cancelBtn,
-  createBtn,
-  createOpenBtn,
-];
+const allCancelMethod = [createNewBtn, formBgLayer, cancelBtn, createBtn, createOpenBtn];
 //! toggle form when needed
 allCancelMethod.forEach((btn) =>
   btn.addEventListener('click', () => {
@@ -183,9 +178,7 @@ function closeDeleteModal() {
 }
 deleteCancelBtn.addEventListener('click', closeDeleteModal);
 deleteModal.addEventListener('click', closeDeleteModal);
-document
-  .getElementById('dlt-mes-setting-page-link')
-  .addEventListener('click', closeDeleteModal);
+document.getElementById('dlt-mes-setting-page-link').addEventListener('click', closeDeleteModal);
 //! delete single project
 let currentId = null;
 
@@ -326,10 +319,7 @@ function createNewProject(id, name) {
       const itemIndex = savedProjects.findIndex((p) => p.id === id);
       if (itemIndex !== -1) {
         savedProjects[itemIndex].name = projectName.textContent.trim();
-        localStorage.setItem(
-          'all-saved-projects',
-          JSON.stringify(savedProjects)
-        );
+        localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
       }
 
       setTimeout(() => {
@@ -402,13 +392,9 @@ function pageChangeUpdate() {
   const eachPage = document.querySelectorAll('.each-page');
   document.querySelectorAll('.each-page').forEach((page) => {
     if (page.id !== pageId) {
-      page
-        .querySelectorAll('a, button, input, select, textarea, div')
-        .forEach((el) => el.setAttribute('tabindex', '-1'));
+      page.querySelectorAll('a, button, input, select, textarea, div').forEach((el) => el.setAttribute('tabindex', '-1'));
     } else {
-      page
-        .querySelectorAll('a, button, input, select, textarea, div')
-        .forEach((el) => el.removeAttribute('tabindex'));
+      page.querySelectorAll('a, button, input, select, textarea, div').forEach((el) => el.removeAttribute('tabindex'));
     }
   });
 
@@ -459,20 +445,16 @@ setTimeout(() => {
 // Quick launch program
 document.querySelector('.quick-launch-btn').addEventListener('click', () => {
   handleProjectCreate(true);
-  document.querySelector('.disable-interactivity-layer').style.display =
-    'block';
+  document.querySelector('.disable-interactivity-layer').style.display = 'block';
   setTimeout(() => {
-    document.querySelector('.disable-interactivity-layer').style.display =
-      'none';
+    document.querySelector('.disable-interactivity-layer').style.display = 'none';
   }, 1400);
 });
 
 //! ----------- Profile page programs -------------
 //profile picture updation
 const savedProfileImg = localStorage.getItem('profile-image');
-const allProfileImgDisplay = document.querySelectorAll(
-  '.all-profile-image-display'
-);
+const allProfileImgDisplay = document.querySelectorAll('.all-profile-image-display');
 const profileImgInput = document.getElementById('profile-img-input');
 const profileImg = document.querySelector('.p-image');
 const previewImgContainer = document.querySelector('.img-container');
@@ -578,7 +560,7 @@ function loadJoinDate(date) {
   joinDateContainer.textContent = date;
 }
 
-loadJoinDate(firstJoinDate || 'Date intentionally removed')
+loadJoinDate(firstJoinDate || 'Date intentionally removed');
 
 // Profile data form updation
 const profileEditForm = document.querySelector('.profile-edit-form');
@@ -590,8 +572,7 @@ profileEditForm.addEventListener('keydown', (e) => {
   }
 });
 
-const savedProfileAboutInfo =
-  JSON.parse(localStorage.getItem('profile-data')) || {};
+const savedProfileAboutInfo = JSON.parse(localStorage.getItem('profile-data')) || {};
 const profileNameInput = document.getElementById('profile-name');
 const profileUsernameInput = document.getElementById('profile-username');
 const profileBioInput = document.getElementById('profile-bio');
@@ -599,9 +580,7 @@ const profilePronounInput = document.getElementById('pronouns-options');
 
 //Edit related buttons variables
 const profileEditBtn = document.querySelector('.profile-edit-button');
-const profileCancelBtn = document.querySelector(
-  '.profile-edit-info-cancel-btn'
-);
+const profileCancelBtn = document.querySelector('.profile-edit-info-cancel-btn');
 const profileSaveBtn = document.querySelector('.profile-edit-info-save-btn');
 
 //!------------------------------
@@ -642,9 +621,7 @@ const profileBio = document.querySelector('.p-bio');
 function saveAndLoadProfileInfo() {
   showName.textContent = savedProfileAboutInfo.name || 'name';
   showUsername.textContent = savedProfileAboutInfo.username || 'username';
-  showPronoun.textContent = savedProfileAboutInfo.pronoun
-    ? ' · ' + savedProfileAboutInfo.pronoun
-    : '';
+  showPronoun.textContent = savedProfileAboutInfo.pronoun ? ' · ' + savedProfileAboutInfo.pronoun : '';
 
   if (savedProfileAboutInfo.bio) {
     profileBio.innerHTML = '';
@@ -660,12 +637,7 @@ function saveAndLoadProfileInfo() {
 
 // save profile info
 profileSaveBtn.addEventListener('click', () => {
-  const inputId = [
-    'profile-name',
-    'profile-username',
-    'profile-bio',
-    'pronouns-options',
-  ];
+  const inputId = ['profile-name', 'profile-username', 'profile-bio', 'pronouns-options'];
   inputId.forEach((id) => {
     const input = document.getElementById(id);
     const key = input.dataset.key;
@@ -681,9 +653,7 @@ profileSaveBtn.addEventListener('click', () => {
 });
 
 // Social links programs
-const profileSocialLinkForm = document.querySelector(
-  '.social-links-edit-form-container'
-);
+const profileSocialLinkForm = document.querySelector('.social-links-edit-form-container');
 document.querySelector('.add-social-link-btn').addEventListener('click', () => {
   styleDisplay(profileSocialLinkForm, 'unset');
   requestAnimationFrame(() => {
@@ -773,14 +743,11 @@ function createSocialInput() {
           <span>${platform.icon}</span>
           <span>${platform.baseUrl.replace('https://', '')}</span>
         </div>
-        <input id="${
-          platform.id
-        }" placeholder="e.g. user-71" autocomplete="off" maxlength="30">
+        <input id="${platform.id}" placeholder="e.g. user-71" autocomplete="off" maxlength="30">
       </div>
     `;
     const usernameData = savedProfileAboutInfo.socialUsernameData || {};
-    inputWrapper.querySelector('input').value =
-      usernameData[platform.name] || '';
+    inputWrapper.querySelector('input').value = usernameData[platform.name] || '';
     socialLinkForm.appendChild(inputWrapper);
   });
 }
@@ -891,9 +858,7 @@ function toastMessagePopup(btn) {
 }
 
 //! Load last 4 project data in profile page.
-const recentProjectsContainer = document.querySelector(
-  '.recent-projects-container'
-);
+const recentProjectsContainer = document.querySelector('.recent-projects-container');
 
 function loadLastFourProject() {
   const lastFourProjects = savedProjects.slice(-4) || [];
@@ -1004,23 +969,15 @@ editorSettingInputs.forEach((input) => {
 });
 
 editorSettingInputs.forEach((input) => {
-  loadEditorSetting(
-    input.id,
-    savedSettings.editor[input.dataset.editorSetting]
-  );
+  loadEditorSetting(input.id, savedSettings.editor[input.dataset.editorSetting]);
 });
 
 // All project deletion program
-const deleteAllProjectModal = document.querySelector(
-  '.delete-all-project-modal'
-);
+const deleteAllProjectModal = document.querySelector('.delete-all-project-modal');
 const deleteAllProjectForm = deleteAllProjectModal.querySelector('form');
-const deleteAllProjectInput = document.getElementById(
-  'delete-all-project-input'
-);
+const deleteAllProjectInput = document.getElementById('delete-all-project-input');
 const deleteAllProjectBtn = document.querySelector('.project-setting button');
-const deleteAllProjectErrorMessage =
-  deleteAllProjectModal.querySelector('.error-message');
+const deleteAllProjectErrorMessage = deleteAllProjectModal.querySelector('.error-message');
 
 deleteAllProjectBtn.addEventListener('click', () => {
   deleteAllProjectModal.classList.add('appear');
@@ -1081,8 +1038,7 @@ deleteAllProjectForm.addEventListener('click', (e) => {
       deleteAllProjectInput.focus();
     } else {
       localStorage.removeItem('all-saved-projects');
-      document.querySelector('.disable-interactivity-layer').style.display =
-        'block';
+      document.querySelector('.disable-interactivity-layer').style.display = 'block';
       toastMessagePopup(confirmBtn);
       deleteAllProjectModal.click();
       setTimeout(() => {
@@ -1118,9 +1074,7 @@ function indexFinder(arr, id) {
   return arr.findIndex((el) => el.id === Number(id));
 }
 
-const projectPageProjectContainer = document.querySelector(
-  '.project-page-project-container'
-);
+const projectPageProjectContainer = document.querySelector('.project-page-project-container');
 const projectEditFormModal = document.querySelector('.edit-project-form-modal');
 const title = projectEditFormModal.querySelector('form input');
 const description = projectEditFormModal.querySelector('form textarea');
@@ -1144,19 +1098,13 @@ function createProjectPageProjects(arr) {
     div.innerHTML = `
       <header class="project-header">
         <a href="./editor/user.html#${p.id}" target="_blank">${p.name}</a>
-        <button title="Click to edit project" data-project-id="${
-          p.id
-        }" class="edit-projects-button">${moreOptSvg()}</button>
+        <button title="Click to edit project" data-project-id="${p.id}" class="edit-projects-button">${moreOptSvg()}</button>
       </header>
       <span class="project-page-project-description">
         ${p.des}
       </span>
       <footer>
-        <button data-project-id="${
-          p.id
-        }" class="add-favorite-btn" title="click to add/remove favorite">${
-      p.favorite ? heartFillSvg() : heartLineSvg()
-    }</button>
+        <button data-project-id="${p.id}" class="add-favorite-btn" title="click to add/remove favorite">${p.favorite ? heartFillSvg() : heartLineSvg()}</button>
         <span>created on ${getDateFunc(p.date)}</span>
       </footer>
     `;
@@ -1176,9 +1124,7 @@ function projectPageProjects(tab) {
 projectPageProjects();
 
 // tab changing program
-const tabChangeProjectBtn = document.querySelectorAll(
-  '.tab-change-project-btn'
-);
+const tabChangeProjectBtn = document.querySelectorAll('.tab-change-project-btn');
 
 tabChangeProjectBtn.forEach((btn) => {
   btn.addEventListener('click', () => {
@@ -1199,12 +1145,8 @@ projectPageProjectContainer.addEventListener('click', (e) => {
 
     const titleInput = projectEditFormModal.querySelector('input');
     const desInput = projectEditFormModal.querySelector('textarea');
-    titleInput.value =
-      savedProjects[index].name === 'Untitled' ? '' : savedProjects[index].name;
-    desInput.value =
-      savedProjects[index].des === 'Empty description'
-        ? ''
-        : savedProjects[index].des;
+    titleInput.value = savedProjects[index].name === 'Untitled' ? '' : savedProjects[index].name;
+    desInput.value = savedProjects[index].des === 'Empty description' ? '' : savedProjects[index].des;
     currentId = id;
 
     projectEditFormModal.classList.add('appear');
@@ -1242,8 +1184,7 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
   if (deleteBtn) {
     projectEditFormModal.classList.remove('appear');
     deleteModal.classList.toggle('appear');
-    dltModCurrTitle.textContent =
-      savedProjects[indexFinder(savedProjects, currentId)].name;
+    dltModCurrTitle.textContent = savedProjects[indexFinder(savedProjects, currentId)].name;
   }
 
   // save btn program

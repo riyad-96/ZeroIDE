@@ -12,7 +12,7 @@
   place-items: center;
   padding-inline: 1.425rem;
   overflow: hidden;
-  box-shadow: 10px 0 30px hsl(0, 0%, 10%, 0.3);
+  box-shadow: 10px 0 15px hsl(0, 0%, 10%, 0.1);
 }
 
 .first-load-welcome-note>.note-content {
@@ -43,6 +43,8 @@
     text-transform: uppercase;
     border-radius: 0.425rem;
     font-weight: 500;
+
+    transition: scale 100ms;
 
     display: block;
     margin-inline: auto;

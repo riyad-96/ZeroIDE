@@ -6,11 +6,190 @@
     <title>Code editor - Code</title>
     <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon" />
 
+    <!-- CodeMirror -->
+    <script src="./codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="./codemirror/lib/codemirror.css" />
+
+    <!-- lang support -->
+    <script src="./codemirror/mode/xml/xml.js"></script>
+    <script src="./codemirror/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="./codemirror/mode/css/css.js"></script>
+    <script src="./codemirror/mode/javascript/javascript.js"></script>
+
+    <!-- Addons -->
+    <!-- hint -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/hint/html-hint.min.js" integrity="sha512-oxBKDzXElkyh3mQC/bKA/se1Stg1Q6fm7jz7PPY2kL01jRHQ64IwjpZVsuZojcaj5g8eKSMY9UJamtB1QR7Dmw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./codemirror/addon/hint/show-hint.js"></script>
+    <script src="./codemirror/addon/hint/xml-hint.js"></script>
+    <script src="./codemirror/addon/hint/html-hint.js"></script>
+    <script src="./codemirror/addon/hint/css-hint.js"></script>
+    <script src="./codemirror/addon/hint/javascript-hint.js"></script>
+    <link rel="stylesheet" href="./codemirror/addon/hint/show-hint.css" />
+
+    <!-- fold -->
+    <script src="./codemirror/addon/fold/xml-fold.js"></script>
+    <script src="./codemirror/addon/fold/foldcode.js"></script>
+    <script src="./codemirror/addon/fold/foldgutter.js"></script>
+    <script src="./codemirror/addon/fold/brace-fold.js"></script>
+    <link rel="stylesheet" href="./codemirror/addon/fold/foldgutter.css" />
+
+    <!-- auto close -->
+    <script src="./codemirror/addon/edit/closebrackets.js"></script>
+    <script src="./codemirror/addon/edit/closetag.js"></script>
+    <script src="./codemirror/addon/edit/matchbrackets.js"></script>
+
+    <!-- Multi-select Addons -->
+    <script src="./codemirror/addon/search/searchcursor.js"></script>
+    <script src="./codemirror/addon/selection/active-line.js"></script>
+    <script src="./codemirror/addon/selection/mark-selection.js"></script>
+    <script src="./codemirror/addon/selection/selection-pointer.js"></script>
+
+    <!-- Highlight matching selections -->
+    <script src="./codemirror/addon/search/match-highlighter.js"></script>
+
+    <!-- comment -->
+    <script src="./codemirror/addon/comment/comment.js"></script>
+    <script src="./codemirror/addon/comment/continuecomment.js"></script>
+
+    <!-- lint -->
+    <script src="./codemirror/addon/lint/lint.js"></script>
+    <script src="./codemirror/addon/lint/html-lint.js"></script>
+    <script src="./codemirror/addon/lint/css-lint.js"></script>
+    <script src="./codemirror/addon/lint/javascript-lint.js"></script>
+    <link rel="stylesheet" href="./codemirror/addon/lint/lint.css" />
+
+    <!-- KeyMap -->
+    <script src="./codemirror/keymap/sublime.js"></script>
+
+    <!-- Prettier -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/standalone.js" integrity="sha512-kZgYwuJlmuFDs982ccZLP9D+TIz/FqkxFQe+G0/TY11X4WqwUZn6P263vtzyt56GThngcoOD9JFvdJsT+D52ow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- parser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/parser-html.min.js" integrity="sha512-DrpA7iAMX9jbdDayBwvC+lNpTJRrjb7p1YoK+R0qLmdKOSwLkg6n7cjHOfGP5gnB4RxGdUim1CeKG3UD2PYO5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/parser-postcss.min.js" integrity="sha512-zq5haHKqL4LvxKb2G/46hdhBNp6FXhzmi1nNqsQjJReAYWXCqEWdAR1l3WEfS9AR7nPER62xRSCkO7vH/EFlVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/parser-babel.min.js" integrity="sha512-2VpL2CQOwACkU58IzGit5Zvl1cinncah3Pd6k0BEhzRhx7jlCAPtK+b8E10+17TrMFg6Nzs8pZGHBJqAR8Tjbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Theme -->
+    <!--<link rel="stylesheet" href="./codemirror/theme/dracula.css" />-->
+
     <link rel="stylesheet" href="editor.css" />
     <script src="./editor.js" defer></script>
   </head>
 
   <body>
+    <div class="beneath-layer"></div>
+    <aside class="sidebar">
+      <h1>Projects</h1>
 
+      <div class="project-list-container">
+        <!-- project list item added through js -->
+      </div>
+    </aside>
+
+    <div class="main-diversion">
+      <header>
+        <div>
+          <button class="sidebar-toggle-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
+              <rect style="fill: var(--sidebar-toggle-icon-bg)" width="100" height="100" rx="20" fill="#000" />
+              <path d="M30 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+              <path d="M70 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
+              <rect class="blinking-rect" x="47" y="33" width="6" height="35" fill="currentColor" />
+            </svg>
+          </button>
+          <div class="title-container">
+            <span class="project-title">--</span>
+            <button title="Click to edit title">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5 18.89H6.41421L15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89ZM21 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L9.24264 18.89H21V20.89ZM15.7279 6.74785L17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785Z"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <nav>
+          <button title="Run code">Run</button>
+          <button title="Customize settings">Customize</button>
+        </nav>
+      </header>
+
+      <main>
+        <div class="code-inputs">
+          <button class="expand-reset-btn">Reset</button>
+          <div id="html-input" class="each-editor" data-input-type="htmlmixed">
+            <div class="top-bar">
+              <div class="file-type-svg-container">
+                <svg viewBox="0 0 15 15" class="file-type-icon" id="icon-file-html">
+                  <rect style="fill: var(--file-type-icon-bg)" width="15" height="15" rx="4"></rect>
+                  <path style="fill: var(--file-type-icon-clr)" d="M10.97 2.29a.563.563 0 0 0-.495-.29.572.572 0 0 0-.488.277l-5.905 9.86a.565.565 0 0 0-.007.574c.102.18.287.289.495.289a.572.572 0 0 0 .488-.277l5.905-9.86a.565.565 0 0 0 .007-.574" fill="#28282B"></path>
+                </svg>
+                <span>HTML</span>
+              </div>
+              <div>
+                <span>Click to expand</span>
+                <button>
+                  <svg viewBox="-122.9 121.1 105.9 61.9" class="icon-arrow-down-mini" width="10" height="10">
+                    <path d="M-63.2,180.3l43.5-43.5c1.7-1.7,2.7-4,2.7-6.5s-1-4.8-2.7-6.5c-1.7-1.7-4-2.7-6.5-2.7s-4.8,1-6.5,2.7l-37.2,37.2l-37.2-37.2c-1.7-1.7-4-2.7-6.5-2.7s-4.8,1-6.5,2.6c-1.9,1.8-2.8,4.2-2.8,6.6c0,2.3,0.9,4.6,2.6,6.5l0,0c11.4,11.5,41,41.2,43,43.3l0.2,0.2C-73.5,183.9-66.8,183.9-63.2,180.3z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="css-input" class="each-editor" data-input-type="css">
+            <div class="top-bar">
+              <div class="file-type-svg-container">
+                <svg viewBox="0 0 15 15" class="file-type-icon" id="icon-file-css">
+                  <rect style="fill: var(--file-type-icon-bg)" width="15" height="15" rx="4"></rect>
+                  <path style="fill: var(--file-type-icon-clr)" d="M8 8.366l1.845 1.065a.507.507 0 0 0 .686-.181.507.507 0 0 0-.186-.685L8.5 7.5l1.845-1.065a.507.507 0 0 0 .186-.685.507.507 0 0 0-.686-.181L8 6.634v-2.13A.507.507 0 0 0 7.5 4c-.268 0-.5.225-.5.503v2.131L5.155 5.569a.507.507 0 0 0-.686.181.507.507 0 0 0 .186.685L6.5 7.5 4.655 8.565a.507.507 0 0 0-.186.685c.134.232.445.32.686.181L7 8.366v2.13c0 .271.224.504.5.504.268 0 .5-.225.5-.503V8.366z" fill="#282828"></path>
+                </svg>
+                <span>CSS</span>
+              </div>
+              <div>
+                <span>Click to expand</span>
+                <button>
+                  <svg viewBox="-122.9 121.1 105.9 61.9" class="icon-arrow-down-mini" width="10" height="10">
+                    <path d="M-63.2,180.3l43.5-43.5c1.7-1.7,2.7-4,2.7-6.5s-1-4.8-2.7-6.5c-1.7-1.7-4-2.7-6.5-2.7s-4.8,1-6.5,2.7l-37.2,37.2l-37.2-37.2c-1.7-1.7-4-2.7-6.5-2.7s-4.8,1-6.5,2.6c-1.9,1.8-2.8,4.2-2.8,6.6c0,2.3,0.9,4.6,2.6,6.5l0,0c11.4,11.5,41,41.2,43,43.3l0.2,0.2C-73.5,183.9-66.8,183.9-63.2,180.3z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="js-input" class="each-editor" data-input-type="javascript">
+            <div class="top-bar">
+              <div class="file-type-svg-container">
+                <svg viewBox="0 0 15 15" class="file-type-icon" id="icon-file-js">
+                  <rect style="fill: var(--file-type-icon-bg)" width="15" height="15" rx="4"></rect>
+                  <path style="fill: var(--file-type-icon-clr)" d="M6.554 3.705c0 .267-.19.496-.452.543-1.2.217-2.12 1.61-2.12 3.275 0 1.665.92 3.057 2.12 3.274a.554.554 0 0 1-.205 1.087c-1.733-.322-3.022-2.175-3.022-4.361 0-2.187 1.289-4.04 3.022-4.362a.554.554 0 0 1 .657.544zm1.892 0c0-.347.316-.607.657-.544 1.733.322 3.022 2.175 3.022 4.362 0 2.186-1.289 4.04-3.022 4.361a.554.554 0 0 1-.205-1.087c1.2-.217 2.12-1.61 2.12-3.274 0-1.665-.92-3.058-2.12-3.275a.551.551 0 0 1-.452-.543z" fill="#282828"></path>
+                </svg>
+                <span>JS</span>
+              </div>
+              <div>
+                <span>Click to expand</span>
+                <button>
+                  <svg viewBox="-122.9 121.1 105.9 61.9" class="icon-arrow-down-mini" width="10" height="10">
+                    <path d="M-63.2,180.3l43.5-43.5c1.7-1.7,2.7-4,2.7-6.5s-1-4.8-2.7-6.5c-1.7-1.7-4-2.7-6.5-2.7s-4.8,1-6.5,2.7l-37.2,37.2l-37.2-37.2c-1.7-1.7-4-2.7-6.5-2.7s-4.8,1-6.5,2.6c-1.9,1.8-2.8,4.2-2.8,6.6c0,2.3,0.9,4.6,2.6,6.5l0,0c11.4,11.5,41,41.2,43,43.3l0.2,0.2C-73.5,183.9-66.8,183.9-63.2,180.3z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="horizontal-resizer" title="Drag to resize"></div>
+
+        <div class="code-preview">
+          <iframe frameborder="0"></iframe>
+        </div>
+      </main>
+      <div class="console">
+        <button title="Click to open console">Console</button>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- <div class=".customization-modal">
+      
+     </div> -->
+     
   </body>
 </html>
