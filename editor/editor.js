@@ -186,14 +186,8 @@ function loadCodeMirror(mode, value) {
 const codeScrolls = [
   {
     html: `<button id="clickMe">Click me!</button>`,
-    css: `button {
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}`,
-    js: `document.getElementById('clickMe').onclick = () => {
-  alert('You clicked me!');
-}`,
+    css: `button {padding: 10px;font-size: 16px;cursor: pointer;}`,
+    js: `document.getElementById('clickMe').onclick = () => {alert('You clicked me!');}`,
   },
   {
     html: `<div class="box">Hover me</div>`,
@@ -262,7 +256,7 @@ const codeScrolls = [
   {
     html: `<button id="spinBtn">Spin!</button>
            <div id="spinner">🌀</div>`,
-    css: `#spinner { font-size: 40px; transition: transform 0.3s ease; }
+    css: `#spinner { max-width: fit-content; font-size: 40px; transition: transform 0.3s ease; }
           #spinner.spin { transform: rotate(360deg); }`,
     js: `document.getElementById('spinBtn').onclick = () => {
             const spinner = document.getElementById('spinner');
@@ -289,13 +283,13 @@ const randomScroll = codeScrolls[Math.floor(Math.random() * codeScrolls.length)]
 
 function fallBack(type) {
   if (type === 'html') {
-    return randomScroll.html;
+    return formatCode(randomScroll.html, 'html');
   }
   if (type === 'css') {
-    return randomScroll.css;
+    return formatCode(randomScroll.css, 'css');
   }
   if (type === 'js') {
-    return randomScroll.js;
+    return formatCode(randomScroll.js, 'babel');
   }
 }
 
@@ -311,7 +305,7 @@ function findCodeType(type) {
 const htmlCodeMirror = CodeMirror(htmlInput, loadCodeMirror('htmlmixed', findCodeType('html')));
 const cssCodeMirror = CodeMirror(cssInput, loadCodeMirror('css', findCodeType('css')));
 const jsCodeMirror = CodeMirror(jsInput, loadCodeMirror('javascript', findCodeType('js')));
-// console.log(htmlCodeMirror.getValue(), cssCodeMirror.getValue(), jsCodeMirror.getValue());
+
 function refreshCodeMirror() {
   htmlCodeMirror.refresh();
   cssCodeMirror.refresh();
@@ -387,19 +381,50 @@ function setValueOnIframe(html, css, js) {
 setValueOnIframe(code().html, code().css, code().js);
 
 document.documentElement.style.setProperty('--user-font', 'fira code');
-// refreshCodeMirror();
 
-//! Code formate
+//! Code format
+function formatCode(code, parser) {
+  const perserType = {
+    html: 'html',
+    css: 'css',
+    babel: 'babel',
+  };
 
+  return prettier.format(code, {
+    parser: perserType[parser],
+    plugins: prettierPlugins,
+    semi: true,
+    singleQuote: true,
+    tabWidth: 2,
+  });
+}
+
+function applyFormatedCode(parser) {
+  if (parser === 'html') {
+    htmlCodeMirror.setValue(formatCode(code().html, parser));
+  }
+  if (parser === 'css') {
+    cssCodeMirror.setValue(formatCode(code().css, parser));
+  }
+  if (parser === 'babel') {
+    jsCodeMirror.setValue(formatCode(code().js, parser));
+  }
+}
+
+document.querySelector('.code-inputs').addEventListener('click', (e) => {
+  const formatBtn = e.target.closest('.single-file-format-btn');
+  if (formatBtn) {
+    applyFormatedCode(formatBtn.dataset.parserType);
+  }
+});
 
 //! Editor collapse and expand program
 const allInputs = document.querySelectorAll('.each-editor');
-const topBars = document.querySelectorAll('.top-bar');
-
-topBars.forEach((bar) => {
-  bar.addEventListener('click', () => {
-    allInputs.forEach((input) => input.classList.toggle('shrink', !input.contains(bar)));
-    allInputs.forEach((input) => input.classList.toggle('expand', input.contains(bar)));
+const expandBtn = document.querySelectorAll('.expand-panel-btn');
+expandBtn.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    allInputs.forEach((input) => input.classList.toggle('shrink', !input.contains(btn)));
+    allInputs.forEach((input) => input.classList.toggle('expand', input.contains(btn)));
     refreshCodeMirror();
     setDisplay(document.querySelector('.expand-reset-btn'), 'block');
   });

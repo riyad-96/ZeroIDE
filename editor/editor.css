@@ -36,6 +36,9 @@
   --g-btn-padding: 0.125rem 0.625rem;
   --g-btn-border-radius: 0.325rem;
 
+  --option-btn-bg: hsl(0, 0%, 80%);
+  --option-btn-hover-bg: hsl(0, 0%, 75%);
+
   --slick-border: 1px solid hsl(0, 0%, 79%);
 
   --sidebar-toggle-icon-bg: hsl(0, 0%, 88%);
@@ -346,6 +349,7 @@ main {
   right: 1rem;
   z-index: 2;
 
+  font-size: 0.925rem;
   font-weight: 500;
   background-color: var(--g-btn-bg);
   color: var(--g-btn-clr);
@@ -396,6 +400,7 @@ main {
   font-weight: 600;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
   user-select: none;
 
@@ -409,28 +414,24 @@ main {
       min-height: 17px;
     }
   }
-  .file-type-svg-container+div {
-    font-size: 0.9325rem;
-    font-weight: 400;
-    width: 100%;
+
+  .extra-options {
     display: flex;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 200ms;
-    pointer-events: none;
-
-    >* {
-      margin-inline-start: auto;
-    }
-
+    gap: 0.225rem;
+    
     button {
-      display: grid;
-      place-items: center;
+      /* display: grid; */
+      background-color: var(--option-btn-bg);
+      color: var(--g-btn-clr);
+      font-size: 0.7525rem;
+      padding: 0 0.5rem;
+      border: var(--slick-border);
+      border-radius: 0.2rem;
     }
-  }
-
-  &:hover .file-type-svg-container+div {
-    opacity: 1;
+    button:hover {
+      background-color: var(--option-btn-hover-bg);
+      color: var(--g-btn-hover-clr);
+    }
   }
 }
 
