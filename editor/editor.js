@@ -44,6 +44,7 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     semicolon: 'on',
     quotation: 'double',
     printWidth: 'Infinity',
+    editorWidth: 400,
   },
 };
 
@@ -169,6 +170,7 @@ function loadSidebarProject() {
 loadSidebarProject();
 
 //! ------ Editor Programs -------
+const headTagsInput = document.getElementById('head-tags-input');
 const htmlInput = document.getElementById('html-input');
 const cssInput = document.getElementById('css-input');
 const jsInput = document.getElementById('js-input');
@@ -199,8 +201,6 @@ function loadCodeMirror(mode, value) {
     lineWrapping: true,
   };
 }
-
-console.log(Number(freshSetting().tabSize));
 
 const codeScrolls = [
   {
@@ -334,6 +334,7 @@ function refreshCodeMirror() {
 // getting current code always
 function code() {
   return {
+    headTags: headTagsInput.value,
     html: htmlCodeMirror.getValue(),
     css: cssCodeMirror.getValue(),
     js: jsCodeMirror.getValue(),
@@ -341,26 +342,27 @@ function code() {
 }
 // run code with one function
 function run() {
-  setValueOnIframe(code().html, code().css, code().js);
+  setValueOnIframe(code().headTags, code().html, code().css, code().js);
 }
 
 // debounce technique
 let codeMirrorRuntimeout;
+
 function codeMirrorCodeRunAndSave() {
   clearTimeout(codeMirrorRuntimeout);
   codeMirrorRuntimeout = setTimeout(run, 1200);
-
   const localCodeObj = {
     id: hash,
     code: {
+      headTags: code().headTags,
       html: code().html,
       css: code().css,
       js: code().js,
     },
   };
   const index = indexFinder(allSavedCode, hash);
-
   if (index !== -1) {
+    allSavedCode[index].code.headTags = code().headTags;
     allSavedCode[index].code.html = code().html;
     allSavedCode[index].code.css = code().css;
     allSavedCode[index].code.js = code().js;
@@ -370,13 +372,24 @@ function codeMirrorCodeRunAndSave() {
   saveLocalStringify('allSavedCode', allSavedCode);
 }
 
+if (allSavedCode) {
+  const headTags = allSavedCode[indexFinder(allSavedCode, hash)].code.headTags;
+  headTagsInput.value = formatCode(headTags, 'html');
+} else {
+  headTagsInput.value = '';
+}
+
+headTagsInput.addEventListener('input', () => {
+  codeMirrorCodeRunAndSave();
+  saveLocalStringify('allSavedCode', allSavedCode);
+});
 const allCodeMirrorEditor = [htmlCodeMirror, cssCodeMirror, jsCodeMirror];
 allCodeMirrorEditor.forEach((editor) => {
   editor.on('change', codeMirrorCodeRunAndSave);
 });
 
 // set code to iframe
-function setValueOnIframe(html, css, js) {
+function setValueOnIframe(headTags, html, css, js) {
   iframe.srcdoc = `
   <!DOCTYPE html>
   <html lang="en">
@@ -384,7 +397,7 @@ function setValueOnIframe(html, css, js) {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>${projectTitle}</title>
-
+        ${headTags}
       <style>
         ${css}
       </style>
@@ -397,7 +410,7 @@ function setValueOnIframe(html, css, js) {
     </body>
   </html>`;
 }
-setValueOnIframe(code().html, code().css, code().js);
+setValueOnIframe(code().headTags, code().html, code().css, code().js);
 
 //! Code format
 function formatCode(code, parser) {
@@ -411,9 +424,9 @@ function formatCode(code, parser) {
     parser: perserType[parser],
     plugins: prettierPlugins,
     tabWidth: Number(savedSettings.editor.tabSize),
-    semi: freshSetting().semicolon === 'on',
-    singleQuote: freshSetting().quotation === 'single',
-    printWidth: Number(freshSetting().printWidth),
+    semi: freshSetting().editor.semicolon === 'on',
+    singleQuote: freshSetting().editor.quotation === 'single',
+    printWidth: Number(freshSetting().editor.printWidth),
   });
 }
 
@@ -548,7 +561,7 @@ const tabs = document.querySelectorAll('.each-tab');
 
 tabSwitchBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
-    tabs.forEach((tab) => tab.classList.toggle('show', btn.dataset.tab === tab.dataset.tab))
+    tabs.forEach((tab) => tab.classList.toggle('show', btn.dataset.tab === tab.dataset.tab));
     tabSwitchBtns.forEach((btn) => btn.classList.remove('selected'));
     btn.classList.add('selected');
   });
@@ -559,22 +572,21 @@ const allEditorInput = document.querySelectorAll('.editor-setting-input');
 const body = document.body;
 // get fresh settings always
 function freshSetting() {
-  return JSON.parse(localStorage.getItem('settings')).editor;
+  return JSON.parse(localStorage.getItem('settings')) || savedSettings;
 }
 
 function refreshEditorContent(type) {
   if (type === 'fontFamily') {
-    body.style.setProperty('--user-font', freshSetting()[type]);
+    body.style.setProperty('--user-font', freshSetting().editor[type]);
   }
   if (type === 'fontSize') {
-    body.style.setProperty('--user-font-size', `${Number(freshSetting()[type]) / 16}rem`);
+    body.style.setProperty('--user-font-size', `${Number(freshSetting().editor[type]) / 16}rem`);
   }
   if (type === 'tabSize') {
-    const newTabSize = Number(freshSetting()[type]);
+    const newTabSize = Number(freshSetting().editor[type]);
     htmlCodeMirror.setOption('tabSize', newTabSize);
     cssCodeMirror.setOption('tabSize', newTabSize);
     jsCodeMirror.setOption('tabSize', newTabSize);
-    console.log(newTabSize);
   }
 }
 
@@ -597,5 +609,5 @@ document.addEventListener('DOMContentLoaded', () => {
   allEditorInput.forEach((input) => {
     refreshEditorContent(input.id);
   });
-  resizableArea.style.width = freshSetting().editorWidth + 'px';
+  resizableArea.style.width = freshSetting().editor.editorWidth + 'px';
 });

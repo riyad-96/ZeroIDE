@@ -371,18 +371,18 @@ main {
 
 .expand-reset-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0rem;
+  right: 150px;
   z-index: 2;
 
   font-size: 0.925rem;
   font-weight: 500;
-  background-color: var(--g-btn-bg);
+  background-color: var(--option-btn-bg);
   color: var(--g-btn-clr);
   padding: var(--g-btn-padding);
-  border: var(--slick-border);
+  border: 1px solid hsl(0, 0%, 75%);
   border-radius: var(--g-btn-border-radius);
-  box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.1);
+  box-shadow: 0 2px 4px hsla(0, 0%, 50%, 0.35);
   display: none;
 
   &:active {
@@ -575,10 +575,10 @@ main {
   padding: 1rem;
   background-color: var(--overlay);
   display: grid;
-  /* display: none; */
+  display: none;
   place-items: center;
   opacity: 1;
-  /* opacity: 0; */
+  opacity: 0;
 
   transition: opacity 200ms;
 
@@ -595,16 +595,16 @@ main {
   height: 100%;
   max-height: 400px;
   background-color: var(--container-bg);
+  border: var(--slick-border);
   padding: var(--padding);
   border-radius: 0.5rem;
   position: relative;
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 1rem;
-  /* overflow: hidden; */
 
   scale: 0.5;
-  /* opacity: 0; */
+  opacity: 0;
   translate: 0 250%;
   transition: all 500ms;
 
