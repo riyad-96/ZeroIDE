@@ -16,12 +16,20 @@
 
   h3 {
     margin: 0;
-    font-weight: 500;
+    font-size: 1.05rem;
+    font-weight: 600;
     line-height: 1lh;
     max-width: fit-content;
     border-block-end: 1px solid hsl(0, 0%, 50%);
-    margin-block: 1rem 0.525rem;
-    padding-block: 0 0.125rem;
+    margin-block: 1rem 0.625rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    span {
+      font-weight: 400;
+      font-size: 0.8325rem
+    }
   }
 }
 
@@ -56,7 +64,7 @@
   div {
     display: flex;
     align-items: center;
-    margin-block: 0 0.225rem;
+    margin-block: 0 0.325rem;
 
     > * {
       flex-grow: 1;
@@ -74,7 +82,7 @@
     height: 33px;
     border: 1px solid var(--slick-border-clr);
     border-radius: 0.425rem;
-    padding-inline: 0.525rem;
+    padding-inline: 0.925rem;
     appearance: none;
     cursor: pointer;
 

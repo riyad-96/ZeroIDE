@@ -1236,13 +1236,20 @@ img {
 }
 .all-settings h3 {
   margin: 0;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 600;
   line-height: 1lh;
   max-width: -moz-fit-content;
   max-width: fit-content;
   border-block-end: 1px solid hsl(0, 0%, 50%);
-  margin-block: 1rem 0.525rem;
-  padding-block: 0 0.125rem;
+  margin-block: 1rem 0.625rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.all-settings h3 span {
+  font-weight: 400;
+  font-size: 0.8325rem;
 }
 
 .theme-container {
@@ -1270,7 +1277,7 @@ img {
 .editor-settings-list.editor-settings-list div {
   display: flex;
   align-items: center;
-  margin-block: 0 0.225rem;
+  margin-block: 0 0.325rem;
 }
 .editor-settings-list.editor-settings-list div > * {
   flex-grow: 1;
@@ -1285,7 +1292,7 @@ img {
   height: 33px;
   border: 1px solid var(--slick-border-clr);
   border-radius: 0.425rem;
-  padding-inline: 0.525rem;
+  padding-inline: 0.925rem;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;

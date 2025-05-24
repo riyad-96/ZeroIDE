@@ -37,7 +37,6 @@ const firstLoadNote = document.querySelector('.first-load-welcome-note');
 const firstLoad = localStorage.getItem('firstLoad');
 
 if (!firstLoad) {
-  console.log('first load');
   gsap.from('.note-content>*', {
     opacity: 0,
     x: 500,
@@ -906,8 +905,12 @@ function getDateFunc(date) {
 const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
   theme: 'default',
   editor: {
+    fontFamily: 'firaCode',
     fontSize: '14',
-    indentSize: '2',
+    tabSize: '2',
+    semicolon: 'on',
+    quotation: 'double',
+    printWidth: 'Infinity',
   },
 };
 
@@ -951,25 +954,18 @@ applyTheme(savedSettings.theme || 'default');
 
 // Setting programs
 const editorSettingInputs = document.querySelectorAll('.editor-setting-input');
+const editorInputContainer = document.querySelector('.editor-settings-list');
 
-function setEditorSetting(type, size) {
-  savedSettings.editor[type] = size;
-}
-
-function loadEditorSetting(id, value) {
-  document.getElementById(id).value = value;
-}
-
-editorSettingInputs.forEach((input) => {
-  input.addEventListener('input', () => {
-    const type = input.dataset.editorSetting;
-    setEditorSetting(type, input.value.trim());
+editorInputContainer.addEventListener('change', (e) => {
+  const input = e.target.closest('.editor-setting-input');
+  if (input) {
+    savedSettings.editor[input.id] = input.value
     localStorage.setItem('settings', JSON.stringify(savedSettings));
-  });
+  }
 });
 
 editorSettingInputs.forEach((input) => {
-  loadEditorSetting(input.id, savedSettings.editor[input.dataset.editorSetting]);
+  document.getElementById(input.id).value = savedSettings.editor[input.id]
 });
 
 // All project deletion program

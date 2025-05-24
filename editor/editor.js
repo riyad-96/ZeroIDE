@@ -5,6 +5,12 @@ document.querySelectorAll('form').forEach((form) => {
   });
 });
 
+function stopPropagation(el) {
+  el.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+}
+
 function saveLocalStringify(key, value) {
   localStorage.setItem(`${key}`, JSON.stringify(value));
 }
@@ -26,9 +32,20 @@ function setCursor(el, cursor) {
 
 //! ----------------------------------
 
-//! Load all saved data programs
+//! Load saved data programs
 const hash = Number(location.hash.replace('#', ''));
 const savedProjects = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
+  theme: 'default',
+  editor: {
+    fontFamily: 'firaCode',
+    fontSize: '14',
+    tabSize: '2',
+    semicolon: 'on',
+    quotation: 'double',
+    printWidth: 'Infinity',
+  },
+};
 
 // load project title
 const projectTitle = savedProjects[indexFinder(savedProjects, hash)].name;
@@ -167,13 +184,13 @@ function loadCodeMirror(mode, value) {
     value,
     keyMap: 'sublime',
     lineNumbers: true,
-    tabSize: 2,
+    tabSize: Number(freshSetting().tabSize),
     addModeClass: true,
     showCursorWhenSelecting: true,
     styleActiveLine: true,
     styleSelectedText: true,
     allowMultipleSelections: true,
-    extraKeys: { 'Ctrl-D': 'selectNextOccurrence', 'Ctrl-Space': 'autocomplete', 'Ctrl-/': 'toggleComment', 'Ctrl-F': 'find', 'Ctrl-G': 'findNext' },
+    extraKeys: { 'Ctrl-D': 'selectNextOccurrence', 'Ctrl-Space': 'autocomplete', 'Ctrl-/': 'toggleComment' },
     gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
     foldGutter: true,
     matchBrackets: true,
@@ -182,6 +199,8 @@ function loadCodeMirror(mode, value) {
     lineWrapping: true,
   };
 }
+
+console.log(Number(freshSetting().tabSize));
 
 const codeScrolls = [
   {
@@ -380,8 +399,6 @@ function setValueOnIframe(html, css, js) {
 }
 setValueOnIframe(code().html, code().css, code().js);
 
-document.documentElement.style.setProperty('--user-font', 'fira code');
-
 //! Code format
 function formatCode(code, parser) {
   const perserType = {
@@ -393,9 +410,10 @@ function formatCode(code, parser) {
   return prettier.format(code, {
     parser: perserType[parser],
     plugins: prettierPlugins,
-    semi: true,
-    singleQuote: true,
-    tabWidth: 2,
+    tabWidth: Number(savedSettings.editor.tabSize),
+    semi: freshSetting().semicolon === 'on',
+    singleQuote: freshSetting().quotation === 'single',
+    printWidth: Number(freshSetting().printWidth),
   });
 }
 
@@ -450,14 +468,134 @@ resizeBar.addEventListener('mousedown', (e) => {
   clickOffset = e.pageX - e.target.getBoundingClientRect().left;
 });
 
-document.addEventListener('mouseup', (e) => {
+document.addEventListener('mouseup', () => {
   document.body.style.userSelect = 'initial';
   document.querySelector('iframe').style.pointerEvents = 'initial';
   document.querySelector('.code-inputs').style.pointerEvents = 'initial';
   isResizing = false;
+  savedSettings.editor.editorWidth = resizableArea.getBoundingClientRect().width;
+  saveLocalStringify('settings', savedSettings);
 });
 
 document.addEventListener('mousemove', (e) => {
   if (!isResizing) return;
   resizableArea.style.width = e.pageX - clickOffset + 'px';
+});
+
+//! Nav programs
+const nav = document.querySelector('nav');
+const customizationModal = document.querySelector('.customization-modal');
+const customizationContainer = document.querySelector('.customization-container');
+const closeCustomizationModalBtn = document.querySelector('.close-modal-btn');
+
+stopPropagation(customizationContainer);
+
+function toggleCustomizationModal() {
+  if (!customizationContainer.classList.contains('slide-up')) {
+    setDisplay(customizationModal, 'grid');
+    requestAnimationFrame(() => {
+      customizationModal.style.opacity = '1';
+      customizationContainer.classList.toggle('slide-up');
+    });
+  } else {
+    customizationContainer.classList.toggle('slide-up');
+    setTimeout(() => {
+      customizationModal.style.opacity = '0';
+      setTimeout(() => {
+        setDisplay(customizationModal, 'none');
+      }, 200);
+    }, 100);
+  }
+}
+
+nav.addEventListener('click', (e) => {
+  const runBtn = e.target.closest('.run-code-btn');
+  const customizeBtn = e.target.closest('.customize-panel-btn');
+
+  if (runBtn) run();
+
+  if (customizeBtn) toggleCustomizationModal();
+});
+
+const customModalBtn = [customizationModal, closeCustomizationModalBtn];
+customModalBtn.forEach((btn) => {
+  btn.addEventListener('click', toggleCustomizationModal);
+});
+
+//! Customization panel programs
+const infoIcon = document.querySelector('.info-icon');
+const infoContainer = document.querySelector('.info-container');
+
+infoIcon.addEventListener('click', (e) => {
+  e.stopPropagation();
+  setDisplay(infoContainer, 'block');
+  setTimeout(() => {
+    infoContainer.classList.add('show');
+  }, 10);
+});
+infoIcon.addEventListener('mouseleave', () => {
+  setTimeout(() => {
+    infoContainer.classList.remove('show');
+    setTimeout(() => {
+      setDisplay(infoContainer, 'none');
+    }, 300);
+  }, 300);
+});
+
+// tab change buttons
+const tabSwitchBtns = document.querySelectorAll('.tab-switch-btn');
+const tabs = document.querySelectorAll('.each-tab');
+
+tabSwitchBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    tabs.forEach((tab) => tab.classList.toggle('show', btn.dataset.tab === tab.dataset.tab))
+    tabSwitchBtns.forEach((btn) => btn.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
+
+//! setting programs
+const allEditorInput = document.querySelectorAll('.editor-setting-input');
+const body = document.body;
+// get fresh settings always
+function freshSetting() {
+  return JSON.parse(localStorage.getItem('settings')).editor;
+}
+
+function refreshEditorContent(type) {
+  if (type === 'fontFamily') {
+    body.style.setProperty('--user-font', freshSetting()[type]);
+  }
+  if (type === 'fontSize') {
+    body.style.setProperty('--user-font-size', `${Number(freshSetting()[type]) / 16}rem`);
+  }
+  if (type === 'tabSize') {
+    const newTabSize = Number(freshSetting()[type]);
+    htmlCodeMirror.setOption('tabSize', newTabSize);
+    cssCodeMirror.setOption('tabSize', newTabSize);
+    jsCodeMirror.setOption('tabSize', newTabSize);
+    console.log(newTabSize);
+  }
+}
+
+const editorTab = document.querySelector('.editor-tab');
+editorTab.addEventListener('change', (e) => {
+  const input = e.target.closest('.editor-setting-input');
+  if (input) {
+    savedSettings.editor[input.id] = input.value;
+    saveLocalStringify('settings', savedSettings);
+    refreshEditorContent(input.id);
+    refreshCodeMirror();
+  }
+});
+
+allEditorInput.forEach((input) => {
+  document.getElementById(input.id).value = savedSettings.editor[input.id];
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  allEditorInput.forEach((input) => {
+    refreshEditorContent(input.id);
+  });
+  resizableArea.style.width = freshSetting().editorWidth + 'px';
 });
