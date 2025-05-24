@@ -44,7 +44,7 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     semicolon: 'on',
     quotation: 'double',
     printWidth: '80',
-    editorWidth: 400,
+    editorWidth: 450,
   },
 };
 
