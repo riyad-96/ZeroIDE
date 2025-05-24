@@ -373,8 +373,10 @@ function codeMirrorCodeRunAndSave() {
 }
 
 if (allSavedCode) {
-  const headTags = allSavedCode[indexFinder(allSavedCode, hash)].code.headTags;
-  headTagsInput.value = formatCode(headTags, 'html');
+  const index = indexFinder(allSavedCode, hash);
+  if(index !== -1) {
+    headTagsInput.value = formatCode(allSavedCode[index].code.headTags, 'html');
+  }
 } else {
   headTagsInput.value = '';
 }
