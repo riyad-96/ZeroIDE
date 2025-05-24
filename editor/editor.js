@@ -43,7 +43,7 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     tabSize: '2',
     semicolon: 'on',
     quotation: 'double',
-    printWidth: 'Infinity',
+    printWidth: '80',
     editorWidth: 400,
   },
 };
