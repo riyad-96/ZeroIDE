@@ -1,3 +1,5 @@
+@import "./theme.css";
+
 @font-face {
   font-family: 'Poppins';
   src: url('../assets/fonts/poppins-v21-latin-600.woff2') format('woff2');
@@ -40,7 +42,7 @@
 }
 
 :root {
-  --body-bg: hsl(0, 0%, 95%);
+  /* --body-bg: hsl(0, 0%, 95%);
   --body-clr: hsl(0, 0%, 10%);
   --overlay: hsl(0, 0%, 100%, 0.3);
 
@@ -74,15 +76,17 @@
 
   --global-scrollbar-track-bg: hsl(0, 0%, 93%);
   --global-scrollbar-thumb-bg: hsl(0, 0%, 65%);
-  --global-scrollbar-thumb-hover-bg: hsl(0, 0%, 50%);
+  --global-scrollbar-thumb-hover-bg: hsl(0, 0%, 50%); */
 
   /* ! Code editor colors */
-  --topbar-bg: hsl(0, 0%, 85%);
+  /* --topbar-bg: hsl(0, 0%, 85%);
   --topbar-clr: hsl(0, 0%, 25%);
 
   --file-type-icon-bg: hsl(0, 0%, 23%);
-  --file-type-icon-clr: hsl(0, 0%, 90%);
+  --file-type-icon-clr: hsl(0, 0%, 90%); */
 }
+
+
 
 /* ----- base ----- */
 * {
@@ -367,6 +371,11 @@ main {
   gap: var(--gap-between-editor);
   position: relative;
   isolation: isolate;
+
+  @media (pointer: coarse) {
+    min-width: var(--resizeBar-width);
+    max-width: calc(100vw - var(--resizeBar-width) * 2);
+  }
 }
 
 .expand-reset-btn {
@@ -427,6 +436,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 5rem;
   user-select: none;
 
   .file-type-svg-container {
@@ -464,6 +474,7 @@ main {
   font-size: var(--user-font-size);
   font-family: var(--user-font);
   background-color: var(--container-bg);
+  background-color: #1f1f1f;
   width: 100%;
   height: 100%;
   min-height: 0;
@@ -472,31 +483,142 @@ main {
 .CodeMirror-activeline-background {
   background-color: transparent;
   border-block: var(--slick-border);
-  opacity: 0.6;
+  opacity: 0.2;
 }
-
-.CodeMirror .CodeMirror-selected {
-  background-color: rgba(128, 0, 128, 0.1); /* the full line background */
-}
-
-/* .CodeMirror-selectedtext.CodeMirror-selectedtext {
-  background-color: #00e1ff31;
-} */
 
 .CodeMirror-sizer {
   height: 100%;
   cursor: text;
 }
 
-.CodeMirror-matchingbracket {
-  color: inherit !important;
-  outline: 1px solid #c5c5c5;
-}
-
 /* @media(pointer: fine) {
   .CodeMirror {
+    }
+    } */
+
+/*! Code mirror styles */
+.CodeMirror.CodeMirror-focused .CodeMirror-selected {
+  background-color: hsla(216, 100%, 60%, 0.25);
+}
+
+.CodeMirror .CodeMirror-selected {
+  background-color: hsla(0, 0%, 50%, 0.25);
+}
+
+.CodeMirror-cursor {
+  border-color: #cccccc;
+  border-width: 2px;
+  animation: custom-cursor-blink 1.3s 500ms infinite;
+}
+
+@keyframes custom-cursor-blink {
+  0% {
+    opacity: 1;
   }
-} */
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*! html */
+.cm-m-xml {
+  color: #cccccc;
+}
+
+.cm-m-xml.cm-tag {
+  color: #569cd6;
+}
+.cm-m-xml.cm-tag.cm-bracket {
+  color: #808080;
+}
+
+.cm-m-xml.cm-attribute {
+  color: #9cdcfe;
+}
+
+.cm-m-xml.cm-string {
+  color: #ce9178;
+}
+
+.cm-m-xml.cm-comment {
+  color: #6a9955;
+}
+
+/*! css */
+.cm-m-css {
+  color: #cccccc;
+}
+
+.cm-m-css.cm-qualifier {
+  color: #d7ba7d;
+}
+
+.CodeMirror-matchingbracket {
+  color: #cccccc !important;
+  outline: 1px solid #c5c5c5;
+}
+.cm-m-css.cm-property {
+  color: #9cdcfe;
+}
+.cm-m-css.cm-number {
+  color: #b5cea8;
+}
+.cm-m-css.cm-keyword {
+  color: #ce9178;
+}
+.cm-m-css.cm-variable-3 {
+  color: #ce9178;
+}
+.cm-m-css.cm-variable.cm-callee {
+  color: #dcdcaa;
+}
+.cm-m-css.cm-comment {
+  color: #6a9955;
+}
+.cm-m-css.cm-atom {
+  color: #ce9178;
+}
+.cm-m-css.cm-builtin {
+  color: #d7ba7d;
+}
+.cm-m-css.cm-tag {
+  color: #d7ba7d;
+}
+
+/*! javascript */
+.cm-m-javascript {
+  color: #cccccc;
+}
+
+.cm-m-javascript.cm-keyword {
+  color: #569cd6;
+}
+.cm-m-javascript.cm-def {
+  color: #4fc1ff;
+}
+.cm-m-javascript.cm-variable {
+  color: #9cdcfe;
+}
+.cm-m-javascript.cm-variable-2 {
+  color: #9cdcfe;
+}
+.cm-m-javascript.cm-property {
+  color: #dcdcaa;
+}
+.cm-m-javascript.cm-string {
+  color: #ce9178;
+}
+
+.cm-m-javascript.cm-comment {
+  color: #6a9955 !important;
+}
+
+.cm-m-javascript.cm-number {
+  color: #b5cea8;
+}
 
 /* ! preview styling */
 .horizontal-resizer {
@@ -638,6 +760,12 @@ main {
 .tab-area {
   display: flex;
   gap: 0.5rem;
+  --break: 700px;
+
+  @media (width < 600px) {
+    display: grid;
+    grid-auto-rows: max-content;
+  }
 }
 
 .customizaion-tab-btn-container {
@@ -646,6 +774,14 @@ main {
   display: grid;
   min-width: 100px;
   gap: 0.225rem;
+
+  @media (width < 600px) {
+    display: flex;
+
+    > * {
+      flex: 1;
+    }
+  }
 }
 
 .tab-switch-btn {
@@ -662,6 +798,10 @@ main {
   &:hover {
     background-color: var(--g-btn-hover-bg);
   }
+
+  @media (width < 600px) {
+    padding-block: 0.225rem;
+  }
 }
 .tab-switch-btn::before {
   content: '';
@@ -672,16 +812,35 @@ main {
   background-color: var(--tab-change-btn-before-bg);
   width: 3px;
   height: 0;
-  transition: height 300ms;
+  transition: height 300ms, width 300ms;
+
+  @media (width < 600px) {
+    top: unset;
+    bottom: 0;
+    left: 50%;
+    height: 3px;
+    width: 0;
+    translate: -50% 0;
+  }
 }
 .tab-switch-btn:hover::before {
   height: 100%;
+
+  @media (width < 600px) {
+    height: 3px;
+    width: 100%;
+  }
 }
 .tab-switch-btn.selected {
   background-color: var(--g-btn-hover-bg);
 }
 .tab-switch-btn.selected::before {
   height: 100%;
+
+  @media (width < 600px) {
+    height: 3px;
+    width: 100%;
+  }
 }
 
 .customization-tab {
@@ -721,6 +880,7 @@ main {
 
 .info-icon {
   display: grid;
+  cursor: pointer;
 }
 
 .info-container {
@@ -801,6 +961,8 @@ code {
   padding: 1rem;
   > * {
     display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-block-end: 0.3rem;
 
     > * {
@@ -817,6 +979,7 @@ code {
     appearance: none;
     color: var(--body-clr);
     height: 33px;
+    min-width: 0;
     border: var(--slick-border);
     border-radius: 0.425rem;
     padding-inline: 0.925rem;

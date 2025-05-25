@@ -199,6 +199,7 @@ function loadCodeMirror(mode, value) {
     autoCloseBrackets: true,
     autoCloseTags: true,
     lineWrapping: true,
+    cursorBlinkRate: 0
   };
 }
 
@@ -215,7 +216,7 @@ const codeScrolls = [
     js: `// CSS handles everything here. Magic box!`,
   },
   {
-    html: `<input id="nameInput" placeholder="Type your name" />
+    html: `<input id="nameInput" placeholder="Type your name" autocomplete="off" />
            <p id="greet"></p>`,
     css: `input { padding: 5px; }
           p { font-weight: bold; margin-top: 10px; }`,
@@ -241,6 +242,7 @@ const codeScrolls = [
   {
     html: `<div class="pulse">💓</div>`,
     css: `.pulse {
+             max-width: fit-content;
              font-size: 30px;
              animation: pulse 1s infinite;
            }
@@ -374,7 +376,7 @@ function codeMirrorCodeRunAndSave() {
 
 if (allSavedCode) {
   const index = indexFinder(allSavedCode, hash);
-  if(index !== -1) {
+  if (index !== -1) {
     headTagsInput.value = formatCode(allSavedCode[index].code.headTags, 'html');
   }
 } else {
@@ -497,6 +499,34 @@ document.addEventListener('mousemove', (e) => {
   resizableArea.style.width = e.pageX - clickOffset + 'px';
 });
 
+//touch support
+resizeBar.addEventListener('touchstart', (e) => {
+  document.body.style.userSelect = 'none';
+  document.querySelector('iframe').style.pointerEvents = 'none';
+  document.querySelector('.code-inputs').style.pointerEvents = 'none';
+
+  isResizing = true;
+  const touch = e.touches[0];
+  const barLeft = e.target.getBoundingClientRect().left;
+  clickOffset = touch.pageX - barLeft;
+});
+
+document.addEventListener('touchmove', (e) => {
+  if (!isResizing) return;
+  e.preventDefault();
+  const touch = e.touches[0];
+  resizableArea.style.width = touch.pageX - clickOffset + 'px';
+});
+
+document.addEventListener('touchend', () => {
+  document.body.style.userSelect = 'initial';
+  document.querySelector('iframe').style.pointerEvents = 'initial';
+  document.querySelector('.code-inputs').style.pointerEvents = 'initial';
+  isResizing = false;
+  savedSettings.editor.editorWidth = resizableArea.getBoundingClientRect().width;
+  saveLocalStringify('settings', savedSettings);
+});
+
 //! Nav programs
 const nav = document.querySelector('nav');
 const customizationModal = document.querySelector('.customization-modal');
@@ -526,9 +556,7 @@ function toggleCustomizationModal() {
 nav.addEventListener('click', (e) => {
   const runBtn = e.target.closest('.run-code-btn');
   const customizeBtn = e.target.closest('.customize-panel-btn');
-
   if (runBtn) run();
-
   if (customizeBtn) toggleCustomizationModal();
 });
 
@@ -611,5 +639,8 @@ document.addEventListener('DOMContentLoaded', () => {
   allEditorInput.forEach((input) => {
     refreshEditorContent(input.id);
   });
-  resizableArea.style.width = freshSetting().editor.editorWidth + 'px';
+  const editorWidth = freshSetting().editor.editorWidth
+  resizableArea.style.width = `${editorWidth <= 350 ? 350 : editorWidth }px`;
 });
+
+// Need to style the codemirror colors

@@ -1,0 +1,53 @@
+:root {
+  --body-bg: hsl(0, 0%, 95%);
+  --body-clr: hsl(0, 0%, 10%);
+  --overlay: hsl(0, 0%, 100%, 0.3);
+
+  --g-btn-clr: hsl(0, 0%, 10%);
+  --g-btn-bg: hsl(0, 0%, 86%);
+  --g-btn-hover-bg: hsl(0, 0%, 82%);
+  --g-btn-hover-clr: hsl(0, 0%, 0%);
+  --g-btn-padding: 0.125rem 0.625rem;
+  --g-btn-border-radius: 0.325rem;
+
+  --option-btn-bg: hsl(0, 0%, 80%);
+  --option-btn-hover-bg: hsl(0, 0%, 75%);
+
+  --input-bg: hsla(0, 0%, 70%, 0.3);
+  --input-outline: 1px solid hsl(0, 0%, 50%, 0.6);
+
+  --tab-change-btn-before-bg: hsl(0, 0%, 37%);
+  --tab-change-btn-selected-bg: hsl(0, 0%, 75%);
+  --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
+
+  --slick-border: 1px solid hsl(0, 0%, 79%);
+
+  --sidebar-toggle-icon-bg: hsl(0, 0%, 88%);
+  --sidebar-toggle-btn-hover-border: 1px solid hsl(0, 0%, 79%);
+  --submenu-bg: hsl(0, 0%, 88%);
+
+  --project-list-item-hover-bg: hsl(0, 0%, 87%);
+
+  --container-bg: hsl(0, 0%, 93%);
+  --light-container-border: 1px solid hsl(0, 0%, 87%);
+
+  --global-scrollbar-track-bg: hsl(0, 0%, 93%);
+  --global-scrollbar-thumb-bg: hsl(0, 0%, 65%);
+  --global-scrollbar-thumb-hover-bg: hsl(0, 0%, 50%);
+
+  /* ! Code editor colors */
+  --topbar-bg: hsl(0, 0%, 85%);
+  --topbar-clr: hsl(0, 0%, 25%);
+
+  --file-type-icon-bg: hsl(0, 0%, 23%);
+  --file-type-icon-clr: hsl(0, 0%, 90%);
+
+  --cm-m-xml: ;
+  --cm-m-xml: ;
+  --cm-m-xml: ;
+  --cm-m-xml: ;
+  --cm-m-xml: ;
+  --cm-m-xml: ;
+  --cm-m-xml: ;
+  --cm-m-xml: ;
+}
