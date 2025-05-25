@@ -192,7 +192,15 @@ function loadCodeMirror(mode, value) {
     styleActiveLine: true,
     styleSelectedText: true,
     allowMultipleSelections: true,
-    extraKeys: { 'Ctrl-D': 'selectNextOccurrence', 'Ctrl-Space': 'autocomplete', 'Ctrl-/': 'toggleComment' },
+    extraKeys: {
+      'Ctrl-D': 'selectNextOccurrence',
+      'Ctrl-Space': 'autocomplete',
+      'Ctrl-/': 'toggleComment',
+      'Shift-Alt-Down': copyLineDown,
+      'Shift-Alt-Up': copyLineUp,
+      'Alt-Up': moveLineUp,
+      'Alt-Down': moveLineDown,
+    },
     gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
     foldGutter: true,
     matchBrackets: true,
@@ -394,25 +402,29 @@ allCodeMirrorEditor.forEach((editor) => {
 
 // set code to iframe
 function setValueOnIframe(headTags, html, css, js) {
-  iframe.srcdoc = `
+  const fullHtml = `
   <!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>${projectTitle}</title>
-        ${headTags}
-      <style>
-        ${css}
-      </style>
+      ${headTags}
+      <style>${css}</style>
     </head>
     <body>
       ${html}
-      <script>
-        ${js}
-      </script>
+      <script>${js}<\/script>
     </body>
   </html>`;
+  
+  const blob = new Blob([fullHtml], { type: 'text/html' });
+  const blobUrl = URL.createObjectURL(blob);
+  iframe.src = blobUrl;
+
+  iframe.onload = () => {
+    URL.revokeObjectURL(blobUrl);
+  };
 }
 setValueOnIframe(code().headTags, code().html, code().css, code().js);
 
@@ -546,7 +558,7 @@ const iframeSizeObserver = new ResizeObserver(() => {
   resizerDebounce = setTimeout(() => {
     iframeSizeDisplay.style.opacity = '0';
   }, 900);
-})
+});
 iframeSizeObserver.observe(iframe);
 
 //! Nav programs
@@ -665,4 +677,91 @@ document.addEventListener('DOMContentLoaded', () => {
   resizableArea.style.width = `${editorWidth <= 350 ? 350 : editorWidth}px`;
 });
 
-// Need to style the codemirror colors
+//! Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  // toggle sidebar
+  if (e.ctrlKey && e.key === 'b') {
+    sidebarToggleBtn.click();
+  }
+  // prevent page saving & print
+  if ((e.ctrlKey || e.metaKey) && ['s', 'p'].includes(e.key)) {
+    e.preventDefault();
+  }
+});
+
+// copy lines
+function copyLineDown(cm) {
+  const pos = cm.getCursor();
+  const line = pos.line;
+  const content = cm.getLine(line);
+
+  cm.operation(() => {
+    cm.replaceRange(content + '\n', { line: line + 1, ch: 0 });
+    cm.setCursor({ line: line + 1, ch: pos.ch });
+  });
+}
+
+function copyLineUp(cm) {
+  const pos = cm.getCursor();
+  const line = pos.line;
+  const content = cm.getLine(line);
+
+  cm.operation(() => {
+    cm.replaceRange(content + '\n', { line: line, ch: 0 });
+    cm.setCursor({ line: line, ch: pos.ch });
+  });
+}
+
+// function moveLineDown(cm) {
+//   const pos = cm.getCursor();
+//   const line = pos.line;
+
+//   if (line === cm.lineCount() - 1) return; // Bottom line, can't move down
+
+//   const currentLine = cm.getLine(line);
+//   const belowLine = cm.getLine(line + 1);
+
+//   cm.operation(() => {
+//     // Replace the two lines
+//     cm.replaceRange(belowLine, { line: line, ch: 0 }, { line + 1, ch: 0 });
+//     cm.replaceRange(currentLine, { line: line + 1, ch: 0 }, { line + 2, ch: 0 });
+//     // Move the cursor down
+//     cm.setCursor({ line: line + 1, ch: pos.ch });
+//   });
+// }
+
+function moveLineDown(cm) {
+  const pos = cm.getCursor();
+  const line = pos.line;
+  if (line === cm.lineCount() - 1) return;
+
+  const currentLine = cm.getLine(line);
+  const belowLine = cm.getLine(line + 1);
+
+  cm.operation(() => {
+    cm.replaceRange(belowLine, { line: line, ch: 0 }, { line: line, ch: currentLine.length });
+
+    cm.replaceRange(currentLine, { line: line + 1, ch: 0 }, { line: line + 1, ch: belowLine.length });
+
+    cm.setCursor({ line: line + 1, ch: pos.ch });
+  });
+}
+
+function moveLineUp(cm) {
+  const pos = cm.getCursor();
+  const line = pos.line;
+  if (line === 0) return;
+
+  const currentLine = cm.getLine(line);
+  const aboveLine = cm.getLine(line - 1);
+
+  cm.operation(() => {
+    // Swap full lines
+    cm.replaceRange(currentLine, { line: line - 1, ch: 0 }, { line: line - 1, ch: aboveLine.length });
+
+    cm.replaceRange(aboveLine, { line: line, ch: 0 }, { line: line, ch: currentLine.length });
+
+    // Cursor up
+    cm.setCursor({ line: line - 1, ch: pos.ch });
+  });
+}

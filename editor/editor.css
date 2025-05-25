@@ -971,7 +971,7 @@ code {
   font-family: var(--user-font);
   border: var(--slick-border);
   min-height: 100px;
-  max-height: 260px;
+  max-height: 255px;
   background-color: var(--input-bg);
   color: inherit;
   border-radius: 0.3rem;
@@ -980,6 +980,10 @@ code {
   resize: vertical;
   outline: none;
   outline-offset: 2px;
+
+  @media(width < 600px) {
+    max-height: 215px;
+  }
 }
 
 .html-tab > textarea:focus,
