@@ -28,7 +28,7 @@
 
     span {
       font-weight: 400;
-      font-size: 0.8325rem
+      font-size: 0.8325rem;
     }
   }
 }
@@ -87,7 +87,8 @@
     cursor: pointer;
 
     option {
-      color: #111;
+      background-color: var(--option-bg);
+      color: var(--option-clr);
     }
   }
 }
@@ -109,8 +110,8 @@
 
     &:hover {
       background-color: #cf2020;
-    border-color: #e34f4f;
-    color: #fff;
+      border-color: #e34f4f;
+      color: #fff;
     }
   }
 }

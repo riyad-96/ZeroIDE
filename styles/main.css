@@ -29,7 +29,7 @@
   font-weight: 400;
 }
 * {
-  font-family: "Poppins";
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   box-sizing: border-box;
 }
 
@@ -176,6 +176,8 @@ main {
   --profile-edit-form-bg: hsl(0, 0%, 91%);
   --input-textarea-bg: hsla(0, 0%, 0%, 0.075);
   --setting-border: 1px solid hsla(0, 0%, 50%, 0.2);
+  --option-bg: hsl(0, 0%, 86%);
+  --option-clr: hsl(0, 0%, 0%);
   --form-bg-clr: hsl(0, 0%, 91%);
   --form-bg-layer-bg: hsla(0, 0%, 100%, 0.3);
   --delete-message-modal-suggested-span: hsl(0, 0%, 36%);
@@ -226,6 +228,8 @@ main {
     --profile-edit-form-bg: hsl(0, 0%, 9%);
     --input-textarea-bg: hsla(0, 0%, 100%, 0.075);
     --setting-border: 1px solid hsla(0, 0%, 50%, 0.2);
+    --option-bg: hsl(0, 0%, 14%);
+    --option-clr: hsl(0, 0%, 100%);
     --form-bg-clr: hsl(0, 0%, 9%);
     --form-bg-layer-bg: hsla(0, 0%, 0%, 0.3);
     --delete-message-modal-suggested-span: hsl(0, 0%, 64%);
@@ -276,6 +280,8 @@ main {
   --profile-edit-form-bg: hsl(0, 0%, 91%);
   --input-textarea-bg: hsla(0, 0%, 0%, 0.075);
   --setting-border: 1px solid hsla(0, 0%, 50%, 0.2);
+  --option-bg: hsl(0, 0%, 86%);
+  --option-clr: hsl(0, 0%, 0%);
   --form-bg-clr: hsl(0, 0%, 91%);
   --form-bg-layer-bg: hsla(0, 0%, 100%, 0.3);
   --delete-message-modal-suggested-span: hsl(0, 0%, 36%);
@@ -326,6 +332,8 @@ main {
   --profile-edit-form-bg: hsl(0, 0%, 9%);
   --input-textarea-bg: hsla(0, 0%, 100%, 0.075);
   --setting-border: 1px solid hsla(0, 0%, 50%, 0.2);
+  --option-bg: hsl(0, 0%, 14%);
+  --option-clr: hsl(0, 0%, 100%);
   --form-bg-clr: hsl(0, 0%, 9%);
   --form-bg-layer-bg: hsla(0, 0%, 0%, 0.3);
   --delete-message-modal-suggested-span: hsl(0, 0%, 64%);
@@ -1299,7 +1307,8 @@ img {
   cursor: pointer;
 }
 .editor-settings-list.editor-settings-list select option {
-  color: #111;
+  background-color: var(--option-bg);
+  color: var(--option-clr);
 }
 
 .project-setting div {

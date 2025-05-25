@@ -237,7 +237,7 @@ html {
   --js-comment: hsl(101, 29%, 47%);
   --js-number: hsl(99, 28%, 73%);
 
-  /* === Matching Brackets === */
+  /* Additionals */
   --bracket-color: hsl(0, 0%, 80%);
   --bracket-outline: hsl(0, 0%, 77%);
 }

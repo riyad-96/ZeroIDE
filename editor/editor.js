@@ -463,7 +463,7 @@ expandBtn.forEach((btn) => {
     setDisplay(document.querySelector('.expand-reset-btn'), 'block');
     setTimeout(() => {
       refreshCodeMirror();
-    }, 400)
+    }, 400);
   });
 });
 
@@ -471,11 +471,11 @@ document.querySelector('.expand-reset-btn').addEventListener('click', () => {
   allInputs.forEach((input) => input.classList.remove('expand', 'shrink'));
   setDisplay(document.querySelector('.expand-reset-btn'), 'none');
   setTimeout(() => {
-      refreshCodeMirror();
-    }, 400)
+    refreshCodeMirror();
+  }, 400);
 });
 
-//! Horizontal resizer program
+//! Horizontal resizer programs
 const resizeBar = document.querySelector('.horizontal-resizer');
 const resizableArea = document.querySelector('.code-inputs');
 
@@ -531,6 +531,23 @@ document.addEventListener('touchend', () => {
   savedSettings.editor.editorWidth = resizableArea.getBoundingClientRect().width;
   saveLocalStringify('settings', savedSettings);
 });
+
+const iframeSizeDisplay = document.querySelector('.iframe-size-display');
+
+let resizerDebounce;
+const iframeSizeObserver = new ResizeObserver(() => {
+  const rect = iframe.getBoundingClientRect();
+  iframeSizeDisplay.innerHTML = `<span class="txt">${Math.round(rect.width)}px</span>
+  <span class="close-txt">✕</span>
+  <span class="txt">${Math.round(rect.height)}px</span>`;
+  iframeSizeDisplay.style.opacity = '0.8';
+
+  clearTimeout(resizerDebounce);
+  resizerDebounce = setTimeout(() => {
+    iframeSizeDisplay.style.opacity = '0';
+  }, 900);
+})
+iframeSizeObserver.observe(iframe);
 
 //! Nav programs
 const nav = document.querySelector('nav');

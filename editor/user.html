@@ -69,9 +69,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/parser-postcss.min.js" integrity="sha512-zq5haHKqL4LvxKb2G/46hdhBNp6FXhzmi1nNqsQjJReAYWXCqEWdAR1l3WEfS9AR7nPER62xRSCkO7vH/EFlVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/parser-babel.min.js" integrity="sha512-2VpL2CQOwACkU58IzGit5Zvl1cinncah3Pd6k0BEhzRhx7jlCAPtK+b8E10+17TrMFg6Nzs8pZGHBJqAR8Tjbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Theme -->
-    <!--<link rel="stylesheet" href="./codemirror/theme/dracula.css" />-->
-
     <link rel="stylesheet" href="editor.css" />
     <script src="./editor.js" defer></script>
   </head>
@@ -114,6 +111,7 @@
       <main>
         <div class="code-inputs">
           <button class="expand-reset-btn">Reset</button>
+
           <div id="html-input" class="each-editor" data-input-type="htmlmixed">
             <!-- editor added through js here -->
             <div class="top-bar">
@@ -178,8 +176,12 @@
     </div>
 
     <!-- Modals -->
-    <div class="customization-modal">
-      <div class="customization-container">
+    <!-- iframe size measure program -->
+    <div class="iframe-size-display"></div>
+
+    <!-- user settings panel -->
+    <div class="customization-modal" style="display: grid; opacity: 1">
+      <div class="customization-container slide-up">
         <button class="close-modal-btn" aria-label="Close customization panel" title="Close customization panel">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 10.5858L9.17157 7.75736L7.75736 9.17157L10.5858 12L7.75736 14.8284L9.17157 16.2426L12 13.4142L14.8284 16.2426L16.2426 14.8284L13.4142 12L16.2426 9.17157L14.8284 7.75736L12 10.5858Z"></path></svg>
         </button>
@@ -188,10 +190,11 @@
           <div class="customizaion-tab-btn-container">
             <button class="tab-switch-btn selected" data-tab="html">HTML</button>
             <button class="tab-switch-btn" data-tab="editor">Editor</button>
+            <button class="tab-switch-btn" data-tab="theme">Themes</button>
           </div>
 
           <div class="customization-tab">
-            <div class="each-tab show" data-tab="html">
+            <div class="each-tab" data-tab="html">
               <div class="html-tab">
                 <div class="label-container">
                   <label for="head-tags-input">
@@ -284,6 +287,36 @@
                   </select>
                 </div>
               </form>
+            </div>
+
+            <div class="each-tab show" data-tab="theme">
+              <div class="theme-tab">
+                <button><span>Browser default</span> <span>light or dark</span></button>
+
+                <div class="theme-container">
+                  <span>Light Themes</span>
+                  <div>
+                    <button class="theme-change-btn" data-theme-info="default-light">Default Light</button>
+                    <button class="theme-change-btn" data-theme-info="night-owl">Night Owl</button>
+                    <button class="theme-change-btn" data-theme-info="material-light">Material</button>
+                    <button class="theme-change-btn" data-theme-info="ayu-light">Ayu Light</button>
+                  </div>
+                </div>
+
+                <div class="theme-container">
+                  <span>Dark Themes</span>
+                  <div>
+                    <button class="theme-change-btn" data-theme-info="default-dark">Default Dark</button>
+                    <button class="theme-change-btn" data-theme-info="dracula">Dracula</button>
+                    <button class="theme-change-btn" data-theme-info="one-monokai">One Monokai</button>
+                    <button class="theme-change-btn" data-theme-info="monokai-pro">Monokai Pro</button>
+                    <button class="theme-change-btn" data-theme-info="github-dark">Github Dark</button>
+                    <button class="theme-change-btn" data-theme-info="material-dark">Material</button>
+                    <button class="theme-change-btn" data-theme-info="ayu-mirage">Ayu Mirage</button>
+                    <button class="theme-change-btn" data-theme-info="shades-of-purple">Shades of Purple</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

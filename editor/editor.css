@@ -47,7 +47,7 @@
 }
 
 body {
-  font-family: 'Poppins';
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--body-bg);
   margin: 0;
 }
@@ -220,6 +220,38 @@ header {
   padding-inline: 0.725rem;
 }
 
+.iframe-size-display {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  z-index: 2;
+  display: block;
+  translate: 0 50px;
+  display: flex;
+  align-items:center;
+  gap: 0.225rem;
+  padding-inline: 0.4rem;
+  padding-block: 0.2rem;
+  border-radius: 3px;
+  transition: opacity 200ms;
+
+  background-color: var(--body-clr);
+  color: var(--body-bg);
+  border: var(--light-container-border);
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+
+  .txt {
+    font-size: 0.825rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+  .close-txt {
+    font-size: 0.6rem;
+  }
+}
+
 header > div {
   display: flex;
   align-items: center;
@@ -273,12 +305,18 @@ header > div {
   max-width: 800px;
   overflow-y: scroll;
 }
+
 .project-title::-webkit-scrollbar-track {
   background-color: var(--container-bg);
 }
-
 .project-title::-webkit-scrollbar {
   width: 8px;
+}
+@media (pointer: fine) {
+  .project-title::-webkit-scrollbar {
+    display: none;
+    width: 8px;
+  }
 }
 
 .title-container button {
@@ -342,19 +380,6 @@ main {
     max-width: calc(100vw - var(--resizeBar-width) * 2);
   }
 }
-
-/* button {
-      background-color: var(--option-btn-bg);
-      color: var(--g-btn-clr);
-      font-size: 0.7525rem;
-      padding: 0 0.5rem;
-      border: var(--slick-border);
-      border-radius: 0.2rem;
-    }
-    button:hover {
-      background-color: var(--option-btn-hover-bg);
-      color: var(--g-btn-hover-clr);
-    } */
 
 .expand-reset-btn {
   position: absolute;
@@ -459,7 +484,6 @@ main {
 .CodeMirror {
   font-size: var(--user-font-size);
   font-family: var(--user-font);
-  background-color: var(--container-bg);
   background-color: var(--cm-editor-bg);
   width: 100%;
   height: 100%;
@@ -849,6 +873,7 @@ main {
   overflow-y: auto;
 }
 
+/* each tab styling */
 .each-tab {
   display: none;
 }
@@ -857,11 +882,18 @@ main {
   display: unset;
 }
 
+/* html tab styling*/
 .html-tab {
   padding: 1rem;
   display: grid;
   grid-auto-rows: max-content;
   gap: 0.5rem;
+  max-height: 330px;
+  overflow-y: auto;
+
+  @media (width < 600px) {
+    max-height: 285px;
+  }
 }
 
 .label-container {
@@ -955,8 +987,12 @@ code {
   outline: var(--input-outline);
 }
 
+/* editor tab styling*/
 .editor-tab {
   padding: 1rem;
+  max-height: 330px;
+  overflow-y: auto;
+
   > * {
     display: flex;
     align-items: center;
@@ -967,13 +1003,10 @@ code {
       flex: 1;
     }
   }
-}
-
-.editor-tab {
   select {
     border: var(--slick-border);
     background-color: var(--input-bg);
-    font-family: 'Poppins';
+    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     appearance: none;
     color: var(--body-clr);
     height: 33px;
@@ -990,12 +1023,81 @@ code {
   }
 
   option {
+    font: inherit;
     background-color: var(--option-bg);
     color: var(--option-clr);
   }
 
   select:focus {
     outline: var(--input-outline);
+  }
+
+  @media (width < 600px) {
+    max-height: 285px;
+  }
+}
+
+/* theme tab styling*/
+.theme-tab {
+  padding: 1rem;
+  max-height: 325px;
+  overflow-y: auto;
+
+  > button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--g-btn-clr);
+    background-color: var(--g-btn-bg);
+    font-size: 0.925rem;
+    gap: 0.4rem;
+    border: var(--slick-border);
+    height: 35px;
+    padding-inline: 1rem;
+    border-radius: var(--g-btn-border-radius);
+
+    span + span {
+      font-weight: 300;
+      font-size: 0.725rem;
+      font-style: italic;
+    }
+
+    &:hover {
+      color: var(--g-btn-hover-clr);
+      background-color: var(--g-btn-hover-bg);
+    }
+  }
+
+  @media (width < 600px) {
+    max-height: 285px;
+  }
+}
+
+.theme-container {
+  > span {
+    display: block;
+    margin-block: 1rem 0.5rem;
+  }
+
+  > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.425rem;
+  }
+  button {
+    background-color: var(--g-btn-bg);
+    font-size: 0.925rem;
+    gap: 0.4rem;
+    border: var(--slick-border);
+    height: 35px;
+    padding-inline: 1rem;
+    border-radius: var(--g-btn-border-radius);
+
+    &:hover {
+      color: var(--g-btn-hover-clr);
+      background-color: var(--g-btn-hover-bg);
+    }
   }
 }
 
