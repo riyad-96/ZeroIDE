@@ -1,3 +1,7 @@
+html {
+  color-scheme: light dark;
+}
+
 :root {
   --body-bg: hsl(0, 0%, 95%);
   --body-clr: hsl(0, 0%, 10%);
@@ -10,14 +14,19 @@
   --g-btn-padding: 0.125rem 0.625rem;
   --g-btn-border-radius: 0.325rem;
 
-  --option-btn-bg: hsl(0, 0%, 80%);
-  --option-btn-hover-bg: hsl(0, 0%, 75%);
+  --option-btn-bg: hsl(0, 0%, 85%);
+  --option-btn-hover-bg: hsl(0, 0%, 80%);
 
   --input-bg: hsla(0, 0%, 70%, 0.3);
   --input-outline: 1px solid hsl(0, 0%, 50%, 0.6);
+  --option-bg: hsl(0, 0%, 86%);
+  --option-clr: hsl(0, 0%, 0%);
+
+  --expand-reset-btn-border: 1px solid hsl(0, 0%, 85%);
+  --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
 
   --tab-change-btn-before-bg: hsl(0, 0%, 37%);
-  --tab-change-btn-selected-bg: hsl(0, 0%, 75%);
+  --tab-change-btn-selected-bg: hsl(0, 0%, 85%);
   --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
 
   --slick-border: 1px solid hsl(0, 0%, 79%);
@@ -28,7 +37,7 @@
 
   --project-list-item-hover-bg: hsl(0, 0%, 87%);
 
-  --container-bg: hsl(0, 0%, 93%);
+  --container-bg: hsl(0, 0%, 91%);
   --light-container-border: 1px solid hsl(0, 0%, 87%);
 
   --global-scrollbar-track-bg: hsl(0, 0%, 93%);
@@ -36,18 +45,209 @@
   --global-scrollbar-thumb-hover-bg: hsl(0, 0%, 50%);
 
   /* ! Code editor colors */
-  --topbar-bg: hsl(0, 0%, 85%);
+  --topbar-bg: hsl(0, 0%, 91%);
   --topbar-clr: hsl(0, 0%, 25%);
 
   --file-type-icon-bg: hsl(0, 0%, 23%);
   --file-type-icon-clr: hsl(0, 0%, 90%);
 
-  --cm-m-xml: ;
-  --cm-m-xml: ;
-  --cm-m-xml: ;
-  --cm-m-xml: ;
-  --cm-m-xml: ;
-  --cm-m-xml: ;
-  --cm-m-xml: ;
-  --cm-m-xml: ;
+  --cm-editor-bg: hsl(0, 0%, 88%);
+  --cm-gutter-bg: hsl(0, 0%, 88%);
+  --cm-gutter-elt-clr: hsl(0, 0%, 60%);
+  --cm-active-gutter-elt-clr: hsl(0, 0%, 0%);
+  --cm-gutters-border-right: 1px solid hsl(0, 0%, 80%);
+
+  --cm-focused-selected-bg: hsla(216, 100%, 80%, 0.25);
+  --cm-unfocused-selected-bg: hsla(0, 0%, 60%, 0.25);
+  --cm-cursor-border-clr: hsl(0, 0%, 20%);
+  --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
+
+  /* xml */
+  --xml-default: hsl(0, 0%, 20%);
+  --xml-keyword: hsl(207, 61%, 39%);
+  --xml-bracket: hsl(0, 0%, 50%);
+  --xml-attribute: hsl(201, 98%, 60%);
+  --xml-string: hsl(17, 47%, 44%);
+  --xml-comment: hsl(101, 29%, 27%);
+
+  /* css */
+  --css-default: hsl(0, 0%, 20%);
+  --css-qualifier: hsl(41, 53%, 47%);
+  --css-property: hsl(201, 98%, 60%);
+  --css-number: hsl(99, 28%, 53%);
+  --css-keyword: hsl(17, 47%, 44%);
+  --css-variable-3: hsl(17, 47%, 44%);
+  --css-callee: hsl(60, 42%, 56%);
+  --css-comment: hsl(101, 29%, 27%);
+  --css-atom: hsl(17, 47%, 44%);
+  --css-builtin: hsl(41, 53%, 47%);
+  --css-tag: hsl(41, 53%, 47%);
+
+  /* js */
+  --js-default: hsl(0, 0%, 20%);
+  --js-keyword: hsl(207, 61%, 39%);
+  --js-def: hsl(201, 100%, 45%);
+  --js-variable: hsl(201, 98%, 60%);
+  --js-variable-2: hsl(201, 98%, 60%);
+  --js-property: hsl(60, 42%, 56%);
+  --js-string: hsl(17, 47%, 44%);
+  --js-comment: hsl(101, 29%, 27%);
+  --js-number: hsl(99, 28%, 53%);
+
+  /* Additionals */
+  --bracket-color: var(--xml-default);
+  --bracket-outline: hsl(0, 0%, 63%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-bg: hsl(0, 0%, 5%);
+    --body-clr: hsl(0, 0%, 90%);
+    --overlay: hsl(0, 0%, 0%, 0.3);
+
+    --g-btn-clr: hsl(0, 0%, 90%);
+    --g-btn-bg: hsl(0, 0%, 14%);
+    --g-btn-hover-bg: hsl(0, 0%, 18%);
+    --g-btn-hover-clr: hsl(0, 0%, 100%);
+    --g-btn-padding: 0.125rem 0.625rem;
+    --g-btn-border-radius: 0.325rem;
+
+    --option-btn-bg: hsl(0, 0%, 20%);
+    --option-btn-hover-bg: hsl(0, 0%, 25%);
+
+    --input-bg: hsla(0, 0%, 30%, 0.3);
+    --input-outline: 1px solid hsl(0, 0%, 50%, 0.6);
+    --option-bg: hsl(0, 0%, 14%);
+    --option-clr: hsl(0, 0%, 100%);
+
+    --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
+    --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
+
+    --tab-change-btn-before-bg: hsl(0, 0%, 63%);
+    --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
+    --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
+
+    --slick-border: 1px solid hsl(0, 0%, 21%);
+
+    --sidebar-toggle-icon-bg: hsl(0, 0%, 12%);
+    --sidebar-toggle-btn-hover-border: 1px solid hsl(0, 0%, 21%);
+    --submenu-bg: hsl(0, 0%, 12%);
+
+    --project-list-item-hover-bg: hsl(0, 0%, 13%);
+
+    --container-bg: hsl(0, 0%, 9%);
+    --light-container-border: 1px solid hsl(0, 0%, 13%);
+
+    --global-scrollbar-track-bg: hsl(0, 0%, 7%);
+    --global-scrollbar-thumb-bg: hsl(0, 0%, 35%);
+    --global-scrollbar-thumb-hover-bg: hsl(0, 0%, 50%);
+
+    /* ! Code editor colors */
+    --topbar-bg: var(--container-bg);
+    --topbar-clr: hsl(0, 0%, 85%);
+
+    --file-type-icon-bg: hsl(0, 0%, 77%);
+    --file-type-icon-clr: hsl(0, 0%, 10%);
+
+    --cm-editor-bg: hsl(0, 0%, 12%);
+    --cm-gutter-bg: hsl(0, 0%, 12%);
+    --cm-gutter-elt-clr: hsl(0, 0%, 40%);
+    --cm-active-gutter-elt-clr: hsl(0, 0%, 100%);
+    --cm-gutters-border-right: 1px solid hsl(0, 0%, 20%);
+
+    --cm-focused-selected-bg: hsla(207, 79%, 56%, 0.4);
+    --cm-unfocused-selected-bg: hsla(0, 0%, 50%, 0.25);
+    --cm-cursor-border-clr: hsl(0, 0%, 80%);
+    --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
+
+    /* xml */
+    --xml-default: hsl(0, 0%, 80%);
+    --xml-keyword: hsl(207, 61%, 59%);
+    --xml-bracket: hsl(0, 0%, 50%);
+    --xml-attribute: hsl(201, 98%, 80%);
+    --xml-string: hsl(17, 47%, 64%);
+    --xml-comment: hsl(101, 29%, 47%);
+
+    /* css */
+    --css-default: hsl(0, 0%, 80%);
+    --css-qualifier: hsl(41, 53%, 67%);
+    --css-property: hsl(201, 98%, 80%);
+    --css-number: hsl(99, 28%, 73%);
+    --css-keyword: hsl(17, 47%, 64%);
+    --css-variable-3: hsl(17, 47%, 64%);
+    --css-callee: hsl(60, 42%, 76%);
+    --css-comment: hsl(101, 29%, 47%);
+    --css-atom: hsl(17, 47%, 64%);
+    --css-builtin: hsl(41, 53%, 67%);
+    --css-tag: hsl(41, 53%, 67%);
+
+    /* js */
+    --js-default: hsl(0, 0%, 80%);
+    --js-keyword: hsl(207, 61%, 59%);
+    --js-def: hsl(201, 100%, 65%);
+    --js-variable: hsl(201, 98%, 80%);
+    --js-variable-2: hsl(201, 98%, 80%);
+    --js-property: hsl(60, 42%, 76%);
+    --js-string: hsl(17, 47%, 64%);
+    --js-comment: hsl(101, 29%, 47%);
+    --js-number: hsl(99, 28%, 73%);
+
+    /* === Matching Brackets === */
+    --bracket-color: var(--xml-default);
+    --bracket-outline: hsl(0, 0%, 37%);
+  }
+}
+
+[data-theme='light-default'] {
+  color-scheme: light;
+  /* variables goes here */
+}
+
+[data-theme='dark-default'] {
+  color-scheme: dark;
+  /* xml */
+  --xml-default: hsl(0, 0%, 80%);
+  --xml-keyword: hsl(207, 61%, 59%);
+  --xml-bracket: hsl(0, 0%, 50%);
+  --xml-attribute: hsl(201, 98%, 80%);
+  --xml-string: hsl(17, 47%, 64%);
+  --xml-comment: hsl(101, 29%, 47%);
+
+  /* css */
+  --css-default: hsl(0, 0%, 80%);
+  --css-qualifier: hsl(41, 53%, 67%);
+  --css-property: hsl(201, 98%, 80%);
+  --css-number: hsl(99, 28%, 73%);
+  --css-keyword: hsl(17, 47%, 64%);
+  --css-variable-3: hsl(17, 47%, 64%);
+  --css-callee: hsl(60, 42%, 76%);
+  --css-comment: hsl(101, 29%, 47%);
+  --css-atom: hsl(17, 47%, 64%);
+  --css-builtin: hsl(41, 53%, 67%);
+  --css-tag: hsl(41, 53%, 67%);
+
+  /* js */
+  --js-default: hsl(0, 0%, 80%);
+  --js-keyword: hsl(207, 61%, 59%);
+  --js-def: hsl(201, 100%, 65%);
+  --js-variable: hsl(201, 98%, 80%);
+  --js-variable-2: hsl(201, 98%, 80%);
+  --js-property: hsl(60, 42%, 76%);
+  --js-string: hsl(17, 47%, 64%);
+  --js-comment: hsl(101, 29%, 47%);
+  --js-number: hsl(99, 28%, 73%);
+
+  /* === Matching Brackets === */
+  --bracket-color: hsl(0, 0%, 80%);
+  --bracket-outline: hsl(0, 0%, 77%);
+}
+
+[data-theme='light-monokai'] {
+  color-scheme: light;
+  /* variables goes here */
+}
+
+[data-theme='dark-monokai'] {
+  color-scheme: dark;
+  /* variables goes here */
 }

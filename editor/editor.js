@@ -199,7 +199,7 @@ function loadCodeMirror(mode, value) {
     autoCloseBrackets: true,
     autoCloseTags: true,
     lineWrapping: true,
-    cursorBlinkRate: 0
+    cursorBlinkRate: 0,
   };
 }
 
@@ -460,14 +460,19 @@ expandBtn.forEach((btn) => {
   btn.addEventListener('click', () => {
     allInputs.forEach((input) => input.classList.toggle('shrink', !input.contains(btn)));
     allInputs.forEach((input) => input.classList.toggle('expand', input.contains(btn)));
-    refreshCodeMirror();
     setDisplay(document.querySelector('.expand-reset-btn'), 'block');
+    setTimeout(() => {
+      refreshCodeMirror();
+    }, 400)
   });
 });
 
 document.querySelector('.expand-reset-btn').addEventListener('click', () => {
   allInputs.forEach((input) => input.classList.remove('expand', 'shrink'));
   setDisplay(document.querySelector('.expand-reset-btn'), 'none');
+  setTimeout(() => {
+      refreshCodeMirror();
+    }, 400)
 });
 
 //! Horizontal resizer program
@@ -639,8 +644,8 @@ document.addEventListener('DOMContentLoaded', () => {
   allEditorInput.forEach((input) => {
     refreshEditorContent(input.id);
   });
-  const editorWidth = freshSetting().editor.editorWidth
-  resizableArea.style.width = `${editorWidth <= 350 ? 350 : editorWidth }px`;
+  const editorWidth = freshSetting().editor.editorWidth;
+  resizableArea.style.width = `${editorWidth <= 350 ? 350 : editorWidth}px`;
 });
 
 // Need to style the codemirror colors
