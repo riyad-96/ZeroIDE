@@ -324,6 +324,63 @@ header > div {
   place-items: center;
 }
 
+.navigation-area {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  --nav-btn-height: 27px;
+  --nav-btn-padding-inline: 0.5rem;
+}
+
+.basic-tools {
+  display: flex;
+  align-items: center;
+}
+
+.color-picker-container {
+  position: relative;
+
+  .color-picker-btn {
+    height: var(--nav-btn-height);
+    display: grid;
+    place-items: center;
+    border: var(--slick-border);
+    padding-inline: var(--nav-btn-padding-inline);
+    border-radius: var(--g-btn-border-radius);
+    background-color: var(--g-btn-bg);
+    color: var(--g-btn-clr);
+  }
+  .color-picker-btn:hover {
+    background-color: var(--g-btn-hover-bg);
+    color: var(--g-btn-hover-clr);
+  }
+  .color-picker-btn:active {
+    translate: 0 1px;
+  }
+
+}
+
+.pickr {
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  >button {
+    opacity: 0;
+  }
+
+  /* width: 200px;
+  height: 100px;
+  background-color: crimson; */
+}
+
+/* .pickr-wrapper {
+  height: 20px;
+  width: 20px;
+  background-color: lightseagreen;
+} */
+
 nav {
   display: flex;
   align-items: center;
@@ -332,8 +389,8 @@ nav {
   button {
     font-weight: 500;
     background-color: var(--g-btn-bg);
-    padding-inline: 0.5rem;
-    height: 27px;
+    padding-inline: var(--nav-btn-padding-inline);
+    height: var(--nav-btn-height);
     border-radius: var(--g-btn-border-radius);
     border: var(--slick-border);
     font-size: 0.925rem;
@@ -464,7 +521,7 @@ main {
       color: var(--g-btn-clr);
       border: var(--slick-border);
       border-radius: 0.2rem;
-      display:grid;
+      display: grid;
       place-items: center;
       height: 20px;
       width: 25px;
@@ -701,8 +758,8 @@ main {
     color: var(--g-btn-hover-clr);
   }
   button:active {
-      translate: 0 1px;
-    }
+    translate: 0 1px;
+  }
 }
 
 /*! Modal styling */

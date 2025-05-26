@@ -564,7 +564,6 @@ const iframeSizeObserver = new ResizeObserver(() => {
 iframeSizeObserver.observe(iframe);
 
 //! Nav programs
-const nav = document.querySelector('nav');
 const customizationModal = document.querySelector('.customization-modal');
 const customizationContainer = document.querySelector('.customization-container');
 const closeCustomizationModalBtn = document.querySelector('.close-modal-btn');
@@ -589,17 +588,80 @@ function toggleCustomizationModal() {
   }
 }
 
-nav.addEventListener('click', (e) => {
+const pickrWrapper = document.querySelector('.pickr-wrapper');
+
+document.addEventListener('click', (e) => {
   const runBtn = e.target.closest('.run-code-btn');
   const customizeBtn = e.target.closest('.customize-panel-btn');
+  const pickrBtn = e.target.closest('.color-picker-btn');
   if (runBtn) run();
   if (customizeBtn) toggleCustomizationModal();
+  if (pickrBtn) {
+    if(!pickrWrapper.classList.contains('show')) {
+      pickrWrapper.classList.add('show')
+      pickrWrapper.click();
+    } else {
+      pickrWrapper.classList.remove('show')
+    }
+  }
 });
 
 const customModalBtn = [customizationModal, closeCustomizationModalBtn];
 customModalBtn.forEach((btn) => {
   btn.addEventListener('click', toggleCustomizationModal);
 });
+
+// Color picker
+const pickr = Pickr.create({
+  el: '.pickr-wrapper',
+  useAsButton: true,
+  theme: 'nano',
+
+  // swatches: ['rgba(244, 67, 54, 1)', 'rgba(233, 30, 99, 0.95)', 'rgba(156, 39, 176, 0.9)', 'rgba(103, 58, 183, 0.85)', 'rgba(63, 81, 181, 0.8)', 'rgba(33, 150, 243, 0.75)', 'rgba(3, 169, 244, 0.7)', 'rgba(0, 188, 212, 0.7)', 'rgba(0, 150, 136, 0.75)', 'rgba(76, 175, 80, 0.8)', 'rgba(139, 195, 74, 0.85)', 'rgba(205, 220, 57, 0.9)', 'rgba(255, 235, 59, 0.95)', 'rgba(255, 193, 7, 1)'],
+
+  components: {
+    preview: true,
+    opacity: true,
+    hue: true,
+    interaction: {
+      hex: true,
+      hsla: true,
+      rgba: true,
+      input: true,
+      clear: true,
+      save: true,
+    },
+  },
+});
+
+// pickr
+//   .on('init', (instance) => {
+//     console.log('Event: "init"', instance);
+//   })
+//   .on('hide', (instance) => {
+//     console.log('Event: "hide"', instance);
+//   })
+//   .on('show', (color, instance) => {
+//     console.log('Event: "show"', color, instance);
+//   })
+//   .on('save', (color, instance) => {
+//     console.log('Event: "save"', color, instance);
+//   })
+//   .on('clear', (instance) => {
+//     console.log('Event: "clear"', instance);
+//   })
+//   .on('change', (color, source, instance) => {
+//     console.log('Event: "change"', color, source, instance);
+//   })
+//   .on('changestop', (source, instance) => {
+//     console.log('Event: "changestop"', source, instance);
+//   })
+//   .on('cancel', (instance) => {
+//     console.log('Event: "cancel"', instance);
+//   })
+//   .on('swatchselect', (color, instance) => {
+//     console.log('Event: "swatchselect"', color, instance);
+//   });
 
 //! Customization panel programs
 const infoIcon = document.querySelector('.info-icon');
