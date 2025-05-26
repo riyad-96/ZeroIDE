@@ -993,7 +993,7 @@ img {
   justify-content: space-between;
   gap: 2rem;
   opacity: 0.7;
-  font-weight: 200;
+  font-weight: 300;
 }
 .each-username-link-container a {
   flex-grow: 1;
@@ -1034,9 +1034,6 @@ img {
 @media (pointer: fine) {
   .each-username-link-container:hover {
     opacity: 1;
-  }
-  .each-username-link-container:hover a {
-    translate: 5px 0;
   }
 }
 @media (width < 650px) {
@@ -1805,11 +1802,13 @@ form textarea::-webkit-scrollbar {
 
 .delete-confirmation-buttons .dlt-confirm-btn {
   color: #fff;
-  background-color: hsl(0, 100%, 60%);
+  border: 1px solid hsl(0, 73%, 47%);
+  background-color: hsl(0, 73%, 47%);
 }
 
 .delete-confirmation-buttons .dlt-confirm-btn:hover {
-  background-color: hsl(0, 100%, 40%);
+  background-color: hsl(0, 73%, 55%);
+  border: 1px solid hsl(0, 73%, 50%);
 }
 
 .delete-confirmation-buttons .dlt-cancel-btn:hover {

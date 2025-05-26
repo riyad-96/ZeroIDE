@@ -358,7 +358,6 @@ header > div {
   .color-picker-btn:active {
     translate: 0 1px;
   }
-
 }
 
 .pickr {
@@ -366,13 +365,9 @@ header > div {
   top: 100%;
   right: 0;
 
-  >button {
+  > button {
     opacity: 0;
   }
-
-  /* width: 200px;
-  height: 100px;
-  background-color: crimson; */
 }
 
 /* .pickr-wrapper {
@@ -1264,5 +1259,56 @@ code {
   }
   span::before {
     width: 0;
+  }
+}
+
+.code-not-found-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  z-index: 9999999999999;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(5px);
+  background-color: var(--overlay);
+  display: none;
+
+  div {
+    background-color: var(--container-bg);
+    border-radius: 0.425rem;
+    padding: 1.3rem;
+    display: grid;
+    grid-auto-rows: max-content;
+    border: var(--slick-border);
+    max-width: 400px;
+
+    h3 {
+      margin: 0;
+      font-weight: 500;
+      font-size: 1.325rem;
+    }
+
+    span {
+      display: block;
+      margin-block: 0.4rem 1rem;
+      opacity: 0.7;
+      line-height: 0.95lh;
+    }
+
+    button {
+      background-color: var(--g-btn-bg);
+      color: var(--g-btn-clr);
+      padding-block: 0.3rem;
+      padding-inline: 1rem;
+      border-radius: 10000px;
+      border: var(--slick-border);
+      font-weight: 500;
+
+      &:hover {
+        background-color: var(--g-btn-hover-bg);
+        color: var(--g-btn-hover-clr);
+      }
+    }
   }
 }

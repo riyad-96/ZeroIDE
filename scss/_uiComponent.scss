@@ -344,10 +344,12 @@ form textarea::-webkit-scrollbar {
 }
 .delete-confirmation-buttons .dlt-confirm-btn {
   color: #fff;
-  background-color: hsl(0, 100%, 60%);
+  border: 1px solid hsl(0, 73%, 47%);
+  background-color: hsl(0, 73%, 47%);
 }
 .delete-confirmation-buttons .dlt-confirm-btn:hover {
-  background-color: hsl(0, 100%, 40%);
+  background-color: hsl(0, 73%, 55%);
+  border: 1px solid hsl(0, 73%, 50%);
 }
 .delete-confirmation-buttons .dlt-cancel-btn:hover {
   background-color: var(--global-button-hover-bg);

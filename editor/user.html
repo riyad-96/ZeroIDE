@@ -205,7 +205,7 @@
         <div class="horizontal-resizer" title="Drag to resize"></div>
 
         <div class="code-preview">
-          <iframe frameborder="0" sandbox="allow-scripts"></iframe>
+          <iframe frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe>
         </div>
       </main>
 
@@ -365,5 +365,14 @@
 
     <!-- toast message -->
     <div class="toast-message-container"></div>
+
+    <!-- disable interactiviy -->
+    <div class="code-not-found-container">
+      <div>
+        <h3>Code not found</h3>
+        <span>Current project must be deleted. Please close the tab.</span>
+        <button class="close-main-tab-btn">Close</button>
+      </div>
+    </div>
   </body>
 </html>

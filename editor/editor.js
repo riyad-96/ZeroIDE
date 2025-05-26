@@ -49,10 +49,36 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
 };
 
 // load project title
-const projectTitle = savedProjects[indexFinder(savedProjects, hash)].name;
+const codeNotFound = document.querySelector('.code-not-found-container');
+const currentProject = savedProjects[indexFinder(savedProjects, hash)];
+
 const projectTitleContainer = document.querySelector('.project-title');
-projectTitleContainer.textContent = projectTitle;
-projectTitleContainer.setAttribute('title', 'Description: ' + savedProjects[indexFinder(savedProjects, hash)].des);
+if(currentProject) {
+  projectTitleContainer.textContent = currentProject.name;
+  projectTitleContainer.setAttribute('title', 'Description: ' + savedProjects[indexFinder(savedProjects, hash)].des);
+} else {
+  checkIfCodeExists();
+}
+
+
+// check if the current file isn't deleted
+function checkIfCodeExists() {
+  const newProjectsList = JSON.parse(localStorage.getItem('all-saved-projects'))
+  const code = newProjectsList[indexFinder(newProjectsList, hash)]
+  if(!code) {
+    setDisplay(codeNotFound, 'grid')
+  }
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') checkIfCodeExists();
+});
+
+const closeMainTabBtn = document.querySelector('.close-main-tab-btn');
+closeMainTabBtn.addEventListener('click', () => {
+  window.close();
+});
+
 
 // title edit program
 const titleEditBtn = document.querySelector('.title-container>button');
@@ -312,6 +338,8 @@ const codeScrolls = [
 const randomScroll = codeScrolls[Math.floor(Math.random() * codeScrolls.length)];
 
 function fallBack(type) {
+  if(!currentProject) return;
+
   if (type === 'html') {
     return formatCode(randomScroll.html, 'html');
   }
@@ -409,7 +437,7 @@ function setValueOnIframe(headTags, html, css, js) {
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>${projectTitle}</title>
+      <title>${currentProject?.name}</title>
       ${headTags}
       <style>${css}</style>
     </head>
@@ -419,13 +447,14 @@ function setValueOnIframe(headTags, html, css, js) {
     </body>
   </html>`;
 
-  const blob = new Blob([fullHtml], { type: 'text/html' });
-  const blobUrl = URL.createObjectURL(blob);
-  iframe.src = blobUrl;
+  // const blob = new Blob([fullHtml], { type: 'text/html' });
+  // const blobUrl = URL.createObjectURL(blob);
+  // iframe.src = blobUrl;
 
-  iframe.onload = () => {
-    URL.revokeObjectURL(blobUrl);
-  };
+  // iframe.onload = () => {
+  //   URL.revokeObjectURL(blobUrl);
+  // };
+  iframe.srcdoc = fullHtml;
 }
 setValueOnIframe(code().headTags, code().html, code().css, code().js);
 
@@ -597,11 +626,11 @@ document.addEventListener('click', (e) => {
   if (runBtn) run();
   if (customizeBtn) toggleCustomizationModal();
   if (pickrBtn) {
-    if(!pickrWrapper.classList.contains('show')) {
-      pickrWrapper.classList.add('show')
+    if (!pickrWrapper.classList.contains('show')) {
+      pickrWrapper.classList.add('show');
       pickrWrapper.click();
     } else {
-      pickrWrapper.classList.remove('show')
+      pickrWrapper.classList.remove('show');
     }
   }
 });
@@ -805,7 +834,6 @@ function moveLineUp(cm) {
   });
 }
 
-//needs theme integration.
 // Toast message program
 const toastMessageContainer = document.querySelector('.toast-message-container');
 
