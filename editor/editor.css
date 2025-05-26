@@ -323,7 +323,7 @@ header > div {
   display: grid;
   place-items: center;
 }
-
+/*! navigation area styling */
 .navigation-area {
   display: flex;
   align-items: center;
@@ -360,21 +360,80 @@ header > div {
   }
 }
 
-.pickr {
+.color-picker-actions {
   position: absolute;
-  top: 100%;
-  right: 0;
+  top: 256px;
+  left: 50%;
+  z-index: 10001;
+  translate: -50% 0;
 
-  > button {
-    opacity: 0;
+  background-color: var(--container-bg);
+  width: 228px;
+  padding: 0 0.7rem 0.7rem 0.7rem;
+  border-radius: 0 0 0.4rem 0.4rem;
+  border-bottom: var(--slick-border);
+  border-inline: var(--slick-border);
+  display: grid;
+  display: none;
+  opacity: 0;
+  transition: opacity 300ms;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-start: 0.3rem;
+
+    span {
+      font-size: 0.825rem;
+    }
+
+    button {
+      display: grid;
+      place-items: center;
+      background-color: var(--g-btn-bg);
+      color: var(--g-btn-clr);
+      border: var(--slick-border);
+      border-radius: 0.2rem;
+      width: 25px;
+      height: 25px;
+
+      &:hover {
+        background-color: var(--g-btn-hover-bg);
+        color: var(--g-btn-hover-clr);
+      }
+    }
   }
 }
 
-/* .pickr-wrapper {
-  height: 20px;
-  width: 20px;
-  background-color: lightseagreen;
-} */
+.pcr-button {
+  display: none;
+}
+
+.pcr-app {
+  position: absolute;
+  top: 45px !important;
+  left: 50% !important;
+  translate: -50% 0;
+  background-color: var(--container-bg);
+  box-shadow: none;
+  border-radius: 0.4rem 0.4rem 0 0;
+  overflow: hidden;
+  border-top: var(--slick-border);
+  border-inline: var(--slick-border);
+  /* transition: opacity 5000ms; */
+}
+
+.pcr-swatches.pcr-swatches.pcr-swatches {
+  display: none;
+}
+
+.pcr-interaction.pcr-interaction.pcr-interaction {
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  background-color: var(--container-bg);
+  width: 100%;
+  translate: 3px 3px;
+}
 
 nav {
   display: flex;

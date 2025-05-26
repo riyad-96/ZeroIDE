@@ -30,6 +30,16 @@ function setCursor(el, cursor) {
   el.style.cursor = cursor;
 }
 
+function copyToClipboard(text) {
+  const tempInput = document.createElement('textarea');
+  tempInput.value = text
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+  console.log('Copied', text)
+}
+
 //! ----------------------------------
 
 //! Load saved data programs
@@ -53,20 +63,19 @@ const codeNotFound = document.querySelector('.code-not-found-container');
 const currentProject = savedProjects[indexFinder(savedProjects, hash)];
 
 const projectTitleContainer = document.querySelector('.project-title');
-if(currentProject) {
+if (currentProject) {
   projectTitleContainer.textContent = currentProject.name;
   projectTitleContainer.setAttribute('title', 'Description: ' + savedProjects[indexFinder(savedProjects, hash)].des);
 } else {
   checkIfCodeExists();
 }
 
-
 // check if the current file isn't deleted
 function checkIfCodeExists() {
-  const newProjectsList = JSON.parse(localStorage.getItem('all-saved-projects'))
-  const code = newProjectsList[indexFinder(newProjectsList, hash)]
-  if(!code) {
-    setDisplay(codeNotFound, 'grid')
+  const newProjectsList = JSON.parse(localStorage.getItem('all-saved-projects'));
+  const code = newProjectsList[indexFinder(newProjectsList, hash)];
+  if (!code) {
+    setDisplay(codeNotFound, 'grid');
   }
 }
 
@@ -78,7 +87,6 @@ const closeMainTabBtn = document.querySelector('.close-main-tab-btn');
 closeMainTabBtn.addEventListener('click', () => {
   window.close();
 });
-
 
 // title edit program
 const titleEditBtn = document.querySelector('.title-container>button');
@@ -338,7 +346,7 @@ const codeScrolls = [
 const randomScroll = codeScrolls[Math.floor(Math.random() * codeScrolls.length)];
 
 function fallBack(type) {
-  if(!currentProject) return;
+  if (!currentProject) return;
 
   if (type === 'html') {
     return formatCode(randomScroll.html, 'html');
@@ -447,14 +455,10 @@ function setValueOnIframe(headTags, html, css, js) {
     </body>
   </html>`;
 
-  // const blob = new Blob([fullHtml], { type: 'text/html' });
-  // const blobUrl = URL.createObjectURL(blob);
-  // iframe.src = blobUrl;
-
-  // iframe.onload = () => {
-  //   URL.revokeObjectURL(blobUrl);
-  // };
-  iframe.srcdoc = fullHtml;
+  const blob = new Blob([fullHtml], { type: 'text/html' });
+  const blobUrl = URL.createObjectURL(blob);
+  iframe.src = blobUrl;
+  iframe.onload = () => URL.revokeObjectURL(blobUrl);
 }
 setValueOnIframe(code().headTags, code().html, code().css, code().js);
 
@@ -492,7 +496,7 @@ document.querySelector('.code-inputs').addEventListener('click', (e) => {
   const formatBtn = e.target.closest('.single-file-format-btn');
   if (formatBtn) {
     applyFormatedCode(formatBtn.dataset.parserType);
-    toastPopup(formatBtn);
+    // toastPopup(formatBtn);
   }
 });
 
@@ -616,52 +620,88 @@ function toggleCustomizationModal() {
     }, 100);
   }
 }
-
-const pickrWrapper = document.querySelector('.pickr-wrapper');
-
-document.addEventListener('click', (e) => {
-  const runBtn = e.target.closest('.run-code-btn');
-  const customizeBtn = e.target.closest('.customize-panel-btn');
-  const pickrBtn = e.target.closest('.color-picker-btn');
-  if (runBtn) run();
-  if (customizeBtn) toggleCustomizationModal();
-  if (pickrBtn) {
-    if (!pickrWrapper.classList.contains('show')) {
-      pickrWrapper.classList.add('show');
-      pickrWrapper.click();
-    } else {
-      pickrWrapper.classList.remove('show');
-    }
-  }
-});
-
 const customModalBtn = [customizationModal, closeCustomizationModalBtn];
 customModalBtn.forEach((btn) => {
   btn.addEventListener('click', toggleCustomizationModal);
 });
 
+document.addEventListener('click', (e) => {
+  const runBtn = e.target.closest('.run-code-btn');
+  const customizeBtn = e.target.closest('.customize-panel-btn');
+
+  if (runBtn) run();
+  if (customizeBtn) toggleCustomizationModal();
+});
+
+const pickrWrapper = document.querySelector('.pickr-wrapper');
+const pickrBtn = document.querySelector('.color-picker-btn');
+const pickrActionContainer = document.querySelector('.color-picker-actions');
 // Color picker
 const pickr = Pickr.create({
   el: '.pickr-wrapper',
-  useAsButton: true,
+  container: '.color-picker-container',
   theme: 'nano',
-
-  // swatches: ['rgba(244, 67, 54, 1)', 'rgba(233, 30, 99, 0.95)', 'rgba(156, 39, 176, 0.9)', 'rgba(103, 58, 183, 0.85)', 'rgba(63, 81, 181, 0.8)', 'rgba(33, 150, 243, 0.75)', 'rgba(3, 169, 244, 0.7)', 'rgba(0, 188, 212, 0.7)', 'rgba(0, 150, 136, 0.75)', 'rgba(76, 175, 80, 0.8)', 'rgba(139, 195, 74, 0.85)', 'rgba(205, 220, 57, 0.9)', 'rgba(255, 235, 59, 0.95)', 'rgba(255, 193, 7, 1)'],
-
   components: {
     preview: true,
     opacity: true,
     hue: true,
     interaction: {
-      hex: true,
-      hsla: true,
-      rgba: true,
       input: true,
-      clear: true,
-      save: true,
     },
   },
 });
+
+function round(v) {
+  return Math.round(v);
+}
+
+function formattedColor(color) {
+  const hexa = color.toHEXA().toString();
+  const [h, s, l, a] = color.toHSLA();
+  const [r, g, b, A] = color.toRGBA();
+  return {
+    hexa,
+    hsla: `hsla(${round(h)}, ${round(s)}%, ${round(l)}%, ${a})`,
+    rgba: `rgba(${round(r)}, ${round(g)}, ${round(b)}, ${A})`,
+  };
+}
+
+function colorUpdate(color) {
+  document.querySelector('.hexa-color-container').textContent = formattedColor(color).hexa;
+  document.querySelector('.hsla-color-container').textContent = formattedColor(color).hsla;
+  document.querySelector('.rgba-color-container').textContent = formattedColor(color).rgba;
+}
+
+pickrBtn.addEventListener('click', () => {
+  pickr.show();
+});
+
+pickr.on('show', (color) => {
+  pickrActionContainer.style.display = 'grid';
+  requestAnimationFrame(() => {
+    pickrActionContainer.style.opacity = '1';
+  });
+  colorUpdate(color);
+});
+
+pickr.on('hide', () => {
+  pickrActionContainer.style.opacity = '0';
+  setTimeout(() => {
+    pickrActionContainer.style.display = 'none';
+  }, 300);
+});
+
+pickr.on('change', (color) => {
+  colorUpdate(color)
+});
+
+pickrActionContainer.addEventListener('click', e => {
+  const clrCopyBtn = e.target.closest('.copy-color-btn');
+  if(clrCopyBtn) {
+    const color = clrCopyBtn.previousElementSibling.textContent
+    copyToClipboard(color);
+  }
+})
 
 // pickr
 //   .on('init', (instance) => {
@@ -854,3 +894,10 @@ function toastPopup(btn) {
     toastMessageContainer.removeChild(div);
   }, 3200);
 }
+
+document.addEventListener('click', e => {
+  const toastBtn = e.target.closest('[data-toast-message]')
+  if(toastBtn) {
+    toastPopup(toastBtn);
+  }
+})

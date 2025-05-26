@@ -70,8 +70,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/parser-babel.min.js" integrity="sha512-2VpL2CQOwACkU58IzGit5Zvl1cinncah3Pd6k0BEhzRhx7jlCAPtK+b8E10+17TrMFg6Nzs8pZGHBJqAR8Tjbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- color picker -->
-     <link rel="stylesheet" href="@simonwep/pickr/dist/themes/nano.min.css"/>
-     <script src="@simonwep/pickr/dist/pickr.min.js"></script>
+    <link rel="stylesheet" href="@simonwep/pickr/dist/themes/nano.min.css" />
+    <script src="@simonwep/pickr/dist/pickr.min.js"></script>
 
     <link rel="stylesheet" href="editor.css" />
     <script src="./editor.js" defer></script>
@@ -114,6 +114,27 @@
                   <path d="M12 2C17.5222 2 22 5.97778 22 10.8889C22 13.9556 19.5111 16.4444 16.4444 16.4444H14.4778C13.5556 16.4444 12.8111 17.1889 12.8111 18.1111C12.8111 18.5333 12.9778 18.9222 13.2333 19.2111C13.5 19.5111 13.6667 19.9 13.6667 20.3333C13.6667 21.2556 12.9 22 12 22C6.47778 22 2 17.5222 2 12C2 6.47778 6.47778 2 12 2ZM10.8111 18.1111C10.8111 16.0843 12.451 14.4444 14.4778 14.4444H16.4444C18.4065 14.4444 20 12.851 20 10.8889C20 7.1392 16.4677 4 12 4C7.58235 4 4 7.58235 4 12C4 16.19 7.2226 19.6285 11.324 19.9718C10.9948 19.4168 10.8111 18.7761 10.8111 18.1111ZM7.5 12C6.67157 12 6 11.3284 6 10.5C6 9.67157 6.67157 9 7.5 9C8.32843 9 9 9.67157 9 10.5C9 11.3284 8.32843 12 7.5 12ZM16.5 12C15.6716 12 15 11.3284 15 10.5C15 9.67157 15.6716 9 16.5 9C17.3284 9 18 9.67157 18 10.5C18 11.3284 17.3284 12 16.5 12ZM12 9C11.1716 9 10.5 8.32843 10.5 7.5C10.5 6.67157 11.1716 6 12 6C12.8284 6 13.5 6.67157 13.5 7.5C13.5 8.32843 12.8284 9 12 9Z"></path>
                 </svg>
               </button>
+
+              <div class="color-picker-actions">
+                <div>
+                  <span class="hexa-color-container">hex</span>
+                  <button class="copy-color-btn" data-color-type="hexa" data-toast-message="Color copied !">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z"></path></svg>
+                  </button>
+                </div>
+                <div>
+                  <span class="hsla-color-container">hsla</span>
+                  <button class="copy-color-btn" data-color-type="hsla" data-toast-message="Color copied !">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z"></path></svg>
+                  </button>
+                </div>
+                <div>
+                  <span class="rgba-color-container">rgba</span>
+                  <button class="copy-color-btn" data-color-type="rgba" data-toast-message="Color copied !">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z"></path></svg>
+                  </button>
+                </div>
+              </div>
 
               <div class="pickr-wrapper"></div>
             </div>
@@ -205,7 +226,7 @@
         <div class="horizontal-resizer" title="Drag to resize"></div>
 
         <div class="code-preview">
-          <iframe frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe>
+          <iframe frameborder="0" sandbox="allow-scripts"></iframe>
         </div>
       </main>
 
