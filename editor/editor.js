@@ -193,6 +193,7 @@ function loadCodeMirror(mode, value) {
     styleSelectedText: true,
     allowMultipleSelections: true,
     extraKeys: {
+      'Ctrl-R': run,
       'Ctrl-D': 'selectNextOccurrence',
       'Ctrl-Space': 'autocomplete',
       'Ctrl-/': 'toggleComment',
@@ -417,7 +418,7 @@ function setValueOnIframe(headTags, html, css, js) {
       <script>${js}<\/script>
     </body>
   </html>`;
-  
+
   const blob = new Blob([fullHtml], { type: 'text/html' });
   const blobUrl = URL.createObjectURL(blob);
   iframe.src = blobUrl;
@@ -462,6 +463,7 @@ document.querySelector('.code-inputs').addEventListener('click', (e) => {
   const formatBtn = e.target.closest('.single-file-format-btn');
   if (formatBtn) {
     applyFormatedCode(formatBtn.dataset.parserType);
+    toastPopup(formatBtn);
   }
 });
 
@@ -689,7 +691,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// copy lines
+// copy lines up/down
 function copyLineDown(cm) {
   const pos = cm.getCursor();
   const line = pos.line;
@@ -712,37 +714,17 @@ function copyLineUp(cm) {
   });
 }
 
-// function moveLineDown(cm) {
-//   const pos = cm.getCursor();
-//   const line = pos.line;
-
-//   if (line === cm.lineCount() - 1) return; // Bottom line, can't move down
-
-//   const currentLine = cm.getLine(line);
-//   const belowLine = cm.getLine(line + 1);
-
-//   cm.operation(() => {
-//     // Replace the two lines
-//     cm.replaceRange(belowLine, { line: line, ch: 0 }, { line + 1, ch: 0 });
-//     cm.replaceRange(currentLine, { line: line + 1, ch: 0 }, { line + 2, ch: 0 });
-//     // Move the cursor down
-//     cm.setCursor({ line: line + 1, ch: pos.ch });
-//   });
-// }
-
+// Line move up/down
 function moveLineDown(cm) {
   const pos = cm.getCursor();
   const line = pos.line;
   if (line === cm.lineCount() - 1) return;
-
   const currentLine = cm.getLine(line);
   const belowLine = cm.getLine(line + 1);
 
   cm.operation(() => {
     cm.replaceRange(belowLine, { line: line, ch: 0 }, { line: line, ch: currentLine.length });
-
     cm.replaceRange(currentLine, { line: line + 1, ch: 0 }, { line: line + 1, ch: belowLine.length });
-
     cm.setCursor({ line: line + 1, ch: pos.ch });
   });
 }
@@ -751,17 +733,34 @@ function moveLineUp(cm) {
   const pos = cm.getCursor();
   const line = pos.line;
   if (line === 0) return;
-
   const currentLine = cm.getLine(line);
   const aboveLine = cm.getLine(line - 1);
 
   cm.operation(() => {
-    // Swap full lines
     cm.replaceRange(currentLine, { line: line - 1, ch: 0 }, { line: line - 1, ch: aboveLine.length });
-
     cm.replaceRange(aboveLine, { line: line, ch: 0 }, { line: line, ch: currentLine.length });
-
-    // Cursor up
     cm.setCursor({ line: line - 1, ch: pos.ch });
   });
+}
+
+//needs theme integration.
+// Toast message program
+const toastMessageContainer = document.querySelector('.toast-message-container');
+
+function toastPopup(btn) {
+  const div = document.createElement('div');
+  div.innerHTML = `<span class="toast-message">${btn.dataset.toastMessage}</span>`;
+  toastMessageContainer.prepend(div);
+
+  requestAnimationFrame(() => {
+    div.classList.add('show');
+  });
+
+  setTimeout(() => {
+    div.classList.remove('show');
+  }, 2800);
+
+  setTimeout(() => {
+    toastMessageContainer.removeChild(div);
+  }, 3200);
 }

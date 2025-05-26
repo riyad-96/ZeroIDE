@@ -205,7 +205,7 @@ h1 {
   grid-template-rows: auto 1fr auto;
 
   --header-height: 50px;
-  --console-height: 35px;
+  --footer-feature-bar-height: 30px;
 }
 
 /*! ----- Header styling ----- */
@@ -228,7 +228,7 @@ header {
   display: block;
   translate: 0 50px;
   display: flex;
-  align-items:center;
+  align-items: center;
   gap: 0.225rem;
   padding-inline: 0.4rem;
   padding-block: 0.2rem;
@@ -332,16 +332,18 @@ nav {
   button {
     font-weight: 500;
     background-color: var(--g-btn-bg);
-    padding: var(--g-btn-padding);
+    padding-inline: 0.5rem;
+    height: 27px;
     border-radius: var(--g-btn-border-radius);
     border: var(--slick-border);
     font-size: 0.925rem;
     transform-origin: center;
-
-    &:active {
-      translate: 0 1px;
-      /* scale: 0.98; */
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  button:active {
+    translate: 0 1px;
   }
 
   button:hover {
@@ -356,7 +358,7 @@ main {
 
   --editor-count: 3;
   --gap-between-editor: 1px;
-  --height-margin: calc(var(--header-height) + var(--console-height) + (var(--gap-between-editor) * var(--editor-count)));
+  --height-margin: calc(var(--header-height) + var(--footer-feature-bar-height) + (var(--gap-between-editor) * var(--editor-count)));
   --resizeBar-width: 20px;
   --topbar-height: 30px;
   --code-input-max-width: calc(100vw - var(--resizeBar-width));
@@ -454,16 +456,24 @@ main {
 
   .extra-options {
     display: flex;
+    align-items: center;
     gap: 0.225rem;
 
     button {
       background-color: var(--option-btn-bg);
       color: var(--g-btn-clr);
-      font-size: 0.7525rem;
-      padding: 0 0.5rem;
       border: var(--slick-border);
       border-radius: 0.2rem;
+      display:grid;
+      place-items: center;
+      height: 20px;
+      width: 25px;
     }
+
+    button:active {
+      translate: 0 1px;
+    }
+
     button:hover {
       background-color: var(--option-btn-hover-bg);
       color: var(--g-btn-hover-clr);
@@ -666,30 +676,33 @@ main {
 }
 
 /* ! Console styling */
-.console {
+.footer-feature-bar {
   border-block-start: var(--light-container-border);
   background-color: var(--container-bg);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding-inline: 1rem;
-  height: var(--console-height);
+  height: var(--footer-feature-bar-height);
 
   button {
-    padding-inline: 0.325rem;
-    font-size: 0.925rem;
-    line-height: 0.9lh;
+    padding-inline: 0.425rem;
+    font-size: 0.825rem;
     background-color: var(--g-btn-bg);
     color: var(--g-btn-clr);
     border-radius: var(--g-btn-border-radius);
     border: var(--slick-border);
     font-weight: 500;
-
-    &:hover {
-      background-color: var(--g-btn-hover-bg);
-      color: var(--g-btn-hover-clr);
-    }
+    display: grid;
+    place-items: center;
   }
+  button:hover {
+    background-color: var(--g-btn-hover-bg);
+    color: var(--g-btn-hover-clr);
+  }
+  button:active {
+      translate: 0 1px;
+    }
 }
 
 /*! Modal styling */
@@ -981,7 +994,7 @@ code {
   outline: none;
   outline-offset: 2px;
 
-  @media(width < 600px) {
+  @media (width < 600px) {
     max-height: 215px;
   }
 }
@@ -1134,4 +1147,65 @@ code {
 .info-container.show {
   translate: calc(-50% - 8px) 0;
   opacity: 1;
+}
+
+/* toast message */
+.toast-message-container {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  pointer-events: none;
+}
+.toast-message-container div {
+  display: flex;
+  justify-content: center;
+  height: 0px;
+  margin-block-end: 2px;
+
+  transition: 200ms;
+}
+.toast-message {
+  height: 35px;
+  color: var(--toast-message-clr);
+  background-color: var(--toast-message-bg);
+  font-size: 0.8525rem;
+  font-weight: 500;
+  display: grid;
+  place-items: center;
+  padding-inline: 0.725rem;
+  border-radius: 0.255rem;
+  border: var(--toast-message-border);
+  overflow: hidden;
+
+  scale: 0.6;
+  opacity: 0;
+  translate: 0 -100%;
+  transition: 300ms;
+}
+
+.toast-message::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 3;
+  height: 3px;
+  width: 100%;
+  background-color: var(--toast-message-clr);
+  transition: width 2800ms linear;
+}
+
+.toast-message-container div.show {
+  height: 40px;
+
+  span {
+    scale: 1;
+    opacity: 1;
+    translate: 0 0;
+  }
+  span::before {
+    width: 0;
+  }
 }

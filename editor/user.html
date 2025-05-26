@@ -102,10 +102,28 @@
           </div>
         </div>
 
-        <nav>
-          <button class="run-code-btn" title="Run code">Run</button>
-          <button class="customize-panel-btn" title="Customize settings">Customize</button>
-        </nav>
+        <div class="navigation-area">
+          <div class="basic-tools">
+            <div class="color-picker-container">
+              <input type="color" />
+              <button class="color-picker">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 2C17.5222 2 22 5.97778 22 10.8889C22 13.9556 19.5111 16.4444 16.4444 16.4444H14.4778C13.5556 16.4444 12.8111 17.1889 12.8111 18.1111C12.8111 18.5333 12.9778 18.9222 13.2333 19.2111C13.5 19.5111 13.6667 19.9 13.6667 20.3333C13.6667 21.2556 12.9 22 12 22C6.47778 22 2 17.5222 2 12C2 6.47778 6.47778 2 12 2ZM10.8111 18.1111C10.8111 16.0843 12.451 14.4444 14.4778 14.4444H16.4444C18.4065 14.4444 20 12.851 20 10.8889C20 7.1392 16.4677 4 12 4C7.58235 4 4 7.58235 4 12C4 16.19 7.2226 19.6285 11.324 19.9718C10.9948 19.4168 10.8111 18.7761 10.8111 18.1111ZM7.5 12C6.67157 12 6 11.3284 6 10.5C6 9.67157 6.67157 9 7.5 9C8.32843 9 9 9.67157 9 10.5C9 11.3284 8.32843 12 7.5 12ZM16.5 12C15.6716 12 15 11.3284 15 10.5C15 9.67157 15.6716 9 16.5 9C17.3284 9 18 9.67157 18 10.5C18 11.3284 17.3284 12 16.5 12ZM12 9C11.1716 9 10.5 8.32843 10.5 7.5C10.5 6.67157 11.1716 6 12 6C12.8284 6 13.5 6.67157 13.5 7.5C13.5 8.32843 12.8284 9 12 9Z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <nav>
+            <button class="run-code-btn" title="Run code">
+              <span>Run</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16.3944 12.0001L10 7.7371V16.263L16.3944 12.0001ZM19.376 12.4161L8.77735 19.4818C8.54759 19.635 8.23715 19.5729 8.08397 19.3432C8.02922 19.261 8 19.1645 8 19.0658V4.93433C8 4.65818 8.22386 4.43433 8.5 4.43433C8.59871 4.43433 8.69522 4.46355 8.77735 4.5183L19.376 11.584C19.6057 11.7372 19.6678 12.0477 19.5146 12.2774C19.478 12.3323 19.4309 12.3795 19.376 12.4161Z"></path></svg>
+            </button>
+            <button class="customize-panel-btn" title="Customize settings" aria-label="customize editor settings">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5.32943 3.27158C6.56252 2.8332 7.9923 3.10749 8.97927 4.09446C9.96652 5.08171 10.2407 6.51202 9.80178 7.74535L20.6465 18.5902L18.5252 20.7115L7.67936 9.86709C6.44627 10.3055 5.01649 10.0312 4.02952 9.04421C3.04227 8.05696 2.7681 6.62665 3.20701 5.39332L5.44373 7.63C6.02952 8.21578 6.97927 8.21578 7.56505 7.63C8.15084 7.04421 8.15084 6.09446 7.56505 5.50868L5.32943 3.27158ZM15.6968 5.15512L18.8788 3.38736L20.293 4.80157L18.5252 7.98355L16.7574 8.3371L14.6361 10.4584L13.2219 9.04421L15.3432 6.92289L15.6968 5.15512ZM8.62572 12.9333L10.747 15.0546L5.79729 20.0044C5.2115 20.5902 4.26175 20.5902 3.67597 20.0044C3.12464 19.453 3.09221 18.5793 3.57867 17.99L3.67597 17.883L8.62572 12.9333Z"></path></svg>
+            </button>
+          </nav>
+        </div>
       </header>
 
       <main>
@@ -123,8 +141,13 @@
                 <span>HTML</span>
               </div>
               <div class="extra-options">
-                <button class="expand-panel-btn" title="Click to expand HTML">Expand</button>
-                <button class="single-file-format-btn" data-parser-type="html" title="Click to format HTML">Format</button>
+                <button class="expand-panel-btn" title="Expand HTML" aria-label="expand html">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 19.1642L18.2071 12.9571L16.7929 11.5429L12 16.3358L7.20712 11.5429L5.79291 12.9571L12 19.1642ZM12 13.5143L18.2071 7.30722L16.7929 5.89301L12 10.6859L7.20712 5.89301L5.79291 7.30722L12 13.5143Z"></path></svg>
+                </button>
+
+                <button class="single-file-format-btn" data-parser-type="html" data-toast-message="HTML file formatted" title="Format HTML" aria-label="format html">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3 4H21V6H3V4ZM3 19H17V21H3V19ZM3 14H21V16H3V14ZM3 9H17V11H3V9Z"></path></svg>
+                </button>
               </div>
             </div>
           </div>
@@ -140,8 +163,13 @@
                 <span>CSS</span>
               </div>
               <div class="extra-options">
-                <button class="expand-panel-btn" title="Click to expand CSS">Expand</button>
-                <button class="single-file-format-btn" data-parser-type="css" title="Click to format CSS">Format</button>
+                <button class="expand-panel-btn" title="Expand CSS" aria-label="expand css">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 19.1642L18.2071 12.9571L16.7929 11.5429L12 16.3358L7.20712 11.5429L5.79291 12.9571L12 19.1642ZM12 13.5143L18.2071 7.30722L16.7929 5.89301L12 10.6859L7.20712 5.89301L5.79291 7.30722L12 13.5143Z"></path></svg>
+                </button>
+
+                <button class="single-file-format-btn" data-parser-type="css" data-toast-message="CSS file formatted" title="Format CSS" aria-label="format html">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3 4H21V6H3V4ZM3 19H17V21H3V19ZM3 14H21V16H3V14ZM3 9H17V11H3V9Z"></path></svg>
+                </button>
               </div>
             </div>
           </div>
@@ -157,8 +185,13 @@
                 <span>JS</span>
               </div>
               <div class="extra-options">
-                <button class="expand-panel-btn" title="Click to expand JS">Expand</button>
-                <button class="single-file-format-btn" data-parser-type="babel" title="Click to format JS">Format</button>
+                <button class="expand-panel-btn" title="Expand JS" aria-label="expand js">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 19.1642L18.2071 12.9571L16.7929 11.5429L12 16.3358L7.20712 11.5429L5.79291 12.9571L12 19.1642ZM12 13.5143L18.2071 7.30722L16.7929 5.89301L12 10.6859L7.20712 5.89301L5.79291 7.30722L12 13.5143Z"></path></svg>
+                </button>
+
+                <button class="single-file-format-btn" data-parser-type="babel" data-toast-message="JS file formatted" title="Format JS" aria-label="format html">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3 4H21V6H3V4ZM3 19H17V21H3V19ZM3 14H21V16H3V14ZM3 9H17V11H3V9Z"></path></svg>
+                </button>
               </div>
             </div>
           </div>
@@ -170,9 +203,10 @@
           <iframe frameborder="0" sandbox="allow-scripts"></iframe>
         </div>
       </main>
-      <div class="console">
+
+      <footer class="footer-feature-bar">
         <button title="Click to open console">Console</button>
-      </div>
+      </footer>
     </div>
 
     <!-- Modals -->
@@ -180,8 +214,9 @@
     <div class="iframe-size-display"></div>
 
     <!-- user settings panel -->
-    <div class="customization-modal" style="display: grid; opacity: 1">
-      <div class="customization-container slide-up">
+    <!-- <div class="customization-modal" style="display: grid; opacity: 1"> -->
+    <div class="customization-modal">
+      <div class="customization-container">
         <button class="close-modal-btn" aria-label="Close customization panel" title="Close customization panel">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 10.5858L9.17157 7.75736L7.75736 9.17157L10.5858 12L7.75736 14.8284L9.17157 16.2426L12 13.4142L14.8284 16.2426L16.2426 14.8284L13.4142 12L16.2426 9.17157L14.8284 7.75736L12 10.5858Z"></path></svg>
         </button>
@@ -322,5 +357,8 @@
         </div>
       </div>
     </div>
+
+    <!-- toast message -->
+    <div class="toast-message-container"></div>
   </body>
 </html>

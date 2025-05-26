@@ -39,6 +39,9 @@ html {
 
   --container-bg: hsl(0, 0%, 91%);
   --light-container-border: 1px solid hsl(0, 0%, 87%);
+  --toast-message-clr: hsl(0, 0%, 95%);
+  --toast-message-bg: hsl(0, 0%, 15%);
+  --toast-message-border: 1px solid var(--toast-message-bg);
 
   --global-scrollbar-track-bg: hsl(0, 0%, 93%);
   --global-scrollbar-thumb-bg: hsl(0, 0%, 65%);
@@ -137,6 +140,9 @@ html {
 
     --container-bg: hsl(0, 0%, 9%);
     --light-container-border: 1px solid hsl(0, 0%, 13%);
+    --toast-message-clr: hsl(0, 0%, 5%);
+    --toast-message-bg: hsl(0, 0%, 85%);
+    --toast-message-border: 1px solid var(--toast-message-bg);
 
     --global-scrollbar-track-bg: hsl(0, 0%, 7%);
     --global-scrollbar-thumb-bg: hsl(0, 0%, 35%);
