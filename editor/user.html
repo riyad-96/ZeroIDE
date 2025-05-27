@@ -63,7 +63,6 @@
 
     <!-- Prettier -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/standalone.js" integrity="sha512-kZgYwuJlmuFDs982ccZLP9D+TIz/FqkxFQe+G0/TY11X4WqwUZn6P263vtzyt56GThngcoOD9JFvdJsT+D52ow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- parser -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/parser-html.min.js" integrity="sha512-DrpA7iAMX9jbdDayBwvC+lNpTJRrjb7p1YoK+R0qLmdKOSwLkg6n7cjHOfGP5gnB4RxGdUim1CeKG3UD2PYO5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prettier/2.0.3/parser-postcss.min.js" integrity="sha512-zq5haHKqL4LvxKb2G/46hdhBNp6FXhzmi1nNqsQjJReAYWXCqEWdAR1l3WEfS9AR7nPER62xRSCkO7vH/EFlVA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -72,6 +71,8 @@
     <!-- color picker -->
     <link rel="stylesheet" href="@simonwep/pickr/dist/themes/nano.min.css" />
     <script src="@simonwep/pickr/dist/pickr.min.js"></script>
+
+    <!-- <script src="https://unpkg.com/console.js"></script> -->
 
     <link rel="stylesheet" href="editor.css" />
     <script src="./editor.js" defer></script>
@@ -88,7 +89,7 @@
     </aside>
 
     <div class="main-diversion">
-      <header>
+      <header class="main-header">
         <div>
           <button class="sidebar-toggle-btn" aria-label="Sidebar toggle button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
@@ -227,6 +228,19 @@
 
         <div class="code-preview">
           <iframe frameborder="0" sandbox="allow-scripts"></iframe>
+
+          <div class="console" style="display: none;">
+            <header class="console-header">
+              <span class="console-header-title"> Console </span>
+              <div class="console-btn-container">
+                <button>Clear</button>
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg>
+                </button>
+              </div>
+            </header>
+            <div class="console-body"></div>
+          </div>
         </div>
       </main>
 
@@ -395,5 +409,6 @@
         <button class="close-main-tab-btn">Close</button>
       </div>
     </div>
+
   </body>
 </html>

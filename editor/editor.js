@@ -32,12 +32,12 @@ function setCursor(el, cursor) {
 
 function copyToClipboard(text) {
   const tempInput = document.createElement('textarea');
-  tempInput.value = text
+  tempInput.value = text;
   document.body.appendChild(tempInput);
   tempInput.select();
   document.execCommand('copy');
   document.body.removeChild(tempInput);
-  console.log('Copied', text)
+  console.log('Copied', text);
 }
 
 //! ----------------------------------
@@ -522,7 +522,7 @@ document.querySelector('.expand-reset-btn').addEventListener('click', () => {
   }, 400);
 });
 
-//! Horizontal resizer programs
+//! Resizer programs
 const resizeBar = document.querySelector('.horizontal-resizer');
 const resizableArea = document.querySelector('.code-inputs');
 
@@ -596,6 +596,33 @@ const iframeSizeObserver = new ResizeObserver(() => {
 });
 iframeSizeObserver.observe(iframe);
 
+//! Console vertical resizer program
+// const pageConsole = document.querySelector('.console');
+// const consoleResizer = document.querySelector('.console-header');
+// let consoleResizing = false;
+// let startY;
+// let initialHeight;
+
+// document.addEventListener('mouseup', () => {
+//   consoleResizing = false;
+//   iframe.style.pointerEvents = 'initial';
+// });
+
+// consoleResizer.addEventListener('mousedown', (e) => {
+//   consoleResizing = true;
+//   iframe.style.pointerEvents = 'none';
+//   startY = e.clientY;
+//   initialHeight = pageConsole.offsetHeight;
+// });
+
+// document.addEventListener('mousemove', (e) => {
+//   if (!consoleResizing) return;
+//   const deltaY = startY - e.clientY;
+//   const newHeight = deltaY + initialHeight;
+
+//   pageConsole.style.height = `${newHeight}px`;
+// });
+
 //! Nav programs
 const customizationModal = document.querySelector('.customization-modal');
 const customizationContainer = document.querySelector('.customization-container');
@@ -636,7 +663,7 @@ document.addEventListener('click', (e) => {
 const pickrWrapper = document.querySelector('.pickr-wrapper');
 const pickrBtn = document.querySelector('.color-picker-btn');
 const pickrActionContainer = document.querySelector('.color-picker-actions');
-// Color picker
+//! Color picker
 const pickr = Pickr.create({
   el: '.pickr-wrapper',
   container: '.color-picker-container',
@@ -692,45 +719,16 @@ pickr.on('hide', () => {
 });
 
 pickr.on('change', (color) => {
-  colorUpdate(color)
+  colorUpdate(color);
 });
 
-pickrActionContainer.addEventListener('click', e => {
+pickrActionContainer.addEventListener('click', (e) => {
   const clrCopyBtn = e.target.closest('.copy-color-btn');
-  if(clrCopyBtn) {
-    const color = clrCopyBtn.previousElementSibling.textContent
+  if (clrCopyBtn) {
+    const color = clrCopyBtn.previousElementSibling.textContent;
     copyToClipboard(color);
   }
-})
-
-// pickr
-//   .on('init', (instance) => {
-//     console.log('Event: "init"', instance);
-//   })
-//   .on('hide', (instance) => {
-//     console.log('Event: "hide"', instance);
-//   })
-//   .on('show', (color, instance) => {
-//     console.log('Event: "show"', color, instance);
-//   })
-//   .on('save', (color, instance) => {
-//     console.log('Event: "save"', color, instance);
-//   })
-//   .on('clear', (instance) => {
-//     console.log('Event: "clear"', instance);
-//   })
-//   .on('change', (color, source, instance) => {
-//     console.log('Event: "change"', color, source, instance);
-//   })
-//   .on('changestop', (source, instance) => {
-//     console.log('Event: "changestop"', source, instance);
-//   })
-//   .on('cancel', (instance) => {
-//     console.log('Event: "cancel"', instance);
-//   })
-//   .on('swatchselect', (color, instance) => {
-//     console.log('Event: "swatchselect"', color, instance);
-//   });
+});
 
 //! Customization panel programs
 const infoIcon = document.querySelector('.info-icon');
@@ -806,11 +804,10 @@ document.addEventListener('DOMContentLoaded', () => {
   allEditorInput.forEach((input) => {
     refreshEditorContent(input.id);
   });
-  const isFine = window.matchMedia('(pointer: fine)').matches
+  const isFine = window.matchMedia('(pointer: fine)').matches;
   const editorWidth = freshSetting().editor.editorWidth;
-  // if(isFine) resizableArea.style.width = 
 
-  resizableArea.style.width = `${isFine && editorWidth <= 400 ? 400 : editorWidth}px`;
+  resizableArea.style.width = `${isFine && editorWidth <= 300 ? 300 : editorWidth}px`;
 });
 
 //! Keyboard shortcuts
@@ -898,9 +895,9 @@ function toastPopup(btn) {
   }, 3200);
 }
 
-document.addEventListener('click', e => {
-  const toastBtn = e.target.closest('[data-toast-message]')
-  if(toastBtn) {
+document.addEventListener('click', (e) => {
+  const toastBtn = e.target.closest('[data-toast-message]');
+  if (toastBtn) {
     toastPopup(toastBtn);
   }
-})
+});

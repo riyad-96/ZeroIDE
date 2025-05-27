@@ -96,6 +96,7 @@ html {
   --js-string: hsl(17, 47%, 44%);
   --js-comment: hsl(101, 29%, 27%);
   --js-number: hsl(99, 28%, 53%);
+  --js-atom: hsl(207, 61%, 59%);
 
   /* Additionals */
   --bracket-color: var(--xml-default);
