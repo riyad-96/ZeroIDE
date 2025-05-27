@@ -806,8 +806,11 @@ document.addEventListener('DOMContentLoaded', () => {
   allEditorInput.forEach((input) => {
     refreshEditorContent(input.id);
   });
+  const isFine = window.matchMedia('(pointer: fine)').matches
   const editorWidth = freshSetting().editor.editorWidth;
-  resizableArea.style.width = `${editorWidth <= 350 ? 350 : editorWidth}px`;
+  // if(isFine) resizableArea.style.width = 
+
+  resizableArea.style.width = `${isFine && editorWidth <= 400 ? 400 : editorWidth}px`;
 });
 
 //! Keyboard shortcuts

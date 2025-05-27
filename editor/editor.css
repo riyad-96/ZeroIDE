@@ -362,14 +362,14 @@ header > div {
 
 .color-picker-actions {
   position: absolute;
-  top: 256px;
+  top: 272px;
   left: 50%;
   z-index: 10001;
   translate: -50% 0;
 
   background-color: var(--container-bg);
   width: 228px;
-  padding: 0 0.7rem 0.7rem 0.7rem;
+  padding: 0 1rem 1rem 1rem;
   border-radius: 0 0 0.4rem 0.4rem;
   border-bottom: var(--slick-border);
   border-inline: var(--slick-border);
@@ -386,6 +386,7 @@ header > div {
 
     span {
       font-size: 0.825rem;
+      opacity: 0.7;
     }
 
     button {
@@ -404,6 +405,9 @@ header > div {
       }
     }
   }
+  @media(pointer: coarse) {
+    top: 271px;
+  }
 }
 
 .pcr-button {
@@ -421,6 +425,7 @@ header > div {
   overflow: hidden;
   border-top: var(--slick-border);
   border-inline: var(--slick-border);
+  padding: 0.5rem;
   /* transition: opacity 5000ms; */
 }
 
@@ -429,7 +434,8 @@ header > div {
 }
 
 .pcr-interaction.pcr-interaction.pcr-interaction {
-  padding: 0 0.5rem 0.5rem 0.5rem;
+  padding: 0;
+  padding-block-start: 0.5rem;
   background-color: var(--container-bg);
   width: 100%;
   translate: 3px 3px;
@@ -496,8 +502,8 @@ main {
 
 .expand-reset-btn {
   position: absolute;
-  top: 5px;
-  right: 150px;
+  top: 4px;
+  right: 80px;
   z-index: 2;
 
   background-color: var(--option-btn-bg);
@@ -509,7 +515,7 @@ main {
   display: none;
 
   &:active {
-    scale: 0.98;
+    translate: 0 1px;
   }
 
   &:hover {
@@ -569,6 +575,7 @@ main {
     display: flex;
     align-items: center;
     gap: 0.225rem;
+    translate: 0 -1px;
 
     button {
       background-color: var(--option-btn-bg);
