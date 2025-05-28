@@ -74,6 +74,9 @@
 
     <!-- <script src="https://unpkg.com/console.js"></script> -->
 
+    <!-- Main css & js files -->
+    <link rel="stylesheet" href="./theme.css" />
+    <link rel="stylesheet" href="./codemirror.css" />
     <link rel="stylesheet" href="editor.css" />
     <script src="./editor.js" defer></script>
   </head>
@@ -229,7 +232,8 @@
         <div class="code-preview">
           <iframe frameborder="0" sandbox="allow-scripts"></iframe>
 
-          <div class="console" style="display: none;">
+          <!-- console will be added soon. -->
+          <div class="console" style="display: none">
             <header class="console-header">
               <span class="console-header-title"> Console </span>
               <div class="console-btn-container">
@@ -245,7 +249,8 @@
       </main>
 
       <footer class="footer-feature-bar">
-        <button title="Click to open console">Console</button>
+        <!-- <button title="Click to open console">Console</button> -->
+        <!-- shortcuts -->
       </footer>
     </div>
 
@@ -254,7 +259,6 @@
     <div class="iframe-size-display"></div>
 
     <!-- user settings panel -->
-    <!-- <div class="customization-modal" style="display: grid; opacity: 1"> -->
     <div class="customization-modal">
       <div class="customization-container">
         <button class="close-modal-btn" aria-label="Close customization panel" title="Close customization panel">
@@ -269,7 +273,7 @@
           </div>
 
           <div class="customization-tab">
-            <div class="each-tab" data-tab="html">
+            <div class="each-tab show" data-tab="html">
               <div class="html-tab">
                 <div class="label-container">
                   <label for="head-tags-input">
@@ -364,7 +368,7 @@
               </form>
             </div>
 
-            <div class="each-tab show" data-tab="theme">
+            <div class="each-tab" data-tab="theme">
               <div class="theme-tab">
                 <button class="theme-change-btn" data-theme-info="default"><span>Browser default</span> <span>light or dark</span></button>
 
@@ -409,6 +413,5 @@
         <button class="close-main-tab-btn">Close</button>
       </div>
     </div>
-
   </body>
 </html>

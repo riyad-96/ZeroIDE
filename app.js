@@ -1219,7 +1219,3 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
 projectEditFormModal.addEventListener('click', () => {
   projectEditFormModal.classList.remove('appear');
 });
-
-
-const array = ['🐏', '🦙', '🐍']
-console.log(array.length)

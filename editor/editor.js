@@ -137,10 +137,10 @@ const themeTab = document.querySelector('.theme-tab');
 const allThemeChangeBtn = document.querySelectorAll('.theme-change-btn');
 
 function applyTheme(theme) {
-  allThemeChangeBtn.forEach(btn => btn.classList.remove('selected'));
-    document.querySelector(`[data-theme-info="${theme}"]`).classList.add('selected')
+  allThemeChangeBtn.forEach((btn) => btn.classList.remove('selected'));
+  document.querySelector(`[data-theme-info="${theme}"]`).classList.add('selected');
 
-  if(theme === 'default') {
+  if (theme === 'default') {
     document.documentElement.removeAttribute('data-theme');
     savedSettings.editor.theme = theme;
     saveLocalStringify('settings', savedSettings);
@@ -153,10 +153,14 @@ function applyTheme(theme) {
 
 themeTab.addEventListener('click', (e) => {
   const themeBtn = e.target.closest('.theme-change-btn');
-  if(themeBtn) {
-    const theme = themeBtn.dataset.themeInfo
+  if (themeBtn) {
+    const theme = themeBtn.dataset.themeInfo;
     applyTheme(theme);
   }
+  document.querySelector('.customization-container').classList.add('transition-off');
+  setTimeout(() => {
+    document.querySelector('.customization-container').classList.remove('transition-off');
+  }, 50);
 });
 
 //! Sidebar programs
