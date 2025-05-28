@@ -507,7 +507,7 @@ main {
 .code-inputs {
   display: flex;
   flex-direction: column;
-  width: 450px;
+  width: 350px;
   max-width: var(--code-input-max-width);
   min-height: var(--code-input-min-height);
   overflow-x: auto;
