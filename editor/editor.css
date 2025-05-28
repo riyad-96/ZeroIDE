@@ -456,6 +456,13 @@ header > div {
 .pcr-result {
   color: var(--body-clr) !important;
   background-color: var(--input-bg) !important;
+  box-shadow: none !important;
+  outline: 2px solid hsl(0, 0%, 50%, 0.3);
+}
+
+.pcr-result:focus {
+  outline-offset: 2px;
+  outline: 2px solid hsl(0, 0%, 50%, 0,5)
 }
 
 nav {

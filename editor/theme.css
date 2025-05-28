@@ -1202,7 +1202,7 @@ html {
   --bracket-outline: hsla(235, 14%, 42%, 1);
 }
 [data-theme='dark-material'] {
-    color-scheme: dark;
+  color-scheme: dark;
   --body-bg: hsl(0, 0%, 5%);
   --body-clr: hsl(0, 0%, 90%);
   --overlay: hsl(0, 0%, 0%, 0.3);
@@ -1225,7 +1225,7 @@ html {
   --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
   --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
 
-  --tab-change-btn-before-bg: #46a6ff;
+  --tab-change-btn-before-bg: hsl(18, 92%, 61%);
   --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
   --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
 
@@ -1280,7 +1280,7 @@ html {
   --css-default: hsl(0, 0%, 90%);
   --css-qualifier: #ffcb6b;
   --css-property: #b2ccd6;
-  --css-number: #f7743e;
+  --css-number: hsl(18, 92%, 61%);
   --css-keyword: #eeffff;
   --css-variable: #eefff1;
   --css-variable-2: #eefff1;
@@ -1288,7 +1288,7 @@ html {
   --css-callee: #69aaff;
   --css-comment: #4a4a4a;
   --css-atom: #eeffff;
-  --css-builtin: #f77e45;
+  --css-builtin: hsl(18, 92%, 61%);
   --css-tag: #ffcb6b;
   --css-string: #c3e88d;
   --css-def: #89ddf8;
@@ -1307,12 +1307,117 @@ html {
 
   /* === Matching Brackets === */
   --bracket-color: var(--xml-default);
-  --matching-bracket-bg: transparent;
-  --bracket-outline: hsla(235, 14%, 42%, 1);
+  --matching-bracket-bg: #212121;
+  --bracket-outline: hsl(17, 92%, 70%, 0.4);
 }
 [data-theme='dark-ayu-mirage'] {
   color-scheme: dark;
-  /* variables goes here */
+  --body-bg: hsl(0, 0%, 5%);
+  --body-clr: hsl(0, 0%, 90%);
+  --overlay: hsl(0, 0%, 0%, 0.3);
+
+  --g-btn-clr: hsl(0, 0%, 90%);
+  --g-btn-bg: hsl(222, 22%, 18%);
+  --g-btn-hover-bg: hsl(222, 22%, 21%);
+  --g-btn-hover-clr: hsl(0, 0%, 100%);
+  --g-btn-padding: 0.125rem 0.625rem;
+  --g-btn-border-radius: 0.325rem;
+
+  --option-btn-bg: hsl(222, 22%, 20%);
+  --option-btn-hover-bg: hsl(222, 22%, 26%);
+
+  --input-bg: hsl(222, 22%, 30%, 0.3);
+  --input-outline: 1px solid hsl(0, 0%, 50%, 0.6);
+  --option-bg: #272d3d;
+  --option-clr: hsl(0, 0%, 100%);
+
+  --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
+  --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
+
+  --tab-change-btn-before-bg: hsl(223, 30%, 65%);
+  --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
+  --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
+
+  --slick-border: 1px solid hsl(222, 22%, 23%);
+
+  --sidebar-toggle-icon-bg: hsl(222, 22%, 21%);
+  --sidebar-toggle-btn-hover-border: 1px solid hsl(222, 22%, 25%);
+  --submenu-bg: hsl(222, 22%, 17%);
+
+  --project-list-item-hover-bg: hsl(0, 0%, 13%);
+
+  --container-bg: hsl(222, 22%, 15%);
+  --light-container-border: 1px solid hsl(222, 22%, 18%);
+
+  --toast-message-clr: hsl(0, 0%, 5%);
+  --toast-message-bg: hsl(0, 0%, 85%);
+  --toast-message-border: 1px solid var(--toast-message-bg);
+
+  --global-scrollbar-track-bg: hsl(222, 22%, 15%);
+  --global-scrollbar-thumb-bg: hsl(222, 22%, 35%);
+  --global-scrollbar-thumb-hover-bg: hsl(222, 22%, 50%);
+
+  /* ! Code editor colors */
+  --topbar-bg: var(--container-bg);
+  --topbar-clr: hsl(0, 0%, 85%);
+
+  --file-type-icon-bg: hsl(0, 0%, 77%);
+  --file-type-icon-clr: hsl(0, 0%, 10%);
+
+  --cm-editor-bg: #242936;
+  --cm-gutter-bg: #242936;
+  --cm-gutter-elt-clr: #4d535d;
+  --cm-active-gutter-elt-clr: hsl(0, 0%, 60%);
+  --cm-gutters-border-right: 1px solid hsl(0, 0%, 20%);
+
+  --cm-focused-selected-bg: #2b4768;
+  --cm-unfocused-selected-bg: #273950;
+  --cm-cursor-clr: #ffd700;
+  --foldmarker-clr: #ffd700;
+  --cm-activeline-bg: #1a1f29;
+  --cm-active-line-bg-border: 1px solid transparent;
+
+  /* xml */
+  --xml-default: #cccac2;
+  --xml-keyword: #5ccfe6;
+  --xml-bracket: #3b7787;
+  --xml-attribute: #ffd173;
+  --xml-string: #caff80;
+  --xml-comment: #6e7c8e;
+
+  /* css */
+  --css-default: hsl(0, 0%, 90%);
+  --css-qualifier: #ffcb6b;
+  --css-property: #b2ccd6;
+  --css-number: hsl(18, 92%, 61%);
+  --css-keyword: #eeffff;
+  --css-variable: #eefff1;
+  --css-variable-2: #eefff1;
+  --css-variable-3: #c792ea;
+  --css-callee: #69aaff;
+  --css-comment: #6e7c8e;
+  --css-atom: #eeffff;
+  --css-builtin: hsl(18, 92%, 61%);
+  --css-tag: #ffcb6b;
+  --css-string: #c3e88d;
+  --css-def: #89ddf8;
+
+  /* js */
+  --js-default: hsl(0, 0%, 80%);
+  --js-keyword: #c792ea;
+  --js-def: #eeffff;
+  --js-variable: #eeffff;
+  --js-variable-2: #eeffff;
+  --js-property: #82aaff;
+  --js-string: #c3e88d;
+  --js-comment: #6e7c8e;
+  --js-number: #f76f39;
+  --js-atom: #ff9cac;
+
+  /* === Matching Brackets === */
+  --bracket-color: var(--xml-default);
+  --matching-bracket-bg: #212121;
+  --bracket-outline: hsl(17, 92%, 70%, 0.4);
 }
 [data-theme='dark-shades-of-purple'] {
   color-scheme: dark;
