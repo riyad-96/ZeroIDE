@@ -782,7 +782,7 @@ html {
   --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
   --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
 
-  --tab-change-btn-before-bg: hsl(0, 0%, 63%);
+  --tab-change-btn-before-bg: #ff5c59;
   --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
   --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
 
@@ -890,7 +890,7 @@ html {
   --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
   --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
 
-  --tab-change-btn-before-bg: hsl(0, 0%, 63%);
+  --tab-change-btn-before-bg: #f279c6;
   --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
   --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
 
@@ -959,15 +959,15 @@ html {
 
   /* js */
   --js-default: hsl(0, 0%, 90%);
-  --js-keyword: #89d1bb;
-  --js-def: #c39ac9;
-  --js-variable: #ffffff;
+  --js-keyword: #ff79c6;
+  --js-def: #bd93f9;
+  --js-variable: #bd93f9;
   --js-variable-2: #ffffff;
-  --js-property: #bad761;
-  --js-string: #ffd76d;
+  --js-property: #3ffa7b;
+  --js-string: #f1fa8c;
   --js-comment: #6272a4;
-  --js-number: #c39ac9;
-  --js-atom: #c39ac9;
+  --js-number: #bd93f9;
+  --js-atom: #bd93f9;
 
   /* === Matching Brackets === */
   --bracket-color: var(--xml-default);
