@@ -1067,15 +1067,15 @@ html {
 
   /* js */
   --js-default: hsl(0, 0%, 80%);
-  --js-keyword: #ff79c6;
-  --js-def: #bd93f9;
-  --js-variable: #bd93f9;
-  --js-variable-2: #ffffff;
-  --js-property: #3ffa7b;
-  --js-string: #f1fa8c;
+  --js-keyword: #3ba9c2;
+  --js-def: #61afe3;
+  --js-variable: #98c379;
+  --js-variable-2: #e06c75;
+  --js-property: #5fafef;
+  --js-string: #e5c07b;
   --js-comment: #676f7d;
-  --js-number: #bd93f9;
-  --js-atom: #bd93f9;
+  --js-number: #c678dd;
+  --js-atom: #3ba9c2;
 
   /* === Matching Brackets === */
   --bracket-color: var(--xml-default);
