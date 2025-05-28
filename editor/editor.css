@@ -443,6 +443,11 @@ header > div {
   translate: 3px 3px;
 }
 
+.pcr-result {
+  color: var(--body-clr) !important;
+  background-color: var(--input-bg) !important;
+}
+
 nav {
   display: flex;
   align-items: center;
@@ -1154,6 +1159,7 @@ code {
 
 .theme-change-btn.selected {
   opacity: 1;
+  background-color: var(--g-btn-hover-bg);
 }
 
 .theme-change-btn.selected::before {

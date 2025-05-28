@@ -9,7 +9,7 @@
 }
 
 .CodeMirror-activeline-background {
-  background-color: transparent;
+  background-color: var(--cm-activeline-bg);
   border-block: var(--cm-active-line-bg-border);
 }
 
@@ -169,4 +169,5 @@
 .CodeMirror-matchingbracket {
   color: var(--bracket-color) !important;
   outline: 1px solid var(--bracket-outline);
+  background-color: var(--matching-bracket-bg) !important;
 }
