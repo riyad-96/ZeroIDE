@@ -1,0 +1,32 @@
+/* Basic selectors */
+.container {
+  padding: 20px;
+  --custom-prop: #fff;
+  background: var(--custom-prop);
+}
+
+#main::before {
+  content: attr();
+  content: 'oi kire';
+  position: absolute;
+}
+
+a:hover {
+  color: rgb(255, 0, 0) !important;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,172 @@
+/* ! CodeMirror styling */
+.CodeMirror {
+  font-size: var(--user-font-size);
+  font-family: var(--user-font);
+  background-color: var(--cm-editor-bg);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.CodeMirror-activeline-background {
+  background-color: transparent;
+  border-block: var(--cm-active-line-bg-border);
+}
+
+.CodeMirror-sizer {
+  height: 100%;
+  cursor: text;
+}
+
+.CodeMirror-gutter {
+  background-color: var(--cm-gutter-bg);
+}
+
+.CodeMirror-gutters {
+  border-right: var(--cm-gutters-border-right);
+}
+
+.CodeMirror-gutter-elt {
+  color: var(--cm-gutter-elt-clr);
+}
+.CodeMirror-activeline-gutter .CodeMirror-gutter-elt {
+  color: var(--cm-active-gutter-elt-clr);
+}
+
+/*! Code mirror styles */
+.CodeMirror.CodeMirror-focused .CodeMirror-selected {
+  background-color: var(--cm-focused-selected-bg);
+}
+
+.CodeMirror .CodeMirror-selected {
+  background-color: var(--cm-unfocused-selected-bg);
+}
+
+.CodeMirror-cursor {
+  border-color: var(--cm-cursor-border-clr);
+  border-width: 2px;
+  animation: custom-cursor-blink 1.3s 500ms infinite;
+}
+
+@keyframes custom-cursor-blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*! XML */
+.cm-m-xml {
+  color: var(--xml-default);
+}
+.cm-m-xml.cm-tag {
+  color: var(--xml-keyword);
+}
+.cm-m-xml.cm-tag.cm-bracket {
+  color: var(--xml-bracket);
+}
+.cm-m-xml.cm-attribute {
+  color: var(--xml-attribute);
+}
+.cm-m-xml.cm-string {
+  color: var(--xml-string);
+}
+.cm-m-xml.cm-comment {
+  color: var(--xml-comment);
+}
+.cm-m-xml.cm-atom {
+  color: var(--xml-keyword);
+}
+
+/*! CSS */
+.cm-m-css {
+  color: var(--css-default);
+}
+.cm-m-css.cm-qualifier {
+  color: var(--css-qualifier);
+}
+.cm-m-css.cm-property {
+  color: var(--css-property);
+}
+.cm-m-css.cm-number {
+  color: var(--css-number);
+}
+.cm-m-css.cm-keyword {
+  color: var(--css-keyword);
+}
+.cm-m-css.cm-variable {
+  color: var(--css-variable);
+}
+.cm-m-css.cm-variable-2 {
+  color: var(--css-variable-2);
+}
+.cm-m-css.cm-variable-3 {
+  color: var(--css-variable-3);
+}
+.cm-m-css.cm-variable.cm-callee {
+  color: var(--css-callee);
+}
+.cm-m-css.cm-comment {
+  color: var(--css-comment);
+}
+.cm-m-css.cm-atom {
+  color: var(--css-atom);
+}
+.cm-m-css.cm-builtin {
+  color: var(--css-builtin);
+}
+.cm-m-css.cm-tag {
+  color: var(--css-tag);
+}
+.cm-m-css.cm-string {
+  color: var(--css-string);
+}
+.cm-m-css.cm-def {
+  color: var(--css-def);
+}
+
+/*! JAVASCRIPT */
+.cm-m-javascript {
+  color: var(--js-default);
+}
+.cm-m-javascript.cm-keyword {
+  color: var(--js-keyword);
+}
+.cm-m-javascript.cm-def {
+  color: var(--js-def);
+}
+.cm-m-javascript.cm-variable {
+  color: var(--js-variable);
+}
+.cm-m-javascript.cm-variable-2 {
+  color: var(--js-variable-2);
+}
+.cm-m-javascript.cm-property {
+  color: var(--js-property);
+}
+.cm-m-javascript.cm-string {
+  color: var(--js-string);
+}
+.cm-m-javascript.cm-string-2 {
+  color: var(--js-string);
+}
+.cm-m-javascript.cm-comment {
+  color: var(--js-comment) !important;
+}
+.cm-m-javascript.cm-number {
+  color: var(--js-number);
+}
+.cm-m-javascript.cm-atom {
+  color: var(--js-atom);
+}
+
+/* Matching Brackets */
+.CodeMirror-matchingbracket {
+  color: var(--bracket-color) !important;
+  outline: 1px solid var(--bracket-outline);
+}

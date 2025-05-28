@@ -54,7 +54,8 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     semicolon: 'on',
     quotation: 'double',
     printWidth: '80',
-    editorWidth: 450,
+    editorWidth: 350,
+    theme: 'default',
   },
 };
 
@@ -130,6 +131,33 @@ function enterToBlur(e) {
     this.removeEventListener('keydown', enterToBlur);
   }
 }
+
+//! Editor Theme programs
+const themeTab = document.querySelector('.theme-tab');
+const allThemeChangeBtn = document.querySelectorAll('.theme-change-btn');
+
+function applyTheme(theme) {
+  allThemeChangeBtn.forEach(btn => btn.classList.remove('selected'));
+    document.querySelector(`[data-theme-info="${theme}"]`).classList.add('selected')
+
+  if(theme === 'default') {
+    document.documentElement.removeAttribute('data-theme');
+    savedSettings.editor.theme = theme;
+    saveLocalStringify('settings', savedSettings);
+    return;
+  }
+  document.documentElement.setAttribute('data-theme', theme);
+  savedSettings.editor.theme = theme;
+  saveLocalStringify('settings', savedSettings);
+}
+
+themeTab.addEventListener('click', (e) => {
+  const themeBtn = e.target.closest('.theme-change-btn');
+  if(themeBtn) {
+    const theme = themeBtn.dataset.themeInfo
+    applyTheme(theme);
+  }
+});
 
 //! Sidebar programs
 const sidebar = document.querySelector('.sidebar');
@@ -808,6 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const editorWidth = freshSetting().editor.editorWidth;
 
   resizableArea.style.width = `${isFine && editorWidth <= 300 ? 300 : editorWidth}px`;
+  applyTheme(freshSetting().editor.theme);
 });
 
 //! Keyboard shortcuts
