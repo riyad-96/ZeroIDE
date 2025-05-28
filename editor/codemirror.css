@@ -43,20 +43,41 @@
 }
 
 .CodeMirror-cursor {
-  border-color: var(--cm-cursor-border-clr);
-  border-width: 2px;
+  border-color: transparent;
+  /* border: none; */
+  max-width: 0;
+
+}
+
+.CodeMirror-cursor::after{
+  position: absolute;
+  content: '.';
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 100;
+  width: 2px;
+  color: transparent;
+  height: 100%;
+  background-color: var(--cm-cursor-border-clr);
   animation: custom-cursor-blink 1.3s 500ms infinite;
 }
 
 @keyframes custom-cursor-blink {
   0% {
-    opacity: 1;
+    height: 100%;
+  }
+  40% {
+    height: 0;
   }
   50% {
     opacity: 0;
   }
+  60% {
+    height: 0;
+  }
   100% {
-    opacity: 1;
+    height: 100%;
   }
 }
 
