@@ -1387,20 +1387,20 @@ html {
 
   /* css */
   --css-default: hsl(0, 0%, 90%);
-  --css-qualifier: #ffcb6b;
-  --css-property: #b2ccd6;
-  --css-number: hsl(18, 92%, 61%);
-  --css-keyword: #eeffff;
-  --css-variable: #eefff1;
-  --css-variable-2: #eefff1;
-  --css-variable-3: #c792ea;
-  --css-callee: #69aaff;
+  --css-qualifier: #ffd173;
+  --css-property: #5ccfdb;
+  --css-number: #dfbfff;
+  --css-keyword: #d85936;
+  --css-variable: #f29e74;
+  --css-variable-2: #cccac2;
+  --css-variable-3: #ffd173;
+  --css-callee: #f28779;
   --css-comment: #6e7c8e;
-  --css-atom: #eeffff;
-  --css-builtin: hsl(18, 92%, 61%);
-  --css-tag: #ffcb6b;
-  --css-string: #c3e88d;
-  --css-def: #89ddf8;
+  --css-atom: #95e6cb;
+  --css-builtin: #ffd173;
+  --css-tag: #73d0ff;
+  --css-string: #d5ff80;
+  --css-def: #ffad66;
 
   /* js */
   --js-default: hsl(0, 0%, 80%);
@@ -1416,8 +1416,8 @@ html {
 
   /* === Matching Brackets === */
   --bracket-color: var(--xml-default);
-  --matching-bracket-bg: #212121;
-  --bracket-outline: hsl(17, 92%, 70%, 0.4);
+  --matching-bracket-bg: hsla(70, 16%, 25%, 0.678);
+  --bracket-outline: hsla(42, 42%, 62%, 0.5);
 }
 [data-theme='dark-shades-of-purple'] {
   color-scheme: dark;

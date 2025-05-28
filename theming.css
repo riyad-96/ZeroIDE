@@ -3,6 +3,8 @@
   padding: 20px;
   --custom-prop: #fff;
   background: var(--custom-prop);
+  background-color: crimson;
+  border: 1px solid red;
 }
 
 #main::before {
