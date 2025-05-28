@@ -137,16 +137,16 @@ const themeTab = document.querySelector('.theme-tab');
 const allThemeChangeBtn = document.querySelectorAll('.theme-change-btn');
 
 function applyTheme(theme) {
-  allThemeChangeBtn.forEach((btn) => btn.classList.remove('selected'));
-  document.querySelector(`[data-theme-info="${theme}"]`).classList.add('selected');
+  allThemeChangeBtn.forEach((btn) => btn.classList.toggle('selected', btn.dataset.themeInfo === theme));
 
   if (theme === 'default') {
     document.documentElement.removeAttribute('data-theme');
-    savedSettings.editor.theme = theme;
-    saveLocalStringify('settings', savedSettings);
     return;
   }
   document.documentElement.setAttribute('data-theme', theme);
+}
+
+function saveTheme(theme) {
   savedSettings.editor.theme = theme;
   saveLocalStringify('settings', savedSettings);
 }
@@ -156,12 +156,15 @@ themeTab.addEventListener('click', (e) => {
   if (themeBtn) {
     const theme = themeBtn.dataset.themeInfo;
     applyTheme(theme);
+    document.querySelector('.customization-container').classList.add('transition-off');
+    setTimeout(() => {
+      document.querySelector('.customization-container').classList.remove('transition-off');
+    }, 50);
+    saveTheme(theme);
   }
-  document.querySelector('.customization-container').classList.add('transition-off');
-  setTimeout(() => {
-    document.querySelector('.customization-container').classList.remove('transition-off');
-  }, 50);
 });
+
+applyTheme(savedSettings.editor.theme);
 
 //! Sidebar programs
 const sidebar = document.querySelector('.sidebar');
@@ -840,7 +843,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const editorWidth = freshSetting().editor.editorWidth;
 
   resizableArea.style.width = `${isFine && editorWidth <= 300 ? 300 : editorWidth}px`;
-  applyTheme(freshSetting().editor.theme);
 });
 
 //! Keyboard shortcuts
