@@ -1390,7 +1390,7 @@ html {
   --css-qualifier: #ffd173;
   --css-property: #5ccfdb;
   --css-number: #dfbfff;
-  --css-keyword: #d85936;
+  --css-keyword: #f29e74;
   --css-variable: #f29e74;
   --css-variable-2: #cccac2;
   --css-variable-3: #ffd173;
@@ -1404,15 +1404,15 @@ html {
 
   /* js */
   --js-default: hsl(0, 0%, 80%);
-  --js-keyword: #c792ea;
-  --js-def: #eeffff;
-  --js-variable: #eeffff;
-  --js-variable-2: #eeffff;
-  --js-property: #82aaff;
-  --js-string: #c3e88d;
+  --js-keyword: #ffad66;
+  --js-def: #cccac2;
+  --js-variable: #cccac2;
+  --js-variable-2: #cccac2;
+  --js-property: #ffd173;
+  --js-string: #d5ff80;
   --js-comment: #6e7c8e;
-  --js-number: #f76f39;
-  --js-atom: #ff9cac;
+  --js-number: #c1b1ff;
+  --js-atom: #dfbfff;
 
   /* === Matching Brackets === */
   --bracket-color: var(--xml-default);
