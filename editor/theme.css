@@ -1443,7 +1443,7 @@ html {
   --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
   --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
 
-  --tab-change-btn-before-bg: hsl(255, 86%, 66%);
+  --tab-change-btn-before-bg: hsl(271, 100%, 69%);
   --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
   --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
 
@@ -1481,13 +1481,13 @@ html {
 
   --cm-focused-selected-bg: #7448af;
   --cm-unfocused-selected-bg: #636b9f;
-  --cm-cursor-clr: hsl(267, 100%, 65%);
+  --cm-cursor-clr: hsl(271, 100%, 69%);
   --foldmarker-clr: hsl(267, 100%, 65%);
   --cm-activeline-bg: hsl(240, 35%, 22%);
   --cm-active-line-bg-border: 1px solid transparent;
 
   /* xml */
-  --xml-default: #ffffff;
+  --xml-default: hsl(0, 0%, 90%);
   --xml-keyword: #9effff;
   --xml-bracket: #9effff;
   --xml-attribute: #fad000;
@@ -1512,16 +1512,16 @@ html {
   --css-def: #ff9d00;
 
   /* js */
-  --js-default: hsl(0, 0%, 80%);
-  --js-keyword: #ffad66;
-  --js-def: #cccac2;
-  --js-variable: #cccac2;
-  --js-variable-2: #cccac2;
-  --js-property: #ffd173;
-  --js-string: #d5ff80;
+  --js-default: hsl(0, 0%, 90%);
+  --js-keyword: #ff9d00;
+  --js-def: #90ffff;
+  --js-variable: #9effff;
+  --js-variable-2: #9effff;
+  --js-property: #80ffbb;
+  --js-string: #a5ff90;
   --js-comment: #b362ff;
-  --js-number: #c1b1ff;
-  --js-atom: #dfbfff;
+  --js-number: #ff628c;
+  --js-atom: #ff628c;
 
   /* === Matching Brackets === */
   --bracket-color: var(--xml-default);
