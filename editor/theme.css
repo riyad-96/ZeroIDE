@@ -1496,20 +1496,20 @@ html {
 
   /* css */
   --css-default: hsl(0, 0%, 90%);
-  --css-qualifier: #ffd173;
-  --css-property: #5ccfdb;
-  --css-number: #dfbfff;
-  --css-keyword: #f29e74;
-  --css-variable: #f29e74;
-  --css-variable-2: #cccac2;
-  --css-variable-3: #ffd173;
-  --css-callee: #f28779;
+  --css-qualifier: #9effff;
+  --css-property: #a5ff90;
+  --css-number: #ffee80;
+  --css-keyword: #ffee80;
+  --css-variable: #9effff;
+  --css-variable-2: #9effff;
+  --css-variable-3: #faca1e;
+  --css-callee: #ff9d00;
   --css-comment: #b362ff;
-  --css-atom: #95e6cb;
-  --css-builtin: #ffd173;
-  --css-tag: #73d0ff;
-  --css-string: #d5ff80;
-  --css-def: #ffad66;
+  --css-atom: #ffee80;
+  --css-builtin: #ffb454;
+  --css-tag: #7bf290;
+  --css-string: #ffee80;
+  --css-def: #ff9d00;
 
   /* js */
   --js-default: hsl(0, 0%, 80%);
