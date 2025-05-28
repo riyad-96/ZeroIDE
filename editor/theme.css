@@ -63,6 +63,7 @@ html {
   --cm-focused-selected-bg: hsla(216, 100%, 80%, 0.25);
   --cm-unfocused-selected-bg: hsla(0, 0%, 60%, 0.25);
   --cm-cursor-clr: hsl(0, 0%, 20%);
+  --foldmarker-clr: hsl(0, 0%, 10%);
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
 
@@ -170,6 +171,7 @@ html {
     --cm-focused-selected-bg: hsla(207, 79%, 56%, 0.4);
     --cm-unfocused-selected-bg: hsla(0, 0%, 50%, 0.25);
     --cm-cursor-clr: hsl(0, 0%, 80%);
+    --foldmarker-clr: hsl(0, 0%, 90%);
     --cm-activeline-bg: transparent;
     --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
 
@@ -280,6 +282,7 @@ html {
   --cm-focused-selected-bg: hsla(216, 100%, 80%, 0.25);
   --cm-unfocused-selected-bg: hsla(0, 0%, 60%, 0.25);
   --cm-cursor-clr: hsl(0, 0%, 20%);
+  --foldmarker-clr: hsl(0, 0%, 10%);
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
 
@@ -387,6 +390,7 @@ html {
   --cm-focused-selected-bg: hsla(207, 79%, 56%, 0.4);
   --cm-unfocused-selected-bg: hsla(0, 0%, 50%, 0.25);
   --cm-cursor-clr: hsl(0, 0%, 80%);
+  --foldmarker-clr: hsl(0, 0%, 90%);
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
 
@@ -494,6 +498,7 @@ html {
   --cm-focused-selected-bg: hsla(0, 0%, 55%, 0.25);
   --cm-unfocused-selected-bg: hsla(0, 0%, 75%, 0.25);
   --cm-cursor-clr: hsl(0, 0%, 20%);
+  --foldmarker-clr: #000;
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
 
@@ -602,6 +607,7 @@ html {
   --cm-focused-selected-bg: hsl(174, 42%, 91%);
   --cm-unfocused-selected-bg: hsl(173, 39%, 95%);
   --cm-cursor-clr: hsl(0, 0%, 20%);
+  --foldmarker-clr: hsl(280, 68%, 55%);
   --cm-activeline-bg: hsl(192, 19%, 97%);
   --cm-active-line-bg-border: 1px solid transparent;
 
@@ -713,6 +719,7 @@ html {
   --cm-focused-selected-bg: #d6e4f6;
   --cm-unfocused-selected-bg: #eaf0f9;
   --cm-cursor-clr: hsl(25, 95%, 61%);
+  --foldmarker-clr: #f07171;
   --cm-activeline-bg: hsl(210, 7%, 95%);
   --cm-active-line-bg-border: 1px solid transparent;
 
@@ -821,6 +828,7 @@ html {
   --cm-focused-selected-bg: #3d404d;
   --cm-unfocused-selected-bg: #323443;
   --cm-cursor-clr: hsl(0, 0%, 80%);
+  --foldmarker-clr: #ff5c59;
   --cm-activeline-bg: #323443;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
 
@@ -929,6 +937,7 @@ html {
   --cm-focused-selected-bg: #44475a;
   --cm-unfocused-selected-bg: #363948;
   --cm-cursor-clr: hsl(0, 0%, 80%);
+  --foldmarker-clr: #ff79c6;
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsla(235, 14%, 27%, 1);
 
@@ -988,7 +997,7 @@ html {
   --g-btn-border-radius: 0.325rem;
 
   --option-btn-bg: hsl(216, 13%, 20%);
-  /* --option-btn-hover-bg: hsl(216, 13%, 25%); */
+  --option-btn-hover-bg: hsl(216, 13%, 25%);
 
   --input-bg: hsla(235, 14%, 30%, 0.3);
   --input-outline: 1px solid hsl(0, 0%, 50%, 0.6);
@@ -1034,11 +1043,12 @@ html {
   --cm-active-gutter-elt-clr: hsl(0, 0%, 90%);
   --cm-gutters-border-right: 1px solid hsl(0, 0%, 20%);
 
-  --cm-focused-selected-bg: #44475a;
-  --cm-unfocused-selected-bg: #363948;
-  --cm-cursor-clr: hsl(0, 0%, 80%);
-  --cm-activeline-bg: transparent;
-  --cm-active-line-bg-border: 1px solid hsla(235, 14%, 27%, 1);
+  --cm-focused-selected-bg: hsl(221, 13%, 26%);
+  --cm-unfocused-selected-bg: hsl(221, 14%, 23%);
+  --cm-cursor-clr: hsl(0, 0%, 95%);
+  --foldmarker-clr: #e06c75;
+  --cm-activeline-bg: hsl(220, 14%, 22%);
+  --cm-active-line-bg-border: 1px solid transparent;
 
   /* xml */
   --xml-default: #bbbbbb;
@@ -1084,7 +1094,112 @@ html {
 }
 [data-theme='dark-github'] {
   color-scheme: dark;
-  /* variables goes here */
+  --body-bg: hsl(0, 0%, 5%);
+  --body-clr: hsl(0, 0%, 90%);
+  --overlay: hsl(0, 0%, 0%, 0.3);
+
+  --g-btn-clr: hsl(0, 0%, 90%);
+  --g-btn-bg: hsl(215, 18%, 17%);
+  --g-btn-hover-bg: hsl(215, 18%, 19%);
+  --g-btn-hover-clr: hsl(0, 0%, 100%);
+  --g-btn-padding: 0.125rem 0.625rem;
+  --g-btn-border-radius: 0.325rem;
+
+  --option-btn-bg: hsl(215, 18%, 20%);
+  --option-btn-hover-bg: hsl(215, 18%, 25%);
+
+  --input-bg: hsl(215, 18%, 30%, 0.3);
+  --input-outline: 1px solid hsl(0, 0%, 50%, 0.6);
+  --option-bg: #262c36;
+  --option-clr: hsl(0, 0%, 100%);
+
+  --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
+  --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
+
+  --tab-change-btn-before-bg: #46a6ff;
+  --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
+  --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
+
+  --slick-border: 1px solid hsl(216, 13%, 21%);
+
+  --sidebar-toggle-icon-bg: hsl(215, 18%, 17%);
+  --sidebar-toggle-btn-hover-border: 1px solid hsl(215, 18%, 22%);
+  --submenu-bg: hsl(215, 18%, 18%);
+
+  --project-list-item-hover-bg: hsl(0, 0%, 13%);
+
+  --container-bg: hsl(215, 18%, 13%);
+  --light-container-border: 1px solid hsl(215, 18%, 19%);
+
+  --toast-message-clr: hsl(0, 0%, 5%);
+  --toast-message-bg: hsl(0, 0%, 85%);
+  --toast-message-border: 1px solid var(--toast-message-bg);
+
+  --global-scrollbar-track-bg: hsl(216, 13%, 15%);
+  --global-scrollbar-thumb-bg: hsl(216, 13%, 35%);
+  --global-scrollbar-thumb-hover-bg: hsl(216, 13%, 50%);
+
+  /* ! Code editor colors */
+  --topbar-bg: var(--container-bg);
+  --topbar-clr: hsl(0, 0%, 85%);
+
+  --file-type-icon-bg: hsl(0, 0%, 77%);
+  --file-type-icon-clr: hsl(0, 0%, 10%);
+
+  --cm-editor-bg: #22272e;
+  --cm-gutter-bg: #22272e;
+  --cm-gutter-elt-clr: #636e7b;
+  --cm-active-gutter-elt-clr: hsl(0, 0%, 80%);
+  --cm-gutters-border-right: 1px solid hsl(0, 0%, 20%);
+
+  --cm-focused-selected-bg: #264f78;
+  --cm-unfocused-selected-bg: hsl(211, 39%, 23%);
+  --cm-cursor-clr: #6cb6ff;
+  --foldmarker-clr: #6cb6ff;
+  --cm-activeline-bg: #292e36;
+  --cm-active-line-bg-border: 1px solid transparent;
+
+  /* xml */
+  --xml-default: #adbac7;
+  --xml-keyword: #8ddb8c;
+  --xml-bracket: #adbac7;
+  --xml-attribute: #6cb6ff;
+  --xml-string: #96d0ff;
+  --xml-comment: #768390;
+
+  /* css */
+  --css-default: hsl(0, 0%, 80%);
+  --css-qualifier: #6cb6ff;
+  --css-property: #6cb6ff;
+  --css-number: #6cb6ff;
+  --css-keyword: #6cb6ff;
+  --css-variable: #56b6c2;
+  --css-variable-2: #f69d50;
+  --css-variable-3: #6cb6ff;
+  --css-callee: #6cb6ff;
+  --css-comment: #768390;
+  --css-atom: #6cb6ff;
+  --css-builtin: #6cb6ff;
+  --css-tag: #8ddb8c;
+  --css-string: #96d0ff;
+  --css-def: #f4684e;
+
+  /* js */
+  --js-default: hsl(0, 0%, 80%);
+  --js-keyword: #f4684e;
+  --js-def: #6cb6ff;
+  --js-variable: #6cb6ff;
+  --js-variable-2: #adbac7;
+  --js-property: #dcbdfb;
+  --js-string: #96d0ff;
+  --js-comment: #768390;
+  --js-number: #6cb6ff;
+  --js-atom: #6cb6ff;
+
+  /* === Matching Brackets === */
+  --bracket-color: var(--xml-default);
+  --matching-bracket-bg: transparent;
+  --bracket-outline: hsla(235, 14%, 42%, 1);
 }
 [data-theme='dark-material'] {
   color-scheme: dark;

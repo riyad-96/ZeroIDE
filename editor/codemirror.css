@@ -33,6 +33,23 @@
   color: var(--cm-active-gutter-elt-clr);
 }
 
+.CodeMirror-widget{}
+.CodeMirror-foldmarker.CodeMirror-foldmarker{
+  color: var(--foldmarker-clr);
+  color: transparent;
+  text-shadow: none;
+  position: relative;
+}
+
+.CodeMirror-foldmarker.CodeMirror-foldmarker::before {
+  content: '...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  color: var(--foldmarker-clr);
+}
+
 /*! Code mirror styles */
 .CodeMirror.CodeMirror-focused .CodeMirror-selected {
   background-color: var(--cm-focused-selected-bg);
@@ -44,9 +61,7 @@
 
 .CodeMirror-cursor {
   border-color: transparent;
-  /* border: none; */
   max-width: 0;
-
 }
 
 .CodeMirror-cursor::after{

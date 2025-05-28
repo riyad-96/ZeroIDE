@@ -16,6 +16,8 @@ a:hover {
   color: rgb(255, 0, 0) !important;
 }
 
+/* [data-theme='dark-monokai'] */
+
 @media (max-width: 600px) {
   .grid {
     display: grid;
