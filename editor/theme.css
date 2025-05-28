@@ -1049,24 +1049,24 @@ html {
   --xml-comment: #676f7d;
 
   /* css */
-  --css-default: #ffffff;
-  --css-qualifier: #4efa7b;
-  --css-property: #8be9fd;
-  --css-number: #bd93f9;
-  --css-keyword: #bd93f9;
-  --css-variable: var(--css-property);
-  --css-variable-2: #ffffff;
-  --css-variable-3: #4efa7b;
-  --css-callee: #8be9fd;
+  --css-default: hsl(0, 0%, 80%);
+  --css-qualifier: #98c379;
+  --css-property: #9fb2bf;
+  --css-number: #c678dd;
+  --css-keyword: #e06c75;
+  --css-variable: #56b6c2;
+  --css-variable-2: #56b1ab;
+  --css-variable-3: #98c379;
+  --css-callee: #98c379;
   --css-comment: #676f7d;
-  --css-atom: #bd93f9;
-  --css-builtin: #42dd6d;
-  --css-tag: #ff6d9d;
-  --css-string: #f1fa8c;
-  --css-def: #ff6d9d;
+  --css-atom: #56b1ab;
+  --css-builtin: #98aa59;
+  --css-tag: #e06c75;
+  --css-string: #da9340;
+  --css-def: #e06c75;
 
   /* js */
-  --js-default: hsl(0, 0%, 90%);
+  --js-default: hsl(0, 0%, 80%);
   --js-keyword: #ff79c6;
   --js-def: #bd93f9;
   --js-variable: #bd93f9;
