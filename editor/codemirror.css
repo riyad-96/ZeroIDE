@@ -59,7 +59,7 @@
   width: 2px;
   color: transparent;
   height: 100%;
-  background-color: var(--cm-cursor-border-clr);
+  background-color: var(--cm-cursor-clr);
   animation: custom-cursor-blink 1.3s 500ms infinite;
 }
 

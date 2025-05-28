@@ -62,7 +62,7 @@ html {
 
   --cm-focused-selected-bg: hsla(216, 100%, 80%, 0.25);
   --cm-unfocused-selected-bg: hsla(0, 0%, 60%, 0.25);
-  --cm-cursor-border-clr: hsl(0, 0%, 20%);
+  --cm-cursor-clr: hsl(0, 0%, 20%);
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
 
@@ -169,7 +169,7 @@ html {
 
     --cm-focused-selected-bg: hsla(207, 79%, 56%, 0.4);
     --cm-unfocused-selected-bg: hsla(0, 0%, 50%, 0.25);
-    --cm-cursor-border-clr: hsl(0, 0%, 80%);
+    --cm-cursor-clr: hsl(0, 0%, 80%);
     --cm-activeline-bg: transparent;
     --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
 
@@ -279,7 +279,7 @@ html {
 
   --cm-focused-selected-bg: hsla(216, 100%, 80%, 0.25);
   --cm-unfocused-selected-bg: hsla(0, 0%, 60%, 0.25);
-  --cm-cursor-border-clr: hsl(0, 0%, 20%);
+  --cm-cursor-clr: hsl(0, 0%, 20%);
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
 
@@ -386,7 +386,7 @@ html {
 
   --cm-focused-selected-bg: hsla(207, 79%, 56%, 0.4);
   --cm-unfocused-selected-bg: hsla(0, 0%, 50%, 0.25);
-  --cm-cursor-border-clr: hsl(0, 0%, 80%);
+  --cm-cursor-clr: hsl(0, 0%, 80%);
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
 
@@ -493,7 +493,7 @@ html {
 
   --cm-focused-selected-bg: hsla(0, 0%, 55%, 0.25);
   --cm-unfocused-selected-bg: hsla(0, 0%, 75%, 0.25);
-  --cm-cursor-border-clr: hsl(0, 0%, 20%);
+  --cm-cursor-clr: hsl(0, 0%, 20%);
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
 
@@ -601,7 +601,7 @@ html {
 
   --cm-focused-selected-bg: hsl(174, 42%, 91%);
   --cm-unfocused-selected-bg: hsl(173, 39%, 95%);
-  --cm-cursor-border-clr: hsl(0, 0%, 20%);
+  --cm-cursor-clr: hsl(0, 0%, 20%);
   --cm-activeline-bg: hsl(192, 19%, 97%);
   --cm-active-line-bg-border: 1px solid transparent;
 
@@ -712,7 +712,7 @@ html {
 
   --cm-focused-selected-bg: #d6e4f6;
   --cm-unfocused-selected-bg: #eaf0f9;
-  --cm-cursor-border-clr: hsl(25, 95%, 61%);
+  --cm-cursor-clr: hsl(25, 95%, 61%);
   --cm-activeline-bg: hsl(210, 7%, 95%);
   --cm-active-line-bg-border: 1px solid transparent;
 
@@ -814,13 +814,13 @@ html {
 
   --cm-editor-bg: #282a3a;
   --cm-gutter-bg: #282a3a;
-  --cm-gutter-elt-clr: hsl(0, 0%, 40%);
+  --cm-gutter-elt-clr: #535763;
   --cm-active-gutter-elt-clr: hsl(0, 0%, 100%);
   --cm-gutters-border-right: 1px solid hsl(0, 0%, 20%);
 
   --cm-focused-selected-bg: #3d404d;
   --cm-unfocused-selected-bg: #323443;
-  --cm-cursor-border-clr: hsl(0, 0%, 80%);
+  --cm-cursor-clr: hsl(0, 0%, 80%);
   --cm-activeline-bg: #323443;
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
 
@@ -922,13 +922,13 @@ html {
 
   --cm-editor-bg: #282a36;
   --cm-gutter-bg: #282a36;
-  --cm-gutter-elt-clr: hsl(0, 0%, 40%);
+  --cm-gutter-elt-clr: #6272a4;
   --cm-active-gutter-elt-clr: hsl(0, 0%, 100%);
   --cm-gutters-border-right: 1px solid hsl(0, 0%, 20%);
 
   --cm-focused-selected-bg: #44475a;
   --cm-unfocused-selected-bg: #363948;
-  --cm-cursor-border-clr: hsl(0, 0%, 80%);
+  --cm-cursor-clr: hsl(0, 0%, 80%);
   --cm-activeline-bg: transparent;
   --cm-active-line-bg-border: 1px solid hsla(235, 14%, 27%, 1);
 
@@ -976,11 +976,111 @@ html {
 }
 [data-theme='dark-one-monokai'] {
   color-scheme: dark;
-  /* variables goes here */
-}
-[data-theme='dark-monokai-pro'] {
-  color-scheme: dark;
-  /* variables goes here */
+  --body-bg: hsl(0, 0%, 5%);
+  --body-clr: hsl(0, 0%, 90%);
+  --overlay: hsl(0, 0%, 0%, 0.3);
+
+  --g-btn-clr: hsl(0, 0%, 90%);
+  --g-btn-bg: hsl(216, 13%, 17%);
+  --g-btn-hover-bg: hsl(216, 13%, 19%);
+  --g-btn-hover-clr: hsl(0, 0%, 100%);
+  --g-btn-padding: 0.125rem 0.625rem;
+  --g-btn-border-radius: 0.325rem;
+
+  --option-btn-bg: hsl(216, 13%, 20%);
+  /* --option-btn-hover-bg: hsl(216, 13%, 25%); */
+
+  --input-bg: hsla(235, 14%, 30%, 0.3);
+  --input-outline: 1px solid hsl(0, 0%, 50%, 0.6);
+  --option-bg: #2b2c39;
+  --option-clr: hsl(0, 0%, 100%);
+
+  --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
+  --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
+
+  --tab-change-btn-before-bg: hsl(187, 47%, 55%);
+  --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
+  --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
+
+  --slick-border: 1px solid hsl(216, 13%, 21%);
+
+  --sidebar-toggle-icon-bg: hsl(0, 0%, 12%);
+  --sidebar-toggle-btn-hover-border: 1px solid hsl(0, 0%, 21%);
+  --submenu-bg: hsl(216, 13%, 18%);
+
+  --project-list-item-hover-bg: hsl(0, 0%, 13%);
+
+  --container-bg: hsl(216, 13%, 15%);
+  --light-container-border: 1px solid hsl(216, 13%, 19%);
+
+  --toast-message-clr: hsl(0, 0%, 5%);
+  --toast-message-bg: hsl(0, 0%, 85%);
+  --toast-message-border: 1px solid var(--toast-message-bg);
+
+  --global-scrollbar-track-bg: hsl(216, 13%, 15%);
+  --global-scrollbar-thumb-bg: hsl(216, 13%, 35%);
+  --global-scrollbar-thumb-hover-bg: hsl(216, 13%, 50%);
+
+  /* ! Code editor colors */
+  --topbar-bg: var(--container-bg);
+  --topbar-clr: hsl(0, 0%, 85%);
+
+  --file-type-icon-bg: hsl(0, 0%, 77%);
+  --file-type-icon-clr: hsl(0, 0%, 10%);
+
+  --cm-editor-bg: hsl(220, 13%, 18%);
+  --cm-gutter-bg: hsl(220, 13%, 18%);
+  --cm-gutter-elt-clr: #495162;
+  --cm-active-gutter-elt-clr: hsl(0, 0%, 90%);
+  --cm-gutters-border-right: 1px solid hsl(0, 0%, 20%);
+
+  --cm-focused-selected-bg: #44475a;
+  --cm-unfocused-selected-bg: #363948;
+  --cm-cursor-clr: hsl(0, 0%, 80%);
+  --cm-activeline-bg: transparent;
+  --cm-active-line-bg-border: 1px solid hsla(235, 14%, 27%, 1);
+
+  /* xml */
+  --xml-default: #bbbbbb;
+  --xml-keyword: #e06c75;
+  --xml-bracket: #bbbbbb;
+  --xml-attribute: #85c379;
+  --xml-string: #e5c07b;
+  --xml-comment: #676f7d;
+
+  /* css */
+  --css-default: #ffffff;
+  --css-qualifier: #4efa7b;
+  --css-property: #8be9fd;
+  --css-number: #bd93f9;
+  --css-keyword: #bd93f9;
+  --css-variable: var(--css-property);
+  --css-variable-2: #ffffff;
+  --css-variable-3: #4efa7b;
+  --css-callee: #8be9fd;
+  --css-comment: #676f7d;
+  --css-atom: #bd93f9;
+  --css-builtin: #42dd6d;
+  --css-tag: #ff6d9d;
+  --css-string: #f1fa8c;
+  --css-def: #ff6d9d;
+
+  /* js */
+  --js-default: hsl(0, 0%, 90%);
+  --js-keyword: #ff79c6;
+  --js-def: #bd93f9;
+  --js-variable: #bd93f9;
+  --js-variable-2: #ffffff;
+  --js-property: #3ffa7b;
+  --js-string: #f1fa8c;
+  --js-comment: #676f7d;
+  --js-number: #bd93f9;
+  --js-atom: #bd93f9;
+
+  /* === Matching Brackets === */
+  --bracket-color: var(--xml-default);
+  --matching-bracket-bg: transparent;
+  --bracket-outline: hsla(235, 14%, 42%, 1);
 }
 [data-theme='dark-github'] {
   color-scheme: dark;
