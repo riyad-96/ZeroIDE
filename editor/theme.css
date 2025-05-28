@@ -1277,21 +1277,21 @@ html {
   --xml-comment: #4a4a4a;
 
   /* css */
-  --css-default: hsl(0, 0%, 80%);
-  --css-qualifier: #6cb6ff;
-  --css-property: #6cb6ff;
-  --css-number: #6cb6ff;
-  --css-keyword: #6cb6ff;
-  --css-variable: #56b6c2;
-  --css-variable-2: #f69d50;
-  --css-variable-3: #6cb6ff;
-  --css-callee: #6cb6ff;
+  --css-default: hsl(0, 0%, 90%);
+  --css-qualifier: #ffcb6b;
+  --css-property: #b2ccd6;
+  --css-number: #f7743e;
+  --css-keyword: #eeffff;
+  --css-variable: #eefff1;
+  --css-variable-2: #eefff1;
+  --css-variable-3: #c792ea;
+  --css-callee: #69aaff;
   --css-comment: #4a4a4a;
-  --css-atom: #6cb6ff;
-  --css-builtin: #6cb6ff;
-  --css-tag: #8ddb8c;
-  --css-string: #96d0ff;
-  --css-def: #f4684e;
+  --css-atom: #eeffff;
+  --css-builtin: #f77e45;
+  --css-tag: #ffcb6b;
+  --css-string: #c3e88d;
+  --css-def: #89ddf8;
 
   /* js */
   --js-default: hsl(0, 0%, 80%);
