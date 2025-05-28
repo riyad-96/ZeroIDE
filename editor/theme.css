@@ -933,7 +933,7 @@ html {
   --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
 
   /* xml */
-  --xml-default: #eaf2f1;
+  --xml-default: #ffffff;
   --xml-keyword: #ff79c6;
   --xml-bracket: #ffffff;
   --xml-attribute: #4bfa7b;
@@ -941,21 +941,21 @@ html {
   --xml-comment: #6272a4;
 
   /* css */
-  --css-default: #eaf2f1;
-  --css-qualifier: #bad152;
-  --css-property: #dff2f1;
-  --css-number: #c39ac9;
-  --css-keyword: #9cd1bb;
+  --css-default: #ffffff;
+  --css-qualifier: #4efa7b;
+  --css-property: #ffffff;
+  --css-number: #bd93f9;
+  --css-keyword: #bd93f9;
   --css-variable: var(--css-property);
   --css-variable-2: var(--css-property);
-  --css-variable-3: #9cd1bb;
-  --css-callee: #bad152;
+  --css-variable-3: #4efa7b;
+  --css-callee: #8be9fd;
   --css-comment: #6272a4;
-  --css-atom: #9cd1bb;
-  --css-builtin: #ff9b5e;
-  --css-tag: #ff657a;
+  --css-atom: #bd93f9;
+  --css-builtin: #42dd6d;
+  --css-tag: #ff6d9d;
   --css-string: #ffd76d;
-  --css-def: #ff657a;
+  --css-def: #ff6d9d;
 
   /* js */
   --js-default: hsl(0, 0%, 90%);
