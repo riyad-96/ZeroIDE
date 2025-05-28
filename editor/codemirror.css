@@ -2,6 +2,7 @@
 .CodeMirror {
   font-size: var(--user-font-size);
   font-family: var(--user-font);
+  font-weight: 300;
   background-color: var(--cm-editor-bg);
   width: 100%;
   height: 100%;

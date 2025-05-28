@@ -29,17 +29,27 @@
 @font-face {
   font-family: 'firaCode';
   src: url('../assets/fonts/editor-fonts/firaCode.woff2') format('woff2');
-  /* font-weight: 400; */
+  font-weight: 400;
 }
 @font-face {
   font-family: 'cascadiaCode';
   src: url('../assets/fonts/editor-fonts/cascadiaCode.woff2') format('woff2');
-  /* font-weight: 400; */
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'cascadiaCode';
+  src: url('../assets/fonts/editor-fonts/cascadia-code-v2-latin-300.woff2') format('woff2');
+  font-weight: 300;
 }
 @font-face {
   font-family: 'jetBrainsMono';
   src: url('../assets/fonts/editor-fonts/jetBrainsMono.woff2') format('woff2');
-  /* font-weight: 400; */
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'jetBrainsMono';
+  src: url('../assets/fonts/editor-fonts/JetBrainsMono-Light.woff2') format('woff2');
+  font-weight: 300;
 }
 
 /* ----- base ----- */
@@ -1154,7 +1164,7 @@ code {
   width: 3px;
   height: 0;
   background-color: var(--tab-change-btn-before-bg);
-  transition: height 500ms 100ms;
+  transition: height 500ms 100ms, background-color 0ms 100ms;
 }
 
 .theme-change-btn.selected {
