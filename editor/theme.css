@@ -1295,15 +1295,15 @@ html {
 
   /* js */
   --js-default: hsl(0, 0%, 80%);
-  --js-keyword: #f4684e;
-  --js-def: #6cb6ff;
-  --js-variable: #6cb6ff;
-  --js-variable-2: #adbac7;
-  --js-property: #dcbdfb;
-  --js-string: #96d0ff;
+  --js-keyword: #c792ea;
+  --js-def: #eeffff;
+  --js-variable: #eeffff;
+  --js-variable-2: #eeffff;
+  --js-property: #82aaff;
+  --js-string: #c3e88d;
   --js-comment: #4a4a4a;
-  --js-number: #6cb6ff;
-  --js-atom: #6cb6ff;
+  --js-number: #f76f39;
+  --js-atom: #ff9cac;
 
   /* === Matching Brackets === */
   --bracket-color: var(--xml-default);
