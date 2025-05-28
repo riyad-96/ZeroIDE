@@ -1421,5 +1421,110 @@ html {
 }
 [data-theme='dark-shades-of-purple'] {
   color-scheme: dark;
-  /* variables goes here */
+  --body-bg: hsl(0, 0%, 5%);
+  --body-clr: hsl(0, 0%, 90%);
+  --overlay: hsl(0, 0%, 0%, 0.3);
+
+  --g-btn-clr: hsl(0, 0%, 90%);
+  --g-btn-bg: hsl(240, 33%, 24%);
+  --g-btn-hover-bg: hsl(240, 33%, 29%);
+  --g-btn-hover-clr: hsl(0, 0%, 100%);
+  --g-btn-padding: 0.125rem 0.625rem;
+  --g-btn-border-radius: 0.325rem;
+
+  --option-btn-bg: hsl(240, 33%, 25%);
+  --option-btn-hover-bg: hsl(240, 33%, 30%);
+
+  --input-bg: hsl(240, 33%, 30%, 0.3);
+  --input-outline: 1px solid hsl(0, 0%, 50%, 0.6);
+  --option-bg: #272d3d;
+  --option-clr: hsl(0, 0%, 100%);
+
+  --expand-reset-btn-border: 1px solid hsl(0, 0%, 25%);
+  --expand-reset-btn-box-shadow: 0 1px 2px hsla(0, 0%, 50%, 0.2);
+
+  --tab-change-btn-before-bg: hsl(255, 86%, 66%);
+  --tab-change-btn-selected-bg: hsl(0, 0%, 25%);
+  --tab-change-btn-border: 1px solid var(--tab-change-btn-before-bg);
+
+  --slick-border: 1px solid hsl(240, 33%, 32%);
+
+  --sidebar-toggle-icon-bg: hsl(240, 33%, 27%);
+  --sidebar-toggle-btn-hover-border: 1px solid hsl(240, 33%, 35%);
+  --submenu-bg: hsl(240, 33%, 23%);
+
+  --project-list-item-hover-bg: hsl(0, 0%, 13%);
+
+  --container-bg: hsl(240, 33%, 20%);
+  --light-container-border: 1px solid hsl(240, 33%, 25%);
+
+  --toast-message-clr: hsl(0, 0%, 5%);
+  --toast-message-bg: hsl(0, 0%, 85%);
+  --toast-message-border: 1px solid var(--toast-message-bg);
+
+  --global-scrollbar-track-bg: hsl(240, 33%, 23%);
+  --global-scrollbar-thumb-bg: hsl(240, 33%, 35%);
+  --global-scrollbar-thumb-hover-bg: hsl(240, 33%, 50%);
+
+  /* ! Code editor colors */
+  --topbar-bg: var(--container-bg);
+  --topbar-clr: hsl(0, 0%, 85%);
+
+  --file-type-icon-bg: hsl(0, 0%, 77%);
+  --file-type-icon-clr: hsl(0, 0%, 10%);
+
+  --cm-editor-bg: #2d2b55;
+  --cm-gutter-bg: #2d2b55;
+  --cm-gutter-elt-clr: hsl(249, 65%, 76%);
+  --cm-active-gutter-elt-clr: hsl(249, 65%, 96%);
+  --cm-gutters-border-right: 1px solid hsl(240, 33%, 34%);
+
+  --cm-focused-selected-bg: #7448af;
+  --cm-unfocused-selected-bg: #636b9f;
+  --cm-cursor-clr: hsl(267, 100%, 65%);
+  --foldmarker-clr: hsl(267, 100%, 65%);
+  --cm-activeline-bg: hsl(240, 35%, 22%);
+  --cm-active-line-bg-border: 1px solid transparent;
+
+  /* xml */
+  --xml-default: #ffffff;
+  --xml-keyword: #9effff;
+  --xml-bracket: #9effff;
+  --xml-attribute: #fad000;
+  --xml-string: #a5ff90;
+  --xml-comment: #b362ff;
+
+  /* css */
+  --css-default: hsl(0, 0%, 90%);
+  --css-qualifier: #ffd173;
+  --css-property: #5ccfdb;
+  --css-number: #dfbfff;
+  --css-keyword: #f29e74;
+  --css-variable: #f29e74;
+  --css-variable-2: #cccac2;
+  --css-variable-3: #ffd173;
+  --css-callee: #f28779;
+  --css-comment: #b362ff;
+  --css-atom: #95e6cb;
+  --css-builtin: #ffd173;
+  --css-tag: #73d0ff;
+  --css-string: #d5ff80;
+  --css-def: #ffad66;
+
+  /* js */
+  --js-default: hsl(0, 0%, 80%);
+  --js-keyword: #ffad66;
+  --js-def: #cccac2;
+  --js-variable: #cccac2;
+  --js-variable-2: #cccac2;
+  --js-property: #ffd173;
+  --js-string: #d5ff80;
+  --js-comment: #b362ff;
+  --js-number: #c1b1ff;
+  --js-atom: #dfbfff;
+
+  /* === Matching Brackets === */
+  --bracket-color: var(--xml-default);
+  --matching-bracket-bg: hsla(70, 16%, 25%, 0.678);
+  --bracket-outline: hsla(42, 42%, 62%, 0.5);
 }
