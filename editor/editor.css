@@ -13,7 +13,7 @@
 
   display: none;
   translate: -100% 0;
-  transition: translate 600ms, max-width 200ms;
+  transition: translate 600ms, max-width 200ms, scale 6s;
   z-index: 2;
 
   @media (width>700px) {
