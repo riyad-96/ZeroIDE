@@ -37,7 +37,6 @@ function copyToClipboard(text) {
   tempInput.select();
   document.execCommand('copy');
   document.body.removeChild(tempInput);
-  console.log('Copied', text);
 }
 
 //! ----------------------------------
@@ -136,7 +135,6 @@ function titleBlurEvent() {
   loadSidebarProject(freshSavedProjects);
 
   this.removeEventListener('blur', titleBlurEvent);
-  console.log('renamed');
 }
 
 function enterToBlur(e) {

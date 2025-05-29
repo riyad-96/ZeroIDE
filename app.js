@@ -1235,7 +1235,6 @@ function refreshPageContent(projects) {
   loadLastFourProject(projects);
   projectPageProjectContainer.innerHTML = '';
   createProjectPageProjects(projects);
-  console.log(savedProjects);
 }
 
 document.addEventListener('visibilitychange', () => {
@@ -1249,7 +1248,6 @@ document.addEventListener('visibilitychange', () => {
     const nameChanged = savedProjects.some((obj, index) => obj.name !== newProjectList[index]?.name);
     if (nameChanged || projectDeleted) {
       refreshPageContent(newProjectList);
-      console.log('content changed')
     }
   }
 });
