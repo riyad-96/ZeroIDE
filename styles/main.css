@@ -379,6 +379,7 @@ main {
   min-width: 60px;
   width: 60px;
   position: relative;
+  z-index: 10;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -1511,16 +1512,17 @@ img {
   }
 }
 
-.sidebar-bg-layer.show {
-  display: block;
-  opacity: 1;
-}
-@starting-style {
+@media (width < 1000px) {
   .sidebar-bg-layer.show {
-    opacity: 0;
+    display: block;
+    opacity: 1;
+  }
+  @starting-style {
+    .sidebar-bg-layer.show {
+      opacity: 0;
+    }
   }
 }
-
 .disable-interactivity-layer {
   width: 100%;
   height: 100%;

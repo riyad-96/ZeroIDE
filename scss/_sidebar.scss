@@ -5,12 +5,13 @@
   min-width: 60px;
   width: 60px;
   position: relative;
+  z-index: 10;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   color: var(--sidebar-clr);
   overflow-x: hidden;
-  transition:  min-width 500ms, background-color 0ms;
+  transition: min-width 500ms, background-color 0ms;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -72,7 +73,7 @@
   height: 100%;
   object-fit: cover;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 //! Primary page menu styling
@@ -128,7 +129,6 @@
   border-radius: unset;
   flex-grow: 1;
 }
-
 
 .sub-menu-btn {
   display: grid;
@@ -277,7 +277,7 @@
 }
 
 .sub-menu-options::before {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -5px;
   right: 12px;

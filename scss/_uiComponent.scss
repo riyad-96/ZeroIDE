@@ -73,12 +73,14 @@
   }
 }
 
-.sidebar-bg-layer.show {
-  display: block;
-  opacity: 1;
-
-  @starting-style {
-    opacity: 0;
+@media(width < 1000px) {
+  .sidebar-bg-layer.show {
+    display: block;
+    opacity: 1;
+  
+    @starting-style {
+      opacity: 0;
+    }
   }
 }
 
