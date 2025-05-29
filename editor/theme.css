@@ -904,7 +904,7 @@ html {
 
   --slick-border: 1px solid hsla(235, 14%, 21%, 1);
 
-  --sidebar-toggle-icon-bg: hsl(0, 0%, 12%);
+  --sidebar-toggle-icon-bg: hsla(235, 14%, 21%, 1);
   --sidebar-toggle-btn-hover-border: 1px solid hsl(0, 0%, 21%);
   --submenu-bg: hsla(235, 14%, 18%, 1);
 

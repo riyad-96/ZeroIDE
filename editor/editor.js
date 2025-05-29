@@ -49,7 +49,9 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
   theme: 'default',
   editor: {
     fontFamily: 'firaCode',
+    fontWeight: '400',
     fontSize: '14',
+    fontLigatures: 'on',
     tabSize: '2',
     semicolon: 'on',
     quotation: 'double',
@@ -183,7 +185,7 @@ reloadTitleAttr();
 function toggleSidebar() {
   if (!sidebar.classList.contains('show')) {
     setDisplay(sidebar, 'block');
-    setDisplay(beneathLayer, 'block');
+    beneathLayer.classList.add('show');
     requestAnimationFrame(() => {
       sidebar.classList.add('show');
       sidebarToggleBtn.classList.add('move');
@@ -192,7 +194,7 @@ function toggleSidebar() {
   } else {
     sidebar.classList.remove('show');
     sidebarToggleBtn.classList.remove('move');
-    setDisplay(beneathLayer, 'none');
+    beneathLayer.classList.remove('show')
     setTimeout(() => {
       setDisplay(sidebar, 'none');
       reloadTitleAttr();
@@ -283,98 +285,249 @@ function loadCodeMirror(mode, value) {
 
 const codeScrolls = [
   {
-    html: `<button id="clickMe">Click me!</button>`,
-    css: `button {padding: 10px;font-size: 16px;cursor: pointer;}`,
-    js: `document.getElementById('clickMe').onclick = () => {alert('You clicked me!');}`,
+    html: '<!-- Centered with Flexbox magic -->',
+    css: '/* Flexbox to the rescue! */',
+    js: '// Toggle like a ninja',
   },
   {
-    html: `<div class="box">Hover me</div>`,
-    css: `.box { width: 100px; height: 100px; background: tomato; transition: 0.3s; }
-           .box:hover { transform: scale(1.2); background: gold; }`,
-    js: `// CSS handles everything here. Magic box!`,
+    html: '<!-- TODO: Add dark mode switch -->',
+    css: '/* Needs better contrast in dark mode */',
+    js: '// Placeholder logic for now',
   },
   {
-    html: `<input id="nameInput" placeholder="Type your name" autocomplete="off" />
-           <p id="greet"></p>`,
-    css: `input { padding: 5px; }
-          p { font-weight: bold; margin-top: 10px; }`,
-    js: `document.getElementById('nameInput').oninput = (e) => {
-            document.getElementById('greet').textContent = "Hello, " + e.target.value + "!";
-         };`,
+    html: '<!-- Button that begs to be clicked -->',
+    css: '/* Gently rounded corners for peaceful vibes */',
+    js: '// Click event with no regrets',
   },
   {
-    html: `<div id="colorBox">🎨</div>`,
-    css: `#colorBox { width: 100px; height: 100px; background: skyblue; text-align: center; line-height: 100px; cursor: pointer; }`,
-    js: `document.getElementById('colorBox').onclick = () => {
-            colorBox.style.background = '#' + Math.floor(Math.random()*16777215).toString(16);
-         };`,
+    html: "<!-- Don't touch this unless you're brave -->",
+    css: "/* It works... don't ask how */",
+    js: '// If it breaks, blame the cat',
   },
   {
-    html: `<button id="darkMode">Toggle Dark Mode</button>`,
-    css: `body.dark { background: #121212; color: white; }
-          button { margin-top: 10px; }`,
-    js: `document.getElementById('darkMode').onclick = () => {
-            document.body.classList.toggle('dark');
-         };`,
+    html: "<!-- Floating nav like it's 1999 -->",
+    css: '/* Absolute positioning wizardry */',
+    js: '// Smooth scroll powered by scrollIntoView',
   },
   {
-    html: `<div class="pulse">💓</div>`,
-    css: `.pulse {
-             max-width: fit-content;
-             font-size: 30px;
-             animation: pulse 1s infinite;
-           }
-           @keyframes pulse {
-             0%, 100% { transform: scale(1); }
-             50% { transform: scale(1.3); }
-           }`,
-    js: `// Just a CSS heartbeat ❤️`,
+    html: '<!-- Could use ARIA for accessibility -->',
+    css: '/* Visually hidden, functionally golden */',
+    js: '// Announce updates for screen readers',
   },
   {
-    html: `<input id="task" placeholder="Enter task" />
-           <ul id="todoList"></ul>`,
-    css: `input { padding: 5px; } li { margin-top: 5px; }`,
-    js: `const task = document.getElementById('task');
-         const list = document.getElementById('todoList');
-         task.addEventListener('keydown', e => {
-           if (e.key === 'Enter') {
-             const li = document.createElement('li');
-             li.textContent = task.value;
-             list.appendChild(li);
-             task.value = '';
-           }
-         });`,
+    html: '<!-- Hero section so epic it needs a cape -->',
+    css: '/* Background like a sunrise */',
+    js: '// Animate entrance with style',
   },
   {
-    html: `<div id="clock"></div>`,
-    css: `#clock { font-size: 24px; font-family: monospace; margin-top: 10px; }`,
-    js: `setInterval(() => {
-            document.getElementById('clock').textContent = new Date().toLocaleTimeString();
-         }, 1000);`,
+    html: '<!-- Need better semantic tags -->',
+    css: '/* Stop using divs for everything! */',
+    js: '// Will replace this with real data later',
   },
   {
-    html: `<button id="spinBtn">Spin!</button>
-           <div id="spinner">🌀</div>`,
-    css: `#spinner { max-width: fit-content; font-size: 40px; transition: transform 0.3s ease; }
-          #spinner.spin { transform: rotate(360deg); }`,
-    js: `document.getElementById('spinBtn').onclick = () => {
-            const spinner = document.getElementById('spinner');
-            spinner.classList.add('spin');
-            setTimeout(() => spinner.classList.remove('spin'), 300);
-         };`,
+    html: '<!-- Modal portal to another dimension -->',
+    css: '/* Z-index chaos begins here */',
+    js: '// Trap focus like a boss',
   },
   {
-    html: `<div id="quoteBox">Click for wisdom 💡</div>`,
-    css: `#quoteBox { padding: 20px; border: 2px dashed #aaa; cursor: pointer; }
-          #quoteBox:hover { background: #f9f9f9; }`,
-    js: `const quotes = [
-           "Code is like humor. When you have to explain it, it’s bad.",
-           "First, solve the problem. Then, write the code.",
-           "Simplicity is the soul of efficiency."
-         ];
-         document.getElementById('quoteBox').onclick = () => {
-           quoteBox.textContent = quotes[Math.floor(Math.random() * quotes.length)];
-         };`,
+    html: '<!-- This is fine -->',
+    css: "/* Everything's on fire, but in style */",
+    js: "// Don't panic, just debounce",
+  },
+  {
+    html: '<!-- Magic happens below -->',
+    css: '/* Sparkles incoming */',
+    js: '// Animate like Studio Ghibli',
+  },
+  {
+    html: '<!-- Grid layout dream come true -->',
+    css: '/* Grid-template-columns sorcery */',
+    js: '// Resize logic pending...',
+  },
+  {
+    html: '<!-- Should probably validate this -->',
+    css: '/* No border yet, just vibes */',
+    js: '// Validate before you devastate',
+  },
+  {
+    html: '<!-- Footer of destiny -->',
+    css: '/* Sticky like grandma’s cookies */',
+    js: '// Scroll to bottom behavior here',
+  },
+  {
+    html: '<!-- Form so clean it sparkles -->',
+    css: '/* Minimalist input elegance */',
+    js: '// Handle form submit like a champ',
+  },
+  {
+    html: '<!-- Carousel of doom -->',
+    css: '/* Overflow hidden… for your safety */',
+    js: '// Slide left, slide right, now spin',
+  },
+  {
+    html: '<!-- Navigation for the chosen ones -->',
+    css: '/* Centered nav with pixel-perfect balance */',
+    js: '// Hamburger menu logic inside',
+  },
+  {
+    html: '<!-- This button has seen things -->',
+    css: '/* Button deserves a raise */',
+    js: '// Add click animation (🧙 style)',
+  },
+  {
+    html: '<!-- Danger zone below -->',
+    css: '/* Red means danger, or love? */',
+    js: '// Confirm before deleting… always',
+  },
+  {
+    html: '<!-- Content so fresh it squeaks -->',
+    css: '/* Ice-cold palette */',
+    js: '// Lazy load like a professional napper',
+  },
+  {
+    html: '<!-- Logo placeholder until client decides -->',
+    css: '/* Temporarily ugly, permanently functional */',
+    js: '// Logo click = homepage (classic)',
+  },
+  {
+    html: '<!-- Hidden Easter egg area -->',
+    css: "/* Shhh, don't tell the user */",
+    js: '// Konami code? Maybe.',
+  },
+  {
+    html: '<!-- Testimonials section -->',
+    css: '/* Italics for fake sincerity */',
+    js: '// Cycle testimonials every 5 seconds',
+  },
+  {
+    html: '<!-- Contact form needs reCAPTCHA -->',
+    css: '/* Anti-bot force field */',
+    js: '// TODO: Add email validation',
+  },
+  {
+    html: '<!-- Scroll-triggered section -->',
+    css: '/* Parallax vibes */',
+    js: '// onScroll event handler of doom',
+  },
+  {
+    html: '<!-- Div of destiny -->',
+    css: '/* Centered with pure intent */',
+    js: '// TODO: Clean this logic up',
+  },
+  {
+    html: '<!-- This input is living its best life -->',
+    css: '/* Looks clickable. It is. */',
+    js: '// Auto-focus FTW',
+  },
+  {
+    html: '<!-- Section not yet responsive -->',
+    css: '/* Mobile styles incoming 🚀 */',
+    js: '// Window resize listener here',
+  },
+  {
+    html: '<!-- Might break IE11 -->',
+    css: '/* Modern-only party */',
+    js: '// Polyfill needed? Nah',
+  },
+  {
+    html: '<!-- Icon pending approval -->',
+    css: '/* Placeholder color: sadness */',
+    js: '// Replace SVG when ready',
+  },
+  {
+    html: '<!-- This div is lying -->',
+    css: '/* Pretends to be a button */',
+    js: '// Fakes a click event',
+  },
+  {
+    html: '<!-- My favorite div -->',
+    css: '/* Treat this with kindness */',
+    js: "// Don't break this, please",
+  },
+  {
+    html: '<!-- Hacky but it works -->',
+    css: "/* Don't look too closely */",
+    js: '// Trust the process',
+  },
+  {
+    html: '<!-- This tag brought to you by StackOverflow -->',
+    css: '/* I found this in a deep Reddit thread */',
+    js: '// Shoutout to that one helpful comment',
+  },
+  {
+    html: '<!-- This span does heavy lifting -->',
+    css: '/* Inline-block hero */',
+    js: '// Handles dynamic updates',
+  },
+  {
+    html: '<!-- Footer flexified -->',
+    css: '/* Auto margins to center the soul */',
+    js: '// Scroll position logic starts here',
+  },
+  {
+    html: '<!-- The sacred wrapper -->',
+    css: '/* Contain all the chaos */',
+    js: '// Wrap your functions too',
+  },
+  {
+    html: '<!-- Placeholder for AI content -->',
+    css: '/* Content-loading shimmer */',
+    js: '// Load content via fetchAI()',
+  },
+  {
+    html: '<!-- Built at 3AM -->',
+    css: '/* Dark mode energy */',
+    js: '// This code is running on caffeine',
+  },
+  {
+    html: '<!-- Insert marketing fluff here -->',
+    css: '/* Padding for dramatic effect */',
+    js: '// Delay typing animation like a pro',
+  },
+  {
+    html: '<!-- Deprecated but beloved -->',
+    css: '/* Old school charm */',
+    js: '// Legacy support logic',
+  },
+  {
+    html: "<!-- Don't delete this comment -->",
+    css: '/* Actually important, despite looks */',
+    js: '// Critical temp workaround',
+  },
+  {
+    html: '<!-- UI placeholder for future dreams -->',
+    css: '/* Box-shadow of ambition */',
+    js: '// Simulate real-time data',
+  },
+  {
+    html: '<!-- Magic numbers below -->',
+    css: '/* Why 42? Don’t ask. */',
+    js: '// The answer to everything',
+  },
+  {
+    html: '<!-- This might work... -->',
+    css: '/* First try. Probably. */',
+    js: '// Feels like a jutsu',
+  },
+  {
+    html: '<!-- Here be dragons -->',
+    css: '/* Enter at your own risk */',
+    js: '// Refactor someday maybe',
+  },
+  {
+    html: '<!-- Good enough for now -->',
+    css: '/* Meh, it works */',
+    js: '// Will regret this later',
+  },
+  {
+    html: '<!-- Minimalist masterpiece -->',
+    css: '/* Less is more */',
+    js: '// Elegant function below',
+  },
+  {
+    html: '<!-- The one and only hero tag -->',
+    css: '/* Font size: epic */',
+    js: '// Scroll reveal activated',
   },
 ];
 
@@ -809,8 +962,15 @@ function refreshEditorContent(type) {
   if (type === 'fontFamily') {
     body.style.setProperty('--user-font', freshSetting().editor[type]);
   }
+  if (type === 'fontWeight') {
+    body.style.setProperty('--user-font-weight', freshSetting().editor[type]);
+  }
   if (type === 'fontSize') {
     body.style.setProperty('--user-font-size', `${Number(freshSetting().editor[type]) / 16}rem`);
+  }
+  if (type === 'fontLigatures') {
+    const ligatureState = freshSetting().editor.fontLigatures === 'on' ? 'calt' : `"calt" off`;
+    body.style.setProperty('--user-font-ligatures', ligatureState);
   }
   if (type === 'tabSize') {
     const newTabSize = Number(freshSetting().editor[type]);
@@ -833,16 +993,6 @@ editorTab.addEventListener('change', (e) => {
 
 allEditorInput.forEach((input) => {
   document.getElementById(input.id).value = savedSettings.editor[input.id];
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  allEditorInput.forEach((input) => {
-    refreshEditorContent(input.id);
-  });
-  const isFine = window.matchMedia('(pointer: fine)').matches;
-  const editorWidth = freshSetting().editor.editorWidth;
-
-  resizableArea.style.width = `${isFine && editorWidth <= 300 ? 300 : editorWidth}px`;
 });
 
 //! Keyboard shortcuts
@@ -936,3 +1086,53 @@ document.addEventListener('click', (e) => {
     toastPopup(toastBtn);
   }
 });
+
+//! Project delete program
+const sidebarDltBtn = document.querySelector('.sidebar-dlt-btn');
+const dltModal = document.querySelector('.delete-modal');
+
+stopPropagation(document.querySelector('.delete-modal-content'));
+dltModal.querySelector('.delete-message-title-container').textContent = currentProject?.name;
+
+sidebarDltBtn.addEventListener('click', () => {
+  dltModal.classList.add('show');
+});
+
+dltModal.addEventListener('click', () => dltModal.classList.remove('show'));
+
+dltModal.querySelector('.delete-modal-content').addEventListener('click', (e) => {
+  const cancelBtn = e.target.closest('.dlt-cancel-btn');
+  const confirmBtn = e.target.closest('.dlt-confirm-btn');
+
+  if (cancelBtn) dltModal.classList.remove('show');
+  if (confirmBtn) {
+    const fromSavedProjectsIndex = indexFinder(savedProjects, hash);
+    savedProjects.splice(fromSavedProjectsIndex, 1);
+    saveLocalStringify('all-saved-projects', savedProjects);
+
+    const fromSavedCodeIndex = indexFinder(allSavedCode, hash);
+    if (fromSavedCodeIndex !== -1) {
+      allSavedCode.splice(fromSavedCodeIndex, 1);
+      saveLocalStringify('allSavedCode', savedProjects);
+    }
+    toastPopup(confirmBtn);
+    // setTimeout(() => {}, )
+  }
+});
+
+//! DOMContentLoaded program
+document.addEventListener('DOMContentLoaded', () => {
+  checkIfCodeExists();
+  allEditorInput.forEach((input) => {
+    refreshEditorContent(input.id);
+  });
+  const isFine = window.matchMedia('(pointer: fine)').matches;
+  const editorWidth = freshSetting().editor.editorWidth;
+
+  resizableArea.style.width = `${isFine && editorWidth <= 300 ? 300 : editorWidth}px`;
+});
+
+const bj1 = [{ id: 1 }, { id: 2 }];
+
+const bj2 = [{ id: 1 }, { id: 2 }];
+

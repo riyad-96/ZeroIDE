@@ -89,7 +89,7 @@ initiateBtn.addEventListener('click', () => {
 });
 
 //! main saved projects variable -----
-const savedProjects = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+let savedProjects = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
 //! -----
 const projectList = document.querySelector('.project-list');
 const projectTitleInput = document.getElementById('project-title');
@@ -122,7 +122,7 @@ const sidebarBgLayer = document.querySelector('.sidebar-bg-layer');
 const sidebarToggleFunc = () => {
   sidebar.classList.toggle('show');
   profileImage.classList.toggle('enlarge');
-  sidebarBgLayer.classList.toggle('appear');
+  sidebarBgLayer.classList.toggle('show');
 
   if (projectMenu.classList.contains('show')) {
     projectMenu.classList.remove('show');
@@ -147,7 +147,7 @@ window.addEventListener('DOMContentLoaded', () => {
     sidebar.classList.add('show');
     profileImage.classList.add('enlarge');
     subMenuBtn.removeAttribute('tabindex');
-    sidebarBgLayer.classList.add('appear');
+    sidebarBgLayer.classList.add('show');
   }
 });
 
@@ -189,9 +189,9 @@ deleteConfirmBtn.addEventListener('click', () => {
     localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
 
     const savedAllCode = JSON.parse(localStorage.getItem('allSavedCode'));
-    if(savedAllCode) {
-      savedAllCode.splice(itemIndex,1);
-      localStorage.setItem('allSavedCode', JSON.stringify(savedAllCode))
+    if (savedAllCode) {
+      savedAllCode.splice(itemIndex, 1);
+      localStorage.setItem('allSavedCode', JSON.stringify(savedAllCode));
     }
 
     const allProjectItems = document.querySelectorAll('.project-list-item');
@@ -204,7 +204,7 @@ deleteConfirmBtn.addEventListener('click', () => {
     });
     closeDeleteModal();
     toastMessagePopup(deleteConfirmBtn);
-    loadLastFourProject();
+    loadLastFourProject(savedProjects);
     projectPageProjects();
   }
 });
@@ -232,11 +232,11 @@ projectDescriptionInput.addEventListener('keydown', (e) => {
 //! -------------------------
 
 //! Loads all saved projects
-function loadAllSavedProjects() {
+function loadAllSavedProjects(savedProjects) {
   projectList.innerHTML = '';
   savedProjects.forEach((p) => createNewProject(p.id, p.name));
 }
-loadAllSavedProjects();
+loadAllSavedProjects(savedProjects);
 
 //! Create project list items
 function createNewProject(id, name) {
@@ -332,7 +332,7 @@ function createNewProject(id, name) {
       setTimeout(() => {
         link.setAttribute('href', prevLink);
         link.style.cursor = 'pointer';
-        loadLastFourProject();
+        loadLastFourProject(savedProjects);
         projectPageProjects();
       }, 400);
     });
@@ -369,7 +369,7 @@ function handleProjectCreate(isOpening = false) {
   projectDescriptionInput.value = '';
 
   toastMessagePopup(!isOpening ? createBtn : createOpenBtn);
-  loadLastFourProject();
+  loadLastFourProject(savedProjects);
   projectPageProjects();
 
   if (isOpening) {
@@ -792,11 +792,11 @@ showSocialLinks();
 
 // copy profile link function
 function clipboardIcon() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z"></path></svg>`
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z"></path></svg>`;
 }
 
 function checkIcon() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg>`
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg>`;
 }
 
 document.querySelector('.social-links').addEventListener('click', (e) => {
@@ -877,8 +877,8 @@ function toastMessagePopup(btn) {
 //! Load last 4 project data in profile page.
 const recentProjectsContainer = document.querySelector('.recent-projects-container');
 
-function loadLastFourProject() {
-  const lastFourProjects = savedProjects.slice(-4) || [];
+function loadLastFourProject(projects) {
+  const lastFourProjects = projects.slice(-4) || [];
   recentProjectsContainer.innerHTML = '';
 
   lastFourProjects.forEach((p) => {
@@ -899,7 +899,7 @@ function loadLastFourProject() {
     }
   });
 }
-loadLastFourProject();
+loadLastFourProject(savedProjects);
 
 function bookmarkSvg() {
   return `<svg aria-hidden="true" height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
@@ -924,7 +924,9 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
   theme: 'default',
   editor: {
     fontFamily: 'firaCode',
+    fontWeight: '400',
     fontSize: '14',
+    fontLigatures: 'on',
     tabSize: '2',
     semicolon: 'on',
     quotation: 'double',
@@ -979,13 +981,13 @@ const editorInputContainer = document.querySelector('.editor-settings-list');
 editorInputContainer.addEventListener('change', (e) => {
   const input = e.target.closest('.editor-setting-input');
   if (input) {
-    savedSettings.editor[input.id] = input.value
+    savedSettings.editor[input.id] = input.value;
     localStorage.setItem('settings', JSON.stringify(savedSettings));
   }
 });
 
 editorSettingInputs.forEach((input) => {
-  document.getElementById(input.id).value = savedSettings.editor[input.id]
+  document.getElementById(input.id).value = savedSettings.editor[input.id];
 });
 
 // All project deletion program
@@ -1213,11 +1215,37 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
     localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
     setTimeout(() => {
       projectPageProjects();
-      loadAllSavedProjects();
+      loadAllSavedProjects(savedProjects);
     }, 600);
   }
 });
 
 projectEditFormModal.addEventListener('click', () => {
   projectEditFormModal.classList.remove('appear');
+});
+
+//! Page content updation according to changes on editor page.
+function refreshPageContent(projects) {
+  savedProjects = projects; // ✅ Sync after refresh!
+  loadAllSavedProjects(projects);
+  loadLastFourProject(projects);
+  projectPageProjectContainer.innerHTML = '';
+  createProjectPageProjects(projects);
+  console.log(savedProjects);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    const newProjectList = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+    // if (newProjectList.length !== savedProjects.length) {
+    //   window.location.reload();
+    // }
+
+    const projectDeleted = newProjectList.length !== savedProjects.length;
+    const nameChanged = savedProjects.some((obj, index) => obj.name !== newProjectList[index]?.name);
+    if (nameChanged || projectDeleted) {
+      refreshPageContent(newProjectList);
+      console.log('content changed')
+    }
+  }
 });

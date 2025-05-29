@@ -54,7 +54,6 @@
 
 //! Sidebar bg layer
 .sidebar-bg-layer {
-  display: none;
   position: fixed;
   z-index: 8;
   left: 0;
@@ -63,8 +62,23 @@
   height: 100%;
   background-color: var(--form-bg-layer-bg);
 
+  display: none;
+  opacity: 0;
+  transition-property: display opacity;
+  transition-duration: 450ms;
+  transition-behavior: allow-discrete;
+
   @media(pointer: fine) {
     backdrop-filter:blur(3px);
+  }
+}
+
+.sidebar-bg-layer.show {
+  display: block;
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
   }
 }
 

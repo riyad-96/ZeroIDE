@@ -1296,7 +1296,7 @@ img {
   color: var(--body-clr);
   height: 33px;
   border: 1px solid var(--slick-border-clr);
-  border-radius: 0.425rem;
+  border-radius: 0.325rem;
   padding-inline: 0.925rem;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -1488,7 +1488,6 @@ img {
 }
 
 .sidebar-bg-layer {
-  display: none;
   position: fixed;
   z-index: 8;
   left: 0;
@@ -1496,11 +1495,26 @@ img {
   width: 100%;
   height: 100%;
   background-color: var(--form-bg-layer-bg);
+  display: none;
+  opacity: 0;
+  transition-property: display opacity;
+  transition-duration: 450ms;
+  transition-behavior: allow-discrete;
 }
 @media (pointer: fine) {
   .sidebar-bg-layer {
     -webkit-backdrop-filter: blur(3px);
             backdrop-filter: blur(3px);
+  }
+}
+
+.sidebar-bg-layer.show {
+  display: block;
+  opacity: 1;
+}
+@starting-style {
+  .sidebar-bg-layer.show {
+    opacity: 0;
   }
 }
 

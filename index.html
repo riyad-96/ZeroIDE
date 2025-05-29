@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="./assets/images/favicon.svg" type="image/x-icon" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+
     <link rel="stylesheet" href="./styles/main.css" />
     <script src="./app.js" defer></script>
   </head>
@@ -260,14 +260,23 @@
                   </div>
 
                   <div class="editor-setting">
-                    <h3>Editor<span>- CodeMirror & Prettier</span></h3>
+                    <h3>Editor settings</h3>
                     <form class="editor-settings-list">
                       <div>
                         <label for="fontFamily">Font</label>
                         <select id="fontFamily" class="editor-setting-input">
-                          <option value="firaCode">Fira Code (default)</option>
+                          <option value="firaCode">Fira Code •</option>
                           <option value="cascadiaCode">Cascadia Code</option>
                           <option value="jetBrainsMono">Jet Brains Mono</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label for="fontWeight">Font weight</label>
+                        <select id="fontWeight" class="editor-setting-input">
+                          <option value="300">300</option>
+                          <option value="400">400 •</option>
+                          <option value="500">500</option>
                         </select>
                       </div>
 
@@ -275,7 +284,7 @@
                         <label for="fontSize">Font size</label>
                         <select id="fontSize" class="editor-setting-input">
                           <option value="12">12 px</option>
-                          <option value="14">14 px (default)</option>
+                          <option value="14">14 px •</option>
                           <option value="16">16 px</option>
                           <option value="18">18 px</option>
                           <option value="20">20 px</option>
@@ -291,9 +300,17 @@
                       </div>
 
                       <div>
+                        <label for="fontLigatures">Font ligatures</label>
+                        <select id="fontLigatures" class="editor-setting-input">
+                          <option value="on">On</option>
+                          <option value="off">Off</option>
+                        </select>
+                      </div>
+
+                      <div>
                         <label for="tabSize">Tab indent size</label>
                         <select id="tabSize" class="editor-setting-input">
-                          <option value="2">2 spaces (default)</option>
+                          <option value="2">2 spaces •</option>
                           <option value="4">4 spaces</option>
                           <option value="6">6 spaces</option>
                           <option value="8">8 spaces <span>(not recomended)</span></option>
@@ -321,7 +338,7 @@
                         <select id="printWidth" class="editor-setting-input">
                           <option value="40">40</option>
                           <option value="60">60</option>
-                          <option value="80">80 (default)</option>
+                          <option value="80">80 •</option>
                           <option value="100">100</option>
                           <option value="120">120</option>
                           <option value="140">140</option>
