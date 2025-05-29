@@ -61,39 +61,60 @@ main {
 .form-background-layer.appear {
   opacity: 1;
   display: grid;
-}
-.form-background-layer.appear form {
-  translate: 0 0px;
+
+  form {
+    scale: 1;
+    translate: 0 0;
+
+    @starting-style {
+      scale: 0.5;
+      translate: 0 350%;
+    }
+  }
+
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 .delete-confirmation-modal.appear {
   opacity: 1;
   display: grid;
+
+  .delete-modal-content {
+    translate: 0 0;
+    scale: 1;
+
+    @starting-style {
+      translate: 0 250%;
+      scale: 0.5;
+    }
+  }
+
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 .profile-img-modal.appear {
-  opacity: 1;
   display: grid;
+  opacity: 1;
+
+  .img-modal-container {
+    translate: 0 0;
+    scale: 1;
+
+    @starting-style {
+      translate: 0 250%;
+      scale: 0.3;
+    }
+  }
+
+  @starting-style {
+    opacity: 0;
+  }
 }
 
-@starting-style {
-  .profile-img-modal.appear {
-    opacity: 0;
-  }
-}
-@starting-style {
-  .form-background-layer.appear {
-    opacity: 0;
-  }
-  .form-background-layer.appear form {
-    translate: 0 20px;
-  }
-}
-@starting-style {
-  .delete-confirmation-modal.appear {
-    opacity: 0;
-  }
-}
 @keyframes created {
   0% {
     translate: 0 -20px;
@@ -181,14 +202,16 @@ main {
 
   form {
     translate: 0 0;
+    scale: 1;
+
+    @starting-style {
+      translate: 0 250%;
+      scale: 0.5;
+    }
   }
 
   @starting-style {
     opacity: 0;
-
-    form {
-      translate: 0 10px;
-    }
   }
 }
 
@@ -208,14 +231,16 @@ main {
 
   form {
     translate: 0 0;
+    scale: 1;
+
+    @starting-style {
+      translate: 0 250%;
+      scale: 0.5;
+    }
   }
 
   @starting-style {
     opacity: 0;
-
-    form {
-      translate: 0 10px;
-    }
   }
 }
 

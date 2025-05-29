@@ -133,6 +133,7 @@ h1 {
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  transition: scale 6s;
 
   --header-height: 50px;
   --footer-feature-bar-height: 30px;
@@ -1313,6 +1314,7 @@ code {
   backdrop-filter: blur(5px);
   background-color: var(--overlay);
   display: none;
+  padding: 1.5rem;
 
   div {
     background-color: var(--container-bg);
@@ -1366,6 +1368,30 @@ code {
       scale: 0.5;
     }
   }
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.disable-interaction {
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  z-index: 9998;
+  background-color: var(--container-bg);
+
+  display: none;
+  opacity: 0;
+  transition-property: display opacity;
+  transition-duration: 3s;
+  transition-behavior: allow-discrete;
+}
+
+.disable-interaction.show {
+  display: block;
+  opacity: 1;
+
   @starting-style {
     opacity: 0;
   }

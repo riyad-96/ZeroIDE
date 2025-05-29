@@ -39,6 +39,10 @@ body {
   margin: 0;
   background-color: var(--body-bg);
   color: var(--body-clr);
+
+  --main-transition-duration: 350ms;
+  --content-transition-duration-scale: 500ms;
+  --content-transition-duration-translate: 550ms;
 }
 
 img {

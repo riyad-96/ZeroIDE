@@ -44,7 +44,12 @@ function copyToClipboard(text) {
 
 //! Load saved data programs
 const hash = Number(location.hash.replace('#', ''));
-const savedProjects = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+let savedProjects = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+
+function freshProjectList() {
+  return JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+}
+
 const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
   theme: 'default',
   editor: {
@@ -84,6 +89,12 @@ function checkIfCodeExists() {
 
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') checkIfCodeExists();
+  const newFreshProjectList = JSON.parse(localStorage.getItem('all-saved-projects'));
+  if (newFreshProjectList) {
+    const index = indexFinder(newFreshProjectList, hash);
+    const newTitle = index !== -1 ? newFreshProjectList[index].name : projectTitleContainer.textContent;
+    projectTitleContainer.textContent = newTitle;
+  }
 });
 
 const closeMainTabBtn = document.querySelector('.close-main-tab-btn');
@@ -119,11 +130,13 @@ function titleBlurEvent() {
   setCursor(this, 'default');
   setDisplay(this.nextElementSibling, 'grid');
 
-  savedProjects[indexFinder(savedProjects, hash)].name = this.textContent.trim();
-  saveLocalStringify('all-saved-projects', savedProjects);
-  loadSidebarProject();
+  const freshSavedProjects = JSON.parse(localStorage.getItem('all-saved-projects'));
+  freshSavedProjects[indexFinder(freshSavedProjects, hash)].name = this.textContent.trim();
+  saveLocalStringify('all-saved-projects', freshSavedProjects);
+  loadSidebarProject(freshSavedProjects);
 
   this.removeEventListener('blur', titleBlurEvent);
+  console.log('renamed');
 }
 
 function enterToBlur(e) {
@@ -194,7 +207,7 @@ function toggleSidebar() {
   } else {
     sidebar.classList.remove('show');
     sidebarToggleBtn.classList.remove('move');
-    beneathLayer.classList.remove('show')
+    beneathLayer.classList.remove('show');
     setTimeout(() => {
       setDisplay(sidebar, 'none');
       reloadTitleAttr();
@@ -231,14 +244,14 @@ function loadProjectItem(title, des, id) {
   projectListContainer.prepend(div);
 }
 
-function loadSidebarProject() {
+function loadSidebarProject(projects) {
   projectListContainer.innerHTML = '';
-  savedProjects.forEach((obj) => {
+  projects.forEach((obj) => {
     loadProjectItem(obj.name, obj.des, obj.id);
   });
 }
 
-loadSidebarProject();
+loadSidebarProject(savedProjects);
 
 //! ------ Editor Programs -------
 const headTagsInput = document.getElementById('head-tags-input');
@@ -729,9 +742,11 @@ document.addEventListener('mouseup', () => {
   document.body.style.userSelect = 'initial';
   document.querySelector('iframe').style.pointerEvents = 'initial';
   document.querySelector('.code-inputs').style.pointerEvents = 'initial';
-  isResizing = false;
-  savedSettings.editor.editorWidth = resizableArea.getBoundingClientRect().width;
-  saveLocalStringify('settings', savedSettings);
+  if (isResizing) {
+    savedSettings.editor.editorWidth = resizableArea.getBoundingClientRect().width;
+    saveLocalStringify('settings', savedSettings);
+    isResizing = false;
+  }
 });
 
 document.addEventListener('mousemove', (e) => {
@@ -1105,18 +1120,27 @@ dltModal.querySelector('.delete-modal-content').addEventListener('click', (e) =>
   const confirmBtn = e.target.closest('.dlt-confirm-btn');
 
   if (cancelBtn) dltModal.classList.remove('show');
-  if (confirmBtn) {
-    const fromSavedProjectsIndex = indexFinder(savedProjects, hash);
-    savedProjects.splice(fromSavedProjectsIndex, 1);
-    saveLocalStringify('all-saved-projects', savedProjects);
 
-    const fromSavedCodeIndex = indexFinder(allSavedCode, hash);
+  if (confirmBtn) {
+    const arr = freshProjectList();
+    const indexFromFreshProjectList = indexFinder(arr, hash);
+    arr.splice(indexFromFreshProjectList, 1);
+    saveLocalStringify('all-saved-projects', arr);
+
+    const freshSavedCodeList = JSON.parse(localStorage.getItem('allSavedCode')) || [];
+    const fromSavedCodeIndex = indexFinder(freshSavedCodeList, hash);
     if (fromSavedCodeIndex !== -1) {
-      allSavedCode.splice(fromSavedCodeIndex, 1);
-      saveLocalStringify('allSavedCode', savedProjects);
+      freshSavedCodeList.splice(fromSavedCodeIndex, 1);
+      saveLocalStringify('allSavedCode', freshSavedCodeList);
     }
+    dltModal.classList.remove('show');
     toastPopup(confirmBtn);
-    // setTimeout(() => {}, )
+    document.querySelector('.disable-interaction').classList.add('show');
+    document.querySelector('.main-diversion').style.scale = '0.9';
+    document.querySelector('.sidebar').style.scale = '0.9';
+    setTimeout(() => {
+      window.close();
+    }, 3300);
   }
 });
 
@@ -1131,8 +1155,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   resizableArea.style.width = `${isFine && editorWidth <= 300 ? 300 : editorWidth}px`;
 });
-
-const bj1 = [{ id: 1 }, { id: 2 }];
-
-const bj2 = [{ id: 1 }, { id: 2 }];
-

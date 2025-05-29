@@ -90,6 +90,9 @@ initiateBtn.addEventListener('click', () => {
 
 //! main saved projects variable -----
 let savedProjects = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+function freshProjectList() {
+  return JSON.parse(localStorage.getItem('all-saved-projects')) || [];
+}
 //! -----
 const projectList = document.querySelector('.project-list');
 const projectTitleInput = document.getElementById('project-title');
@@ -1159,12 +1162,12 @@ projectPageProjectContainer.addEventListener('click', (e) => {
   const settingBtn = e.target.closest('.edit-projects-button');
   if (settingBtn) {
     const id = settingBtn.dataset.projectId;
-    const index = indexFinder(savedProjects, id);
+    const index = indexFinder(freshProjectList(), id);
 
     const titleInput = projectEditFormModal.querySelector('input');
     const desInput = projectEditFormModal.querySelector('textarea');
-    titleInput.value = savedProjects[index].name === 'Untitled' ? '' : savedProjects[index].name;
-    desInput.value = savedProjects[index].des === 'Empty description' ? '' : savedProjects[index].des;
+    titleInput.value = freshProjectList()[index].name === 'Untitled' ? '' : freshProjectList()[index].name;
+    desInput.value = freshProjectList()[index].des === 'Empty description' ? '' : freshProjectList()[index].des;
     currentId = id;
 
     projectEditFormModal.classList.add('appear');
@@ -1175,8 +1178,8 @@ projectPageProjectContainer.addEventListener('click', (e) => {
   const favoriteBtn = e.target.closest('.add-favorite-btn');
   if (favoriteBtn) {
     const id = favoriteBtn.dataset.projectId;
-    const index = indexFinder(savedProjects, id);
-    if (!savedProjects[index].favorite) {
+    const index = indexFinder(freshProjectList(), id);
+    if (!freshProjectList()[index].favorite) {
       favoriteBtn.innerHTML = '';
       favoriteBtn.innerHTML = heartFillSvg();
       savedProjects[index].favorite = true;
@@ -1202,20 +1205,21 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
   if (deleteBtn) {
     projectEditFormModal.classList.remove('appear');
     deleteModal.classList.toggle('appear');
-    dltModCurrTitle.textContent = savedProjects[indexFinder(savedProjects, currentId)].name;
+    dltModCurrTitle.textContent = freshProjectList()[indexFinder(savedProjects, currentId)].name;
   }
 
   // save btn program
   const saveBtn = e.target.closest('.project-edit-form-save-btn');
   if (saveBtn) {
-    const index = indexFinder(savedProjects, currentId);
-    savedProjects[index].name = title.value.trim() || 'Untitled';
-    savedProjects[index].des = description.value.trim() || 'Empty description';
+    const freshProject = freshProjectList();
+    const index = indexFinder(freshProject, currentId);
+    freshProject[index].name = title.value.trim() || 'Untitled';
+    freshProject[index].des = description.value.trim() || 'Empty description';
     projectEditFormModal.classList.remove('appear');
-    localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
+    localStorage.setItem('all-saved-projects', JSON.stringify(freshProject));
     setTimeout(() => {
       projectPageProjects();
-      loadAllSavedProjects(savedProjects);
+      loadAllSavedProjects(freshProject);
     }, 600);
   }
 });

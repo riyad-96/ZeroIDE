@@ -15,12 +15,12 @@
   box-shadow: 10px 0 15px hsl(0, 0%, 10%, 0.1);
 }
 
-.first-load-welcome-note>.note-content {
+.first-load-welcome-note > .note-content {
   width: 100%;
   max-width: 600px;
   text-align: center;
 
-  >* {
+  > * {
     margin: 0;
   }
 
@@ -68,8 +68,8 @@
   transition-duration: 450ms;
   transition-behavior: allow-discrete;
 
-  @media(pointer: fine) {
-    backdrop-filter:blur(3px);
+  @media (pointer: fine) {
+    backdrop-filter: blur(3px);
   }
 }
 
@@ -103,14 +103,20 @@
   height: 100%;
   z-index: 99;
   background-color: var(--form-bg-layer-bg);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
   place-items: center;
   padding: 1.5rem;
+  overflow: hidden;
+
   display: none;
   opacity: 0;
-  transition: 300ms allow-discrete;
-  overflow: auto;
+  transition-property: display opacity;
+  transition-duration: var(--main-transition-duration);
+  transition-behavior: allow-discrete;
+
+  @media (width > 700px) {
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
 }
 
 .img-modal-container {
@@ -123,6 +129,10 @@
   border: 1px solid var(--slick-border-clr);
   padding: 1rem;
   overflow-y: auto;
+
+  scale: 0.3;
+  translate: 0 150%;
+  transition: translate var(--content-transition-duration-translate), scale var(--content-transition-duration-scale);
 }
 
 .img-container {
@@ -172,7 +182,7 @@
   input {
     display: none;
   }
-  @media(pointer: coarse) {
+  @media (pointer: coarse) {
     display: grid;
     gap: 1.425rem;
   }
@@ -198,13 +208,18 @@
   width: 100%;
   height: 100%;
   background-color: var(--form-bg-layer-bg);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
   place-items: center;
   padding: 1rem;
-  opacity: 0;
-  transition: 300ms allow-discrete;
+
   display: none;
+  opacity: 0;
+  transition-property: display opacity;
+  transition-duration: var(--main-transition-duration);
+  transition-behavior: allow-discrete;
+  @media (width > 700px) {
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
 }
 
 .form-background-layer form {
@@ -218,10 +233,12 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-  translate: 0 -20px;
-  transition: translate 300ms;
 
-  @media(width < 700px) {
+  translate: 0 250%;
+  scale: 0.5;
+  transition: scale var(--content-transition-duration-scale), translate var(--content-transition-duration-translate);
+
+  @media (width < 700px) {
     width: 80%;
   }
 }
@@ -294,13 +311,20 @@ form textarea::-webkit-scrollbar {
   height: 100%;
   padding: 1.5rem;
   place-items: center;
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
   background-color: var(--form-bg-layer-bg);
-  opacity: 0;
-  transition: 300ms allow-discrete;
+
   display: none;
+  opacity: 0;
+  transition-property: display opacity;
+  transition-duration: var(--main-transition-duration);
+  transition-behavior: allow-discrete;
+
+  @media (width > 700px) {
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
 }
+
 .delete-confirmation-modal > div {
   box-sizing: content-box;
   background-color: var(--sidebar-border-clr);
@@ -308,7 +332,10 @@ form textarea::-webkit-scrollbar {
   border: 1px solid var(--slick-border-clr);
   width: 100%;
   max-width: 400px;
-  transition: translate 300ms;
+
+  scale: 0.5;
+  translate: 0 250%;
+  transition: scale var(--content-transition-duration-scale), translate var(--content-transition-duration-translate);
 }
 .delete-confirmation-modal > div > div:first-of-type {
   border-block-start: 1px solid var(--slick-border-clr);
@@ -427,12 +454,17 @@ form textarea::-webkit-scrollbar {
   display: grid;
   place-items: center;
   background-color: var(--form-bg-layer-bg);
-  backdrop-filter: blur(3px);
+
   display: none;
   opacity: 0;
   transition-property: display, opacity;
   transition-behavior: allow-discrete;
-  transition-duration: 300ms;
+  transition-duration: var(--main-transition-duration);
+
+  @media (width > 700px) {
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
 }
 
 .edit-project-form-modal form {
@@ -443,8 +475,10 @@ form textarea::-webkit-scrollbar {
   max-width: 400px;
   border-radius: 0.5rem;
   border: 1px solid var(--slick-border-clr);
-  translate: 0 -10px;
-  transition: translate 300ms;
+
+  translate: 0 250%;
+  scale: 0.5;
+  transition: translate var(--content-transition-duration-translate), scale var(--content-transition-duration-scale);
 
   div:last-child {
     display: flex;
@@ -472,7 +506,7 @@ form textarea::-webkit-scrollbar {
     border-color: hsl(0, 73%, 60%);
   }
 
-  @media(width < 700px) {
+  @media (width < 700px) {
     width: 80%;
   }
 }
@@ -488,13 +522,17 @@ form textarea::-webkit-scrollbar {
   display: grid;
   place-items: center;
   background-color: var(--form-bg-layer-bg);
-  backdrop-filter: blur(3px);
-  
+
   display: none;
   opacity: 0;
-  transition-property: display, opacity;
+  transition-property: display opacity;
+  transition-duration: var(--main-transition-duration);
   transition-behavior: allow-discrete;
-  transition-duration: 300ms;
+
+  @media (width > 700px) {
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
 }
 
 .delete-all-project-modal form {
@@ -506,8 +544,9 @@ form textarea::-webkit-scrollbar {
   border-radius: 0.5rem;
   border: 1px solid var(--slick-border-clr);
 
-  translate: 0 -10px;
-  transition: translate 300ms;
+  scale: 0.5;
+  translate: 0 250%;
+  transition: translate var(--content-transition-duration-translate), scale var(--content-transition-duration-scale);
 
   span:first-child {
     font-size: 1.5rem;
@@ -518,8 +557,8 @@ form textarea::-webkit-scrollbar {
   }
 
   .warning-message {
-    background-color:hsl(0, 100%, 60%, 0.13);
-    color:hsl(0, 100%, 45%);
+    background-color: hsl(0, 100%, 60%, 0.13);
+    color: hsl(0, 100%, 45%);
     font-size: 0.925rem;
     padding-block: 0.5rem;
     padding-inline-start: 1rem;
@@ -566,7 +605,7 @@ form textarea::-webkit-scrollbar {
     color: #fff;
   }
 
-  .delete-all-project-btn-container{
+  .delete-all-project-btn-container {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -574,9 +613,8 @@ form textarea::-webkit-scrollbar {
     margin: 0;
   }
 
-  @media(width < 700px) {
+  @media (width < 700px) {
     width: 80%;
     padding: 1.225rem;
   }
 }
-
