@@ -385,8 +385,10 @@ function handleProjectCreate(isOpening = false) {
   projectPageProjects();
 
   if (isOpening) {
+    document.querySelector('.disable-interactivity-layer').style.display = 'block';
     setTimeout(() => {
       window.open(`./editor/user.html#${id}`, '_blank');
+      document.querySelector('.disable-interactivity-layer').style.display = 'none';
     }, 1400);
   }
 }

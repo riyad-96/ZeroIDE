@@ -92,7 +92,13 @@ function checkIfCodeExists() {
   const code = newProjectsList[indexFinder(newProjectsList, hash)];
   if (!code) {
     setDisplay(codeNotFound, 'grid');
+    setMinusTabIndex(codeNotFound.querySelector('button'));
   }
+}
+
+function setMinusTabIndex(...excludeList) {
+  document.querySelectorAll('button, input, textarea, select').forEach(el => el.setAttribute('tabindex', '-1'));
+  excludeList.forEach(el => el.removeAttribute('tabindex'));
 }
 
 document.addEventListener('visibilitychange', () => {
