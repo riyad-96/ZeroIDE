@@ -5,6 +5,7 @@ if(!savedCleanTag || savedCleanTag !== cleanTag) {
   localStorage.clear();
   localStorage.setItem('clean-tag', cleanTag)
 }
+// Migration system will be added if needed.
 
 //! Base functions
 document.querySelectorAll('form').forEach((form) => {
