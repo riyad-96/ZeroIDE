@@ -679,6 +679,7 @@ function formatCode(code, parser) {
   });
 }
 
+//! Editor clear expand and format button program
 function applyFormatedCode(parser) {
   if (parser === 'html') {
     htmlCodeMirror.setValue(formatCode(code().html, parser));
@@ -691,15 +692,30 @@ function applyFormatedCode(parser) {
   }
 }
 
+function clearEditor(editor) {
+  if(editor === 'html') {
+    htmlCodeMirror.setValue('');
+  }
+  if(editor === 'css') {
+    cssCodeMirror.setValue('');
+  }
+  if(editor === 'js') {
+    jsCodeMirror.setValue('');
+  }
+}
+
 document.querySelector('.code-inputs').addEventListener('click', (e) => {
   const formatBtn = e.target.closest('.single-file-format-btn');
   if (formatBtn) {
     applyFormatedCode(formatBtn.dataset.parserType);
-    // toastPopup(formatBtn);
+  }
+  const clearEditorBtn = e.target.closest('.clear-editor-btn');
+  if(clearEditorBtn) {
+    clearEditor(clearEditorBtn.dataset.clearEditor);
+    setTimeout(refreshCodeMirror, 400)
   }
 });
 
-//! Editor collapse and expand program
 const allInputs = document.querySelectorAll('.each-editor');
 const expandBtn = document.querySelectorAll('.expand-panel-btn');
 expandBtn.forEach((btn) => {

@@ -446,7 +446,7 @@ main {
 .expand-reset-btn {
   position: absolute;
   top: 4px;
-  right: 80px;
+  right: 110px;
   z-index: 2;
 
   background-color: var(--option-btn-bg);

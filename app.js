@@ -1164,13 +1164,13 @@ projectPageProjectContainer.addEventListener('click', (e) => {
     const id = settingBtn.dataset.projectId;
     const index = indexFinder(freshProjectList(), id);
 
+    projectEditFormModal.classList.add('appear');
     const titleInput = projectEditFormModal.querySelector('input');
     const desInput = projectEditFormModal.querySelector('textarea');
     titleInput.value = freshProjectList()[index].name === 'Untitled' ? '' : freshProjectList()[index].name;
     desInput.value = freshProjectList()[index].des === 'Empty description' ? '' : freshProjectList()[index].des;
     currentId = id;
 
-    projectEditFormModal.classList.add('appear');
     titleInput.focus();
   }
 
@@ -1218,8 +1218,7 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
     projectEditFormModal.classList.remove('appear');
     localStorage.setItem('all-saved-projects', JSON.stringify(freshProject));
     setTimeout(() => {
-      projectPageProjects();
-      loadAllSavedProjects(freshProject);
+      refreshPageContent(freshProject)
     }, 600);
   }
 });
@@ -1230,11 +1229,10 @@ projectEditFormModal.addEventListener('click', () => {
 
 //! Page content updation according to changes on editor page.
 function refreshPageContent(projects) {
-  savedProjects = projects; // ✅ Sync after refresh!
+  savedProjects = projects;
   loadAllSavedProjects(projects);
   loadLastFourProject(projects);
-  projectPageProjectContainer.innerHTML = '';
-  createProjectPageProjects(projects);
+  projectPageProjects();
 }
 
 document.addEventListener('visibilitychange', () => {
