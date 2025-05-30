@@ -1,9 +1,9 @@
 //! Clean localStorage control
-const cleanTag = 'clean-v-0.1'
-const savedCleanTag = localStorage.getItem('clean-tag')
-if(!savedCleanTag || savedCleanTag !== cleanTag) {
+const cleanTag = 'clean-v-0.1';
+const savedCleanTag = localStorage.getItem('clean-tag');
+if (!savedCleanTag || savedCleanTag !== cleanTag) {
   localStorage.clear();
-  localStorage.setItem('clean-tag', cleanTag)
+  localStorage.setItem('clean-tag', cleanTag);
 }
 // Migration system will be added if needed.
 
@@ -488,6 +488,13 @@ document.querySelector('.change-img-btn').addEventListener('click', () => {
 // select profile picture
 profileImgInput.addEventListener('change', (e) => {
   const file = e.target.files[0];
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert('Please keep the image file size limited around 2MB(Mega Byte)');
+    profileImgInput.value = '';
+    return;
+  }
+
   const reader = new FileReader();
   reader.readAsDataURL(file);
 
@@ -1227,7 +1234,7 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
     projectEditFormModal.classList.remove('appear');
     localStorage.setItem('all-saved-projects', JSON.stringify(freshProject));
     setTimeout(() => {
-      refreshPageContent(freshProject)
+      refreshPageContent(freshProject);
     }, 600);
   }
 });
