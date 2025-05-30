@@ -11,6 +11,14 @@
   min-height: 0;
 }
 
+.CodeMirror pre {
+  padding-inline: 0.425rem !important;
+}
+
+.CodeMirror-lines {
+  padding-block: 0.425rem 10rem !important;
+}
+
 .CodeMirror-activeline-background {
   background-color: var(--cm-activeline-bg);
   border-block: var(--cm-active-line-bg-border);
@@ -21,11 +29,8 @@
   cursor: text;
 }
 
-.CodeMirror-gutter {
-  background-color: var(--cm-gutter-bg);
-}
-
 .CodeMirror-gutters {
+  background-color: var(--cm-gutter-bg);
   border-right: var(--cm-gutters-border-right);
 }
 
