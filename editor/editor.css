@@ -136,7 +136,7 @@ h1 {
   transition: scale 6s;
 
   --header-height: 50px;
-  --footer-feature-bar-height: 30px;
+  --footer-feature-bar-height: 10px;
 }
 
 /*! ----- Header styling ----- */

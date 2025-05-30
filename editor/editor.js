@@ -93,6 +93,7 @@ document.addEventListener('visibilitychange', () => {
     const index = indexFinder(newFreshProjectList, hash);
     const newTitle = index !== -1 ? newFreshProjectList[index].name : projectTitleContainer.textContent;
     projectTitleContainer.textContent = newTitle;
+    loadSidebarProject(newFreshProjectList);
   }
 });
 
@@ -243,7 +244,7 @@ function loadProjectItem(title, des, id) {
 }
 
 function loadSidebarProject(projects) {
-  projectListContainer.innerHTML = '';
+  document.querySelector('.project-list-container').innerHTML = ''
   projects.forEach((obj) => {
     loadProjectItem(obj.name, obj.des, obj.id);
   });
@@ -724,7 +725,7 @@ expandBtn.forEach((btn) => {
     allInputs.forEach((input) => input.classList.toggle('expand', input.contains(btn)));
     setDisplay(document.querySelector('.expand-reset-btn'), 'block');
     setTimeout(() => {
-      refreshCodeMirror();
+      // refreshCodeMirror();
     }, 400);
   });
 });
