@@ -17,13 +17,6 @@ allFormInDOM.forEach((form) => {
   });
 });
 
-function setMinusTabIndexExcept(...excludeList) {
-  document.querySelectorAll('button, input, textarea, select').forEach((el) => el.setAttribute('tabindex', '-1'));
-  excludeList.forEach((el) => {
-    if(el.getAttribute) el.removeAttribute('tabindex')
-  });
-}
-
 //! ----- Variables -----
 const sidebar = document.querySelector('.sidebar');
 const sidebarToggleBtn = document.querySelector('.sidebar-toggle-btn');
@@ -138,21 +131,26 @@ imgModArr.forEach((element) => {
 const sideBarStat = localStorage.getItem('sidebar-stat');
 const sidebarBgLayer = document.querySelector('.sidebar-bg-layer');
 
-// sidebar.classList.toggle('show');
-// profileImage.classList.toggle('enlarge');
-// sidebarBgLayer.classList.toggle('show');
-
 const sidebarToggleFunc = () => {
-  const sidebarShowing = sidebar.classList.contains('show');
-  sidebar.classList.toggle('show', !sidebarShowing);
-  sidebarBgLayer.classList.toggle('show', !sidebarShowing);
-  profileImage.classList.toggle('enlarge', !sidebarShowing);
+  sidebar.classList.toggle('show');
+  profileImage.classList.toggle('enlarge');
+  sidebarBgLayer.classList.toggle('show');
 
-  if(sidebarShowing) {
-    setMinusTabIndexExcept(...sidebar.querySelectorAll('*'));
+  if (projectMenu.classList.contains('show')) {
+    projectMenu.classList.remove('show');
+  }
+  if (sidebar.classList.contains('show')) {
+    localStorage.setItem('sidebar-stat', 'open');
+    subMenuBtn.removeAttribute('tabindex');
+    document.querySelector('.sub-menu').style.display = 'initial';
+  } else {
+    subMenuBtn.setAttribute('tabindex', '-1');
+    localStorage.removeItem('sidebar-stat');
+    setTimeout(() => {
+      document.querySelector('.sub-menu').style.display = 'none';
+    }, 600);
   }
 };
-
 sidebarToggleBtn.addEventListener('click', sidebarToggleFunc);
 sidebarBgLayer.addEventListener('click', sidebarToggleFunc);
 
