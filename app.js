@@ -1,3 +1,12 @@
+//! Clean localStorage control
+const cleanTag = 'clean-v-0.1'
+const savedCleanTag = localStorage.getItem('clean-tag')
+if(!savedCleanTag || savedCleanTag !== cleanTag) {
+  localStorage.clear();
+  localStorage.setItem('clean-tag', cleanTag)
+}
+
+
 const allFormInDOM = document.querySelectorAll('form');
 allFormInDOM.forEach((form) => {
   form.addEventListener('submit', (e) => {
