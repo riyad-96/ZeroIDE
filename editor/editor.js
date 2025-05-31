@@ -1059,15 +1059,21 @@ document.addEventListener('keydown', (e) => {
   }
   if (e.ctrlKey && (e.key === '1' || e.key === 'j')) {
     e.preventDefault();
+    if(sidebar.classList.contains('show')) sidebarToggleBtn.click();
     htmlCodeMirror.focus();
   }
   if (e.ctrlKey && (e.key === '2' || e.key === 'k')) {
     e.preventDefault();
+    if(sidebar.classList.contains('show')) sidebarToggleBtn.click();
     cssCodeMirror.focus();
   }
   if (e.ctrlKey && (e.key === '3' || e.key === 'l')) {
     e.preventDefault();
+    if(sidebar.classList.contains('show')) sidebarToggleBtn.click();
     jsCodeMirror.focus();
+  }
+  if((e.ctrlKey && e.key === ',') && !customizationContainer.classList.contains('slide-up')) {
+    document.querySelector('.customize-panel-btn').click();
   }
 });
 
