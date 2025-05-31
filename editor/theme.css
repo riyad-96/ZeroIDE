@@ -273,14 +273,14 @@ html {
   --file-type-icon-bg: hsl(0, 0%, 23%);
   --file-type-icon-clr: hsl(0, 0%, 90%);
 
-  --cm-editor-bg: hsl(0, 0%, 93%);
-  --cm-gutter-bg: hsl(0, 0%, 93%);
+  --cm-editor-bg: hsl(0, 0%, 98%);
+  --cm-gutter-bg: hsl(0, 0%, 98%);
   --cm-gutter-elt-clr: hsl(0, 0%, 60%);
   --cm-active-gutter-elt-clr: hsl(0, 0%, 0%);
   --cm-gutters-border-right: 1px solid hsl(0, 0%, 80%);
 
-  --cm-focused-selected-bg: hsla(216, 100%, 80%, 0.25);
-  --cm-unfocused-selected-bg: hsla(0, 0%, 60%, 0.25);
+  --cm-focused-selected-bg: #ced8e8;
+  --cm-unfocused-selected-bg: #cecece;
   --cm-cursor-clr: hsl(0, 0%, 20%);
   --foldmarker-clr: hsl(0, 0%, 10%);
   --cm-activeline-bg: transparent;

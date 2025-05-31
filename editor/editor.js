@@ -1,9 +1,9 @@
 //! Clean localStorage control
-const cleanTag = 'clean-v-0.1'
-const savedCleanTag = localStorage.getItem('clean-tag')
-if(!savedCleanTag || savedCleanTag !== cleanTag) {
+const cleanTag = 'clean-v-0.1';
+const savedCleanTag = localStorage.getItem('clean-tag');
+if (!savedCleanTag || savedCleanTag !== cleanTag) {
   localStorage.clear();
-  localStorage.setItem('clean-tag', cleanTag)
+  localStorage.setItem('clean-tag', cleanTag);
 }
 // Migration system will be added if needed.
 
@@ -97,8 +97,8 @@ function checkIfCodeExists() {
 }
 
 function setMinusTabIndex(...excludeList) {
-  document.querySelectorAll('button, input, textarea, select').forEach(el => el.setAttribute('tabindex', '-1'));
-  excludeList.forEach(el => el.removeAttribute('tabindex'));
+  document.querySelectorAll('button, input, textarea, select').forEach((el) => el.setAttribute('tabindex', '-1'));
+  excludeList.forEach((el) => el.removeAttribute('tabindex'));
 }
 
 document.addEventListener('visibilitychange', () => {
@@ -259,7 +259,7 @@ function loadProjectItem(title, des, id) {
 }
 
 function loadSidebarProject(projects) {
-  document.querySelector('.project-list-container').innerHTML = ''
+  document.querySelector('.project-list-container').innerHTML = '';
   projects.forEach((obj) => {
     loadProjectItem(obj.name, obj.des, obj.id);
   });
@@ -299,6 +299,12 @@ function loadCodeMirror(mode, value) {
       'Shift-Alt-Up': copyLineUp,
       'Alt-Up': moveLineUp,
       'Alt-Down': moveLineDown,
+      'Ctrl-J': () => htmlCodeMirror.focus(),
+      'Ctrl-K': () => cssCodeMirror.focus(),
+      'Ctrl-L': () => jsCodeMirror.focus(),
+      'Ctrl-1': () => htmlCodeMirror.focus(),
+      'Ctrl-2': () => cssCodeMirror.focus(),
+      'Ctrl-3': () => jsCodeMirror.focus(),
     },
     gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
     foldGutter: true,
@@ -709,13 +715,13 @@ function applyFormatedCode(parser) {
 }
 
 function clearEditor(editor) {
-  if(editor === 'html') {
+  if (editor === 'html') {
     htmlCodeMirror.setValue('');
   }
-  if(editor === 'css') {
+  if (editor === 'css') {
     cssCodeMirror.setValue('');
   }
-  if(editor === 'js') {
+  if (editor === 'js') {
     jsCodeMirror.setValue('');
   }
 }
@@ -726,9 +732,9 @@ document.querySelector('.code-inputs').addEventListener('click', (e) => {
     applyFormatedCode(formatBtn.dataset.parserType);
   }
   const clearEditorBtn = e.target.closest('.clear-editor-btn');
-  if(clearEditorBtn) {
+  if (clearEditorBtn) {
     clearEditor(clearEditorBtn.dataset.clearEditor);
-    setTimeout(refreshCodeMirror, 400)
+    setTimeout(refreshCodeMirror, 400);
   }
 });
 
@@ -1044,11 +1050,24 @@ allEditorInput.forEach((input) => {
 document.addEventListener('keydown', (e) => {
   // toggle sidebar
   if (e.ctrlKey && e.key === 'b') {
+    e.preventDefault();
     sidebarToggleBtn.click();
   }
   // prevent page saving & print
   if ((e.ctrlKey || e.metaKey) && ['s', 'p'].includes(e.key)) {
     e.preventDefault();
+  }
+  if (e.ctrlKey && (e.key === '1' || e.key === 'j')) {
+    e.preventDefault();
+    htmlCodeMirror.focus();
+  }
+  if (e.ctrlKey && (e.key === '2' || e.key === 'k')) {
+    e.preventDefault();
+    cssCodeMirror.focus();
+  }
+  if (e.ctrlKey && (e.key === '3' || e.key === 'l')) {
+    e.preventDefault();
+    jsCodeMirror.focus();
   }
 });
 
@@ -1141,6 +1160,8 @@ dltModal.querySelector('.delete-message-title-container').textContent = currentP
 
 sidebarDltBtn.addEventListener('click', () => {
   dltModal.classList.add('show');
+  dltModal.querySelector('.delete-message-title-container').textContent = freshProjectList()[indexFinder(freshProjectList(), hash)].name;
+  sidebarToggleBtn.click();
 });
 
 dltModal.addEventListener('click', () => dltModal.classList.remove('show'));
