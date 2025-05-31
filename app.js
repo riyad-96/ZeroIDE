@@ -1456,3 +1456,5 @@ document.addEventListener('visibilitychange', () => {
     }
   }
 });
+
+document.querySelectorAll('div').forEach(div => div.setAttribute('tabindex', '-1'))
