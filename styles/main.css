@@ -43,6 +43,11 @@ body {
   --content-transition-duration-translate: 550ms;
 }
 
+div:focus,
+div:focus-visible {
+  outline: none;
+}
+
 img {
   display: block;
 }

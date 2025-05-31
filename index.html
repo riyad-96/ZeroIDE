@@ -24,7 +24,7 @@
     <main>
       <aside class="sidebar">
         <button class="sidebar-toggle-btn">
-          <svg tabindex="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="35" height="35">
             <rect width="100" height="100" rx="20" fill="#000" />
             <path d="M30 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
             <path d="M70 30 v40" stroke="currentColor" stroke-width="6" stroke-linecap="round" />
@@ -33,7 +33,7 @@
         </button>
 
         <div class="profile-image">
-          <div title="Click to preview image" class="display-profile-img all-profile-image-display">
+          <div title="Click to preview image" class="display-profile-img all-profile-image-display focus-trap-activate">
             <!-- profile images show inside this container -->
           </div>
         </div>
@@ -80,7 +80,7 @@
                 </svg>
                 <span>Projects</span>
               </a>
-              <button tabindex="-1" title="click to open projects list" class="sub-menu-btn">
+              <button title="click to open projects list" class="sub-menu-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                   <path d="M12 16L6 10H18L12 16Z"></path>
                 </svg>
@@ -89,7 +89,7 @@
 
             <div class="grid-smooth-height">
               <div class="sub-menu">
-                <button class="create-new-project-btn">
+                <button class="create-new-project-btn focus-trap-activate">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
                     <path d="M15 4H5V20H19V8H15V4ZM3 2.9918C3 2.44405 3.44749 2 3.9985 2H16L20.9997 7L21 20.9925C21 21.5489 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5447 3 21.0082V2.9918ZM11 11V8H13V11H16V13H13V16H11V13H8V11H11Z"></path>
                   </svg>
@@ -108,14 +108,14 @@
       <!-- ! ---- All other page starts here ---- -->
       <div class="all-pages">
         <!-- ! Home page -->
-        <div class="home-page each-page" id="home-page">
-          <div class="body">
-            <div class="page-wrapper landing-page-wrapper">
+        <div tabindex="-1" class="home-page each-page" id="home-page">
+          <div tabindex="-1" class="body">
+            <div tabindex="-1" class="page-wrapper landing-page-wrapper">
               <!-- home page contents -->
-              <div id="particle-container"></div>
-              <div class="home-page-banner-container">
-                <div class="banners" aria-hidden="true">
-                  <div class="banner-track">
+              <div tabindex="-1" id="particle-container"></div>
+              <div tabindex="-1" class="home-page-banner-container">
+                <div tabindex="-1" class="banners" aria-hidden="true">
+                  <div tabindex="-1" class="banner-track">
                     <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private.<span>•</span></span>
 
                     <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private.<span>•</span></span>
@@ -127,8 +127,8 @@
                 </div>
               </div>
 
-              <div class="home-page-wrapper">
-                <div class="hero">
+              <div tabindex="-1" class="home-page-wrapper">
+                <div tabindex="-1" class="hero">
                   <h1>Welcome to Your Coding Zen</h1>
                   <p>Write code. See results. No setup, no fluff—just pure focus.</p>
                   <button class="quick-launch-btn">Quick Launch</button>
@@ -141,12 +141,12 @@
         </div>
 
         <!-- ! Profile page -->
-        <div class="profile-page each-page" id="profile-page">
-          <div class="body">
-            <div class="page-wrapper">
+        <div tabindex="-1" class="profile-page each-page" id="profile-page">
+          <div tabindex="-1" class="body">
+            <div tabindex="-1" class="page-wrapper">
               <!-- profile page contents -->
 
-              <div class="profile-page-wrapper">
+              <div tabindex="-1" class="profile-page-wrapper">
                 <div class="profile-informations">
                   <div class="profile-image-container">
                     <div title="Click to preview image" class="p-image all-profile-image-display">
@@ -237,14 +237,14 @@
         </div>
 
         <!-- ! Settings page -->
-        <div class="settings-page each-page" id="settings-page">
-          <div class="body">
-            <div class="page-wrapper">
+        <div tabindex="-1" class="settings-page each-page" id="settings-page">
+          <div tabindex="-1" class="body">
+            <div tabindex="-1" class="page-wrapper">
               <!-- settings page contents -->
-              <div class="settings-page-wrapper">
+              <div tabindex="-1" class="settings-page-wrapper">
                 <h2>Settings</h2>
-                <div class="all-settings">
-                  <div class="appearance-setting">
+                <div tabindex="-1" class="all-settings">
+                  <div tabindex="-1" class="appearance-setting">
                     <h3>Appearance</h3>
                     <div class="theme-container">
                       <button class="themes-btn active" data-theme-info="default">
@@ -359,7 +359,7 @@
                     <h3>Projects</h3>
                     <div>
                       <span>Delete All projects</span>
-                      <button>Delete all</button>
+                      <button class="focus-trap-activate">Delete all</button>
                     </div>
                   </div>
                 </div>
@@ -371,22 +371,22 @@
         </div>
 
         <!-- ! Projects page -->
-        <div class="projects-page each-page" id="projects-page">
-          <div class="body">
-            <div class="page-wrapper">
+        <div tabindex="-1" class="projects-page each-page" id="projects-page">
+          <div tabindex="-1" class="body">
+            <div tabindex="-1" class="page-wrapper">
               <!-- projects page contents -->
 
-              <div class="projects-page-wrapper">
+              <div tabindex="-1" class="projects-page-wrapper">
                 <h2>Projects</h2>
                 <header class="project-page-header">
                   <div class="projects-tab">
                     <button class="tab-change-project-btn active-tab">All</button>
                     <button class="tab-change-project-btn" data-project-tab="favorite">Favorite</button>
                   </div>
-                  <button class="start-new-project-btn">Start new</button>
+                  <button class="start-new-project-btn focus-trap-activate">Start new</button>
                 </header>
 
-                <div class="project-page-project-container">
+                <div tabindex="-1" class="project-page-project-container">
                   <!-- projects added through js -->
                 </div>
               </div>
@@ -406,7 +406,7 @@
     <div class="disable-interactivity-layer"></div>
 
     <!-- profile image modal -->
-    <div class="profile-img-modal">
+    <div class="profile-img-modal focus-trap-release universal-modal-control">
       <div class="img-modal-container">
         <div class="img-container all-profile-image-display">
           <!-- profile images show inside this container -->
@@ -415,7 +415,7 @@
           <span>Please keep the image file size limited around 2MB(Mega Byte)</span>
           <div>
             <input type="file" accept="image/*" id="profile-img-input" />
-            <button title="Click to Close" class="close-img-btn">Close</button>
+            <button title="Click to Close" class="close-img-btn focus-trap-release">Close</button>
             <button title="Click to download" class="download-img-btn" data-toast-message="Download started !">Download</button>
             <button title="Click to Change" class="change-img-btn">Change</button>
           </div>
@@ -424,7 +424,7 @@
     </div>
 
     <!-- create new project form -->
-    <div class="form-background-layer">
+    <div class="form-background-layer focus-trap-release universal-modal-control">
       <form>
         <div>
           <label for="project-title">Project title</label>
@@ -437,15 +437,15 @@
         </div>
 
         <div class="form-buttons">
-          <button class="cancel-btn">cancel</button>
-          <button class="create-btn" data-toast-message="New project created !">Create</button>
-          <button class="create-open-btn" data-toast-message="Opening new Project !">Create & open</button>
+          <button class="cancel-btn focus-trap-release">cancel</button>
+          <button class="create-btn focus-trap-release" data-toast-message="New project created !">Create</button>
+          <button class="create-open-btn focus-trap-release" data-toast-message="Opening new Project !">Create & open</button>
         </div>
       </form>
     </div>
 
     <!-- delete confirmation -->
-    <div class="delete-confirmation-modal">
+    <div class="delete-confirmation-modal focus-trap-release universal-modal-control">
       <div class="delete-modal-content">
         <h2>Delete Project?</h2>
         <div>
@@ -458,8 +458,8 @@
             >
           </div>
           <div class="delete-confirmation-buttons">
-            <button class="dlt-cancel-btn">Cancel</button>
-            <button class="dlt-confirm-btn" data-toast-message="Project deleted !">Delete</button>
+            <button class="dlt-cancel-btn focus-trap-release">Cancel</button>
+            <button class="dlt-confirm-btn focus-trap-release" data-toast-message="Project deleted !">Delete</button>
           </div>
         </div>
       </div>
@@ -469,7 +469,7 @@
     <div class="toast-container"></div>
 
     <!-- edit project form -->
-    <div class="edit-project-form-modal">
+    <div class="edit-project-form-modal focus-trap-release universal-modal-control">
       <form>
         <div>
           <label for="title-input">Title</label>
@@ -481,15 +481,15 @@
         </div>
 
         <div>
-          <button class="project-edit-form-cancel-btn">Cancel</button>
+          <button class="project-edit-form-cancel-btn focus-trap-release">Cancel</button>
           <button class="project-edit-form-delete-btn">Delete</button>
-          <button class="project-edit-form-save-btn">Save</button>
+          <button class="project-edit-form-save-btn focus-trap-release">Save</button>
         </div>
       </form>
     </div>
 
     <!-- all project delete form -->
-    <div class="delete-all-project-modal">
+    <div class="delete-all-project-modal focus-trap-release universal-modal-control">
       <form>
         <div>
           <span>Delete all project</span>
@@ -501,7 +501,7 @@
         </div>
         <div class="error-message"></div>
         <div class="delete-all-project-btn-container">
-          <button class="cancel-all-project-delete-btn">Cancel</button>
+          <button class="cancel-all-project-delete-btn focus-trap-release">Cancel</button>
           <button data-toast-message="All projects deleted !" class="confirm-all-project-delete-btn">Delete all</button>
         </div>
       </form>

@@ -17,10 +17,6 @@ allFormInDOM.forEach((form) => {
   });
 });
 
-function setTabIndex() {
-  
-}
-
 //! ----- Variables -----
 const sidebar = document.querySelector('.sidebar');
 const sidebarToggleBtn = document.querySelector('.sidebar-toggle-btn');
@@ -44,6 +40,114 @@ const createBtn = document.querySelector('.create-btn');
 const createOpenBtn = document.querySelector('.create-open-btn');
 
 const createNewBtn = document.querySelector('.create-new-project-btn');
+
+//! current page finder
+function currentPage() {
+  const currentPageHash = location.hash.replace('#', '');
+  if (currentPageHash) {
+    return document.getElementById(currentPageHash);
+  } else {
+    return document.getElementById('home-page');
+  }
+}
+//! tabindex helper function
+function tabIndex(elements, { value, remove = false }) {
+  if (typeof elements === 'string') {
+    elements = document.querySelectorAll(elements);
+  } else if (elements instanceof Element) {
+    elements = [elements];
+  } else if (!elements || typeof elements.forEach !== 'function') {
+    console.warn('tabIndex(): Invalid "elements" parameter');
+    return;
+  }
+
+  const focusableSelectors = 'a, button, input, textarea, [contenteditable="true"], select';
+
+  elements.forEach((el) => {
+    const target = [];
+
+    if (el.matches(focusableSelectors)) {
+      target.push(el);
+    }
+    el.querySelectorAll(focusableSelectors).forEach((nested) => target.push(nested));
+
+    target.forEach((node) => {
+      if (remove) {
+        node.removeAttribute('tabindex');
+        console.log('tabindex removed from : ', node);
+      } else {
+        node.setAttribute('tabindex', value);
+        console.log('tabindex added to : ', node);
+      }
+    });
+  });
+}
+
+function focusTrap() {
+  tabIndex(currentPage(), {
+    value: -1,
+  });
+  tabIndex('.sidebar', {
+    value: -1,
+  });
+  document.body.setAttribute('data-modal-stat', 'active');
+}
+
+function focusRelease() {
+  tabIndex('.sidebar', {
+    remove: true,
+  });
+
+  if (sidebarStat() === 'closed') {
+    tabIndex('.grid-smooth-height', {
+      value: -1,
+    });
+    tabIndex(subMenuBtn, {
+      value: -1,
+    });
+    tabIndex(currentPage(), {
+      remove: true,
+    });
+  }
+
+  if (!smallScreen()) {
+    tabIndex('.sidebar', {
+      remove: true,
+    });
+    tabIndex(currentPage(), {
+      remove: true,
+    });
+
+    if (sidebarStat() === 'closed') {
+      tabIndex('.grid-smooth-height', {
+        value: -1,
+      });
+      tabIndex(subMenuBtn, {
+        value: -1,
+      });
+    }
+  }
+  document.body.removeAttribute('data-modal-stat');
+}
+
+document.addEventListener('click', (e) => {
+  const focusTrapBtn = e.target.closest('.focus-trap-activate');
+  if (focusTrapBtn) {
+    focusTrap();
+  }
+
+  const focusTrapReleaseBtn = e.target.closest('.focus-trap-release');
+  if (focusTrapReleaseBtn) {
+    focusRelease();
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.body.hasAttribute('data-modal-stat')) {
+    document.querySelectorAll('.universal-modal-control').forEach((modal) => modal.classList.remove('appear'));
+    focusRelease();
+  }
+});
 
 //! first load welcome note
 const firstLoadNote = document.querySelector('.first-load-welcome-note');
@@ -132,48 +236,127 @@ imgModArr.forEach((element) => {
 
 //! sidebar programs ------
 //! sidebar toggle
-const sideBarStat = localStorage.getItem('sidebar-stat');
 const sidebarBgLayer = document.querySelector('.sidebar-bg-layer');
 
-// sidebar.classList.toggle('show');
-// profileImage.classList.toggle('enlarge');
-// sidebarBgLayer.classList.toggle('show');
+function smallScreen() {
+  return window.matchMedia('(width <= 1000px)').matches;
+}
+function sidebarStat() {
+  return localStorage.getItem('sidebar-stat');
+}
+if (!sidebarStat()) {
+  localStorage.setItem('sidebar-stat', 'closed');
+}
 
-const sidebarToggleFunc = () => {
-  const sidebarShowing = sidebar.classList.contains('show');
-  sidebar.classList.toggle('show', !sidebarShowing);
-  sidebarBgLayer.classList.toggle('show', !sidebarShowing);
-  profileImage.classList.toggle('enlarge', !sidebarShowing);
+function sidebarToggleFunc() {
+  const stat = sidebarStat();
 
-  if (sidebarShowing) {
-    setMinusTabIndexExcept(...sidebar.querySelectorAll('*'));
+  if (stat === 'closed') {
+    sidebar.classList.add('show');
+    sidebarBgLayer.classList.add('show');
+    profileImage.classList.add('enlarge');
+    projectMenu.classList.remove('show');
+    localStorage.setItem('sidebar-stat', 'open');
+    if (smallScreen()) {
+      tabIndex(currentPage(), {
+        value: -1,
+      });
+    }
+    tabIndex('.grid-smooth-height', {
+      remove: true,
+    });
+    tabIndex(subMenuBtn, {
+      remove: true,
+    });
   }
-};
+
+  if (stat === 'open') {
+    sidebar.classList.remove('show');
+    sidebarBgLayer.classList.remove('show');
+    profileImage.classList.remove('enlarge');
+    projectMenu.classList.remove('show');
+    localStorage.setItem('sidebar-stat', 'closed');
+
+    tabIndex(currentPage(), {
+      remove: true,
+    });
+    tabIndex('.grid-smooth-height', {
+      value: -1,
+    });
+    tabIndex(subMenuBtn, {
+      value: -1,
+    });
+  }
+}
 
 sidebarToggleBtn.addEventListener('click', sidebarToggleFunc);
 sidebarBgLayer.addEventListener('click', sidebarToggleFunc);
 
+// load sidebar stat
 window.addEventListener('DOMContentLoaded', () => {
-  if (sideBarStat) {
+  if (sidebarStat() === 'open') {
     sidebar.classList.add('show');
-    profileImage.classList.add('enlarge');
-    subMenuBtn.removeAttribute('tabindex');
     sidebarBgLayer.classList.add('show');
+    profileImage.classList.add('enlarge');
+
+    if (smallScreen()) {
+      requestAnimationFrame(() => {
+        tabIndex(currentPage(), {
+          value: -1,
+        });
+        console.log(smallScreen());
+      });
+    }
+  } else {
+    tabIndex(subMenuBtn, {
+      value: -1,
+    });
+
+    tabIndex('.grid-smooth-height', {
+      value: -1,
+    });
   }
+});
+
+// debounce check sidebar state and tabindex.
+let debounce;
+window.addEventListener('resize', () => {
+  clearTimeout(debounce);
+
+  debounce = setTimeout(() => {
+    if (document.body.hasAttribute('data-modal-stat')) {
+      console.log('handel');
+      return;
+    }
+
+    if (sidebarStat() === 'open' && smallScreen()) {
+      tabIndex(currentPage(), {
+        value: -1,
+      });
+    } else {
+      tabIndex(currentPage(), {
+        remove: true,
+      });
+    }
+  }, 300);
 });
 
 //! sub menu toggle
 subMenuBtn.addEventListener('click', () => {
   projectMenu.classList.toggle('show');
-  projectTitleInput.focus();
 });
 
 //! Create new projects programs --------
-const allCancelMethod = [createNewBtn, formBgLayer, cancelBtn, createBtn, createOpenBtn];
+const allCancelMethod = [formBgLayer, cancelBtn, createBtn, createOpenBtn];
 //! toggle form when needed
+createNewBtn.addEventListener('click', () => {
+  formBgLayer.classList.add('appear');
+});
+
 allCancelMethod.forEach((btn) =>
   btn.addEventListener('click', () => {
     formBgLayer.classList.toggle('appear');
+    focusRelease();
   })
 );
 
@@ -184,7 +367,8 @@ deleteModalContent.addEventListener('click', (e) => {
 
 //! cancel delete
 function closeDeleteModal() {
-  deleteModal.classList.toggle('appear');
+  deleteModal.classList.remove('appear');
+  focusRelease();
 }
 deleteCancelBtn.addEventListener('click', closeDeleteModal);
 deleteModal.addEventListener('click', closeDeleteModal);
@@ -279,7 +463,7 @@ function createNewProject(id, name) {
           </path>
         </svg>
       </button>
-      <button aria-label="delete button" title="Delete project"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+      <button class="focus-trap-activate" aria-label="delete button" title="Delete project"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
           fill="currentColor">
           <path
             d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z">
@@ -409,12 +593,16 @@ function pageChangeUpdate() {
   });
 
   // set/remove tabindex
-  const eachPage = document.querySelectorAll('.each-page');
   document.querySelectorAll('.each-page').forEach((page) => {
+    if (document.body.hasAttribute('data-modal-stat')) return;
     if (page.id !== pageId) {
-      page.querySelectorAll('a, button, input, select, textarea, div').forEach((el) => el.setAttribute('tabindex', '-1'));
-    } else {
-      page.querySelectorAll('a, button, input, select, textarea, div').forEach((el) => el.removeAttribute('tabindex'));
+      tabIndex(page, {
+        value: -1,
+      });
+    } else if (page.id === pageId && sidebarStat() === 'closed') {
+      tabIndex(page, {
+        remove: true,
+      });
     }
   });
 
@@ -1136,7 +1324,7 @@ function createProjectPageProjects(arr) {
     div.innerHTML = `
       <header class="project-header">
         <a href="./editor/user.html#${p.id}" target="_blank">${p.name}</a>
-        <button title="Click to edit project" data-project-id="${p.id}" class="edit-projects-button">${moreOptSvg()}</button>
+        <button title="Click to edit project" data-project-id="${p.id}" class="edit-projects-button focus-trap-activate">${moreOptSvg()}</button>
       </header>
       <span class="project-page-project-description">
         ${p.des}
@@ -1187,7 +1375,6 @@ projectPageProjectContainer.addEventListener('click', (e) => {
     titleInput.value = freshProjectList()[index].name === 'Untitled' ? '' : freshProjectList()[index].name;
     desInput.value = freshProjectList()[index].des === 'Empty description' ? '' : freshProjectList()[index].des;
     currentId = id;
-
     titleInput.focus();
   }
 
@@ -1215,6 +1402,7 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
   const cancelBtn = e.target.closest('.project-edit-form-cancel-btn');
   if (cancelBtn) {
     projectEditFormModal.classList.remove('appear');
+    focusRelease();
   }
 
   //delete btn program
@@ -1237,11 +1425,13 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
     setTimeout(() => {
       refreshPageContent(freshProject);
     }, 600);
+    focusRelease();
   }
 });
 
 projectEditFormModal.addEventListener('click', () => {
   projectEditFormModal.classList.remove('appear');
+  focusRelease();
 });
 
 //! Page content updation according to changes on editor page.
