@@ -3,6 +3,8 @@
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 2;
+
   width: 100%;
   max-width: 250px;
   background-color: var(--container-bg);
@@ -13,8 +15,9 @@
 
   display: none;
   translate: -100% 0;
-  transition: translate 600ms, max-width 200ms, scale 6s;
-  z-index: 2;
+  transition-property: display translate;
+  transition-duration: 550ms;
+  transition-behavior: allow-discrete;
 
   @media (width>700px) {
     max-width: 300px;
@@ -22,7 +25,12 @@
 }
 
 .sidebar.show {
+  display: block;
   translate: 0 0;
+
+  @starting-style {
+    translate: -100% 0;
+  }
 }
 
 h1 {
@@ -196,7 +204,8 @@ header > div {
   position: relative;
   left: 0px;
   z-index: 3;
-  transition: scale 50ms, left 600ms;
+
+  transition: scale 50ms, left 550ms;
 
   svg {
     width: 35px;
@@ -212,7 +221,7 @@ header > div {
   }
 }
 
-.sidebar-toggle-btn.move {
+.sidebar-toggle-btn.show {
   left: 190px;
 
   @media (width > 700px) {
@@ -235,8 +244,8 @@ header > div {
   max-height: 45px;
   max-width: 800px;
   overflow-y: scroll;
-  
-  @media(pointer: coarse) {
+
+  @media (pointer: coarse) {
     font-size: clamp(0.825rem, 0.2917rem + 2.1333vw, 1.225rem);
   }
 }
@@ -705,19 +714,22 @@ main {
   opacity: 0;
   display: none;
   transition-property: display opacity;
-  transition-duration: 600ms;
+  transition-duration: 550ms;
   transition-behavior: allow-discrete;
-
-  /* display: none;
-  opacity: 0;
-  transition-property: display opacity;
-  transition-duration: 600ms;
-  transition-behavior: allow-discrete; */
 
   @media (width > 700px) {
     backdrop-filter: blur(3px);
   }
 }
+.beneath-layer.show {
+  display: block;
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
 .customization-modal {
   position: fixed;
   top: 0;
@@ -728,18 +740,40 @@ main {
 
   padding: 1rem;
   background-color: var(--overlay);
-  display: grid;
-  display: none;
   place-items: center;
   opacity: 1;
   opacity: 0;
 
-  transition: opacity 200ms;
+  display: none;
+  opacity: 0;
+  transition-property: display opacity;
+  transition-duration: var(--modal-transition-duration);
+  transition-behavior: allow-discrete;
 
   @media (pointer: fine) {
     backdrop-filter: blur(3px);
   }
 }
+
+.customization-modal.show {
+  display: grid;
+  opacity: 1;
+
+  .customization-container {
+    translate: 0 0;
+    scale: 1;
+
+    @starting-style {
+      translate: 0 250%;
+      scale: 0.5;
+    }
+  }
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
 .customization-container {
   --padding: 1rem;
 
@@ -757,9 +791,8 @@ main {
   gap: 1rem;
 
   scale: 0.5;
-  opacity: 0;
   translate: 0 250%;
-  transition: all 500ms;
+  transition: translate var(--modal-content-transition-duration-translate), scale var(--modal-content-transition-duration-scale);
 
   h2 {
     margin: 0;
@@ -1230,14 +1263,7 @@ main {
 .customization-container.transition-off {
   transition: none;
 }
-.beneath-layer.show {
-  display: block;
-  opacity: 1;
 
-  @starting-style {
-    opacity: 0;
-  }
-}
 .info-container.show {
   translate: calc(-50% - 8px) 0;
   opacity: 1;
@@ -1408,7 +1434,7 @@ main {
   left: 0;
   inset: 0;
   background-color: var(--overlay);
-  padding: 1.5rem;
+  padding: 5rem 1.5rem;
   overflow-y: auto;
 
   display: none;
@@ -1420,7 +1446,7 @@ main {
   @media (pointer: fine) {
     backdrop-filter: blur(3px);
   }
-  @media(pointer: coarse) {
+  @media (pointer: coarse) {
     &::-webkit-scrollbar {
       width: 10px;
     }
@@ -1527,9 +1553,8 @@ main {
   gap: 0.5rem;
 
   code {
+    font-family: 'firaCode', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 0.7525rem;
-    font-family: inherit;
-    font-family: var(--user-font);
     border: var(--slick-border);
     padding: 0.225rem 0.525rem;
     border-radius: 0.325rem;

@@ -202,35 +202,30 @@ const beneathLayer = document.querySelector('.beneath-layer');
 
 function reloadTitleAttr() {
   if (!sidebar.classList.contains('show')) {
-    sidebarToggleBtn.setAttribute('title', 'Click to open sidebar');
+    sidebarToggleBtn.setAttribute('title', 'Open sidebar');
   } else {
-    sidebarToggleBtn.setAttribute('title', 'Click to close sidebar');
+    sidebarToggleBtn.setAttribute('title', 'Close sidebar');
   }
 }
 reloadTitleAttr();
 
 function toggleSidebar() {
-  if (!sidebar.classList.contains('show')) {
-    setDisplay(sidebar, 'block');
-    beneathLayer.classList.add('show');
-    requestAnimationFrame(() => {
-      sidebar.classList.add('show');
-      sidebarToggleBtn.classList.add('move');
-      reloadTitleAttr();
-    });
-  } else {
-    sidebar.classList.remove('show');
-    sidebarToggleBtn.classList.remove('move');
-    beneathLayer.classList.remove('show');
-    setTimeout(() => {
-      setDisplay(sidebar, 'none');
-      reloadTitleAttr();
-    }, 600);
-  }
+  sidebar.classList.toggle('show', !sidebar.classList.contains('show'));
+  sidebarToggleBtn.classList.toggle('show', !sidebarToggleBtn.classList.contains('show'));
+  beneathLayer.classList.toggle('show', !beneathLayer.classList.contains('show'));
+  reloadTitleAttr();
 }
 
-sidebarToggleBtn.addEventListener('click', toggleSidebar);
-beneathLayer.addEventListener('click', toggleSidebar);
+document.addEventListener('click', (e) => {
+  const sidebarBtn = e.target.closest('.sidebar-toggle-btn');
+  const sidebarLayer = e.target.closest('.beneath-layer');
+  if (sidebarBtn) {
+    toggleSidebar();
+  }
+  if (sidebarLayer) {
+    toggleSidebar();
+  }
+});
 
 // load project in sidebar
 const projectListContainer = document.querySelector('.project-list-container');
@@ -313,10 +308,10 @@ function loadCodeMirror(mode, value) {
       'Cmd-1': () => htmlCodeMirror.focus(),
       'Cmd-2': () => cssCodeMirror.focus(),
       'Cmd-3': () => jsCodeMirror.focus(),
-      'Shift-Alt-Down': copyLineDown,
-      'Shift-Alt-Up': copyLineUp,
-      'Alt-Up': moveLineUp,
-      'Alt-Down': moveLineDown,
+      'Shift-Alt-Down': copyLinesDown,
+      'Shift-Alt-Up': copyLinesUp,
+      'Alt-Up': moveLinesUp,
+      'Alt-Down': moveLinesDown,
     },
     gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
     foldGutter: true,
@@ -879,36 +874,26 @@ const customizationModal = document.querySelector('.customization-modal');
 const customizationContainer = document.querySelector('.customization-container');
 const closeCustomizationModalBtn = document.querySelector('.close-modal-btn');
 
-stopPropagation(customizationContainer);
-
-function toggleCustomizationModal() {
-  if (!customizationContainer.classList.contains('slide-up')) {
-    setDisplay(customizationModal, 'grid');
-    requestAnimationFrame(() => {
-      customizationModal.style.opacity = '1';
-      customizationContainer.classList.toggle('slide-up');
-    });
-  } else {
-    customizationContainer.classList.toggle('slide-up');
-    setTimeout(() => {
-      customizationModal.style.opacity = '0';
-      setTimeout(() => {
-        setDisplay(customizationModal, 'none');
-      }, 200);
-    }, 100);
-  }
-}
-const customModalBtn = [customizationModal, closeCustomizationModalBtn];
-customModalBtn.forEach((btn) => {
-  btn.addEventListener('click', toggleCustomizationModal);
-});
-
 document.addEventListener('click', (e) => {
   const runBtn = e.target.closest('.run-code-btn');
   const customizeBtn = e.target.closest('.customize-panel-btn');
+  const modal = e.target.closest('.customization-modal');
+  const modalContent = e.target.closest('.customization-container');
+  const closeModalBtn = e.target.closest('.close-modal-btn');
 
   if (runBtn) run();
-  if (customizeBtn) toggleCustomizationModal();
+  if (customizeBtn) {
+    customizationModal.classList.add('show');
+  }
+  if (closeModalBtn) {
+    customizationModal.classList.remove('show');
+  }
+  if (modalContent) {
+    return;
+  }
+  if (modal) {
+    customizationModal.classList.remove('show');
+  }
 });
 
 const pickrWrapper = document.querySelector('.pickr-wrapper');
@@ -1087,88 +1072,175 @@ document.addEventListener('click', (e) => {
   }
 });
 
+function closeSidebar() {
+  sidebar.classList.remove('show');
+  sidebarToggleBtn.classList.remove('show');
+  beneathLayer.classList.remove('show');
+  reloadTitleAttr();
+}
+
+function closeModalFunc() {
+  document.querySelectorAll('.universal-modal').forEach((modal) => {
+    if (modal.classList.contains('show')) {
+      modal.classList.remove('show');
+    }
+  });
+  closeSidebar();
+}
+
 document.addEventListener('keydown', (e) => {
-  // toggle sidebar
-  if (e.ctrlKey && e.key === 'b') {
+  // if()
+
+  if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
     e.preventDefault();
-    sidebarToggleBtn.click();
+    closeModalFunc();
+    toggleSidebar();
   }
-  // prevent page saving & print
   if ((e.ctrlKey || e.metaKey) && ['s', 'p'].includes(e.key)) {
     e.preventDefault();
   }
   if ((e.ctrlKey || e.metaKey) && (e.key === '1' || e.key === 'j')) {
     e.preventDefault();
-    if (sidebar.classList.contains('show')) sidebarToggleBtn.click();
+    closeModalFunc();
     htmlCodeMirror.focus();
   }
   if ((e.ctrlKey || e.metaKey) && (e.key === '2' || e.key === 'k')) {
     e.preventDefault();
-    if (sidebar.classList.contains('show')) sidebarToggleBtn.click();
+    closeModalFunc();
     cssCodeMirror.focus();
   }
   if ((e.ctrlKey || e.metaKey) && (e.key === '3' || e.key === 'l')) {
     e.preventDefault();
-    if (sidebar.classList.contains('show')) sidebarToggleBtn.click();
+    closeModalFunc();
     jsCodeMirror.focus();
   }
   if ((e.ctrlKey || e.metaKey) && e.key === ',' && !customizationContainer.classList.contains('slide-up')) {
+    closeModalFunc();
     document.querySelector('.customize-panel-btn').click();
   }
-  if((e.ctrlKey || e.metaKey) && e.key === ';' && !keyboardShortcutModal.classList.contains('show')) {
-    keyboardShortcutModal.classList.add('show')
+  if ((e.ctrlKey || e.metaKey) && e.key === ';' && !keyboardShortcutModal.classList.contains('show')) {
+    closeModalFunc();
+    keyboardShortcutModal.classList.add('show');
   }
 });
 
 // copy lines up/down
-function copyLineDown(cm) {
-  const pos = cm.getCursor();
-  const line = pos.line;
-  const content = cm.getLine(line);
-
+function copyLinesUp(cm) {
+  // 1. Figure out which lines are touched by your selection/cursor
+  const fromLine = cm.getCursor("start").line;
+  const toLine   = cm.getCursor("end").line;
+  
+  // 2. Grab those lines as a single string
+  const lines = [];
+  for (let i = fromLine; i <= toLine; i++) {
+    lines.push(cm.getLine(i));
+  }
+  const blockText = lines.join("\n");
+  
+  // 3. Insert that block right at the start of "fromLine" (i.e. above the current block)
   cm.operation(() => {
-    cm.replaceRange(content + '\n', { line: line + 1, ch: 0 });
-    cm.setCursor({ line: line + 1, ch: pos.ch });
+    cm.replaceRange(blockText + "\n", { line: fromLine, ch: 0 });
+    
+    // 4. Now select exactly the new copy (which lives from fromLine … toLine)
+    //    Since we just inserted at fromLine, the new copy spans [fromLine … fromLine+(toLine-fromLine)]
+    const newFrom = fromLine;
+    const newTo   = fromLine + (toLine - fromLine);
+    cm.setSelection(
+      { line: newFrom, ch: 0 },
+      { line: newTo,   ch: cm.getLine(newTo).length }
+    );
   });
 }
 
-function copyLineUp(cm) {
-  const pos = cm.getCursor();
-  const line = pos.line;
-  const content = cm.getLine(line);
-
+function copyLinesDown(cm) {
+  // 1. Figure out which lines are touched by your selection/cursor
+  const fromLine = cm.getCursor("start").line;
+  const toLine   = cm.getCursor("end").line;
+  
+  // 2. Grab those lines as a single string
+  const lines = [];
+  for (let i = fromLine; i <= toLine; i++) {
+    lines.push(cm.getLine(i));
+  }
+  const blockText = lines.join("\n");
+  
+  // 3. Insert that block right after "toLine"
+  const insertPos = { line: toLine, ch: cm.getLine(toLine).length };
   cm.operation(() => {
-    cm.replaceRange(content + '\n', { line: line, ch: 0 });
-    cm.setCursor({ line: line, ch: pos.ch });
+    // We prefix with "\n" so it doesn’t merge into the last line’s text
+    cm.replaceRange("\n" + blockText, insertPos);
+    
+    // 4. Select the newly inserted copy (which starts at toLine+1)
+    const newFrom = toLine + 1;
+    const newTo   = toLine + 1 + (toLine - fromLine);
+    cm.setSelection(
+      { line: newFrom, ch: 0 },
+      { line: newTo,   ch: cm.getLine(newTo).length }
+    );
   });
 }
+
 
 // Line move up/down
-function moveLineDown(cm) {
-  const pos = cm.getCursor();
-  const line = pos.line;
-  if (line === cm.lineCount() - 1) return;
-  const currentLine = cm.getLine(line);
-  const belowLine = cm.getLine(line + 1);
+function moveLinesUp(cm) {
+  // Grab the first (and only) selection
+  const sel = cm.listSelections()[0];
+  let fromLine = sel.from().line;
+  let toLine = sel.to().line;
+
+  // If your “to” ends exactly at col 0 of a new line,
+  // treat it as “up to the previous line.”
+  if (sel.to().ch === 0 && fromLine !== toLine) {
+    toLine -= 1;
+  }
+
+  // If we’re already at the very top, abort
+  if (fromLine === 0) return;
+
+  // Text of the line immediately above our block
+  const lineAboveText = cm.getLine(fromLine - 1);
+
+  // Text of the entire selected block (from start of fromLine to end of toLine)
+  const blockText = cm.getRange({ line: fromLine, ch: 0 }, { line: toLine, ch: cm.getLine(toLine).length });
 
   cm.operation(() => {
-    cm.replaceRange(belowLine, { line: line, ch: 0 }, { line: line, ch: currentLine.length });
-    cm.replaceRange(currentLine, { line: line + 1, ch: 0 }, { line: line + 1, ch: belowLine.length });
-    cm.setCursor({ line: line + 1, ch: pos.ch });
+    // 1) Replace “(lineAbove) + (block)” with “(block) + (lineAbove)”
+    cm.replaceRange(blockText + '\n' + lineAboveText, { line: fromLine - 1, ch: 0 }, { line: toLine, ch: cm.getLine(toLine).length });
+
+    // 2) Shift the selection up by 1 line
+    const newAnchor = { line: sel.anchor.line - 1, ch: sel.anchor.ch };
+    const newHead = { line: sel.head.line - 1, ch: sel.head.ch };
+    cm.setSelection(newAnchor, newHead);
   });
 }
 
-function moveLineUp(cm) {
-  const pos = cm.getCursor();
-  const line = pos.line;
-  if (line === 0) return;
-  const currentLine = cm.getLine(line);
-  const aboveLine = cm.getLine(line - 1);
+function moveLinesDown(cm) {
+  const sel = cm.listSelections()[0];
+  let fromLine = sel.from().line;
+  let toLine = sel.to().line;
+
+  if (sel.to().ch === 0 && fromLine !== toLine) {
+    toLine -= 1;
+  }
+
+  const lastLine = cm.lineCount() - 1;
+  // If our block already touches the bottom, abort
+  if (toLine === lastLine) return;
+
+  // Text of the line immediately below our block
+  const lineBelowText = cm.getLine(toLine + 1);
+
+  // Text of the selected block
+  const blockText = cm.getRange({ line: fromLine, ch: 0 }, { line: toLine, ch: cm.getLine(toLine).length });
 
   cm.operation(() => {
-    cm.replaceRange(currentLine, { line: line - 1, ch: 0 }, { line: line - 1, ch: aboveLine.length });
-    cm.replaceRange(aboveLine, { line: line, ch: 0 }, { line: line, ch: currentLine.length });
-    cm.setCursor({ line: line - 1, ch: pos.ch });
+    // 1) Replace “(block + lineBelow)” with “(lineBelow + block)”
+    cm.replaceRange(lineBelowText + '\n' + blockText, { line: fromLine, ch: 0 }, { line: toLine + 1, ch: cm.getLine(toLine + 1).length });
+
+    // 2) Shift the selection down by 1 line
+    const newAnchor = { line: sel.anchor.line + 1, ch: sel.anchor.ch };
+    const newHead = { line: sel.head.line + 1, ch: sel.head.ch };
+    cm.setSelection(newAnchor, newHead);
   });
 }
 
@@ -1256,7 +1328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   resizableArea.style.width = `${isFine && editorWidth <= 300 ? 300 : editorWidth}px`;
 
   const isMac = /Mac/i.test(navigator.platform);
-  document.querySelectorAll('.shortcut-keys').forEach(key => {
-    key.innerHTML = key.innerHTML.replace(/Ctrl/g, isMac? 'Cmd' : 'Ctrl')
-  })
+  document.querySelectorAll('.shortcut-keys').forEach((key) => {
+    key.innerHTML = key.innerHTML.replace(/Ctrl/g, isMac ? 'Cmd' : 'Ctrl');
+  });
 });

@@ -177,6 +177,9 @@
 .cm-m-css.cm-string {
   color: var(--css-string);
 }
+.cm-m-css.cm-string-2 {
+  color: var(--css-property);
+}
 .cm-m-css.cm-def {
   color: var(--css-def);
 }
