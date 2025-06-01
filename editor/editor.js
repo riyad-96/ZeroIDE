@@ -1085,16 +1085,19 @@ function closeModalFunc() {
       modal.classList.remove('show');
     }
   });
-  closeSidebar();
 }
 
 document.addEventListener('keydown', (e) => {
-  // if()
+  if (e.key === 'Escape') {
+    // e.preventDefault();
+    closeModalFunc();
+    closeSidebar();
+  };
 
   if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
     e.preventDefault();
-    closeModalFunc();
     toggleSidebar();
+    closeModalFunc();
   }
   if ((e.ctrlKey || e.metaKey) && ['s', 'p'].includes(e.key)) {
     e.preventDefault();
@@ -1102,24 +1105,29 @@ document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && (e.key === '1' || e.key === 'j')) {
     e.preventDefault();
     closeModalFunc();
+    closeSidebar();
     htmlCodeMirror.focus();
   }
   if ((e.ctrlKey || e.metaKey) && (e.key === '2' || e.key === 'k')) {
     e.preventDefault();
     closeModalFunc();
+    closeSidebar();
     cssCodeMirror.focus();
   }
   if ((e.ctrlKey || e.metaKey) && (e.key === '3' || e.key === 'l')) {
     e.preventDefault();
     closeModalFunc();
+    closeSidebar();
     jsCodeMirror.focus();
   }
   if ((e.ctrlKey || e.metaKey) && e.key === ',' && !customizationContainer.classList.contains('slide-up')) {
     closeModalFunc();
+    closeSidebar();
     document.querySelector('.customize-panel-btn').click();
   }
   if ((e.ctrlKey || e.metaKey) && e.key === ';' && !keyboardShortcutModal.classList.contains('show')) {
     closeModalFunc();
+    closeSidebar();
     keyboardShortcutModal.classList.add('show');
   }
 });
