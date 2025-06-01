@@ -66,6 +66,7 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     fontSize: '14',
     fontLigatures: 'on',
     tabSize: '2',
+    autoRun: 'off',
     semicolon: 'on',
     quotation: 'double',
     printWidth: '80',
@@ -624,8 +625,6 @@ function run() {
 let codeMirrorRuntimeout;
 
 function codeMirrorCodeRunAndSave() {
-  clearTimeout(codeMirrorRuntimeout);
-  codeMirrorRuntimeout = setTimeout(run, 1200);
   const localCodeObj = {
     id: hash,
     code: {
@@ -645,6 +644,19 @@ function codeMirrorCodeRunAndSave() {
     allSavedCode.push(localCodeObj);
   }
   saveLocalStringify('allSavedCode', allSavedCode);
+
+  if(savedSettings.editor.autoRun === 'off') {
+    return;
+  }
+  if(savedSettings.editor.autoRun === 'immediate') {
+    run();
+    return;
+  }
+  clearTimeout(codeMirrorRuntimeout);
+  if(savedSettings.editor.autoRun === 'afterDelay') {
+    codeMirrorRuntimeout = setTimeout(run, 1200)
+  }
+
 }
 
 if (allSavedCode) {
@@ -1092,7 +1104,7 @@ document.addEventListener('keydown', (e) => {
     // e.preventDefault();
     closeModalFunc();
     closeSidebar();
-  };
+  }
 
   if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
     e.preventDefault();
