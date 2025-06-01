@@ -795,13 +795,13 @@ html {
 
   --slick-border: 1px solid hsla(235, 18%, 21%, 1);
 
-  --sidebar-toggle-icon-bg: hsl(0, 0%, 12%);
-  --sidebar-toggle-btn-hover-border: 1px solid hsl(0, 0%, 21%);
+  --sidebar-toggle-icon-bg: hsl(235, 18%, 18%);
+  --sidebar-toggle-btn-hover-border: 1px solid hsl(235, 18%, 26%);
   --submenu-bg: hsla(235, 18%, 18%, 1);
 
   --project-list-item-hover-bg: hsl(0, 0%, 13%);
 
-  --container-bg: #1e1f2b;
+  --container-bg: hsl(235, 18%, 14%);
   --light-container-border: 1px solid hsla(235, 18%, 19%);
 
   --toast-message-clr: hsl(0, 0%, 5%);
@@ -1013,8 +1013,8 @@ html {
 
   --slick-border: 1px solid hsl(216, 13%, 21%);
 
-  --sidebar-toggle-icon-bg: hsl(0, 0%, 12%);
-  --sidebar-toggle-btn-hover-border: 1px solid hsl(0, 0%, 21%);
+  --sidebar-toggle-icon-bg: hsl(216, 13%, 19%);
+  --sidebar-toggle-btn-hover-border: 1px solid hsl(216, 13%, 26%);
   --submenu-bg: hsl(216, 13%, 18%);
 
   --project-list-item-hover-bg: hsl(0, 0%, 13%);

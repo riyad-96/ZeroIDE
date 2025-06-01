@@ -1518,18 +1518,18 @@ main {
 }
 
 .keyboard-shortcut-modal-content h3 {
-  line-height: 0.8lh;
+  /* line-height: 0.8lh; */
   font-weight: 500;
   margin-block-end: 1rem;
-  padding-inline-start: 0.5rem;
-  border-inline-start: 2px solid var(--tab-change-btn-before-bg);
+  border-block-end: var(--slick-border);
 }
 
 .shortcut-header {
   font-weight: 500;
-  border-block-end: var(--slick-border);
-  margin-block: 0.5rem;
-  max-width: fit-content;
+  line-height: 0.7lh;
+  margin-block: 1.5rem 0.5rem;
+  padding-inline-start: 0.5rem;
+  border-inline-start: 2px solid var(--tab-change-btn-before-bg);
 }
 
 .shortcut-line {
