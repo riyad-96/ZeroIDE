@@ -1410,16 +1410,37 @@ img {
   justify-content: space-between;
   gap: 1rem;
 }
-.each-project header a {
-  text-decoration: underline;
-  font-weight: 300;
+.each-project header .title {
+  font-weight: 400;
   word-break: break-all;
+}
+.each-project header button {
+  border: 1px solid transparent;
+  padding: 0.125rem;
+  border-radius: 100px;
+  background-color: var(--global-button-bg);
+  opacity: 0.8;
+}
+.each-project header button svg {
+  animation: rotateSettingSvg;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+.each-project header button:hover {
+  border: 1px solid var(--slick-border-clr);
+  background-color: var(--global-button-hover-bg);
+  opacity: 1;
+}
+.each-project header button:hover svg {
+  animation-play-state: running;
 }
 .each-project > span {
   margin: 0;
-  opacity: 0.6;
+  opacity: 0.8;
   font-size: 0.9125rem;
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: 0.3px;
   line-height: 18px;
   overflow: hidden;
@@ -1431,19 +1452,40 @@ img {
   line-clamp: 3;
   -webkit-line-clamp: 3;
 }
+.each-project button {
+  display: grid;
+  place-items: center;
+}
+
 .each-project footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+.each-project footer div {
+  display: flex;
+  align-items: center;
+  gap: 0.425rem;
+}
+.each-project footer .open-editor-btn {
+  display: flex;
+  gap: 0.325rem;
+  align-items: center;
+  border: 1px solid var(--slick-border-clr);
+  background-color: var(--global-button-bg);
+  padding: 0.0725rem 0.425rem;
+  border-radius: var(--global-button-border-radius);
+}
+.each-project footer .open-editor-btn span {
+  opacity: 1;
+}
+.each-project footer .open-editor-btn:hover {
+  background-color: var(--global-button-hover-bg);
+}
 .each-project footer span {
   opacity: 0.6;
   font-size: 0.825rem;
   font-weight: 300;
-}
-.each-project button {
-  display: grid;
-  place-items: center;
 }
 
 .each-project > span::-webkit-scrollbar {
@@ -2318,6 +2360,10 @@ main {
 .delete-project-input-container input.error {
   outline: 1px solid hsl(0, 100%, 45%);
   outline-offset: 2px;
+}
+
+input, textarea {
+  border-radius: 0.2525rem !important;
 }
 
 @media (width < 1000px) {

@@ -1294,7 +1294,10 @@ function heartFillSvg() {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#e62037"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853Z"></path></svg>`;
 }
 function moreOptSvg() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M5.32943 3.27158C6.56252 2.8332 7.9923 3.10749 8.97927 4.09446C10.1002 5.21537 10.3019 6.90741 9.5843 8.23385L20.293 18.9437L18.8788 20.3579L8.16982 9.64875C6.84325 10.3669 5.15069 10.1654 4.02952 9.04421C3.04227 8.05696 2.7681 6.62665 3.20701 5.39332L5.44373 7.63C6.02952 8.21578 6.97927 8.21578 7.56505 7.63C8.15084 7.04421 8.15084 6.09446 7.56505 5.50868L5.32943 3.27158ZM15.6968 5.15512L18.8788 3.38736L20.293 4.80157L18.5252 7.98355L16.7574 8.3371L14.6361 10.4584L13.2219 9.04421L15.3432 6.92289L15.6968 5.15512ZM8.97927 13.2868L10.3935 14.7011L5.09018 20.0044C4.69966 20.3949 4.06649 20.3949 3.67597 20.0044C3.31334 19.6417 3.28744 19.0699 3.59826 18.6774L3.67597 18.5902L8.97927 13.2868Z"></path></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2 11.9998C2 11.1353 2.1097 10.2964 2.31595 9.49631C3.40622 9.55283 4.48848 9.01015 5.0718 7.99982C5.65467 6.99025 5.58406 5.78271 4.99121 4.86701C6.18354 3.69529 7.66832 2.82022 9.32603 2.36133C9.8222 3.33385 10.8333 3.99982 12 3.99982C13.1667 3.99982 14.1778 3.33385 14.674 2.36133C16.3317 2.82022 17.8165 3.69529 19.0088 4.86701C18.4159 5.78271 18.3453 6.99025 18.9282 7.99982C19.5115 9.01015 20.5938 9.55283 21.6841 9.49631C21.8903 10.2964 22 11.1353 22 11.9998C22 12.8643 21.8903 13.7032 21.6841 14.5033C20.5938 14.4468 19.5115 14.9895 18.9282 15.9998C18.3453 17.0094 18.4159 18.2169 19.0088 19.1326C17.8165 20.3043 16.3317 21.1794 14.674 21.6383C14.1778 20.6658 13.1667 19.9998 12 19.9998C10.8333 19.9998 9.8222 20.6658 9.32603 21.6383C7.66832 21.1794 6.18354 20.3043 4.99121 19.1326C5.58406 18.2169 5.65467 17.0094 5.0718 15.9998C4.48848 14.9895 3.40622 14.4468 2.31595 14.5033C2.1097 13.7032 2 12.8643 2 11.9998ZM6.80385 14.9998C7.43395 16.0912 7.61458 17.3459 7.36818 18.5236C7.77597 18.8138 8.21005 19.0652 8.66489 19.2741C9.56176 18.4712 10.7392 17.9998 12 17.9998C13.2608 17.9998 14.4382 18.4712 15.3351 19.2741C15.7899 19.0652 16.224 18.8138 16.6318 18.5236C16.3854 17.3459 16.566 16.0912 17.1962 14.9998C17.8262 13.9085 18.8225 13.1248 19.9655 12.7493C19.9884 12.5015 20 12.2516 20 11.9998C20 11.7481 19.9884 11.4981 19.9655 11.2504C18.8225 10.8749 17.8262 10.0912 17.1962 8.99982C16.566 7.90845 16.3854 6.65378 16.6318 5.47605C16.224 5.18588 15.7899 4.93447 15.3351 4.72552C14.4382 5.52844 13.2608 5.99982 12 5.99982C10.7392 5.99982 9.56176 5.52844 8.66489 4.72552C8.21005 4.93447 7.77597 5.18588 7.36818 5.47605C7.61458 6.65378 7.43395 7.90845 6.80385 8.99982C6.17376 10.0912 5.17754 10.8749 4.03451 11.2504C4.01157 11.4981 4 11.7481 4 11.9998C4 12.2516 4.01157 12.5015 4.03451 12.7493C5.17754 13.1248 6.17376 13.9085 6.80385 14.9998ZM12 14.9998C10.3431 14.9998 9 13.6567 9 11.9998C9 10.343 10.3431 8.99982 12 8.99982C13.6569 8.99982 15 10.343 15 11.9998C15 13.6567 13.6569 14.9998 12 14.9998ZM12 12.9998C12.5523 12.9998 13 12.5521 13 11.9998C13 11.4475 12.5523 10.9998 12 10.9998C11.4477 10.9998 11 11.4475 11 11.9998C11 12.5521 11.4477 12.9998 12 12.9998Z"></path></svg>`;
+}
+function openCodeSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z"></path></svg>`;
 }
 
 function indexFinder(arr, id) {
@@ -1324,14 +1327,17 @@ function createProjectPageProjects(arr) {
     div.classList.add('each-project');
     div.innerHTML = `
       <header class="project-header">
-        <a href="./editor/user.html#${p.id}" target="_blank">${p.name}</a>
+        <span class="title">${p.name}</span>
         <button title="Click to edit project" data-project-id="${p.id}" class="edit-projects-button focus-trap-activate">${moreOptSvg()}</button>
       </header>
       <span class="project-page-project-description">
         ${p.des}
       </span>
       <footer>
-        <button data-project-id="${p.id}" class="add-favorite-btn" title="click to add/remove favorite">${p.favorite ? heartFillSvg() : heartLineSvg()}</button>
+        <div>
+          <button data-project-id="${p.id}" class="add-favorite-btn" title="click to add/remove favorite">${p.favorite ? heartFillSvg() : heartLineSvg()}</button>
+          <button class="open-editor-btn" data-project-id="${p.id}">${openCodeSvg()}<span>Editor</span></button>
+        </div>
         <span>created on ${getDateFunc(p.date)}</span>
       </footer>
     `;
@@ -1362,7 +1368,7 @@ tabChangeProjectBtn.forEach((btn) => {
   });
 });
 
-//! open project settings
+//! project programs
 projectPageProjectContainer.addEventListener('click', (e) => {
   //setting btn
   const settingBtn = e.target.closest('.edit-projects-button');
@@ -1396,6 +1402,11 @@ projectPageProjectContainer.addEventListener('click', (e) => {
       localStorage.setItem('all-saved-projects', JSON.stringify(savedProjects));
     }
   }
+  // open editor btn
+  const openEditorBtn = e.target.closest('.open-editor-btn')
+  if(openEditorBtn) {
+    window.open(`./editor/user.html#${openEditorBtn.dataset.projectId}`)
+  }
 });
 
 projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
@@ -1425,7 +1436,7 @@ projectEditFormModal.querySelector('form').addEventListener('click', (e) => {
     localStorage.setItem('all-saved-projects', JSON.stringify(freshProject));
     setTimeout(() => {
       refreshPageContent(freshProject);
-    }, 600);
+    }, 350);
     focusRelease();
   }
 });
@@ -1458,4 +1469,4 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-document.querySelectorAll('div').forEach(div => div.setAttribute('tabindex', '-1'))
+document.querySelectorAll('div').forEach((div) => div.setAttribute('tabindex', '-1'));

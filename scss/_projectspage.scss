@@ -24,7 +24,7 @@
   border-radius: var(--global-button-border-radius);
   overflow: hidden;
   border: 1px solid var(--slick-border-clr);
-  
+
   button {
     background-color: var(--global-button-bg);
     padding: var(--global-button-padding);
@@ -78,17 +78,42 @@
     justify-content: space-between;
     gap: 1rem;
 
-    a {
-      text-decoration: underline;
-      font-weight: 300;
+    .title {
+      font-weight: 400;
       word-break: break-all;
+    }
+
+    button {
+      border: 1px solid transparent;
+      padding: 0.125rem;
+      border-radius: 100px;
+      background-color: var(--global-button-bg);
+      opacity: 0.8;
+
+      svg {
+        animation: rotateSettingSvg;
+        animation-duration: 15s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-play-state: paused;
+      }
+
+      &:hover {
+        border: 1px solid var(--slick-border-clr);
+        background-color: var(--global-button-hover-bg);
+        opacity: 1;
+
+        svg {
+          animation-play-state: running;
+        }
+      }
     }
   }
   > span {
     margin: 0;
-    opacity: 0.6;
+    opacity: 0.8;
     font-size: 0.9125rem;
-    font-weight: 200;
+    font-weight: 300;
     letter-spacing: 0.3px;
     line-height: 18px;
     overflow: hidden;
@@ -102,24 +127,48 @@
     -webkit-line-clamp: 3;
   }
 
-  footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    span {
-      opacity: 0.6;
-      font-size: 0.825rem;
-      font-weight: 300;
-    }
-  }
-
   button {
     display: grid;
     place-items: center;
   }
 }
+.each-project footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-.each-project>span::-webkit-scrollbar {
+  div {
+    display: flex;
+    align-items: center;
+    gap: 0.425rem;
+  }
+
+  .open-editor-btn {
+    display: flex;
+    gap: 0.325rem;
+    align-items: center;
+
+    border: 1px solid var(--slick-border-clr);
+    background-color: var(--global-button-bg);
+    padding: 0.0725rem 0.425rem;
+    border-radius: var(--global-button-border-radius);
+
+    span {
+      opacity: 1;
+    }
+
+    &:hover {
+      background-color: var(--global-button-hover-bg);
+    }
+  }
+
+  span {
+    opacity: 0.6;
+    font-size: 0.825rem;
+    font-weight: 300;
+  }
+}
+
+.each-project > span::-webkit-scrollbar {
   width: 10px;
 }
