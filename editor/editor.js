@@ -1126,88 +1126,57 @@ document.addEventListener('keydown', (e) => {
 
 // copy lines up/down
 function copyLinesUp(cm) {
-  // 1. Figure out which lines are touched by your selection/cursor
-  const fromLine = cm.getCursor("start").line;
-  const toLine   = cm.getCursor("end").line;
-  
-  // 2. Grab those lines as a single string
+  const fromLine = cm.getCursor('start').line;
+  const toLine = cm.getCursor('end').line;
+
   const lines = [];
   for (let i = fromLine; i <= toLine; i++) {
     lines.push(cm.getLine(i));
   }
-  const blockText = lines.join("\n");
-  
-  // 3. Insert that block right at the start of "fromLine" (i.e. above the current block)
+  const blockText = lines.join('\n');
+
   cm.operation(() => {
-    cm.replaceRange(blockText + "\n", { line: fromLine, ch: 0 });
-    
-    // 4. Now select exactly the new copy (which lives from fromLine … toLine)
-    //    Since we just inserted at fromLine, the new copy spans [fromLine … fromLine+(toLine-fromLine)]
+    cm.replaceRange(blockText + '\n', { line: fromLine, ch: 0 });
     const newFrom = fromLine;
-    const newTo   = fromLine + (toLine - fromLine);
-    cm.setSelection(
-      { line: newFrom, ch: 0 },
-      { line: newTo,   ch: cm.getLine(newTo).length }
-    );
+    const newTo = fromLine + (toLine - fromLine);
+    cm.setSelection({ line: newFrom, ch: 0 }, { line: newTo, ch: cm.getLine(newTo).length });
   });
 }
 
 function copyLinesDown(cm) {
-  // 1. Figure out which lines are touched by your selection/cursor
-  const fromLine = cm.getCursor("start").line;
-  const toLine   = cm.getCursor("end").line;
-  
-  // 2. Grab those lines as a single string
+  const fromLine = cm.getCursor('start').line;
+  const toLine = cm.getCursor('end').line;
+
   const lines = [];
   for (let i = fromLine; i <= toLine; i++) {
     lines.push(cm.getLine(i));
   }
-  const blockText = lines.join("\n");
-  
-  // 3. Insert that block right after "toLine"
+  const blockText = lines.join('\n');
+
   const insertPos = { line: toLine, ch: cm.getLine(toLine).length };
   cm.operation(() => {
-    // We prefix with "\n" so it doesn’t merge into the last line’s text
-    cm.replaceRange("\n" + blockText, insertPos);
-    
-    // 4. Select the newly inserted copy (which starts at toLine+1)
+    cm.replaceRange('\n' + blockText, insertPos);
+
     const newFrom = toLine + 1;
-    const newTo   = toLine + 1 + (toLine - fromLine);
-    cm.setSelection(
-      { line: newFrom, ch: 0 },
-      { line: newTo,   ch: cm.getLine(newTo).length }
-    );
+    const newTo = toLine + 1 + (toLine - fromLine);
+    cm.setSelection({ line: newFrom, ch: 0 }, { line: newTo, ch: cm.getLine(newTo).length });
   });
 }
 
-
 // Line move up/down
 function moveLinesUp(cm) {
-  // Grab the first (and only) selection
   const sel = cm.listSelections()[0];
   let fromLine = sel.from().line;
   let toLine = sel.to().line;
-
-  // If your “to” ends exactly at col 0 of a new line,
-  // treat it as “up to the previous line.”
   if (sel.to().ch === 0 && fromLine !== toLine) {
     toLine -= 1;
   }
-
-  // If we’re already at the very top, abort
   if (fromLine === 0) return;
-
-  // Text of the line immediately above our block
   const lineAboveText = cm.getLine(fromLine - 1);
-
-  // Text of the entire selected block (from start of fromLine to end of toLine)
   const blockText = cm.getRange({ line: fromLine, ch: 0 }, { line: toLine, ch: cm.getLine(toLine).length });
 
   cm.operation(() => {
-    // 1) Replace “(lineAbove) + (block)” with “(block) + (lineAbove)”
     cm.replaceRange(blockText + '\n' + lineAboveText, { line: fromLine - 1, ch: 0 }, { line: toLine, ch: cm.getLine(toLine).length });
-
-    // 2) Shift the selection up by 1 line
     const newAnchor = { line: sel.anchor.line - 1, ch: sel.anchor.ch };
     const newHead = { line: sel.head.line - 1, ch: sel.head.ch };
     cm.setSelection(newAnchor, newHead);
@@ -1222,22 +1191,12 @@ function moveLinesDown(cm) {
   if (sel.to().ch === 0 && fromLine !== toLine) {
     toLine -= 1;
   }
-
   const lastLine = cm.lineCount() - 1;
-  // If our block already touches the bottom, abort
   if (toLine === lastLine) return;
-
-  // Text of the line immediately below our block
   const lineBelowText = cm.getLine(toLine + 1);
-
-  // Text of the selected block
   const blockText = cm.getRange({ line: fromLine, ch: 0 }, { line: toLine, ch: cm.getLine(toLine).length });
-
   cm.operation(() => {
-    // 1) Replace “(block + lineBelow)” with “(lineBelow + block)”
     cm.replaceRange(lineBelowText + '\n' + blockText, { line: fromLine, ch: 0 }, { line: toLine + 1, ch: cm.getLine(toLine + 1).length });
-
-    // 2) Shift the selection down by 1 line
     const newAnchor = { line: sel.anchor.line + 1, ch: sel.anchor.ch };
     const newHead = { line: sel.head.line + 1, ch: sel.head.ch };
     cm.setSelection(newAnchor, newHead);
