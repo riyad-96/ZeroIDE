@@ -303,7 +303,7 @@
 
       <footer class="footer-feature-bar">
         <!-- <button title="Click to open console">Console</button> -->
-        <!-- <button>Shortcuts</button> -->
+        <button class="shortcut-viewer-btn">Shortcuts</button>
       </footer>
     </div>
 
@@ -501,7 +501,135 @@
     </div>
 
     <!-- keyboard shortcut modal -->
-     <div class="keyboar-shortcut-modal"></div>
+    <div class="keyboard-shortcut-modal show">
+      <div class="keyboard-shortcut-modal-content">
+        <button class="close-keyboard-shortcut-modal-btn" aria-label="Close keyboard shortcut panel" title="Close keyboard shortcut panel">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 10.5858L9.17157 7.75736L7.75736 9.17157L10.5858 12L7.75736 14.8284L9.17157 16.2426L12 13.4142L14.8284 16.2426L16.2426 14.8284L13.4142 12L16.2426 9.17157L14.8284 7.75736L12 10.5858Z"></path></svg>
+        </button>
+
+        <div class="navigation-shortcut-container">
+          <h3>Navigation shortcuts</h3>
+
+          <div class="ui-navigation-shortcut-container">
+            <h4 class="shortcut-header">UI Navigation</h4>
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Toggle sidebar</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>B</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Open customization panel</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>,</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Show keyboard shortcuts</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>;</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Exit </span>
+              <span class="shortcut-keys"> <code>Escape</code></span>
+            </span>
+          </div>
+
+          <div class="editor-navigation-shortcut-container">
+            <h4 class="shortcut-header">Editor Navigation</h4>
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Focus HTML editor</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>J</code> or <code>1</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Focus CSS editor</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>K</code> or <code>2</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Focus JS editor</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>L</code> or <code>3</code> </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="editor-shortcut-container">
+          <h3>Editor shortcuts</h3>
+
+          <div class="basic-shortcut-container">
+            <h4 class="shortcut-header">Basic</h4>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Copy selected text</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>C</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Cut selected text/line</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>X</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Paste text</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>V</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Undo</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>Z</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Redo</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>Y</code> </span>
+            </span>
+          </div>
+
+          <div class="core-shortcut-container">
+            <h4 class="shortcut-header">Core</h4>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Run</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>R</code> or <code>S</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Insert new line and focus</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>Enter</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Comment lines</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>/</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Single line duplication</span>
+              <span class="shortcut-keys"> <code>Shift</code><code>Alt</code><code>Up/Down</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Move line up/down</span>
+              <span class="shortcut-keys"> <code>Alt</code><code>Up/Down</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Inline suggestions</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>Space</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Multiple cursor</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>Left click</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Column Select</span>
+              <span class="shortcut-keys"> <code>Alt</code><code>Drag</code> </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- disable interaction -->
     <div class="disable-interaction"></div>

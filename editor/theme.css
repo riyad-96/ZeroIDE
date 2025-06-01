@@ -64,8 +64,8 @@ html {
   --cm-unfocused-selected-bg: #cecece;
   --cm-cursor-clr: hsl(0, 0%, 20%);
   --foldmarker-clr: hsl(0, 0%, 10%);
-  --cm-activeline-bg: transparent;
-  --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
+  --cm-activeline-bg: hsl(0, 0%, 96%);
+  --cm-active-line-bg-border: 1px solid hsl(0, 0%, 94%);
 
   /* xml */
   --xml-default: hsl(0, 0%, 20%);
@@ -172,8 +172,8 @@ html {
     --cm-unfocused-selected-bg: #3a3d41;
     --cm-cursor-clr: hsl(0, 0%, 80%);
     --foldmarker-clr: hsl(0, 0%, 90%);
-    --cm-activeline-bg: transparent;
-    --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
+    --cm-activeline-bg: hsl(0, 0%, 14%);
+    --cm-active-line-bg-border: 1px solid hsl(0, 0%, 17%);
 
     /* xml */
     --xml-default: hsl(0, 0%, 80%);
@@ -283,8 +283,8 @@ html {
   --cm-unfocused-selected-bg: #cecece;
   --cm-cursor-clr: hsl(0, 0%, 20%);
   --foldmarker-clr: hsl(0, 0%, 10%);
-  --cm-activeline-bg: transparent;
-  --cm-active-line-bg-border: 1px solid hsl(0, 0%, 82%);
+  --cm-activeline-bg: hsl(0, 0%, 96%);
+  --cm-active-line-bg-border: 1px solid hsl(0, 0%, 94%);
 
   /* xml */
   --xml-default: hsl(0, 0%, 20%);
@@ -391,8 +391,8 @@ html {
   --cm-unfocused-selected-bg: #3a3d41;
   --cm-cursor-clr: hsl(0, 0%, 80%);
   --foldmarker-clr: hsl(0, 0%, 90%);
-  --cm-activeline-bg: transparent;
-  --cm-active-line-bg-border: 1px solid hsl(0, 0%, 18%);
+  --cm-activeline-bg: hsl(0, 0%, 14%);
+  --cm-active-line-bg-border: 1px solid hsl(0, 0%, 17%);
 
   --bracket-color: var(--xml-default);
   --bracket-outline: hsl(0, 0%, 37%);

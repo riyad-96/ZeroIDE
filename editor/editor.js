@@ -292,19 +292,31 @@ function loadCodeMirror(mode, value) {
     allowMultipleSelections: true,
     extraKeys: {
       'Ctrl-R': run,
+      'Ctrl-S': run,
       'Ctrl-D': 'selectNextOccurrence',
       'Ctrl-Space': 'autocomplete',
       'Ctrl-/': 'toggleComment',
-      'Shift-Alt-Down': copyLineDown,
-      'Shift-Alt-Up': copyLineUp,
-      'Alt-Up': moveLineUp,
-      'Alt-Down': moveLineDown,
       'Ctrl-J': () => htmlCodeMirror.focus(),
       'Ctrl-K': () => cssCodeMirror.focus(),
       'Ctrl-L': () => jsCodeMirror.focus(),
       'Ctrl-1': () => htmlCodeMirror.focus(),
       'Ctrl-2': () => cssCodeMirror.focus(),
       'Ctrl-3': () => jsCodeMirror.focus(),
+      'Cmd-R': run,
+      'Cmd-S': run,
+      'Cmd-D': 'selectNextOccurrence',
+      'Cmd-Space': 'autocomplete',
+      'Cmd-/': 'toggleComment',
+      'Cmd-J': () => htmlCodeMirror.focus(),
+      'Cmd-K': () => cssCodeMirror.focus(),
+      'Cmd-L': () => jsCodeMirror.focus(),
+      'Cmd-1': () => htmlCodeMirror.focus(),
+      'Cmd-2': () => cssCodeMirror.focus(),
+      'Cmd-3': () => jsCodeMirror.focus(),
+      'Shift-Alt-Down': copyLineDown,
+      'Shift-Alt-Up': copyLineUp,
+      'Alt-Up': moveLineUp,
+      'Alt-Down': moveLineDown,
     },
     gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
     foldGutter: true,
@@ -1047,6 +1059,34 @@ allEditorInput.forEach((input) => {
 });
 
 //! Keyboard shortcuts
+const keyboardShortcutModal = document.querySelector('.keyboard-shortcut-modal');
+const keyboardShortcutModalContent = document.querySelector('.keyboard-shortcut-modal-content');
+// stopPropagation(keyboardShortcutModalContent);
+const shortcutViewerBtn = document.querySelector('.shortcut-viewer-btn');
+
+document.addEventListener('click', (e) => {
+  const shortcutViewerBtn = e.target.closest('.shortcut-viewer-btn');
+  const shortcutModal = e.target.closest('.keyboard-shortcut-modal');
+  const modalContent = e.target.closest('.keyboard-shortcut-modal-content');
+  const closeModalBtn = e.target.closest('.close-keyboard-shortcut-modal-btn');
+
+  if (shortcutViewerBtn) {
+    keyboardShortcutModal.classList.add('show');
+  }
+
+  if (closeModalBtn) {
+    keyboardShortcutModal.classList.remove('show');
+  }
+
+  if (modalContent) {
+    return;
+  }
+
+  if (shortcutModal) {
+    keyboardShortcutModal.classList.remove('show');
+  }
+});
+
 document.addEventListener('keydown', (e) => {
   // toggle sidebar
   if (e.ctrlKey && e.key === 'b') {
@@ -1057,23 +1097,26 @@ document.addEventListener('keydown', (e) => {
   if ((e.ctrlKey || e.metaKey) && ['s', 'p'].includes(e.key)) {
     e.preventDefault();
   }
-  if (e.ctrlKey && (e.key === '1' || e.key === 'j')) {
+  if ((e.ctrlKey || e.metaKey) && (e.key === '1' || e.key === 'j')) {
     e.preventDefault();
-    if(sidebar.classList.contains('show')) sidebarToggleBtn.click();
+    if (sidebar.classList.contains('show')) sidebarToggleBtn.click();
     htmlCodeMirror.focus();
   }
-  if (e.ctrlKey && (e.key === '2' || e.key === 'k')) {
+  if ((e.ctrlKey || e.metaKey) && (e.key === '2' || e.key === 'k')) {
     e.preventDefault();
-    if(sidebar.classList.contains('show')) sidebarToggleBtn.click();
+    if (sidebar.classList.contains('show')) sidebarToggleBtn.click();
     cssCodeMirror.focus();
   }
-  if (e.ctrlKey && (e.key === '3' || e.key === 'l')) {
+  if ((e.ctrlKey || e.metaKey) && (e.key === '3' || e.key === 'l')) {
     e.preventDefault();
-    if(sidebar.classList.contains('show')) sidebarToggleBtn.click();
+    if (sidebar.classList.contains('show')) sidebarToggleBtn.click();
     jsCodeMirror.focus();
   }
-  if((e.ctrlKey && e.key === ',') && !customizationContainer.classList.contains('slide-up')) {
+  if ((e.ctrlKey || e.metaKey) && e.key === ',' && !customizationContainer.classList.contains('slide-up')) {
     document.querySelector('.customize-panel-btn').click();
+  }
+  if((e.ctrlKey || e.metaKey) && e.key === ';' && !keyboardShortcutModal.classList.contains('show')) {
+    keyboardShortcutModal.classList.add('show')
   }
 });
 
@@ -1211,4 +1254,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const editorWidth = freshSetting().editor.editorWidth;
 
   resizableArea.style.width = `${isFine && editorWidth <= 300 ? 300 : editorWidth}px`;
+
+  const isMac = /Mac/i.test(navigator.platform);
+  document.querySelectorAll('.shortcut-keys').forEach(key => {
+    key.innerHTML = key.innerHTML.replace(/Ctrl/g, isMac? 'Cmd' : 'Ctrl')
+  })
 });
