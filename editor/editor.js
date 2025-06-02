@@ -1,11 +1,26 @@
-//! Clean localStorage control
-const cleanTag = 'clean-v-0.1';
-const savedCleanTag = localStorage.getItem('clean-tag');
-if (!savedCleanTag || savedCleanTag !== cleanTag) {
-  localStorage.clear();
-  localStorage.setItem('clean-tag', cleanTag);
+//! LocalStorage version/Migration control system
+const currentVersion = 'v0.x.x';
+const savedVersion = localStorage.getItem('version');
+
+// 2 Jun 2025
+function migrateTo_v0_0_1() {
+  const settingsObj = JSON.parse(localStorage.getItem('settings'));
+  if(settingsObj){
+    settingsObj.editor.expandPanel = 'on';
+    localStorage.setItem('settings', JSON.stringify(settingsObj));
+  }
 }
-// Migration system will be added if needed.
+// ----------
+
+if (!currentVersion || savedVersion !== currentVersion) {
+  // Resets
+  //2 Jun 2025
+  localStorage.removeItem('clean-tag');
+  // ----------
+
+  migrateTo_v0_0_1();
+  localStorage.setItem('version', currentVersion);
+}
 
 //! Base functions
 document.querySelectorAll('form').forEach((form) => {
@@ -66,7 +81,7 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     fontSize: '14',
     fontLigatures: 'on',
     tabSize: '2',
-    autoRun: 'off',
+    autoRun: 'afterDelay',
     expandPanel: 'off',
     semicolon: 'on',
     quotation: 'double',

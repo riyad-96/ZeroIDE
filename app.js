@@ -1,12 +1,27 @@
-//! Clean localStorage control
-const cleanTag = 'clean-v-0.1';
-const savedCleanTag = localStorage.getItem('clean-tag');
-if (!savedCleanTag || savedCleanTag !== cleanTag) {
-  localStorage.clear();
-  localStorage.setItem('clean-tag', cleanTag);
-}
-// Migration system will be added if needed.
+//! LocalStorage version/Migration control system
+const currentVersion = 'v0.x.x';
+const savedVersion = localStorage.getItem('version');
 
+// 2 Jun 2025
+function migrateTo_v0_0_1() {
+  const settingsObj = JSON.parse(localStorage.getItem('settings'));
+  if(settingsObj){
+    settingsObj.editor.expandPanel = 'on';
+    localStorage.setItem('settings', JSON.stringify(settingsObj));
+  }
+}
+// ----------
+
+if (!currentVersion || savedVersion !== currentVersion) {
+  // Resets
+  localStorage.removeItem('clean-tag');
+  // ----------
+
+  migrateTo_v0_0_1();
+  localStorage.setItem('version', currentVersion);
+}
+
+//! -----------------------------------------
 const allFormInDOM = document.querySelectorAll('form');
 allFormInDOM.forEach((form) => {
   form.addEventListener('submit', (e) => {
@@ -74,10 +89,8 @@ function tabIndex(elements, { value, remove = false }) {
     target.forEach((node) => {
       if (remove) {
         node.removeAttribute('tabindex');
-        console.log('tabindex removed from : ', node);
       } else {
         node.setAttribute('tabindex', value);
-        console.log('tabindex added to : ', node);
       }
     });
   });
@@ -304,7 +317,6 @@ window.addEventListener('DOMContentLoaded', () => {
         tabIndex(currentPage(), {
           value: -1,
         });
-        console.log(smallScreen());
       });
     }
   } else {
@@ -325,7 +337,6 @@ window.addEventListener('resize', () => {
 
   debounce = setTimeout(() => {
     if (document.body.hasAttribute('data-modal-stat')) {
-      console.log('handel');
       return;
     }
 
@@ -1136,7 +1147,7 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     fontSize: '14',
     fontLigatures: 'on',
     tabSize: '2',
-    autoRun: 'off',
+    autoRun: 'afterDelay',
     expandPanel:'on',
     semicolon: 'on',
     quotation: 'double',
