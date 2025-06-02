@@ -1,5 +1,5 @@
 //! LocalStorage version/Migration control system
-const currentVersion = 'v0.x.x';
+const currentVersion = 'v0.0.1';
 const savedVersion = localStorage.getItem('version');
 
 // 2 Jun 2025

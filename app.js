@@ -1,5 +1,5 @@
 //! LocalStorage version/Migration control system
-const currentVersion = 'v0.x.x';
+const currentVersion = 'v0.0.1';
 const savedVersion = localStorage.getItem('version');
 
 // 2 Jun 2025
@@ -14,6 +14,7 @@ function migrateTo_v0_0_1() {
 
 if (!currentVersion || savedVersion !== currentVersion) {
   // Resets
+  //2 Jun 2025
   localStorage.removeItem('clean-tag');
   // ----------
 
