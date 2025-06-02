@@ -1293,14 +1293,12 @@ img {
   align-items: center;
   margin-block: 0 0.325rem;
 }
-.editor-settings-list.editor-settings-list div > * {
-  flex-grow: 1;
-  flex-basis: 0;
-}
 .editor-settings-list.editor-settings-list label {
+  flex: 3;
   margin: 0;
 }
 .editor-settings-list.editor-settings-list select {
+  flex: 2;
   background-color: var(--input-textarea-bg);
   color: var(--body-clr);
   height: 33px;
@@ -1540,7 +1538,7 @@ img {
 
 .sidebar-bg-layer {
   position: fixed;
-  z-index: 8;
+  z-index: 9;
   left: 0;
   top: 0;
   width: 100%;
@@ -2372,7 +2370,6 @@ input, textarea {
   }
   .sidebar {
     position: fixed;
-    z-index: 9;
     height: 100%;
   }
   .sidebar-bg-layer.appear {

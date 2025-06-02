@@ -1074,9 +1074,14 @@ main {
     align-items: center;
     justify-content: space-between;
 
-    >* {
-      flex: 1;
+    label {
+      font-size: 0.925rem;
+      flex: 3;
     }
+    select {
+      flex: 2;
+    }
+
     &:not(:last-child) {
       margin-block-end: 0.325rem;
     }

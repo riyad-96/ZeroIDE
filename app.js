@@ -1137,6 +1137,7 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     fontLigatures: 'on',
     tabSize: '2',
     autoRun: 'off',
+    expandPanel:'on',
     semicolon: 'on',
     quotation: 'double',
     printWidth: '80',

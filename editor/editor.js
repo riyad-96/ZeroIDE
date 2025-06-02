@@ -67,6 +67,7 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     fontLigatures: 'on',
     tabSize: '2',
     autoRun: 'off',
+    expandPanel: 'off',
     semicolon: 'on',
     quotation: 'double',
     printWidth: '80',
@@ -292,23 +293,25 @@ function loadCodeMirror(mode, value) {
       'Ctrl-D': 'selectNextOccurrence',
       'Ctrl-Space': 'autocomplete',
       'Ctrl-/': 'toggleComment',
-      'Ctrl-J': () => htmlCodeMirror.focus(),
-      'Ctrl-K': () => cssCodeMirror.focus(),
-      'Ctrl-L': () => jsCodeMirror.focus(),
-      'Ctrl-1': () => htmlCodeMirror.focus(),
-      'Ctrl-2': () => cssCodeMirror.focus(),
-      'Ctrl-3': () => jsCodeMirror.focus(),
+      'Ctrl-J': () => focusOnEditor('html'),
+      'Ctrl-K': () => focusOnEditor('css'),
+      'Ctrl-L': () => focusOnEditor('js'),
+      'Ctrl-1': () => focusOnEditor('html'),
+      'Ctrl-2': () => focusOnEditor('css'),
+      'Ctrl-3': () => focusOnEditor('js'),
+      'Shift-Alt-F': () => checkFileTypeAndFormat(),
       'Cmd-R': run,
       'Cmd-S': run,
       'Cmd-D': 'selectNextOccurrence',
       'Cmd-Space': 'autocomplete',
       'Cmd-/': 'toggleComment',
-      'Cmd-J': () => htmlCodeMirror.focus(),
-      'Cmd-K': () => cssCodeMirror.focus(),
-      'Cmd-L': () => jsCodeMirror.focus(),
-      'Cmd-1': () => htmlCodeMirror.focus(),
-      'Cmd-2': () => cssCodeMirror.focus(),
-      'Cmd-3': () => jsCodeMirror.focus(),
+      'Cmd-J': () => focusOnEditor('html'),
+      'Cmd-K': () => focusOnEditor('css'),
+      'Cmd-L': () => focusOnEditor('js'),
+      'Cmd-1': () => focusOnEditor('html'),
+      'Cmd-2': () => focusOnEditor('css'),
+      'Cmd-3': () => focusOnEditor('js'),
+      // 'Shift-Alt-F': () => checkFileTypeAndFormat(),
       'Shift-Alt-Down': copyLinesDown,
       'Shift-Alt-Up': copyLinesUp,
       'Alt-Up': moveLinesUp,
@@ -645,18 +648,17 @@ function codeMirrorCodeRunAndSave() {
   }
   saveLocalStringify('allSavedCode', allSavedCode);
 
-  if(savedSettings.editor.autoRun === 'off') {
+  if (savedSettings.editor.autoRun === 'off') {
     return;
   }
-  if(savedSettings.editor.autoRun === 'immediate') {
+  if (savedSettings.editor.autoRun === 'immediate') {
     run();
     return;
   }
   clearTimeout(codeMirrorRuntimeout);
-  if(savedSettings.editor.autoRun === 'afterDelay') {
-    codeMirrorRuntimeout = setTimeout(run, 1200)
+  if (savedSettings.editor.autoRun === 'afterDelay') {
+    codeMirrorRuntimeout = setTimeout(run, 1200);
   }
-
 }
 
 if (allSavedCode) {
@@ -703,6 +705,11 @@ function setValueOnIframe(headTags, html, css, js) {
 setValueOnIframe(code().headTags, code().html, code().css, code().js);
 
 //! Code format
+
+//! Editor clear expand and format button program
+const allInputs = document.querySelectorAll('.each-editor');
+const expandBtn = document.querySelectorAll('.expand-panel-btn');
+
 function formatCode(code, parser) {
   const perserType = {
     html: 'html',
@@ -720,7 +727,6 @@ function formatCode(code, parser) {
   });
 }
 
-//! Editor clear expand and format button program
 function applyFormatedCode(parser) {
   if (parser === 'html') {
     htmlCodeMirror.setValue(formatCode(code().html, parser));
@@ -745,6 +751,30 @@ function clearEditor(editor) {
   }
 }
 
+function expandEditorPanel(fileType) {
+  allInputs.forEach((input) => {
+    if (input.dataset.expandFile === fileType) {
+      input.classList.remove('shrink');
+      input.classList.add('expand');
+    } else {
+      input.classList.remove('expand');
+      input.classList.add('shrink');
+    }
+  });
+  setDisplay(document.querySelector('.expand-reset-btn'), 'block');
+  setTimeout(() => {
+    refreshCodeMirror();
+  }, 400);
+}
+
+function resetExpandState() {
+  allInputs.forEach((input) => input.classList.remove('expand', 'shrink'));
+  setDisplay(document.querySelector('.expand-reset-btn'), 'none');
+  setTimeout(() => {
+    refreshCodeMirror();
+  }, 400);
+}
+
 document.querySelector('.code-inputs').addEventListener('click', (e) => {
   const formatBtn = e.target.closest('.single-file-format-btn');
   if (formatBtn) {
@@ -755,28 +785,20 @@ document.querySelector('.code-inputs').addEventListener('click', (e) => {
     clearEditor(clearEditorBtn.dataset.clearEditor);
     setTimeout(refreshCodeMirror, 400);
   }
+  const expandBtn = e.target.closest('.expand-panel-btn');
+  if (expandBtn) expandEditorPanel(expandBtn.dataset.expandFile);
 });
 
-const allInputs = document.querySelectorAll('.each-editor');
-const expandBtn = document.querySelectorAll('.expand-panel-btn');
-expandBtn.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    allInputs.forEach((input) => input.classList.toggle('shrink', !input.contains(btn)));
-    allInputs.forEach((input) => input.classList.toggle('expand', input.contains(btn)));
-    setDisplay(document.querySelector('.expand-reset-btn'), 'block');
-    setTimeout(() => {
-      // refreshCodeMirror();
-    }, 400);
-  });
-});
+// expandBtn.forEach((btn) => {
+//   btn.addEventListener('click', () => {
+//     expandEditorPanel(btn.dataset.expandFile);
+//     setTimeout(() => {
+//       refreshCodeMirror();
+//     }, 400);
+//   });
+// });
 
-document.querySelector('.expand-reset-btn').addEventListener('click', () => {
-  allInputs.forEach((input) => input.classList.remove('expand', 'shrink'));
-  setDisplay(document.querySelector('.expand-reset-btn'), 'none');
-  setTimeout(() => {
-    refreshCodeMirror();
-  }, 400);
-});
+document.querySelector('.expand-reset-btn').addEventListener('click', resetExpandState);
 
 //! Resizer programs
 const resizeBar = document.querySelector('.horizontal-resizer');
@@ -1099,9 +1121,52 @@ function closeModalFunc() {
   });
 }
 
+function focusOnEditor(type) {
+  if (type === 'html') {
+    htmlCodeMirror.focus();
+    if (freshSetting().editor.expandPanel === 'on') {
+      expandEditorPanel('html');
+      return;
+    }
+    resetExpandState();
+  }
+  
+  if (type === 'css') {
+    cssCodeMirror.focus();
+    if (freshSetting().editor.expandPanel === 'on') {
+      expandEditorPanel('css');
+      return;
+    }
+    resetExpandState();
+  }
+  
+  if (type === 'js') {
+    jsCodeMirror.focus();
+    if (freshSetting().editor.expandPanel === 'on') {
+      expandEditorPanel('js');
+      return;
+    }
+    resetExpandState();
+  }
+}
+
+function checkFileTypeAndFormat() {
+  if (htmlCodeMirror.hasFocus()) {
+    applyFormatedCode('html')
+    toastPopup('HTML file formatted')
+  };
+  if (cssCodeMirror.hasFocus()) {
+    applyFormatedCode('css')
+    toastPopup('CSS file formatted')
+  };
+  if (jsCodeMirror.hasFocus()) {
+    applyFormatedCode('babel')
+    toastPopup('JS file formatted')
+  };
+}
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    // e.preventDefault();
     closeModalFunc();
     closeSidebar();
   }
@@ -1118,19 +1183,19 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     closeModalFunc();
     closeSidebar();
-    htmlCodeMirror.focus();
+    focusOnEditor('html');
   }
   if ((e.ctrlKey || e.metaKey) && (e.key === '2' || e.key === 'k')) {
     e.preventDefault();
     closeModalFunc();
     closeSidebar();
-    cssCodeMirror.focus();
+    focusOnEditor('css');
   }
   if ((e.ctrlKey || e.metaKey) && (e.key === '3' || e.key === 'l')) {
     e.preventDefault();
     closeModalFunc();
     closeSidebar();
-    jsCodeMirror.focus();
+    focusOnEditor('js');
   }
   if ((e.ctrlKey || e.metaKey) && e.key === ',' && !customizationContainer.classList.contains('slide-up')) {
     closeModalFunc();
@@ -1226,9 +1291,9 @@ function moveLinesDown(cm) {
 // Toast message program
 const toastMessageContainer = document.querySelector('.toast-message-container');
 
-function toastPopup(btn) {
+function toastPopup(message) {
   const div = document.createElement('div');
-  div.innerHTML = `<span class="toast-message">${btn.dataset.toastMessage}</span>`;
+  div.innerHTML = `<span class="toast-message">${message}</span>`;
   toastMessageContainer.prepend(div);
 
   requestAnimationFrame(() => {
@@ -1247,7 +1312,7 @@ function toastPopup(btn) {
 document.addEventListener('click', (e) => {
   const toastBtn = e.target.closest('[data-toast-message]');
   if (toastBtn) {
-    toastPopup(toastBtn);
+    toastPopup(toastBtn.dataset.toastMessage);
   }
 });
 
@@ -1285,7 +1350,7 @@ dltModal.querySelector('.delete-modal-content').addEventListener('click', (e) =>
       saveLocalStringify('allSavedCode', freshSavedCodeList);
     }
     dltModal.classList.remove('show');
-    toastPopup(confirmBtn);
+    toastPopup(confirmBtn.dataset.toastMessage);
     document.querySelector('.disable-interaction').classList.add('show');
     document.querySelector('.main-diversion').style.scale = '0.9';
     document.querySelector('.sidebar').style.scale = '0.9';

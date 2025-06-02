@@ -179,7 +179,7 @@
         <div class="code-inputs">
           <button class="expand-reset-btn">Reset</button>
 
-          <div id="html-input" class="each-editor" data-input-type="htmlmixed">
+          <div id="html-input" class="each-editor" data-expand-file="html" data-input-type="htmlmixed">
             <!-- editor added through js here -->
             <div class="top-bar">
               <div class="file-type-svg-container">
@@ -200,7 +200,7 @@
                   </svg>
                 </button>
 
-                <button class="expand-panel-btn" title="Expand HTML" aria-label="expand html">
+                <button class="expand-panel-btn" data-expand-file="html" title="Expand HTML" aria-label="expand html">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 19.1642L18.2071 12.9571L16.7929 11.5429L12 16.3358L7.20712 11.5429L5.79291 12.9571L12 19.1642ZM12 13.5143L18.2071 7.30722L16.7929 5.89301L12 10.6859L7.20712 5.89301L5.79291 7.30722L12 13.5143Z"></path></svg>
                 </button>
 
@@ -211,7 +211,7 @@
             </div>
           </div>
 
-          <div id="css-input" class="each-editor" data-input-type="css">
+          <div id="css-input" class="each-editor" data-expand-file="css" data-input-type="css">
             <!-- editor added through js here -->
             <div class="top-bar">
               <div class="file-type-svg-container">
@@ -232,7 +232,7 @@
                   </svg>
                 </button>
 
-                <button class="expand-panel-btn" title="Expand CSS" aria-label="expand css">
+                <button class="expand-panel-btn" data-expand-file="css" title="Expand CSS" aria-label="expand css">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 19.1642L18.2071 12.9571L16.7929 11.5429L12 16.3358L7.20712 11.5429L5.79291 12.9571L12 19.1642ZM12 13.5143L18.2071 7.30722L16.7929 5.89301L12 10.6859L7.20712 5.89301L5.79291 7.30722L12 13.5143Z"></path></svg>
                 </button>
 
@@ -243,7 +243,7 @@
             </div>
           </div>
 
-          <div id="js-input" class="each-editor" data-input-type="javascript">
+          <div id="js-input" class="each-editor" data-expand-file="js" data-input-type="javascript">
             <!-- editor added through js here -->
             <div class="top-bar">
               <div class="file-type-svg-container">
@@ -268,7 +268,7 @@
                   </svg>
                 </button>
 
-                <button class="expand-panel-btn" title="Expand JS" aria-label="expand js">
+                <button class="expand-panel-btn" data-expand-file="js" title="Expand JS" aria-label="expand js">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 19.1642L18.2071 12.9571L16.7929 11.5429L12 16.3358L7.20712 11.5429L5.79291 12.9571L12 19.1642ZM12 13.5143L18.2071 7.30722L16.7929 5.89301L12 10.6859L7.20712 5.89301L5.79291 7.30722L12 13.5143Z"></path></svg>
                 </button>
 
@@ -410,7 +410,16 @@
                       <option value="immediate">Immediate</option>
                     </select>
                   </div>
+
+                  <div>
+                    <label for="expandPanel">Expand editor on keyboard focus</label>
+                    <select id="expandPanel" class="editor-setting-input">
+                      <option value="on">On</option>
+                      <option value="off">Off</option>
+                    </select>
+                  </div>
                 </div>
+
                 <div class="setting-type-diversion">
                   <h3>Formats</h3>
                   <div>
@@ -612,8 +621,18 @@
             </span>
 
             <span class="shortcut-line">
+              <span class="shortcut-indication">Select next occurrence</span>
+              <span class="shortcut-keys"> <code>Ctrl</code><code>D</code> </span>
+            </span>
+
+            <span class="shortcut-line">
               <span class="shortcut-indication">Comment lines</span>
               <span class="shortcut-keys"> <code>Ctrl</code><code>/</code> </span>
+            </span>
+
+            <span class="shortcut-line">
+              <span class="shortcut-indication">Format focused file</span>
+              <span class="shortcut-keys"> <code>Shift</code><code>Alt</code><code>F</code> </span>
             </span>
 
             <span class="shortcut-line">
