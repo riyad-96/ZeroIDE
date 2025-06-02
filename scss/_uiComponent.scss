@@ -73,17 +73,6 @@
   }
 }
 
-@media(width < 1000px) {
-  .sidebar-bg-layer.show {
-    display: block;
-    opacity: 1;
-  
-    @starting-style {
-      opacity: 0;
-    }
-  }
-}
-
 //! disable-interactivity-layer
 .disable-interactivity-layer {
   width: 100%;
