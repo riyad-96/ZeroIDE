@@ -143,15 +143,17 @@
     gap: 0.425rem;
   }
 
-  .open-editor-btn {
+  .open-editor-btn,
+  .preview-editor-btn {
     display: flex;
     gap: 0.325rem;
     align-items: center;
 
     border: 1px solid var(--slick-border-clr);
     background-color: var(--global-button-bg);
-    padding: 0.0725rem 0.425rem;
+    padding: 0 0.425rem;
     border-radius: var(--global-button-border-radius);
+    height: 25px;
 
     span {
       opacity: 1;

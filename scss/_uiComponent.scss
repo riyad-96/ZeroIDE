@@ -609,3 +609,70 @@ form textarea::-webkit-scrollbar {
     padding: 1.225rem;
   }
 }
+
+//! display preview modal styling
+.display-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  background-color: var(--form-bg-layer-bg);
+  z-index: 99;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+
+  display: none;
+  opacity: 0;
+  transition-property: display opacity;
+  transition-duration: var(--main-transition-duration);
+  transition-behavior: allow-discrete;
+
+  @media(pointer: fine) {
+    backdrop-filter: blur(3px);
+  }
+}
+
+.preview-modal-content {
+  display: flex;
+  aspect-ratio: 16/9;
+  width: 100%;
+  max-width: 1250px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid red;
+  background-color: hsl(0, 0%, 50%);
+
+  scale: 0.5;
+  translate: 0 150%;
+  transition: scale var(--content-transition-duration-scale), translate var(--content-transition-duration-translate);
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  @media(width <= 500px) {
+    aspect-ratio: 9/16;
+  }
+}
+
+.display-preview-modal.show {
+  display: grid;
+  opacity: 1;
+
+  .preview-modal-content {
+    scale: 1;
+    translate: 0 0;
+
+    @starting-style {
+      scale: 0.5;
+      translate: 0 150%;
+    }
+  }
+
+  @starting-style {
+    opacity: 0;
+  }
+}

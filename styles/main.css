@@ -1462,19 +1462,23 @@ img {
   align-items: center;
   gap: 0.425rem;
 }
-.each-project footer .open-editor-btn {
+.each-project footer .open-editor-btn,
+.each-project footer .preview-editor-btn {
   display: flex;
   gap: 0.325rem;
   align-items: center;
   border: 1px solid var(--slick-border-clr);
   background-color: var(--global-button-bg);
-  padding: 0.0725rem 0.425rem;
+  padding: 0 0.425rem;
   border-radius: var(--global-button-border-radius);
+  height: 25px;
 }
-.each-project footer .open-editor-btn span {
+.each-project footer .open-editor-btn span,
+.each-project footer .preview-editor-btn span {
   opacity: 1;
 }
-.each-project footer .open-editor-btn:hover {
+.each-project footer .open-editor-btn:hover,
+.each-project footer .preview-editor-btn:hover {
   background-color: var(--global-button-hover-bg);
 }
 .each-project footer span {
@@ -2092,6 +2096,73 @@ form textarea::-webkit-scrollbar {
   .delete-all-project-modal form {
     width: 80%;
     padding: 1.225rem;
+  }
+}
+
+.display-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  background-color: var(--form-bg-layer-bg);
+  z-index: 99;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  display: none;
+  opacity: 0;
+  transition-property: display opacity;
+  transition-duration: var(--main-transition-duration);
+  transition-behavior: allow-discrete;
+}
+@media (pointer: fine) {
+  .display-preview-modal {
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+  }
+}
+
+.preview-modal-content {
+  display: flex;
+  aspect-ratio: 16/9;
+  width: 100%;
+  max-width: 1250px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid red;
+  background-color: hsl(0, 0%, 50%);
+  scale: 0.5;
+  translate: 0 150%;
+  transition: scale var(--content-transition-duration-scale), translate var(--content-transition-duration-translate);
+}
+.preview-modal-content iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+@media (width <= 500px) {
+  .preview-modal-content {
+    aspect-ratio: 9/16;
+  }
+}
+
+.display-preview-modal.show {
+  display: grid;
+  opacity: 1;
+}
+.display-preview-modal.show .preview-modal-content {
+  scale: 1;
+  translate: 0 0;
+}
+@starting-style {
+  .display-preview-modal.show .preview-modal-content {
+    scale: 0.5;
+    translate: 0 150%;
+  }
+}
+@starting-style {
+  .display-preview-modal.show {
+    opacity: 0;
   }
 }
 
