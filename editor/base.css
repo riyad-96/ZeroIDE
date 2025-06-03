@@ -74,6 +74,39 @@
   font-weight: 300;
 }
 
+/* Source code */
+@font-face {
+  font-family: 'sourceCode';
+  src: url('../assets/fonts/editor-fonts/sourceCode/source-code-pro-v30-latin-500.woff2') format('woff2');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'sourceCode';
+  src: url('../assets/fonts/editor-fonts/sourceCode/source-code-pro-v30-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'sourceCode';
+  src: url('../assets/fonts/editor-fonts/sourceCode/source-code-pro-v30-latin-300.woff2') format('woff2');
+  font-weight: 300;
+}
+
+/* Consolas */
+@font-face {
+  font-family: 'consolas';
+  src: url('../assets/fonts/editor-fonts/consolas.woff2') format('woff2');
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'consolas';
+  src: url('../assets/fonts/editor-fonts/consolas.woff2') format('woff2');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'consolas';
+  src: url('../assets/fonts/editor-fonts/consolas.woff2') format('woff2');
+  font-weight: 300;
+}
 
 * {
   box-sizing: border-box;
