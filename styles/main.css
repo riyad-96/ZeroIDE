@@ -2109,6 +2109,7 @@ form textarea::-webkit-scrollbar {
   display: grid;
   place-items: center;
   padding: 1.5rem;
+  overflow-y: auto;
   display: none;
   opacity: 0;
   transition-property: display opacity;
@@ -2124,13 +2125,10 @@ form textarea::-webkit-scrollbar {
 
 .preview-modal-content {
   display: flex;
-  aspect-ratio: 16/9;
   width: 100%;
-  max-width: 1250px;
-  overflow: hidden;
-  border-radius: 0.5rem;
-  border: 1px solid red;
-  background-color: hsl(0, 0%, 50%);
+  border: 1px solid var(--slick-border-clr);
+  background-color: #ffffff;
+  position: relative;
   scale: 0.5;
   translate: 0 150%;
   transition: scale var(--content-transition-duration-scale), translate var(--content-transition-duration-translate);
@@ -2140,10 +2138,48 @@ form textarea::-webkit-scrollbar {
   height: 100%;
   display: block;
 }
-@media (width <= 500px) {
+@media (width < 1300px) {
   .preview-modal-content {
-    aspect-ratio: 9/16;
+    height: 80%;
   }
+}
+@media (width >= 1300px) {
+  .preview-modal-content {
+    max-width: 1300px;
+    aspect-ratio: 16/9;
+  }
+}
+
+.preview-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.preview-extra-feature-container {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding-inline: 0.5rem 0.225rem;
+  padding-block: 0.225rem;
+  border-radius: 0.225rem;
+  background-color: var(--sidebar-bg);
+  border: 1px solid var(--sidebar-border-clr);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.preview-extra-feature-container button {
+  background-color: var(--global-button-bg);
+  color: var(--global-button-clr);
+  border-radius: 0.225rem;
+  padding-inline: 0.525rem;
+  padding-block: 0.125rem;
+  font-size: 0.925rem;
+  border: 1px solid var(--slick-border-clr);
+}
+.preview-extra-feature-container button:hover {
+  background-color: var(--global-button-hover-bg);
 }
 
 .display-preview-modal.show {

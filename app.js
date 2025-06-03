@@ -1383,6 +1383,92 @@ tabChangeProjectBtn.forEach((btn) => {
 });
 
 //! project programs
+const previewModal = document.querySelector('.display-preview-modal');
+const previewTitleContainer = document.querySelector('.preview-project-title-container');
+const previewIframe = document.querySelector('.preview-iframe');
+
+previewModal.addEventListener('click', () => {
+  previewModal.classList.remove('show');
+});
+
+let immediateId;
+previewModal.querySelector('.preview-modal-content').addEventListener('click', e => {
+  e.stopPropagation();
+
+  if(e.target.closest('.previw-project-open-editor-btn')) {
+    window.open(`./editor/user.html#${immediateId}`)
+  }
+})
+
+const noCodeMessages = [
+  "No code here… yet.",
+  "Waiting for your first line of magic.",
+  "This area is currently empty.",
+  "Code something awesome to get started.",
+  "Nothing to show here just now.",
+  "This space is feeling a bit lonely.",
+  "Ready when you are — just add code.",
+  "Nothing’s been written here so far.",
+  "A clean slate — start building!",
+  "Time to bring this section to life.",
+  "No code has been added yet.",
+  "Still waiting for your code brilliance.",
+  "This canvas is blank. Make something!",
+  "Silence… the code hasn’t spoken yet.",
+  "All clear — nothing to preview yet.",
+  "Looks like you haven’t written anything.",
+  "It’s quiet here. Too quiet.",
+  "Your code will appear here.",
+  "Once you write code, it’ll show up here.",
+  "No content loaded — start coding!",
+  "Waiting patiently for your genius.",
+  "Nothing but potential in this space.",
+  "Go ahead — type something amazing.",
+  "There’s a void here. Fill it with code.",
+  "Let the coding begin!",
+  "Nothing to render yet.",
+  "This section is still in stealth mode.",
+  "It’s empty… for now.",
+  "A little code goes a long way — try it!",
+  "You haven’t added any code yet."
+];
+
+function projectNotFoundCode() { 
+  return `<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Code not found</title>
+        <style>  
+          body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #ffffff;
+          }
+          div {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        </style>
+      </head>
+      <body>
+        <div>
+          <span>${noCodeMessages[Math.floor(Math.random() * noCodeMessages.length)]}</span>
+        </div>
+      </body>
+    </html>`;
+}
+
+function updateIframe(iframe, code) {
+  const blob = new Blob([code], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  iframe.src = url;
+  URL.revokeObjectURL(blob);
+}
+
 projectPageProjectContainer.addEventListener('click', (e) => {
   //setting btn
   const settingBtn = e.target.closest('.edit-projects-button');
@@ -1424,8 +1510,37 @@ projectPageProjectContainer.addEventListener('click', (e) => {
   // open preview modal
   const previewBtn = e.target.closest('.preview-editor-btn');
   if (previewBtn) {
-    const previewModal = document.querySelector('.display-preview-modal');
-    previewModal.classList.add('show')
+    previewModal.classList.add('show');
+    const id = previewBtn.dataset.projectId;
+    immediateId = id;
+    const savedCode = JSON.parse(localStorage.getItem('allSavedCode'));
+    const index = savedProjects.findIndex((project) => project.id === Number(id));
+    previewTitleContainer.textContent = savedProjects[index].name;
+
+    const thisProject = savedCode.find((project) => project.id === Number(id));
+    if (!thisProject) {
+      updateIframe(previewIframe, projectNotFoundCode());
+      return;
+    }
+    if (thisProject) {
+      const { headTags, html, css, js } = thisProject.code;
+      const fullHTML = `
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>${'need to added'}</title>
+            ${headTags}
+            <style>${css}</style>
+          </head>
+          <body>
+            ${html}
+            <script>${js}<\/script>
+          </body>
+        </html>`;
+      updateIframe(previewIframe, fullHTML);
+    }
   }
 });
 
