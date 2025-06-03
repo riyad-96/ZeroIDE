@@ -648,6 +648,7 @@ form textarea::-webkit-scrollbar {
     width: 100%;
     height: 100%;
     display: block;
+    border: none;
   }
 
   @media (width < 1300px) {
@@ -674,13 +675,13 @@ form textarea::-webkit-scrollbar {
   border-radius: 0.225rem;
   background-color: var(--sidebar-bg);
   border: 1px solid var(--sidebar-border-clr);
-  // color: var(--body-bg);
 
   display: flex;
   align-items: center;
   gap: 0.5rem;
 
   button {
+    display: grid;
     background-color: var(--global-button-bg);
     color: var(--global-button-clr);
     border-radius: 0.225rem;
@@ -693,6 +694,15 @@ form textarea::-webkit-scrollbar {
   button:hover {
     background-color: var(--global-button-hover-bg);
   }
+}
+
+.preview-project-description {
+  position: absolute;
+  bottom: -55px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.925rem;
 }
 
 .display-preview-modal.show {

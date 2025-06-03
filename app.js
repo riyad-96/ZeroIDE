@@ -1395,7 +1395,7 @@ let immediateId;
 previewModal.querySelector('.preview-modal-content').addEventListener('click', e => {
   e.stopPropagation();
 
-  if(e.target.closest('.previw-project-open-editor-btn')) {
+  if(e.target.closest('.preview-project-open-editor-btn')) {
     window.open(`./editor/user.html#${immediateId}`)
   }
 })
@@ -1516,6 +1516,7 @@ projectPageProjectContainer.addEventListener('click', (e) => {
     const savedCode = JSON.parse(localStorage.getItem('allSavedCode'));
     const index = savedProjects.findIndex((project) => project.id === Number(id));
     previewTitleContainer.textContent = savedProjects[index].name;
+    document.querySelector('.preview-project-description').textContent = savedProjects[index].des
 
     const thisProject = savedCode.find((project) => project.id === Number(id));
     if (!thisProject) {
