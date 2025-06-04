@@ -5,7 +5,7 @@ const savedVersion = localStorage.getItem('version');
 // 2 Jun 2025
 function migrateTo_v0_0_1() {
   const settingsObj = JSON.parse(localStorage.getItem('settings'));
-  if(settingsObj){
+  if (settingsObj) {
     settingsObj.editor.expandPanel = 'on';
     localStorage.setItem('settings', JSON.stringify(settingsObj));
   }
@@ -636,7 +636,7 @@ function code() {
 }
 // run code with one function
 function run() {
-  setValueOnIframe( code().html, code().css, code().js);
+  setValueOnIframe(code().html, code().css, code().js);
 }
 
 // debounce technique
@@ -695,7 +695,7 @@ allCodeMirrorEditor.forEach((editor) => {
 });
 
 // set code to iframe
-function setValueOnIframe( html, css, js) {
+function setValueOnIframe(html, css, js) {
   const fullHtml = `
   <!DOCTYPE html>
   <html lang="en">
@@ -717,7 +717,7 @@ function setValueOnIframe( html, css, js) {
   iframe.src = blobUrl;
   iframe.onload = () => URL.revokeObjectURL(blobUrl);
 }
-setValueOnIframe( code().html, code().css, code().js);
+setValueOnIframe(code().html, code().css, code().js);
 
 //! Code format
 
@@ -1020,8 +1020,122 @@ tabSwitchBtns.forEach((btn) => {
 });
 
 //! HTML head tag programs
+const tagListContainer = document.querySelector('.head-tag-list-container');
+const starterTagContainer = document.querySelector('.starter-tags-container');
+const searchDisplayContainer = document.querySelector('.show-library-result-container');
+const customTagInput = document.getElementById('custom-head-tag-input');
+const searchCdnInput = document.getElementById('library-search-input');
 
+function urlSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.3638 15.5355L16.9496 14.1213L18.3638 12.7071C20.3164 10.7545 20.3164 7.58866 18.3638 5.63604C16.4112 3.68341 13.2453 3.68341 11.2927 5.63604L9.87849 7.05025L8.46428 5.63604L9.87849 4.22182C12.6122 1.48815 17.0443 1.48815 19.778 4.22182C22.5117 6.95549 22.5117 11.3876 19.778 14.1213L18.3638 15.5355ZM15.5353 18.364L14.1211 19.7782C11.3875 22.5118 6.95531 22.5118 4.22164 19.7782C1.48797 17.0445 1.48797 12.6123 4.22164 9.87868L5.63585 8.46446L7.05007 9.87868L5.63585 11.2929C3.68323 13.2455 3.68323 16.4113 5.63585 18.364C7.58847 20.3166 10.7543 20.3166 12.7069 18.364L14.1211 16.9497L15.5353 18.364ZM14.8282 7.75736L16.2425 9.17157L9.17139 16.2426L7.75717 14.8284L14.8282 7.75736Z"></path></svg>`;
+}
+function scriptSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z"></path></svg>`;
+}
+function addSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>`;
+}
 
+function createEachLibraryContainer(object) {
+  const obj = {
+    name: object.name,
+    version: object.version,
+    latest: object.latest,
+    des: object.description,
+  };
+  const { name, version, latest, des } = obj;
+
+  const div = document.createElement('div');
+  div.className = 'each-library-container';
+  div.innerHTML = `
+  <div>
+    <div class="library-header">
+      <span class="library-name">${name}</span>
+      <span class="library-version">@ ${version}</span>
+    </div>
+    <div class="library-body">
+      <span class="library-description">${des}</span>
+    </div>
+  </div>
+
+  <div class="library-option-button-container">
+    <span class="URL-container">${latest}</span>
+    <button class="library-url-copy-btn" aria-label="copy url" title="Copy URL">
+      ${urlSvg()}
+    </button>
+    <button class="library-script-tag-copy-btn" aria-label="copy script tag" title="Copy script tag">
+      ${scriptSvg()}
+    </button>
+    <button class="library-script-tag-add-btn" aria-label="Add script tag" title="Add to head">
+      ${addSvg()}
+    </button>
+  </div>`;
+  searchDisplayContainer.appendChild(div);
+}
+
+function getCdn(query) {
+  return fetch(`https://api.cdnjs.com/libraries?search=${query}&fields=filename,description,version`)
+    .then((res) => res.json())
+    .then((data) => {
+      return data.results;
+    });
+}
+
+let debounceSearch;
+searchCdnInput.addEventListener('input', () => {
+  clearTimeout(debounceSearch);
+  debounceSearch = setTimeout(async () => {
+    const query = searchCdnInput.value.trim();
+    if (!query) {
+      searchDisplayContainer.innerHTML = `<span class="empty-result-message">Libraries will appear here</span>`;
+      return;
+    }
+
+    const data = await getCdn(query);
+    if (data.length === 0) {
+      searchDisplayContainer.innerHTML = `<span class="empty-result-message">No matching libraries for '${query}'. Try another keyword.</span>`;
+      return;
+    }
+
+    searchDisplayContainer.innerHTML = '';
+    const searchResult = data.slice(0, 100);
+    searchResult.forEach((obj) => {
+      createEachLibraryContainer(obj);
+    });
+  }, 500);
+});
+
+function getUrl(btn) {
+  return btn.closest('.each-library-container').querySelector('.URL-container').textContent;
+}
+function getLibraryName(btn) {
+  return btn.closest('.each-library-container').querySelector('.library-name').textContent;
+}
+
+function getTag(url) {
+  const cleanUrl = url.split('?')[0].split('#')[0];
+  if (cleanUrl.endsWith('.js')) {
+    return `<script src="${url}"></script>`;
+  }
+  if (cleanUrl.endsWith('.css')) {
+    return `<link rel="stylesheet" href="${url}" />`;
+  }
+  return '';
+}
+
+searchDisplayContainer.addEventListener('click', (e) => {
+  const urlCopyBtn = e.target.closest('.library-url-copy-btn');
+  if (urlCopyBtn) {
+    // const url = getUrl(urlCopyBtn);
+    copyToClipboard(getUrl(urlCopyBtn));
+    toastPopup(`URL of '${getLibraryName(urlCopyBtn)}' copied !`);
+  }
+  const scriptCopyBtn = e.target.closest('.library-script-tag-copy-btn');
+  if (scriptCopyBtn) {
+    copyToClipboard(getTag(getUrl(scriptCopyBtn)));
+    toastPopup(`Tag of '${getLibraryName(scriptCopyBtn)}' copied !`);
+  }
+});
 //! editor setting programs
 const allEditorInput = document.querySelectorAll('.editor-setting-input');
 const body = document.body;
@@ -1120,7 +1234,7 @@ function focusOnEditor(type) {
     }
     resetExpandState();
   }
-  
+
   if (type === 'css') {
     cssCodeMirror.focus();
     if (freshSetting().editor.expandPanel === 'on') {
@@ -1129,7 +1243,7 @@ function focusOnEditor(type) {
     }
     resetExpandState();
   }
-  
+
   if (type === 'js') {
     jsCodeMirror.focus();
     if (freshSetting().editor.expandPanel === 'on') {
@@ -1142,17 +1256,17 @@ function focusOnEditor(type) {
 
 function checkFileTypeAndFormat() {
   if (htmlCodeMirror.hasFocus()) {
-    applyFormatedCode('html')
-    toastPopup('HTML file formatted')
-  };
+    applyFormatedCode('html');
+    toastPopup('HTML file formatted');
+  }
   if (cssCodeMirror.hasFocus()) {
-    applyFormatedCode('css')
-    toastPopup('CSS file formatted')
-  };
+    applyFormatedCode('css');
+    toastPopup('CSS file formatted');
+  }
   if (jsCodeMirror.hasFocus()) {
-    applyFormatedCode('babel')
-    toastPopup('JS file formatted')
-  };
+    applyFormatedCode('babel');
+    toastPopup('JS file formatted');
+  }
 }
 
 document.addEventListener('keydown', (e) => {
