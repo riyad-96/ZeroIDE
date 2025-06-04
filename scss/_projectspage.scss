@@ -79,8 +79,9 @@
     gap: 1rem;
 
     .title {
-      font-weight: 400;
+      font-weight: 300;
       word-break: break-all;
+      line-height: 0.8lh;
     }
 
     button {
@@ -88,7 +89,9 @@
       padding: 0.125rem;
       border-radius: 100px;
       background-color: var(--global-button-bg);
+      border: 1px solid var(--slick-border-clr);
       opacity: 0.8;
+      padding: 0.225rem;
 
       svg {
         animation: rotateSettingSvg;

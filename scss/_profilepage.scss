@@ -83,14 +83,15 @@ img {
 }
 
 .profile-edit-button {
-  display: block;
-  width: 100%;
+  display: grid;
+  place-items: center;
   background-color: var(--global-button-bg);
   border: 1px solid var(--slick-border-clr);
-  padding: 0.325rem 0;
   font-size: 0.925rem;
+  height: 30px;
+  padding-inline: 0.725rem;
   font-weight: 500;
-  border-radius: 0.5rem;
+  border-radius: 0.325rem;
   margin-block-start: 1rem;
 
   &:hover {
@@ -104,6 +105,7 @@ img {
   margin-block-start: 1rem;
   opacity: 0.8;
   font-size: 0.825rem;
+  font-weight: 300;
 }
 
 //! social tab
@@ -380,8 +382,12 @@ img {
   gap: 0.425rem;
   margin-block-end: 0.525rem;
 
-  a {
+  a:hover {
     text-decoration: underline;
+  }
+
+  svg {
+    min-width: 16px;
   }
 }
 

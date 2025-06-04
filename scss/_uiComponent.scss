@@ -664,17 +664,19 @@ form textarea::-webkit-scrollbar {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  z-index: 999;
 }
 
 .preview-extra-feature-container {
   position: absolute;
-  top: -40px;
+  bottom: calc(100% + 5px);
   left: 0;
   padding-inline: 0.5rem 0.225rem;
   padding-block: 0.225rem;
   border-radius: 0.225rem;
-  background-color: var(--sidebar-bg);
+  background-color: var(--form-bg-clr);
   border: 1px solid var(--sidebar-border-clr);
+  font-weight: 300;
 
   display: flex;
   align-items: center;
@@ -689,6 +691,7 @@ form textarea::-webkit-scrollbar {
     padding-block: 0.125rem;
     font-size: 0.925rem;
     border: 1px solid var(--slick-border-clr);
+    text-wrap: nowrap;
   }
   
   button:hover {
@@ -698,11 +701,14 @@ form textarea::-webkit-scrollbar {
 
 .preview-project-description {
   position: absolute;
-  bottom: -55px;
+  top: calc(100% + 15px);
   left: 0;
   width: 100%;
   text-align: center;
   font-size: 0.925rem;
+  margin: 0;
+  font-weight: 300;
+
 }
 
 .display-preview-modal.show {

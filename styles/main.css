@@ -942,14 +942,15 @@ img {
 }
 
 .profile-edit-button {
-  display: block;
-  width: 100%;
+  display: grid;
+  place-items: center;
   background-color: var(--global-button-bg);
   border: 1px solid var(--slick-border-clr);
-  padding: 0.325rem 0;
   font-size: 0.925rem;
+  height: 30px;
+  padding-inline: 0.725rem;
   font-weight: 500;
-  border-radius: 0.5rem;
+  border-radius: 0.325rem;
   margin-block-start: 1rem;
 }
 .profile-edit-button:hover {
@@ -962,6 +963,7 @@ img {
   margin-block-start: 1rem;
   opacity: 0.8;
   font-size: 0.825rem;
+  font-weight: 300;
 }
 
 .social-links {
@@ -1218,8 +1220,11 @@ img {
   gap: 0.425rem;
   margin-block-end: 0.525rem;
 }
-.each-recent-project > div:first-child a {
+.each-recent-project > div:first-child a:hover {
   text-decoration: underline;
+}
+.each-recent-project > div:first-child svg {
+  min-width: 16px;
 }
 
 .each-recent-project > div:last-child {
@@ -1406,15 +1411,18 @@ img {
   gap: 1rem;
 }
 .each-project header .title {
-  font-weight: 400;
+  font-weight: 300;
   word-break: break-all;
+  line-height: 0.8lh;
 }
 .each-project header button {
   border: 1px solid transparent;
   padding: 0.125rem;
   border-radius: 100px;
   background-color: var(--global-button-bg);
+  border: 1px solid var(--slick-border-clr);
   opacity: 0.8;
+  padding: 0.225rem;
 }
 .each-project header button svg {
   animation: rotateSettingSvg;
@@ -2154,17 +2162,19 @@ form textarea::-webkit-scrollbar {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  z-index: 999;
 }
 
 .preview-extra-feature-container {
   position: absolute;
-  top: -40px;
+  bottom: calc(100% + 5px);
   left: 0;
   padding-inline: 0.5rem 0.225rem;
   padding-block: 0.225rem;
   border-radius: 0.225rem;
-  background-color: var(--sidebar-bg);
+  background-color: var(--form-bg-clr);
   border: 1px solid var(--sidebar-border-clr);
+  font-weight: 300;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -2178,6 +2188,7 @@ form textarea::-webkit-scrollbar {
   padding-block: 0.125rem;
   font-size: 0.925rem;
   border: 1px solid var(--slick-border-clr);
+  text-wrap: nowrap;
 }
 .preview-extra-feature-container button:hover {
   background-color: var(--global-button-hover-bg);
@@ -2185,11 +2196,13 @@ form textarea::-webkit-scrollbar {
 
 .preview-project-description {
   position: absolute;
-  bottom: -55px;
+  top: calc(100% + 15px);
   left: 0;
   width: 100%;
   text-align: center;
   font-size: 0.925rem;
+  margin: 0;
+  font-weight: 300;
 }
 
 .display-preview-modal.show {
@@ -2501,7 +2514,6 @@ input, textarea {
     height: 180px;
   }
   .profile-page-wrapper .profile-informations button {
-    padding-inline: 1rem;
     max-width: -moz-fit-content;
     max-width: fit-content;
   }
