@@ -625,36 +625,47 @@ function refreshCodeMirror() {
   jsCodeMirror.refresh();
 }
 
+const localCodeObj = {
+  id: hash,
+  code: {
+    headTags: [],
+    html: code().html,
+    css: code().css,
+    js: code().js,
+  },
+};
+
 // getting current code always
 function code() {
+  function headTags() {
+    const index = indexFinder(allSavedCode, hash)
+    if(index !== -1) {
+      const headTagsArray = allSavedCode[index].code.headTags.map(obj => obj.script)
+      const headTagsString = headTagsArray.join('\n');
+      return headTagsString;
+    }
+  }
   return {
-    // headTags: headTagsInput.value,
+    headTags: headTags(),
     html: htmlCodeMirror.getValue(),
     css: cssCodeMirror.getValue(),
     js: jsCodeMirror.getValue(),
   };
 }
+
+console.log(code().headTags)
+
 // run code with one function
 function run() {
-  setValueOnIframe(code().html, code().css, code().js);
+  setValueOnIframe(code().headTags, code().html, code().css, code().js);
 }
 
 // debounce technique
 let codeMirrorRuntimeout;
-
 function codeMirrorCodeRunAndSave() {
-  const localCodeObj = {
-    id: hash,
-    code: {
-      // headTags: code().headTags,
-      html: code().html,
-      css: code().css,
-      js: code().js,
-    },
-  };
   const index = indexFinder(allSavedCode, hash);
   if (index !== -1) {
-    allSavedCode[index].code.headTags = code().headTags;
+    // allSavedCode[index].code.headTags = code().headTags;
     allSavedCode[index].code.html = code().html;
     allSavedCode[index].code.css = code().css;
     allSavedCode[index].code.js = code().js;
@@ -676,26 +687,13 @@ function codeMirrorCodeRunAndSave() {
   }
 }
 
-// if (allSavedCode) {
-//   const index = indexFinder(allSavedCode, hash);
-//   if (index !== -1) {
-//     headTagsInput.value = formatCode(allSavedCode[index].code.headTags, 'html');
-//   }
-// } else {
-//   headTagsInput.value = '';
-// }
-
-// headTagsInput.addEventListener('input', () => {
-//   codeMirrorCodeRunAndSave();
-//   saveLocalStringify('allSavedCode', allSavedCode);
-// });
 const allCodeMirrorEditor = [htmlCodeMirror, cssCodeMirror, jsCodeMirror];
 allCodeMirrorEditor.forEach((editor) => {
   editor.on('change', codeMirrorCodeRunAndSave);
 });
 
 // set code to iframe
-function setValueOnIframe(html, css, js) {
+function setValueOnIframe(headTags, html, css, js) {
   const fullHtml = `
   <!DOCTYPE html>
   <html lang="en">
@@ -703,7 +701,7 @@ function setValueOnIframe(html, css, js) {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>${currentProject?.name}</title>
-      
+      ${headTags || ''}
       <style>${css}</style>
     </head>
     <body>
@@ -717,7 +715,7 @@ function setValueOnIframe(html, css, js) {
   iframe.src = blobUrl;
   iframe.onload = () => URL.revokeObjectURL(blobUrl);
 }
-setValueOnIframe(code().html, code().css, code().js);
+setValueOnIframe(code().headTags, code().html, code().css, code().js);
 
 //! Code format
 
@@ -1020,12 +1018,7 @@ tabSwitchBtns.forEach((btn) => {
 });
 
 //! HTML head tag programs
-const tagListContainer = document.querySelector('.head-tag-list-container');
-const starterTagContainer = document.querySelector('.starter-tags-container');
-const searchDisplayContainer = document.querySelector('.show-library-result-container');
-const customTagInput = document.getElementById('custom-head-tag-input');
-const searchCdnInput = document.getElementById('library-search-input');
-
+// Helpers
 function urlSvg() {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.3638 15.5355L16.9496 14.1213L18.3638 12.7071C20.3164 10.7545 20.3164 7.58866 18.3638 5.63604C16.4112 3.68341 13.2453 3.68341 11.2927 5.63604L9.87849 7.05025L8.46428 5.63604L9.87849 4.22182C12.6122 1.48815 17.0443 1.48815 19.778 4.22182C22.5117 6.95549 22.5117 11.3876 19.778 14.1213L18.3638 15.5355ZM15.5353 18.364L14.1211 19.7782C11.3875 22.5118 6.95531 22.5118 4.22164 19.7782C1.48797 17.0445 1.48797 12.6123 4.22164 9.87868L5.63585 8.46446L7.05007 9.87868L5.63585 11.2929C3.68323 13.2455 3.68323 16.4113 5.63585 18.364C7.58847 20.3166 10.7543 20.3166 12.7069 18.364L14.1211 16.9497L15.5353 18.364ZM14.8282 7.75736L16.2425 9.17157L9.17139 16.2426L7.75717 14.8284L14.8282 7.75736Z"></path></svg>`;
 }
@@ -1035,6 +1028,115 @@ function scriptSvg() {
 function addSvg() {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>`;
 }
+function loaderSvg() {
+  return `<svg class="loading-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M18.364 5.63604L16.9497 7.05025C15.683 5.7835 13.933 5 12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12H21C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C14.4853 3 16.7353 4.00736 18.364 5.63604Z"></path></svg>`;
+}
+function closeSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg>`;
+}
+function randomCdnPlaceholder() {
+  const cdnSearchPlaceholders = [
+    'Type something to summon a CDN spell!',
+    'Looking for magic? Start typing a library name.',
+    'Input a keyword to begin your search.',
+    'What do you want to import today?',
+    'Type a library name to fetch its tag.',
+    'Ready when you are—just type!',
+    'Start typing to find your favorite CDN.',
+    'Enter a library, change the game.',
+    'Your next tool is just a few letters away.',
+    'Need Tailwind? Axios? You know what to do.',
+    'Search like a ninja—type fast!',
+    'Cast your search jutsu now!',
+    'Type it and it shall appear!',
+    'Drop some letters, unleash some scripts.',
+    'Write a name, get the magic.',
+    'The CDN oracle awaits your input.',
+    'Start typing to reveal possibilities.',
+    'What library are you looking for?',
+    'Write and I shall fetch!',
+    'Still waiting... go ahead, type something!',
+    'Tell me what you seek, dev master.',
+    'Want Lodash? Just say the word!',
+    'Type a name, fuel your project.',
+    'Need power? Type your library.',
+    'Begin your CDN quest here.',
+    'Your script tag journey starts with a word.',
+    'Type a tag name and strike gold.',
+    'Enter something—surprises await.',
+    'Want sweet alerts? Just type it.',
+    'What’s your library wish today?',
+  ];
+
+  return cdnSearchPlaceholders[Math.floor(Math.random() * cdnSearchPlaceholders.length)];
+}
+
+function getSelectedStarterTag(btn) {
+  const starterTags = {
+    tailwindcss: 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
+    fontawesomeicon: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
+    axios: 'https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js',
+    lodash: 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js',
+    chartjs: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js',
+    sweetalert2: 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.16.1/sweetalert2.min.js',
+    gsap: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js',
+  };
+
+  const askedTag = btn.dataset.cdnName;
+  return starterTags[askedTag];
+}
+
+//! starter tags program
+const tagListContainer = document.querySelector('.head-tag-list-container');
+const starterTagDisplayContainer = document.querySelector('.head-tag-list');
+const starterTagContainer = document.querySelector('.starter-tags');
+
+function refreshTagListInTagDisplayContainer() {
+  starterTagDisplayContainer.innerHTML = '';
+  const index = indexFinder(allSavedCode, hash);
+  if (index !== -1) {
+    allSavedCode[index].code.headTags.forEach((tagObj) => {
+      const div = document.createElement('div');
+      div.innerHTML = `<span>${tagObj.name}</span>
+        <button class="remove-tag-btn" data-tag-id="${tagObj.id}" aria-label="Remove tag button">${closeSvg()}</button>`;
+      starterTagDisplayContainer.appendChild(div);
+    });
+  }
+}
+
+function addStarterTagAndSave(id, name, script) {
+  const index = indexFinder(allSavedCode, hash);
+  if (index !== -1) {
+    const existingTag = allSavedCode[index].code.headTags?.find((tagObj) => tagObj?.id === id);
+    if (!existingTag) {
+      allSavedCode[index].code.headTags.push({ id, name, script });
+      console.log(allSavedCode);
+      refreshTagListInTagDisplayContainer();
+      saveLocalStringify('allSavedCode', allSavedCode);
+      run();
+    }
+  } else {
+    localCodeObj.code.headTags.push({ id, name, script });
+    allSavedCode.push(localCodeObj);
+    saveLocalStringify('allSavedCode', allSavedCode);
+    run();
+  }
+}
+
+starterTagContainer.addEventListener('click', (e) => {
+  const btn = e.target.closest('.started-tag-insert-btn');
+  if (btn) {
+    const script = getFullTag(getSelectedStarterTag(btn));
+    addStarterTagAndSave(btn.dataset.tagId, btn.textContent, script);
+  }
+});
+
+const customTagTitleInput = document.getElementById('custom-head-tag-title');
+const customTagBodyInput = document.getElementById('custom-head-tag-body');
+
+//! Search cdn and add program
+const searchDisplayContainer = document.querySelector('.show-library-result-container');
+const searchCdnInput = document.getElementById('library-search-input');
 
 function createEachLibraryContainer(object) {
   const obj = {
@@ -1087,9 +1189,11 @@ searchCdnInput.addEventListener('input', () => {
   debounceSearch = setTimeout(async () => {
     const query = searchCdnInput.value.trim();
     if (!query) {
-      searchDisplayContainer.innerHTML = `<span class="empty-result-message">Libraries will appear here</span>`;
+      searchDisplayContainer.innerHTML = `<span class="empty-result-message">${randomCdnPlaceholder()}</span>`;
       return;
     }
+
+    searchDisplayContainer.innerHTML = `<span class="loader-container">${loaderSvg()}</span>`;
 
     const data = await getCdn(query);
     if (data.length === 0) {
@@ -1112,7 +1216,7 @@ function getLibraryName(btn) {
   return btn.closest('.each-library-container').querySelector('.library-name').textContent;
 }
 
-function getTag(url) {
+function getFullTag(url) {
   const cleanUrl = url.split('?')[0].split('#')[0];
   if (cleanUrl.endsWith('.js')) {
     return `<script src="${url}"></script>`;
@@ -1120,19 +1224,18 @@ function getTag(url) {
   if (cleanUrl.endsWith('.css')) {
     return `<link rel="stylesheet" href="${url}" />`;
   }
-  return '';
+  return `<script src="${url}"></script>`;
 }
 
 searchDisplayContainer.addEventListener('click', (e) => {
   const urlCopyBtn = e.target.closest('.library-url-copy-btn');
   if (urlCopyBtn) {
-    // const url = getUrl(urlCopyBtn);
     copyToClipboard(getUrl(urlCopyBtn));
     toastPopup(`URL of '${getLibraryName(urlCopyBtn)}' copied !`);
   }
   const scriptCopyBtn = e.target.closest('.library-script-tag-copy-btn');
   if (scriptCopyBtn) {
-    copyToClipboard(getTag(getUrl(scriptCopyBtn)));
+    copyToClipboard(getFullTag(getUrl(scriptCopyBtn)));
     toastPopup(`Tag of '${getLibraryName(scriptCopyBtn)}' copied !`);
   }
 });
