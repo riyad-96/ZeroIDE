@@ -141,6 +141,9 @@ function focusRelease() {
       });
     }
   }
+
+  document.querySelectorAll('.universal-modal-control').forEach(modal => modal.classList.remove('show'))
+
   document.body.removeAttribute('data-modal-stat');
 }
 
@@ -1350,7 +1353,7 @@ function createProjectPageProjects(arr) {
         <div>
           <button data-project-id="${p.id}" class="add-favorite-btn" title="click to add/remove favorite">${p.favorite ? heartFillSvg() : heartLineSvg()}</button>
           <button class="open-editor-btn" data-project-id="${p.id}" title="Open code editor">${openCodeSvg()}<span>Editor</span></button>
-          <button class="preview-editor-btn" data-project-id="${p.id}" title="Preview">${eyeSvg()}</button>
+          <button class="preview-editor-btn focus-trap-activate" data-project-id="${p.id}" title="Preview">${eyeSvg()}</button>
         </div>
         <span>${getDateFunc(p.date)}</span>
       </footer>

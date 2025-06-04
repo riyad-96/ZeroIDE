@@ -661,6 +661,8 @@ form textarea::-webkit-scrollbar {
 }
 
 .preview-close-button {
+  display: grid;
+  place-items: center;
   position: absolute;
   top: 1rem;
   right: 1rem;

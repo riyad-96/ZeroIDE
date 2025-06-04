@@ -280,7 +280,7 @@ function loadSidebarProject(projects) {
 loadSidebarProject(savedProjects);
 
 //! ------ Editor Programs -------
-const headTagsInput = document.getElementById('head-tags-input');
+// const headTagsInput = document.getElementById('head-tags-input');
 const htmlInput = document.getElementById('html-input');
 const cssInput = document.getElementById('css-input');
 const jsInput = document.getElementById('js-input');
@@ -628,7 +628,7 @@ function refreshCodeMirror() {
 // getting current code always
 function code() {
   return {
-    headTags: headTagsInput.value,
+    // headTags: headTagsInput.value,
     html: htmlCodeMirror.getValue(),
     css: cssCodeMirror.getValue(),
     js: jsCodeMirror.getValue(),
@@ -636,7 +636,7 @@ function code() {
 }
 // run code with one function
 function run() {
-  setValueOnIframe(code().headTags, code().html, code().css, code().js);
+  setValueOnIframe( code().html, code().css, code().js);
 }
 
 // debounce technique
@@ -646,7 +646,7 @@ function codeMirrorCodeRunAndSave() {
   const localCodeObj = {
     id: hash,
     code: {
-      headTags: code().headTags,
+      // headTags: code().headTags,
       html: code().html,
       css: code().css,
       js: code().js,
@@ -676,26 +676,26 @@ function codeMirrorCodeRunAndSave() {
   }
 }
 
-if (allSavedCode) {
-  const index = indexFinder(allSavedCode, hash);
-  if (index !== -1) {
-    headTagsInput.value = formatCode(allSavedCode[index].code.headTags, 'html');
-  }
-} else {
-  headTagsInput.value = '';
-}
+// if (allSavedCode) {
+//   const index = indexFinder(allSavedCode, hash);
+//   if (index !== -1) {
+//     headTagsInput.value = formatCode(allSavedCode[index].code.headTags, 'html');
+//   }
+// } else {
+//   headTagsInput.value = '';
+// }
 
-headTagsInput.addEventListener('input', () => {
-  codeMirrorCodeRunAndSave();
-  saveLocalStringify('allSavedCode', allSavedCode);
-});
+// headTagsInput.addEventListener('input', () => {
+//   codeMirrorCodeRunAndSave();
+//   saveLocalStringify('allSavedCode', allSavedCode);
+// });
 const allCodeMirrorEditor = [htmlCodeMirror, cssCodeMirror, jsCodeMirror];
 allCodeMirrorEditor.forEach((editor) => {
   editor.on('change', codeMirrorCodeRunAndSave);
 });
 
 // set code to iframe
-function setValueOnIframe(headTags, html, css, js) {
+function setValueOnIframe( html, css, js) {
   const fullHtml = `
   <!DOCTYPE html>
   <html lang="en">
@@ -703,7 +703,7 @@ function setValueOnIframe(headTags, html, css, js) {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>${currentProject?.name}</title>
-      ${headTags}
+      
       <style>${css}</style>
     </head>
     <body>
@@ -717,7 +717,7 @@ function setValueOnIframe(headTags, html, css, js) {
   iframe.src = blobUrl;
   iframe.onload = () => URL.revokeObjectURL(blobUrl);
 }
-setValueOnIframe(code().headTags, code().html, code().css, code().js);
+setValueOnIframe( code().html, code().css, code().js);
 
 //! Code format
 
@@ -803,15 +803,6 @@ document.querySelector('.code-inputs').addEventListener('click', (e) => {
   const expandBtn = e.target.closest('.expand-panel-btn');
   if (expandBtn) expandEditorPanel(expandBtn.dataset.expandFile);
 });
-
-// expandBtn.forEach((btn) => {
-//   btn.addEventListener('click', () => {
-//     expandEditorPanel(btn.dataset.expandFile);
-//     setTimeout(() => {
-//       refreshCodeMirror();
-//     }, 400);
-//   });
-// });
 
 document.querySelector('.expand-reset-btn').addEventListener('click', resetExpandState);
 
@@ -1016,25 +1007,6 @@ pickrActionContainer.addEventListener('click', (e) => {
 });
 
 //! Customization panel programs
-const infoIcon = document.querySelector('.info-icon');
-const infoContainer = document.querySelector('.info-container');
-
-infoIcon.addEventListener('click', (e) => {
-  e.stopPropagation();
-  setDisplay(infoContainer, 'block');
-  setTimeout(() => {
-    infoContainer.classList.add('show');
-  }, 10);
-});
-infoIcon.addEventListener('mouseleave', () => {
-  setTimeout(() => {
-    infoContainer.classList.remove('show');
-    setTimeout(() => {
-      setDisplay(infoContainer, 'none');
-    }, 300);
-  }, 300);
-});
-
 // tab change buttons
 const tabSwitchBtns = document.querySelectorAll('.tab-switch-btn');
 const tabs = document.querySelectorAll('.each-tab');
@@ -1047,7 +1019,10 @@ tabSwitchBtns.forEach((btn) => {
   });
 });
 
-//! setting programs
+//! HTML head tag programs
+
+
+//! editor setting programs
 const allEditorInput = document.querySelectorAll('.editor-setting-input');
 const body = document.body;
 // get fresh settings always

@@ -921,97 +921,197 @@ main {
 /* html tab styling*/
 .html-tab {
   padding: 1rem;
-  display: grid;
-  grid-auto-rows: max-content;
-  gap: 0.5rem;
-  height: 100%;
-}
-.label-container {
-  position: relative;
-  max-width: fit-content;
-}
-.label-container > label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  max-width: fit-content;
-}
-.info-icon {
-  display: grid;
-  cursor: pointer;
-}
-.info-container {
-  position: absolute;
-  top: 35px;
-  left: 100%;
-  z-index: 5;
-  translate: calc(-50% - 8px) -10px;
+  >div {
+    margin-block-end: 0.5rem;
+  }
 
+  --tag-list-border: 1px solid hsl(0, 0%, 50%, 0.1);
+  --tag-list-bg: hsl(0, 0%, 40%, 0.05);
+  --tag-bg: hsl(0, 0%, 40%, 0.1);
+  --tag-hover-bg: hsl(0, 0%, 40%, 0.17);
+}
+
+.tag-list-indication {
+  display: block;
+  font-size: 0.925rem;
+  font-weight: 300;
+  margin-block-end: 0.325rem;
+}
+
+.head-tag-list {
   width: 100%;
-  max-width: 200px;
-  font-size: 0.825rem;
-  outline: var(--slick-border);
-  outline-width: 2px;
-  box-shadow: 0 0 0 5px hsl(0, 0%, 50%, 0.4);
+  height: 60px;
+  max-height: 80px;
+  border: var(--tag-list-border);
   border-radius: 0.3rem;
-  background-color: var(--body-bg);
+  background-color: var(--tag-list-bg);
+  padding: 0.325rem;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
 
-  display: none;
-  opacity: 0;
-  transition: opacity 100ms, translate 300ms;
-}
-.info-container > div {
-  border-radius: inherit;
-  padding: 0.5rem;
-  background-color: var(--container-bg);
-  letter-spacing: 0.3px;
-  position: relative;
-}
-.info-container::before {
-  content: '';
-  width: 10px;
-  height: 10px;
-  background-color: var(--container-bg);
-  outline: var(--slick-border);
-  outline-width: 2px;
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    background-color: var(--tag-bg);
+    border: var(--slick-border);
+    max-width: fit-content;
+    padding-inline: 0.325rem 0.125rem;
+    border-radius: 0.225rem;
+    padding-block: 0.125rem;
 
-  position: absolute;
-  top: 0;
-  left: 50%;
-  rotate: 45deg;
-  translate: -50% -50%;
-}
-.info-container > span {
-  padding-inline: 0.2rem;
-  position: relative;
-}
-.info-container code {
-  font-family: var(--user-font), monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: hsl(0, 0%, 50%, 0.2);
-  padding-inline: 0.25rem;
-  border-radius: 0.2rem;
-}
-.html-tab > textarea {
-  font-family: var(--user-font), monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  border: var(--slick-border);
-  min-height: 100px;
-  max-height: 350px;
-  background-color: var(--input-bg);
-  color: inherit;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
-  font-size: 0.9525rem;
-  resize: vertical;
-  outline: none;
-  outline-offset: 2px;
+    &:hover {
+      background-color: var(--tag-hover-bg);
+    }
 
-  @media (width < 600px) {
-    max-height: 315px;
+    > * {
+      display: grid;
+      place-items: center;
+    }
+
+    span {
+      line-height: 0.8lh;
+      font-size: 0.925rem;
+      font-weight: 300;
+      cursor: default;
+      letter-spacing: 0.4px;
+    }
   }
 }
-.html-tab > textarea:focus,
-.html-tab > textarea:focus-visible {
-  outline: var(--input-outline);
+
+.starter-tags-container {
+}
+
+.starter-tags {
+  width: 100%;
+  border: var(--tag-list-border);
+  border-radius: 0.3rem;
+  background-color: var(--tag-list-bg);
+  padding: 0.325rem;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.425rem;
+
+  button {
+    display: flex;
+    background-color: var(--tag-bg);
+    border: var(--slick-border);
+    max-width: fit-content;
+    padding-inline: 0.625rem;
+    padding-block: 0.125rem;
+    border-radius: 0.225rem;
+    font-size: 0.825rem;
+
+    &:hover {
+      background-color: var(--tag-hover-bg);
+    }
+  }
+}
+
+.add-custom-tag-container {
+  textarea {
+    display: block;
+    font-family: var(--user-font);
+    width: 100%;
+    min-width: 0;
+    height: 38px;
+    min-height: 38px;
+    max-height: 150px;
+    font-size: 1rem;
+    padding: 0.325rem 0.625rem;
+    background-color: var(--tag-list-bg);
+    border: var(--tag-list-border);
+    border-radius: 0.3rem;
+    color: var(--body-clr);
+    outline-offset: 1px;
+    resize: none;
+    transition: height 300ms;
+
+    &:focus,
+    &:focus-visible {
+      height: 150px;
+      outline: 1px solid hsl(0, 0%, 50%, 0.6);
+    }
+
+  }
+  ::placeholder {
+    font-family: 'Poppins';
+  }
+}
+
+.library-search-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  font-size: 1rem;
+  font-family: 'Poppins';
+  padding: 0.325rem 0.625rem;
+  background-color: var(--tag-list-bg);
+  border: var(--tag-list-border);
+  border-radius: 0.3rem;
+  color: var(--body-clr);
+  outline-offset: 1px;
+
+  &:focus,
+  &:focus-visible {
+    outline: 1px solid hsl(0, 0%, 50%, 0.6);
+  }
+}
+
+.each-library-container {
+  display: flex;
+  gap: 0.5rem;
+  background-color: var(--tag-bg);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+
+  >div:first-child {
+    flex: 1;
+  }
+}
+.library-header {
+  .library-name {
+    font-size: 1.325rem;
+    font-weight: 500;
+  }
+  .library-version {
+    font-size: 0.9rem;
+    font-weight: 300;
+    opacity: 0.95;
+  }
+}
+
+.library-body {
+  .library-description {
+    font-size: 0.925rem;
+    opacity: 0.95;
+    font-weight: 300;
+  }
+}
+
+.library-option-button-container {
+  display: flex;
+  align-items: flex-start;
+  /* padding-block-start: 0.4rem; */
+  gap: 0.5rem;
+  /* border: 1px solid red; */
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: hsl(0, 0%, 40%, 0.1);
+    border-radius: 0.3rem;
+
+    &:hover {
+      background-color: hsl(0, 0%, 40%, 0.2);
+    }
+  }
 }
 
 /* editor tab styling*/
@@ -1145,8 +1245,8 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 0.425rem;
-    
-    @media(width < 600px) {
+
+    @media (width < 600px) {
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     }
   }
