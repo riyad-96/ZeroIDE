@@ -1127,7 +1127,7 @@ function addStarterTagAndSave(id, name, script) {
       allSavedCode[index].code.headTags.push({ id, name, script });
       saveLocalStringify('allSavedCode', allSavedCode);
       refreshTagListInTagDisplayContainer();
-      toastPopup(`'${name}' added inside html head tag.`);
+      toastPopup(`Inserted '${name}' into html head tag.`);
       run();
     } else {
       toastPopup(`'${name}' tag is already added.`);
@@ -1137,7 +1137,7 @@ function addStarterTagAndSave(id, name, script) {
     allSavedCode.push(localCodeObj);
     saveLocalStringify('allSavedCode', allSavedCode);
     refreshTagListInTagDisplayContainer();
-    toastPopup(`'${name}' added inside html head tag.`);
+    toastPopup(`Inserted '${name}' into html head tag.`);
     run();
   }
 }
@@ -1166,13 +1166,30 @@ starterTagDisplayContainer.addEventListener('click', (e) => {
         allSavedCode[index].code.headTags = allTagArray;
         saveLocalStringify('allSavedCode', allSavedCode);
         refreshTagListInTagDisplayContainer();
+        run();
       }
     }
   }
 });
 
+//! Custom head tags program
 const customTagTitleInput = document.getElementById('custom-head-tag-title');
 const customTagBodyInput = document.getElementById('custom-head-tag-body');
+const insertTagBtn = document.querySelector('.insert-custom-tags-btn')
+insertTagBtn.addEventListener('click', () => {
+  const title = customTagTitleInput.value.trim();
+  const script = customTagBodyInput.value.trim();
+  const id = `${new Date().getTime()}`;
+  if(!title || !script) {
+    toastPopup(`Name and tag both should be filled`)
+    return;
+  };
+  customTagTitleInput.value = ''
+  customTagBodyInput.value = ''
+  addStarterTagAndSave(id, title, script);
+  // toastPopup(`Inserted '${title}' into html head tag.`)
+})
+
 
 //! Search cdn and add program
 const searchDisplayContainer = document.querySelector('.show-library-result-container');
@@ -1289,6 +1306,8 @@ searchDisplayContainer.addEventListener('click', (e) => {
     addStarterTagAndSave(id, name, getFullTag(getUrl(addTagBtn)));
   }
 });
+
+
 //! editor setting programs
 const allEditorInput = document.querySelectorAll('.editor-setting-input');
 const body = document.body;
@@ -1559,11 +1578,11 @@ function toastPopup(message) {
 
   setTimeout(() => {
     div.classList.remove('show');
-  }, 2800);
+  }, 5000);
 
   setTimeout(() => {
     toastMessageContainer.removeChild(div);
-  }, 3200);
+  }, 5200);
 }
 
 document.addEventListener('click', (e) => {

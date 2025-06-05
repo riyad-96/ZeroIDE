@@ -329,7 +329,7 @@
             <div class="each-tab show" data-tab="html">
               <div class="html-tab">
                 <div class="head-tag-list-container">
-                  <span class="tag-list-indication">Added tag list</span>
+                  <span class="tag-list-indication">Included tag list</span>
                   <div class="head-tag-list">
                     <span class="empty-head-tag-message">Tags will be added here</span>
                     <!-- tags added through js -->
@@ -337,7 +337,10 @@
                 </div>
 
                 <div class="starter-tags-container">
-                  <span class="tag-list-indication">Starter tags</span>
+                  <span class="tag-list-indication">
+                    <span>Starter tags</span>
+                    <span class="special-indication">May be outdated — insert manually if needed.</span>
+                  </span>
                   <div class="starter-tags">
                     <button class="started-tag-insert-btn" data-tag-id="1" data-cdn-name="tailwindcss">Tailwind CSS</button>
                     <button class="started-tag-insert-btn" data-tag-id="2" data-cdn-name="fontawesomeicon">Font Awesome icons</button>
@@ -350,14 +353,17 @@
                 </div>
 
                 <div class="add-custom-tag-container">
-                  <span class="tag-list-indication">Add custom head tags</span>
-                  <input id="custom-head-tag-title" type="text" placeholder="Tag title">
-                  <textarea id="custom-head-tag-body" placeholder="Tag body"></textarea>
+                  <span class="tag-list-indication">Insert custom head tags</span>
+                  <div>
+                    <input id="custom-head-tag-title" type="text" placeholder="Name it freely." autocomplete="off">
+                    <button class="insert-custom-tags-btn">Insert</button>
+                  </div>
+                  <textarea id="custom-head-tag-body" placeholder='e.g. <script> or <link rel="stylesheet">'></textarea>
                 </div>
 
                 <div class="search-libs-container">
-                  <label for="library-search-input" class="tag-list-indication">Search from CDNJS</label>
-                  <input id="library-search-input" class="library-search-input" maxlength="50" type="text" placeholder="Search libraries" autocomplete="off" />
+                  <span class="tag-list-indication">Search CDNJS</span>
+                  <input id="library-search-input" class="library-search-input" maxlength="50" type="text" placeholder="Search for a library" autocomplete="off" />
                 </div>
 
                 <div class="show-library-result-container">
