@@ -1,7 +1,4 @@
 //! LocalStorage version/Migration control system
-const currentVersion = 'v0.0.1';
-const savedVersion = localStorage.getItem('version');
-
 // 2 Jun 2025
 function migrateTo_v0_0_1() {
   const settingsObj = JSON.parse(localStorage.getItem('settings'));
@@ -10,18 +7,39 @@ function migrateTo_v0_0_1() {
     localStorage.setItem('settings', JSON.stringify(settingsObj));
   }
 }
+// 5 Jun 2025
+function migrateTo_v0_0_2() {
+  const savedCode = JSON.parse(localStorage.getItem('allSavedCode'))
+  if(savedCode) {
+    savedCode.forEach(obj => {
+      obj.code.headTags = []
+    })
+    localStorage.setItem('allSavedCode', JSON.stringify(savedCode));
+  }
+}
+
 // ----------
+const previousVersion = 'v0.0.1';
+const currentVersion = 'v0.0.2';
+const savedVersion = localStorage.getItem('version');
 
 if (!currentVersion || savedVersion !== currentVersion) {
   // Resets
   //2 Jun 2025
   localStorage.removeItem('clean-tag');
   // ----------
-
+  
+  //2 Jun 2025
   migrateTo_v0_0_1();
+
+  // 5 Jun 2025
+  if(savedVersion !== currentVersion) {
+    migrateTo_v0_0_2();
+  }
+
   localStorage.setItem('version', currentVersion);
 }
-
+//! ---------------------------------------------------
 //! Base functions
 document.querySelectorAll('form').forEach((form) => {
   form.addEventListener('submit', (e) => {

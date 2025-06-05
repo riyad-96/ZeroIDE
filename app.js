@@ -1,7 +1,4 @@
 //! LocalStorage version/Migration control system
-const currentVersion = 'v0.0.1';
-const savedVersion = localStorage.getItem('version');
-
 // 2 Jun 2025
 function migrateTo_v0_0_1() {
   const settingsObj = JSON.parse(localStorage.getItem('settings'));
@@ -10,7 +7,21 @@ function migrateTo_v0_0_1() {
     localStorage.setItem('settings', JSON.stringify(settingsObj));
   }
 }
+// 5 Jun 2025
+function migrateTo_v0_0_2() {
+  const savedCode = JSON.parse(localStorage.getItem('allSavedCode'));
+  if (savedCode) {
+    savedCode.forEach((obj) => {
+      obj.code.headTags = [];
+    });
+    localStorage.setItem('allSavedCode', JSON.stringify(savedCode));
+  }
+}
+
 // ----------
+const previousVersion = 'v0.0.1';
+const currentVersion = 'v0.0.2';
+const savedVersion = localStorage.getItem('version');
 
 if (!currentVersion || savedVersion !== currentVersion) {
   // Resets
@@ -18,7 +29,14 @@ if (!currentVersion || savedVersion !== currentVersion) {
   localStorage.removeItem('clean-tag');
   // ----------
 
+  //2 Jun 2025
   migrateTo_v0_0_1();
+
+  // 5 Jun 2025
+  if (savedVersion !== currentVersion) {
+    migrateTo_v0_0_2();
+  }
+
   localStorage.setItem('version', currentVersion);
 }
 
@@ -142,7 +160,7 @@ function focusRelease() {
     }
   }
 
-  document.querySelectorAll('.universal-modal-control').forEach(modal => modal.classList.remove('show'))
+  document.querySelectorAll('.universal-modal-control').forEach((modal) => modal.classList.remove('show'));
 
   document.body.removeAttribute('data-modal-stat');
 }
@@ -1395,48 +1413,48 @@ previewModal.addEventListener('click', () => {
 });
 
 let immediateId;
-previewModal.querySelector('.preview-modal-content').addEventListener('click', e => {
+previewModal.querySelector('.preview-modal-content').addEventListener('click', (e) => {
   e.stopPropagation();
 
-  if(e.target.closest('.preview-project-open-editor-btn')) {
-    window.open(`./editor/user.html#${immediateId}`)
+  if (e.target.closest('.preview-project-open-editor-btn')) {
+    window.open(`./editor/user.html#${immediateId}`);
   }
-})
+});
 
 const noCodeMessages = [
-  "No code here… yet.",
-  "Waiting for your first line of magic.",
-  "This area is currently empty.",
-  "Code something awesome to get started.",
-  "Nothing to show here just now.",
-  "This space is feeling a bit lonely.",
-  "Ready when you are — just add code.",
-  "Nothing’s been written here so far.",
-  "A clean slate — start building!",
-  "Time to bring this section to life.",
-  "No code has been added yet.",
-  "Still waiting for your code brilliance.",
-  "This canvas is blank. Make something!",
-  "Silence… the code hasn’t spoken yet.",
-  "All clear — nothing to preview yet.",
-  "Looks like you haven’t written anything.",
-  "It’s quiet here. Too quiet.",
-  "Your code will appear here.",
-  "Once you write code, it’ll show up here.",
-  "No content loaded — start coding!",
-  "Waiting patiently for your genius.",
-  "Nothing but potential in this space.",
-  "Go ahead — type something amazing.",
-  "There’s a void here. Fill it with code.",
-  "Let the coding begin!",
-  "Nothing to render yet.",
-  "This section is still in stealth mode.",
-  "It’s empty… for now.",
-  "A little code goes a long way — try it!",
-  "You haven’t added any code yet."
+  'No code here… yet.',
+  'Waiting for your first line of magic.',
+  'This area is currently empty.',
+  'Code something awesome to get started.',
+  'Nothing to show here just now.',
+  'This space is feeling a bit lonely.',
+  'Ready when you are — just add code.',
+  'Nothing’s been written here so far.',
+  'A clean slate — start building!',
+  'Time to bring this section to life.',
+  'No code has been added yet.',
+  'Still waiting for your code brilliance.',
+  'This canvas is blank. Make something!',
+  'Silence… the code hasn’t spoken yet.',
+  'All clear — nothing to preview yet.',
+  'Looks like you haven’t written anything.',
+  'It’s quiet here. Too quiet.',
+  'Your code will appear here.',
+  'Once you write code, it’ll show up here.',
+  'No content loaded — start coding!',
+  'Waiting patiently for your genius.',
+  'Nothing but potential in this space.',
+  'Go ahead — type something amazing.',
+  'There’s a void here. Fill it with code.',
+  'Let the coding begin!',
+  'Nothing to render yet.',
+  'This section is still in stealth mode.',
+  'It’s empty… for now.',
+  'A little code goes a long way — try it!',
+  'You haven’t added any code yet.',
 ];
 
-function projectNotFoundCode() { 
+function projectNotFoundCode() {
   return `<!DOCTYPE html>
     <html lang="en">
       <head>
@@ -1519,7 +1537,7 @@ projectPageProjectContainer.addEventListener('click', (e) => {
     const savedCode = JSON.parse(localStorage.getItem('allSavedCode'));
     const index = savedProjects.findIndex((project) => project.id === Number(id));
     previewTitleContainer.textContent = savedProjects[index].name;
-    document.querySelector('.preview-project-description').textContent = savedProjects[index].des
+    document.querySelector('.preview-project-description').textContent = savedProjects[index].des;
 
     const thisProject = savedCode.find((project) => project.id === Number(id));
     if (!thisProject) {
@@ -1528,6 +1546,9 @@ projectPageProjectContainer.addEventListener('click', (e) => {
     }
     if (thisProject) {
       const { headTags, html, css, js } = thisProject.code;
+      const extractedTagsArray = headTags?.map((obj) => obj?.script);
+      const tagsString = extractedTagsArray?.join('\n');
+
       const fullHTML = `
         <!DOCTYPE html>
         <html lang="en">
@@ -1535,7 +1556,7 @@ projectPageProjectContainer.addEventListener('click', (e) => {
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>${'need to added'}</title>
-            ${headTags}
+            ${tagsString || ''}
             <style>${css}</style>
           </head>
           <body>
@@ -1543,7 +1564,9 @@ projectPageProjectContainer.addEventListener('click', (e) => {
             <script>${js}<\/script>
           </body>
         </html>`;
-      updateIframe(previewIframe, fullHTML);
+      setTimeout(() => {
+        updateIframe(previewIframe, fullHTML);
+      }, 600);
     }
   }
 });
