@@ -9,11 +9,11 @@ function migrateTo_v0_0_1() {
 }
 // 5 Jun 2025
 function migrateTo_v0_0_2() {
-  const savedCode = JSON.parse(localStorage.getItem('allSavedCode'))
-  if(savedCode) {
-    savedCode.forEach(obj => {
-      obj.code.headTags = []
-    })
+  const savedCode = JSON.parse(localStorage.getItem('allSavedCode'));
+  if (savedCode) {
+    savedCode.forEach((obj) => {
+      obj.code.headTags = [];
+    });
     localStorage.setItem('allSavedCode', JSON.stringify(savedCode));
   }
 }
@@ -28,12 +28,12 @@ if (!currentVersion || savedVersion !== currentVersion) {
   //2 Jun 2025
   localStorage.removeItem('clean-tag');
   // ----------
-  
+
   //2 Jun 2025
   migrateTo_v0_0_1();
 
   // 5 Jun 2025
-  if(savedVersion !== currentVersion) {
+  if (savedVersion !== currentVersion) {
     migrateTo_v0_0_2();
   }
 
@@ -332,7 +332,7 @@ function loadCodeMirror(mode, value) {
       'Ctrl-1': () => focusOnEditor('html'),
       'Ctrl-2': () => focusOnEditor('css'),
       'Ctrl-3': () => focusOnEditor('js'),
-      'Shift-Alt-F': () => checkFileTypeAndFormat(),
+      'Ctrl-Alt-R': () => resetExpandState(),
       'Cmd-R': run,
       'Cmd-S': run,
       'Cmd-D': 'selectNextOccurrence',
@@ -344,7 +344,8 @@ function loadCodeMirror(mode, value) {
       'Cmd-1': () => focusOnEditor('html'),
       'Cmd-2': () => focusOnEditor('css'),
       'Cmd-3': () => focusOnEditor('js'),
-      // 'Shift-Alt-F': () => checkFileTypeAndFormat(),
+      'Cmd-Alt-R': () => resetExpandState,
+      'Shift-Alt-F': () => checkFileTypeAndFormat(),
       'Shift-Alt-Down': copyLinesDown,
       'Shift-Alt-Up': copyLinesUp,
       'Alt-Up': moveLinesUp,
@@ -1099,19 +1100,7 @@ function getSelectedStarterTag(btn) {
   const askedTag = btn.dataset.cdnName;
   return starterTags[askedTag];
 }
-const emptyTagMessages = [
-  "No tags yet.",
-  "Add a tag to get started.",
-  "Tag list is empty.",
-  "Waiting for tags.",
-  "Start adding tags.",
-  "Nothing here yet.",
-  "Tags will show up here.",
-  "Add something cool.",
-  "It's quiet here.",
-  "Empty for now.",
-  "No scripts added yet."
-];
+const emptyTagMessages = ['No tags yet.', 'Add a tag to get started.', 'Tag list is empty.', 'Waiting for tags.', 'Start adding tags.', 'Nothing here yet.', 'Tags will show up here.', 'Add something cool.', "It's quiet here.", 'Empty for now.', 'No scripts added yet.'];
 
 //! starter tags program
 const tagListContainer = document.querySelector('.head-tag-list-container');
@@ -1122,14 +1111,14 @@ function refreshTagListInTagDisplayContainer() {
   const index = indexFinder(allSavedCode, hash);
   if (index !== -1) {
     starterTagDisplayContainer.innerHTML = '';
-    const tagsArray = allSavedCode[index].code.headTags
+    const tagsArray = allSavedCode[index].code.headTags;
     tagsArray.forEach((tagObj) => {
       const div = document.createElement('div');
       div.innerHTML = `<span>${tagObj.name}</span>
         <button class="remove-tag-btn" data-tag-id="${tagObj.id}" aria-label="Remove tag button">${closeSvg()}</button>`;
       starterTagDisplayContainer.appendChild(div);
     });
-    if(!tagsArray || tagsArray.length === 0) {
+    if (!tagsArray || tagsArray.length === 0) {
       starterTagDisplayContainer.innerHTML = `<span class="empty-head-tag-message">${emptyTagMessages[Math.floor(Math.random() * emptyTagMessages.length)]}</span>`;
     }
   }
@@ -1193,21 +1182,20 @@ starterTagDisplayContainer.addEventListener('click', (e) => {
 //! Custom head tags program
 const customTagTitleInput = document.getElementById('custom-head-tag-title');
 const customTagBodyInput = document.getElementById('custom-head-tag-body');
-const insertTagBtn = document.querySelector('.insert-custom-tags-btn')
+const insertTagBtn = document.querySelector('.insert-custom-tags-btn');
 insertTagBtn.addEventListener('click', () => {
   const title = customTagTitleInput.value.trim();
   const script = customTagBodyInput.value.trim();
   const id = `${new Date().getTime()}`;
-  if(!title || !script) {
-    toastPopup(`Name and tag both should be filled`)
+  if (!title || !script) {
+    toastPopup(`Name and tag both should be filled`);
     return;
-  };
-  customTagTitleInput.value = ''
-  customTagBodyInput.value = ''
+  }
+  customTagTitleInput.value = '';
+  customTagBodyInput.value = '';
   addStarterTagAndSave(id, title, script);
   // toastPopup(`Inserted '${title}' into html head tag.`)
-})
-
+});
 
 //! Search cdn and add program
 const searchDisplayContainer = document.querySelector('.show-library-result-container');
@@ -1324,7 +1312,6 @@ searchDisplayContainer.addEventListener('click', (e) => {
     addStarterTagAndSave(id, name, getFullTag(getUrl(addTagBtn)));
   }
 });
-
 
 //! editor setting programs
 const allEditorInput = document.querySelectorAll('.editor-setting-input');
@@ -1492,11 +1479,13 @@ document.addEventListener('keydown', (e) => {
     focusOnEditor('js');
   }
   if ((e.ctrlKey || e.metaKey) && e.key === ',' && !customizationContainer.classList.contains('slide-up')) {
+    e.preventDefault();
     closeModalFunc();
     closeSidebar();
     document.querySelector('.customize-panel-btn').click();
   }
   if ((e.ctrlKey || e.metaKey) && e.key === ';' && !keyboardShortcutModal.classList.contains('show')) {
+    e.preventDefault();
     closeModalFunc();
     closeSidebar();
     keyboardShortcutModal.classList.add('show');

@@ -1619,9 +1619,6 @@ function refreshPageContent(projects) {
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') {
     const newProjectList = JSON.parse(localStorage.getItem('all-saved-projects')) || [];
-    // if (newProjectList.length !== savedProjects.length) {
-    //   window.location.reload();
-    // }
 
     const projectDeleted = newProjectList.length !== savedProjects.length;
     const nameChanged = savedProjects.some((obj, index) => obj.name !== newProjectList[index]?.name);
@@ -1632,3 +1629,5 @@ document.addEventListener('visibilitychange', () => {
 });
 
 document.querySelectorAll('div').forEach((div) => div.setAttribute('tabindex', '-1'));
+
+//! Tooltip program
