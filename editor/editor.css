@@ -942,7 +942,7 @@ main {
 .head-tag-list {
   width: 100%;
   min-height: 60px;
-  max-height: 100px;
+  max-height: 103px;
   border: var(--tag-list-border);
   border-radius: 0.3rem;
   background-color: var(--tag-list-bg);
@@ -975,11 +975,15 @@ main {
 
     span {
       line-height: 0.8lh;
-      font-size: 0.925rem;
+      font-size: 0.825rem;
       font-weight: 300;
       cursor: default;
       letter-spacing: 0.4px;
     }
+  }
+
+  &::-webkit-scrollbar {
+    width: 13px;
   }
 }
 

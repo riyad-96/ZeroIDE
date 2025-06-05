@@ -638,9 +638,9 @@ const localCodeObj = {
 // getting current code always
 function code() {
   function headTags() {
-    const index = indexFinder(allSavedCode, hash)
-    if(index !== -1) {
-      const headTagsArray = allSavedCode[index].code.headTags.map(obj => obj.script)
+    const index = indexFinder(allSavedCode, hash);
+    if (index !== -1) {
+      const headTagsArray = allSavedCode[index].code.headTags.map((obj) => obj.script);
       const headTagsString = headTagsArray.join('\n');
       return headTagsString;
     }
@@ -653,8 +653,6 @@ function code() {
   };
 }
 
-console.log(code().headTags)
-
 // run code with one function
 function run() {
   setValueOnIframe(code().headTags, code().html, code().css, code().js);
@@ -665,7 +663,6 @@ let codeMirrorRuntimeout;
 function codeMirrorCodeRunAndSave() {
   const index = indexFinder(allSavedCode, hash);
   if (index !== -1) {
-    // allSavedCode[index].code.headTags = code().headTags;
     allSavedCode[index].code.html = code().html;
     allSavedCode[index].code.css = code().css;
     allSavedCode[index].code.js = code().js;
@@ -1070,7 +1067,6 @@ function randomCdnPlaceholder() {
 
   return cdnSearchPlaceholders[Math.floor(Math.random() * cdnSearchPlaceholders.length)];
 }
-
 function getSelectedStarterTag(btn) {
   const starterTags = {
     tailwindcss: 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
@@ -1085,6 +1081,19 @@ function getSelectedStarterTag(btn) {
   const askedTag = btn.dataset.cdnName;
   return starterTags[askedTag];
 }
+const emptyTagMessages = [
+  "No tags yet.",
+  "Add a tag to get started.",
+  "Tag list is empty.",
+  "Waiting for tags.",
+  "Start adding tags.",
+  "Nothing here yet.",
+  "Tags will show up here.",
+  "Add something cool.",
+  "It's quiet here.",
+  "Empty for now.",
+  "No scripts added yet."
+];
 
 //! starter tags program
 const tagListContainer = document.querySelector('.head-tag-list-container');
@@ -1092,17 +1101,23 @@ const starterTagDisplayContainer = document.querySelector('.head-tag-list');
 const starterTagContainer = document.querySelector('.starter-tags');
 
 function refreshTagListInTagDisplayContainer() {
-  starterTagDisplayContainer.innerHTML = '';
   const index = indexFinder(allSavedCode, hash);
   if (index !== -1) {
-    allSavedCode[index].code.headTags.forEach((tagObj) => {
+    starterTagDisplayContainer.innerHTML = '';
+    const tagsArray = allSavedCode[index].code.headTags
+    tagsArray.forEach((tagObj) => {
       const div = document.createElement('div');
       div.innerHTML = `<span>${tagObj.name}</span>
         <button class="remove-tag-btn" data-tag-id="${tagObj.id}" aria-label="Remove tag button">${closeSvg()}</button>`;
       starterTagDisplayContainer.appendChild(div);
     });
+    if(!tagsArray || tagsArray.length === 0) {
+      starterTagDisplayContainer.innerHTML = `<span class="empty-head-tag-message">${emptyTagMessages[Math.floor(Math.random() * emptyTagMessages.length)]}</span>`;
+    }
   }
 }
+
+refreshTagListInTagDisplayContainer();
 
 function addStarterTagAndSave(id, name, script) {
   const index = indexFinder(allSavedCode, hash);
@@ -1110,15 +1125,19 @@ function addStarterTagAndSave(id, name, script) {
     const existingTag = allSavedCode[index].code.headTags?.find((tagObj) => tagObj?.id === id);
     if (!existingTag) {
       allSavedCode[index].code.headTags.push({ id, name, script });
-      console.log(allSavedCode);
-      refreshTagListInTagDisplayContainer();
       saveLocalStringify('allSavedCode', allSavedCode);
+      refreshTagListInTagDisplayContainer();
+      toastPopup(`'${name}' added inside html head tag.`);
       run();
+    } else {
+      toastPopup(`'${name}' tag is already added.`);
     }
   } else {
     localCodeObj.code.headTags.push({ id, name, script });
     allSavedCode.push(localCodeObj);
     saveLocalStringify('allSavedCode', allSavedCode);
+    refreshTagListInTagDisplayContainer();
+    toastPopup(`'${name}' added inside html head tag.`);
     run();
   }
 }
@@ -1128,6 +1147,27 @@ starterTagContainer.addEventListener('click', (e) => {
   if (btn) {
     const script = getFullTag(getSelectedStarterTag(btn));
     addStarterTagAndSave(btn.dataset.tagId, btn.textContent, script);
+  }
+});
+
+//! Remove tags
+starterTagDisplayContainer.addEventListener('click', (e) => {
+  const removeBtn = e.target.closest('.remove-tag-btn');
+  if (removeBtn) {
+    const eachTagParent = removeBtn.parentNode;
+    eachTagParent.remove();
+    const index = indexFinder(allSavedCode, hash);
+    if (index !== -1) {
+      const id = removeBtn.dataset.tagId;
+      const allTagArray = allSavedCode[index].code.headTags;
+      const tagIndex = allTagArray.findIndex((tagObj) => tagObj?.id === id);
+      if (tagIndex !== -1) {
+        allTagArray.splice(tagIndex, 1);
+        allSavedCode[index].code.headTags = allTagArray;
+        saveLocalStringify('allSavedCode', allSavedCode);
+        refreshTagListInTagDisplayContainer();
+      }
+    }
   }
 });
 
@@ -1232,11 +1272,21 @@ searchDisplayContainer.addEventListener('click', (e) => {
   if (urlCopyBtn) {
     copyToClipboard(getUrl(urlCopyBtn));
     toastPopup(`URL of '${getLibraryName(urlCopyBtn)}' copied !`);
+    return;
   }
   const scriptCopyBtn = e.target.closest('.library-script-tag-copy-btn');
   if (scriptCopyBtn) {
     copyToClipboard(getFullTag(getUrl(scriptCopyBtn)));
     toastPopup(`Tag of '${getLibraryName(scriptCopyBtn)}' copied !`);
+    return;
+  }
+  const addTagBtn = e.target.closest('.library-script-tag-add-btn');
+  if (addTagBtn) {
+    const mainLibraryContainer = e.target.closest('.each-library-container');
+    const name = mainLibraryContainer.querySelector('.library-name').textContent.trim();
+    const version = mainLibraryContainer.querySelector('.library-version').textContent.replace('@', '').trim();
+    const id = `${name}@${version}`;
+    addStarterTagAndSave(id, name, getFullTag(getUrl(addTagBtn)));
   }
 });
 //! editor setting programs
