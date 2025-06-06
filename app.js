@@ -692,6 +692,7 @@ document.querySelector('.quick-launch-btn').addEventListener('click', () => {
   }, 1400);
 });
 
+
 //! ----------- Profile page programs -------------
 //profile picture updation
 const savedProfileImg = localStorage.getItem('profile-image');
@@ -1634,7 +1635,6 @@ document.querySelectorAll('div').forEach((div) => div.setAttribute('tabindex', '
 const tooltipContainer = document.querySelector('.tooltip-container');
 const tooltipBottomContainer = document.querySelector('.tooltip-bottom-container');
 
-
 document.addEventListener('mouseover', (e) => {
   const target = e.target.closest('[data-tooltip]');
   if (target) {
@@ -1670,6 +1670,24 @@ document.addEventListener('mouseout', (e) => {
 
   const tooltipBottom = e.target.closest('[data-tooltip-bottom]');
   if (tooltipBottom) {
-    tooltipBottomContainer.classList.remove('show')
+    tooltipBottomContainer.classList.remove('show');
   }
 });
+
+//! Floating cursor
+const floatingEl = document.querySelector('.floating-cursor')
+console.log(floatingEl)
+
+document.addEventListener('mouseenter', () => {
+  floatingEl.classList.add('show');
+})
+document.addEventListener('mouseleave', () => {
+  floatingEl.classList.remove('show');
+})
+
+document.addEventListener('mousemove', (e) => {
+  const {width, height} = floatingEl.getBoundingClientRect();
+  // floatingEl.style.top = `${e.pageY - height/2}px`
+  // floatingEl.style.left = `${e.pageX - width/2}px`
+  floatingEl.style.transform = `translate(${e.pageX - width/2}px, ${e.pageY - height/2}px)`;
+})
