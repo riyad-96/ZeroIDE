@@ -480,7 +480,7 @@ function createNewProject(id, name) {
       </svg>
       <span>${name}</span>
     </a>
-    <button class="sub-menu-option-btn">
+    <button class="sub-menu-option-btn" aria-label="More options" data-tooltip-bottom="More options">
     <svg xmlns="http://www.w3.org/2000/svg" height="20px"
       viewBox="0 -960 960 960" width="20px" fill="currentColor">
       <path
@@ -488,7 +488,7 @@ function createNewProject(id, name) {
     </svg>
     </button>
     <div class="sub-menu-options">
-      <button aria-label="rename button" title="Rename project">
+      <button aria-label="Rename button" data-tooltip="Rename project">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
           fill="currentColor">
           <path
@@ -496,7 +496,7 @@ function createNewProject(id, name) {
           </path>
         </svg>
       </button>
-      <button class="focus-trap-activate" aria-label="delete button" title="Delete project"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
+      <button class="focus-trap-activate" aria-label="delete button"  data-tooltip="Delete project"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"
           fill="currentColor">
           <path
             d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z">
@@ -1018,10 +1018,10 @@ function showSocialLinks() {
       const div = document.createElement('div');
       div.classList.add('each-username-link-container');
       div.innerHTML = `
-        <a href="${fullUrl}" title="${title}" target="_blank">
+        <a href="${fullUrl}" data-tooltip="${title}" target="_blank">
           ${icon} <span>${username}</span><span class="profile-url"> - ${fullUrl}</span>
         </a>
-        <button data-toast-message="Link Copied !" class="url-copy-btn" title="Copy ${title}" aria-label="Copy link button" data-social-profile-url="${fullUrl}">
+        <button data-toast-message="Link Copied !" class="url-copy-btn" data-tooltip="Copy ${title}" aria-label="Copy link button" data-social-profile-url="${fullUrl}">
           ${clipboardIcon()}
         </button>`;
 
@@ -1128,7 +1128,7 @@ function loadLastFourProject(projects) {
       div.innerHTML = `
         <div>
           ${bookmarkSvg()}
-          <a href="./editor/user.html#${p.id}" target="_blank">${p.name}</a>
+          <a href="./editor/user.html#${p.id}" target="_blank"  data-tooltip="Open '${p.name}' in editor">${p.name}</a>
         </div>
         <span>${p.des}</span>
         <div>
@@ -1362,16 +1362,16 @@ function createProjectPageProjects(arr) {
     div.innerHTML = `
       <header class="project-header">
         <span class="title">${p.name}</span>
-        <button title="Click to edit project" data-project-id="${p.id}" class="edit-projects-button focus-trap-activate">${moreOptSvg()}</button>
+        <button data-project-id="${p.id}" data-tooltip="Settings" class="edit-projects-button focus-trap-activate">${moreOptSvg()}</button>
       </header>
       <span class="project-page-project-description">
         ${p.des}
       </span>
       <footer>
         <div>
-          <button data-project-id="${p.id}" class="add-favorite-btn" title="click to add/remove favorite">${p.favorite ? heartFillSvg() : heartLineSvg()}</button>
-          <button class="open-editor-btn" data-project-id="${p.id}" title="Open code editor">${openCodeSvg()}<span>Editor</span></button>
-          <button class="preview-editor-btn focus-trap-activate" data-project-id="${p.id}" title="Preview">${eyeSvg()}</button>
+          <button data-project-id="${p.id}" class="add-favorite-btn" data-tooltip-bottom="Favorite">${p.favorite ? heartFillSvg() : heartLineSvg()}</button>
+          <button class="open-editor-btn" data-project-id="${p.id}" >${openCodeSvg()}<span>Editor</span></button>
+          <button class="preview-editor-btn focus-trap-activate" data-project-id="${p.id}" data-tooltip-bottom="Preview code" >${eyeSvg()}</button>
         </div>
         <span>${getDateFunc(p.date)}</span>
       </footer>
@@ -1631,3 +1631,45 @@ document.addEventListener('visibilitychange', () => {
 document.querySelectorAll('div').forEach((div) => div.setAttribute('tabindex', '-1'));
 
 //! Tooltip program
+const tooltipContainer = document.querySelector('.tooltip-container');
+const tooltipBottomContainer = document.querySelector('.tooltip-bottom-container');
+
+
+document.addEventListener('mouseover', (e) => {
+  const target = e.target.closest('[data-tooltip]');
+  if (target) {
+    tooltipContainer.textContent = target.dataset.tooltip;
+  }
+  const tooltipBottom = e.target.closest('[data-tooltip-bottom]');
+  if (tooltipBottom) {
+    tooltipBottomContainer.textContent = tooltipBottom.dataset.tooltipBottom;
+  }
+});
+
+document.addEventListener('mousemove', (e) => {
+  const target = e.target.closest('[data-tooltip]');
+  if (target) {
+    tooltipContainer.classList.add('show');
+    tooltipContainer.style.top = `${e.clientY - 50}px`;
+    tooltipContainer.style.left = `${e.clientX - tooltipContainer.getBoundingClientRect().width / 2}px`;
+  }
+
+  const tooltipBottom = e.target.closest('[data-tooltip-bottom]');
+  if (tooltipBottom) {
+    tooltipBottomContainer.classList.add('show');
+    tooltipBottomContainer.style.top = `${e.clientY + 30}px`;
+    tooltipBottomContainer.style.left = `${e.clientX - tooltipBottomContainer.getBoundingClientRect().width / 2}px`;
+  }
+});
+
+document.addEventListener('mouseout', (e) => {
+  const target = e.target.closest('[data-tooltip]');
+  if (target) {
+    tooltipContainer.classList.remove('show');
+  }
+
+  const tooltipBottom = e.target.closest('[data-tooltip-bottom]');
+  if (tooltipBottom) {
+    tooltipBottomContainer.classList.remove('show')
+  }
+});

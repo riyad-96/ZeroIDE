@@ -12,11 +12,15 @@
 }
 
 .CodeMirror pre {
-  padding-inline: 0.425rem !important;
+  padding-inline: 0.325rem !important;
 }
 
 .CodeMirror-lines {
-  padding-block: 0.425rem 10rem !important;
+  padding-block: 0.425rem 4rem !important;
+
+  @media (height < 700px) {
+    padding-block: 0.425rem 2rem !important;
+  }
 }
 
 .CodeMirror-activeline-background {
@@ -45,7 +49,13 @@
   color: inherit;
 }
 
-/* .CodeMirror-widget{} */
+.CodeMirror-vscrollbar::-webkit-scrollbar {
+  width: 13px;
+
+  @media (pointer: coarse) {
+    width: 8px;
+  }
+}
 
 .CodeMirror-foldmarker.CodeMirror-foldmarker {
   color: var(--foldmarker-clr);

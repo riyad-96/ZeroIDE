@@ -237,9 +237,9 @@ const beneathLayer = document.querySelector('.beneath-layer');
 
 function reloadTitleAttr() {
   if (!sidebar.classList.contains('show')) {
-    sidebarToggleBtn.setAttribute('title', 'Open sidebar');
+    sidebarToggleBtn.setAttribute('data-tooltip-bottom', 'Sidebar');
   } else {
-    sidebarToggleBtn.setAttribute('title', 'Close sidebar');
+    sidebarToggleBtn.setAttribute('data-tooltip-bottom', 'Close sidebar');
   }
 }
 reloadTitleAttr();
@@ -1658,4 +1658,48 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.shortcut-keys').forEach((key) => {
     key.innerHTML = key.innerHTML.replace(/Ctrl/g, isMac ? 'Cmd' : 'Ctrl');
   });
+});
+
+//! Tooltip program
+const tooltipContainer = document.querySelector('.tooltip-container');
+const tooltipBottomContainer = document.querySelector('.tooltip-bottom-container');
+
+
+document.addEventListener('mouseover', (e) => {
+  const target = e.target.closest('[data-tooltip]');
+  if (target) {
+    tooltipContainer.textContent = target.dataset.tooltip;
+  }
+  const tooltipBottom = e.target.closest('[data-tooltip-bottom]');
+  if (tooltipBottom) {
+    tooltipBottomContainer.textContent = tooltipBottom.dataset.tooltipBottom;
+  }
+});
+
+document.addEventListener('mousemove', (e) => {
+  const target = e.target.closest('[data-tooltip]');
+  if (target) {
+    tooltipContainer.classList.add('show');
+    tooltipContainer.style.top = `${e.clientY - 50}px`;
+    tooltipContainer.style.left = `${e.clientX - tooltipContainer.getBoundingClientRect().width / 2}px`;
+  }
+
+  const tooltipBottom = e.target.closest('[data-tooltip-bottom]');
+  if (tooltipBottom) {
+    tooltipBottomContainer.classList.add('show');
+    tooltipBottomContainer.style.top = `${e.clientY + 30}px`;
+    tooltipBottomContainer.style.left = `${e.clientX - tooltipBottomContainer.getBoundingClientRect().width / 2}px`;
+  }
+});
+
+document.addEventListener('mouseout', (e) => {
+  const target = e.target.closest('[data-tooltip]');
+  if (target) {
+    tooltipContainer.classList.remove('show');
+  }
+
+  const tooltipBottom = e.target.closest('[data-tooltip-bottom]');
+  if (tooltipBottom) {
+    tooltipBottomContainer.classList.remove('show')
+  }
 });

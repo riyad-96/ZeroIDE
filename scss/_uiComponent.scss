@@ -695,7 +695,7 @@ form textarea::-webkit-scrollbar {
     border: 1px solid var(--slick-border-clr);
     text-wrap: nowrap;
   }
-  
+
   button:hover {
     background-color: var(--global-button-hover-bg);
   }
@@ -710,7 +710,6 @@ form textarea::-webkit-scrollbar {
   font-size: 0.925rem;
   margin: 0;
   font-weight: 300;
-
 }
 
 .display-preview-modal.show {
@@ -730,4 +729,68 @@ form textarea::-webkit-scrollbar {
   @starting-style {
     opacity: 0;
   }
+}
+
+//! Tool tip
+.tooltip-container,
+.tooltip-bottom-container {
+  position: fixed;
+  z-index: 99999999999;
+  background-color: var(--body-clr);
+  color: var(--body-bg);
+  padding-block: 0.225rem;
+  padding-inline: 0.525rem;
+  border-radius: 0.3rem;
+  font-size: 0.8225rem;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.9;
+  text-wrap: nowrap;
+
+  display: none;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 200ms;
+  transition-delay: 350ms;
+  transition-behavior: allow-discrete;
+}
+
+@media (pointer: fine) {
+  .tooltip-container.show,
+  .tooltip-bottom-container.show {
+    display: block;
+    opacity: 0.9;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}
+
+.tooltip-container::before,
+.tooltip-bottom-container::before {
+  position: absolute;
+  content: '';
+  rotate: 45deg;
+  width: 8px;
+  height: 8px;
+  background-color: var(--body-clr);
+}
+
+.tooltip-container::before {
+  bottom: 0;
+  left: 50%;
+  translate: -50% 50%;
+}
+
+.tooltip-bottom-container::before {
+  top: 0;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+[data-tooltip] *,
+[data-tooltip-bottom] * {
+  user-select: none;
+  pointer-events: none;
 }
