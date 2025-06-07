@@ -535,7 +535,7 @@ html {
   --js-variable: hsl(182, 86%, 33%);
   --js-variable-2: var(--js-variable);
   --js-property: hsl(315, 90%, 35%);
-  --js-string: hsl(221, 63%, 56%);
+  --js-string: #c96765;
   --js-comment: var(--cm-comment);
   --js-number: hsl(315, 90%, 35%);
   --js-atom: hsl(0, 44%, 53%);

@@ -735,6 +735,8 @@ form textarea::-webkit-scrollbar {
 .tooltip-container,
 .tooltip-bottom-container {
   position: fixed;
+  // top: 0;
+  // left: 0;
   z-index: 99999999999;
   background-color: var(--body-clr);
   color: var(--body-bg);
@@ -752,6 +754,7 @@ form textarea::-webkit-scrollbar {
   transition-property: opacity;
   transition-duration: 200ms;
   transition-delay: 350ms;
+  transition-timing-function: ease-out;
   transition-behavior: allow-discrete;
 }
 
@@ -793,27 +796,4 @@ form textarea::-webkit-scrollbar {
 [data-tooltip-bottom] * {
   user-select: none;
   pointer-events: none;
-}
-
-//! Floating cursor
-.floating-cursor {
-  position: fixed;
-  top:0;
-  left: 0;
-  z-index: 999;
-  width: 0px;
-  height: 0px;
-  border-radius: 50%;
-  background-color: white;
-  mix-blend-mode: difference;
-  pointer-events: none;
-  user-select: none;
-  transition: 250ms ease-out;
-}
-
-@media(pointer: fine) {
-  .floating-cursor.show {
-    width: 20px;
-    height: 20px;
-  }
 }

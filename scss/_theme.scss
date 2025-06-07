@@ -49,6 +49,22 @@
   --banner-clr: hsl(0, 0%, 20%);
   --banner-bg: hsla(0, 0%, 50%, 0.1);
 
+  --ZeroIDE-linenumber: #90a7b2;
+  --ZeroIDE-keyword: #994bc3;
+  --ZeroIDE-variable: #4875d5;
+  --ZeroIDE-variable-2: #0c969b;
+  --ZeroIDE-operator: var(--body-clr);
+  --ZeroIDE-property: #aa0981;
+  --ZeroIDE-property-2: #aa0981;
+  --ZeroIDE-string: #d26765;
+  --ZeroIDE-curlybraces: var(--body-clr);
+  --ZeroIDE-squarebrackets: var(--body-clr);
+  --ZeroIDE-comma: var(--body-clr);
+  --ZeroIDE-keyword-2: #0c969b;
+
+  --ZeroIDE-line-hover-bg: hsl(0, 0%, 50%, 0.1);
+  --ZeroIDE-line-hover-number-clr: var(--body-clr);
+
   // profilepage
   --p-username-clr: hsl(0, 0%, 50%);
   --social-link-form-bg: hsl(0, 0%, 91%);
@@ -65,8 +81,8 @@
   --form-bg-layer-bg: hsla(0, 0%, 100%, 0.3);
   --delete-message-modal-suggested-span: hsl(0, 0%, 36%);
 
-  --toast-message-clr: hsl(0, 0%, 20%);
-  --toast-message-bg: hsl(0, 0%, 80%);
+  --toast-message-clr: var(--body-bg);
+  --toast-message-bg: var(--body-clr);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -121,6 +137,22 @@
     --banner-clr: hsl(0, 0%, 80%);
     --banner-bg: hsla(0, 0%, 50%, 0.1);
 
+    --ZeroIDE-linenumber: #90a7b2;
+    --ZeroIDE-keyword: #569cd6;
+    --ZeroIDE-variable: #4fc1ff;
+    --ZeroIDE-variable-2: #9cdcfe;
+    --ZeroIDE-operator: var(--body-clr);
+    --ZeroIDE-property: #9cdcfe;
+    --ZeroIDE-property-2: #dcdcaa;
+    --ZeroIDE-string: #ce9178;
+    --ZeroIDE-curlybraces: var(--body-clr);
+    --ZeroIDE-squarebrackets: var(--body-clr);
+    --ZeroIDE-comma: var(--body-clr);
+    --ZeroIDE-keyword-2: #9cdcfe;
+
+    --ZeroIDE-line-hover-bg: hsl(0, 0%, 50%, 0.1);
+    --ZeroIDE-line-hover-number-clr: var(--body-clr);
+
     // profilepage
     --p-username-clr: hsl(0, 0%, 50%);
     --social-link-form-bg: hsl(0, 0%, 9%);
@@ -136,8 +168,8 @@
     --form-bg-clr: hsl(0, 0%, 9%);
     --form-bg-layer-bg: hsla(0, 0%, 0%, 0.3);
     --delete-message-modal-suggested-span: hsl(0, 0%, 64%);
-    --toast-message-clr: hsl(0, 0%, 100%);
-    --toast-message-bg: hsl(0, 0%, 40%);
+    --toast-message-clr: var(--body-bg);
+    --toast-message-bg: var(--body-clr);
   }
 }
 
@@ -193,6 +225,22 @@
   --banner-clr: hsl(0, 0%, 20%);
   --banner-bg: hsla(0, 0%, 50%, 0.1);
 
+  --ZeroIDE-linenumber: #90a7b2;
+  --ZeroIDE-keyword: #994bc3;
+  --ZeroIDE-variable: #4875d5;
+  --ZeroIDE-variable-2: #0c969b;
+  --ZeroIDE-operator: var(--body-clr);
+  --ZeroIDE-property: #aa0981;
+  --ZeroIDE-property-2: #aa0981;
+  --ZeroIDE-string: #d26765;
+  --ZeroIDE-curlybraces: var(--body-clr);
+  --ZeroIDE-squarebrackets: var(--body-clr);
+  --ZeroIDE-comma: var(--body-clr);
+  --ZeroIDE-keyword-2: #0c969b;
+
+  --ZeroIDE-line-hover-bg: hsl(0, 0%, 50%, 0.1);
+  --ZeroIDE-line-hover-number-clr: var(--body-clr);
+
   // profilepage
   --p-username-clr: hsl(0, 0%, 50%);
   --social-link-form-bg: hsl(0, 0%, 91%);
@@ -209,8 +257,8 @@
   --form-bg-layer-bg: hsla(0, 0%, 100%, 0.3);
   --delete-message-modal-suggested-span: hsl(0, 0%, 36%);
 
-  --toast-message-clr: hsl(0, 0%, 20%);
-  --toast-message-bg: hsl(0, 0%, 80%);
+  --toast-message-clr: var(--body-bg);
+  --toast-message-bg: var(--body-clr);
 }
 
 [data-theme='dark'] {
@@ -265,6 +313,22 @@
   --banner-clr: hsl(0, 0%, 80%);
   --banner-bg: hsla(0, 0%, 50%, 0.1);
 
+  --ZeroIDE-linenumber: #90a7b2;
+  --ZeroIDE-keyword: #569cd6;
+  --ZeroIDE-variable: #4fc1ff;
+  --ZeroIDE-variable-2: #9cdcfe;
+  --ZeroIDE-operator: var(--body-clr);
+  --ZeroIDE-property: #9cdcfe;
+  --ZeroIDE-property-2: #dcdcaa;
+  --ZeroIDE-string: #ce9178;
+  --ZeroIDE-curlybraces: var(--body-clr);
+  --ZeroIDE-squarebrackets: var(--body-clr);
+  --ZeroIDE-comma: var(--body-clr);
+  --ZeroIDE-keyword-2: #9cdcfe;
+
+  --ZeroIDE-line-hover-bg: hsl(0, 0%, 50%, 0.1);
+  --ZeroIDE-line-hover-number-clr: var(--body-clr);
+
   // profilepage
   --p-username-clr: hsl(0, 0%, 50%);
   --social-link-form-bg: hsl(0, 0%, 9%);
@@ -280,6 +344,6 @@
   --form-bg-clr: hsl(0, 0%, 9%);
   --form-bg-layer-bg: hsla(0, 0%, 0%, 0.3);
   --delete-message-modal-suggested-span: hsl(0, 0%, 64%);
-  --toast-message-clr: hsl(0, 0%, 100%);
-  --toast-message-bg: hsl(0, 0%, 40%);
+  --toast-message-clr: var(--body-bg);
+  --toast-message-bg: var(--body-clr);
 }

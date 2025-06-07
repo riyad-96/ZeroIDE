@@ -113,70 +113,165 @@
             <div tabindex="-1" class="page-wrapper landing-page-wrapper">
               <!-- home page contents -->
               <div tabindex="-1" id="particle-container"></div>
-              <div tabindex="-1" class="home-page-banner-container">
-                <div tabindex="-1" class="banners" aria-hidden="true">
-                  <div tabindex="-1" class="banner-track">
-                    <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private.<span>•</span></span>
-
-                    <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private.<span>•</span></span>
-
-                    <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private.<span>•</span></span>
-
-                    <span>Your personal code editor—everything stays in your browser’s local storage. No servers, no snooping. Your data stays safe and private. </span>
+              <header class="home-page-header">
+                <div class="home-page-header-wrapper">
+                  <div class="editor-name">
+                    <span class="nav-button logo-text" data-nav-page="home">ZeroIDE</span>
                   </div>
+
+                  <nav class="home-page-nav">
+                    <button class="nav-button" data-nav-page="features">Features</button>
+                    <button class="nav-button" data-nav-page="about">About</button>
+                  </nav>
+                </div>
+              </header>
+
+              <div class="home-page-wrapper">
+                <div class="home-page-wrapper-content">
+                  <div id="home">
+                    <div class="hero-section">
+                      <div class="text-area">
+                        <h1>Built by a dev, for devs</h1>
+                        <p>No clutter. No distractions. Just you and your code—exactly how it should be.</p>
+                      </div>
+
+                      <div class="demo-code-area">
+                        <button class="print-button" data-toast-message="'devKit' printed in console" data-tooltip-bottom="print 'devkit' in browser console">print</button>
+
+                        <header>
+                          <span>index.js</span>
+                        </header>
+                        <div>
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">1</span>
+                            <span class="ZeroIDE-keyword">const</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-variable">devKit</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-operator">=</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-curlybraces">{</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">2</span>
+                            <span class="gap-2"></span>
+                            <span class="ZeroIDE-property">name</span>
+                            <span class="ZeroIDE-operator">:</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-string">'ZeroIDE'</span>
+                            <span class="ZeroIDE-comma">,</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">3</span>
+                            <span class="gap-2"></span>
+                            <span class="ZeroIDE-property">theme</span>
+                            <span class="ZeroIDE-operator">:</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-squarebracket">[</span>
+                            <span class="ZeroIDE-string">'Light'</span>
+                            <span class="ZeroIDE-comma">,</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-string">'Dark'</span>
+                            <span class="ZeroIDE-squarebracket">]</span>
+                            <span class="ZeroIDE-comma">,</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">4</span>
+                            <span class="gap-2"></span>
+                            <span class="ZeroIDE-property">lang</span>
+                            <span class="ZeroIDE-operator">:</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-squarebracket">[</span>
+                            <span class="ZeroIDE-string">'html'</span>
+                            <span class="ZeroIDE-comma">,</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-string">'css'</span>
+                            <span class="ZeroIDE-comma">,</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-string">'javascript'</span>
+                            <span class="ZeroIDE-squarebracket">]</span>
+                            <span class="ZeroIDE-comma">,</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">5</span>
+                            <span class="gap-2"></span>
+                            <span class="ZeroIDE-property">engine</span>
+                            <span class="ZeroIDE-operator">:</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-squarebracket">[</span>
+                            <span class="ZeroIDE-string">'iframe'</span>
+                            <span class="ZeroIDE-comma">,</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-string">'blob'</span>
+                            <span class="ZeroIDE-squarebracket">]</span>
+                            <span class="ZeroIDE-comma">,</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">6</span>
+                            <span class="gap-2"></span>
+                            <span class="ZeroIDE-property">feature</span>
+                            <span class="ZeroIDE-operator">:</span>
+                            <span class="gap"></span>
+                            <span class="ZeroIDE-squarebracket">[</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">7</span>
+                            <span class="gap-4"></span>
+                            <span class="ZeroIDE-string">'Live preview'</span>
+                            <span class="ZeroIDE-comma">,</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">8</span>
+                            <span class="gap-4"></span>
+                            <span class="ZeroIDE-string">'CDNJS search'</span>
+                            <span class="ZeroIDE-comma">,</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">9</span>
+                            <span class="gap-4"></span>
+                            <span class="ZeroIDE-string">'many more...'</span>
+                            <span class="ZeroIDE-comma">,</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">10</span>
+                            <span class="gap-2"></span>
+                            <span class="ZeroIDE-squarebracket">]</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">11</span>
+                            <span class="ZeroIDE-curlybraces">}</span>
+                            <span class="ZeroIDE-semicolon">;</span>
+                          </span>
+
+                          <span class="ZeroIDE-line">
+                            <span class="ZeroIDE-linenumber">12</span>
+                            <span class="ZeroIDE-keyword-2">console</span>
+                            <span class="ZeroIDE-operator">.</span>
+                            <span class="ZeroIDE-property-2">log</span>
+                            <span class="ZeroIDE-parantheses">(</span>
+                            <span class="ZeroIDE-variable-2">devKit</span>
+                            <span class="ZeroIDE-paranthesea">)</span>
+                            <span class="ZeroIDE-semicolon">;</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="features"></div>
+                  <div id="about"></div>
                 </div>
               </div>
-
-              <div tabindex="-1" class="home-page-wrapper">
-                <div tabindex="-1" class="hero">
-                  <h1>Welcome to Your Coding Zen</h1>
-                  <p>Write code. See results. No setup, no fluff—just pure focus.</p>
-                  <button class="quick-launch-btn">Quick Launch</button>
-                </div>
-
-                <div class="feature-section">
-                  <div class="feature-card">
-                    <h3>Live Preview</h3>
-                    <span>Real-time output using a sandboxed iframe. No reloads, just results.</span>
-                  </div>
-
-                  <div class="feature-card">
-                    <h3>CDN Library Search</h3>
-                    <span>Instantly fetch and embed libraries from CDNJS into your project.</span>
-                  </div>
-
-                  <div class="feature-card">
-                    <h3>Auto Save</h3>
-                    <span>Your code stays safe with localStorage — even after closing the tab.</span>
-                  </div>
-
-                  <div class="feature-card">
-                    <h3>Resizable Panels</h3>
-                    <span>Custom layout with draggable dividers. Adjust to your workflow.</span>
-                  </div>
-
-                  <div class="feature-card">
-                    <h3>Prettier Code Formatting</h3>
-                    <span>Format HTML, CSS, and JS with one click using Prettier (or similar).</span>
-                  </div>
-
-                  <div class="feature-card">
-                    <h3>Editor Customization</h3>
-                    <span>Toggle line numbers, change tab size, or switch themes on demand.</span>
-                  </div>
-
-                  <div class="feature-card">
-                    <h3>Format Settings</h3>
-                    <span>Control code style: semicolons, quotes, spacing, wrapping, and more.</span>
-                  </div>
-
-                  <div class="feature-card">
-                    <h3>Color Picker Tool</h3>
-                    <span>Visual color picker to easily insert HEX/RGB values into your code.</span>
-                  </div>
-                </div>
-              </div>
-
               <!-- home page contents ends -->
             </div>
           </div>
@@ -289,13 +384,13 @@
                   <div tabindex="-1" class="appearance-setting">
                     <h3>Appearance</h3>
                     <div class="theme-container">
-                      <button class="themes-btn active" data-theme-info="default" data-tooltip="Default theme">
+                      <button class="themes-btn active" data-theme-info="default" data-tooltip="Switch to default theme">
                         <span>Browser Default</span>
                       </button>
-                      <button class="themes-btn" data-theme-info="light" data-tooltip="Light theme">
+                      <button class="themes-btn" data-theme-info="light" data-tooltip="Switch to light theme">
                         <span>Light Theme</span>
                       </button>
-                      <button class="themes-btn" data-theme-info="dark" data-tooltip="Dark theme">
+                      <button class="themes-btn" data-theme-info="dark" data-tooltip="Switch to dark theme">
                         <span>Dark Theme</span>
                       </button>
                     </div>
@@ -587,6 +682,6 @@
     <div class="tooltip-bottom-container"></div>
 
     <!-- floating div -->
-     <div class="floating-cursor"></div>
+    <div class="floating-cursor"></div>
   </body>
 </html>

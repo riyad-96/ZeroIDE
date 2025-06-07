@@ -639,6 +639,15 @@ function pageChangeUpdate() {
     }
   });
 
+  document.querySelectorAll('.each-page').forEach((page) => {
+    page.classList.remove('show');
+    if (page.id === location.hash.replace('#', '')) {
+      page.classList.add('show');
+    } else {
+      document.getElementById('home-page').classList.add('show');
+    }
+  });
+
   const page = document.getElementById(pageId);
   if (page) {
     page.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -683,15 +692,27 @@ setTimeout(() => {
   particleContainer.style.opacity = '1';
 }, 1000);
 
-// Quick launch program
-document.querySelector('.quick-launch-btn').addEventListener('click', () => {
-  handleProjectCreate(true);
-  document.querySelector('.disable-interactivity-layer').style.display = 'block';
-  setTimeout(() => {
-    document.querySelector('.disable-interactivity-layer').style.display = 'none';
-  }, 1400);
-});
+// // Quick launch program
+// document.querySelector('.quick-launch-btn').addEventListener('click', () => {
+//   handleProjectCreate(true);
+//   document.querySelector('.disable-interactivity-layer').style.display = 'block';
+//   setTimeout(() => {
+//     document.querySelector('.disable-interactivity-layer').style.display = 'none';
+//   }, 1400);
+// });
 
+// print button
+document.querySelector('.print-button').addEventListener('click', () => {
+  const devKit = {
+    name: 'ZeroIDE',
+    theme: ['Light', 'Dark'],
+    lang: ['html', 'css', 'javascript'],
+    engine: ['iframe', 'blob'],
+    feature: ['live previw', 'CDNJS search', 'resizable panel', 'lots of keyboard shortcuts', 'color picker tool', 'prettier code formatter', 'and many more...'],
+  };
+
+  console.log(devKit);
+});
 
 //! ----------- Profile page programs -------------
 //profile picture updation
@@ -1177,6 +1198,8 @@ const savedSettings = JSON.parse(localStorage.getItem('settings')) || {
     theme: 'default',
   },
 };
+
+document.documentElement.style.setProperty('--user-font', savedSettings.editor.fontFamily);
 
 // Theme programs
 const themeBtns = document.querySelectorAll('.themes-btn');
@@ -1673,21 +1696,3 @@ document.addEventListener('mouseout', (e) => {
     tooltipBottomContainer.classList.remove('show');
   }
 });
-
-//! Floating cursor
-const floatingEl = document.querySelector('.floating-cursor')
-console.log(floatingEl)
-
-document.addEventListener('mouseenter', () => {
-  floatingEl.classList.add('show');
-})
-document.addEventListener('mouseleave', () => {
-  floatingEl.classList.remove('show');
-})
-
-document.addEventListener('mousemove', (e) => {
-  const {width, height} = floatingEl.getBoundingClientRect();
-  // floatingEl.style.top = `${e.pageY - height/2}px`
-  // floatingEl.style.left = `${e.pageX - width/2}px`
-  floatingEl.style.transform = `translate(${e.pageX - width/2}px, ${e.pageY - height/2}px)`;
-})

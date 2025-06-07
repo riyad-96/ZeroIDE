@@ -10,6 +10,13 @@
   height: 100svh;
   overflow-y: hidden;
   padding: 0.5rem;
+
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.each-page.show {
+  opacity: 1;
 }
 
 .each-page .body {
@@ -19,7 +26,6 @@
   border-radius: 0.525rem;
   overflow: hidden;
   background-color: var(--each-page-body-bg);
-  // transition: background-color 400ms;
 }
 
 .page-wrapper {
@@ -27,4 +33,3 @@
   height: 100%;
   overflow-y: auto;
 }
-
