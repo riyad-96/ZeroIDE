@@ -921,6 +921,12 @@ main {
   justify-content: space-between;
 }
 
+.editor-info {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
 .logo-text {
   display: inline-block;
   margin: 0;
@@ -933,9 +939,16 @@ main {
           user-select: none;
 }
 
+.version-info {
+  font-size: 0.8525rem;
+  opacity: 0.7;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
 .home-page-nav {
   display: flex;
-  gap: clamp(0.5rem, 0.25rem + 1vw, 1rem);
+  gap: clamp(0.725rem, 0.475rem + 1vw, 1.225rem);
 }
 
 .home-page-nav button {
@@ -952,7 +965,7 @@ main {
   bottom: 0;
   translate: -50% 0;
   width: 0;
-  height: 2px;
+  height: 1px;
   background-color: var(--body-clr);
   transition: width 300ms;
 }
@@ -977,7 +990,7 @@ main {
 }
 
 .hero-section {
-  margin-block-start: clamp(5rem, 2.8571rem + 6.8571vw, 8rem);
+  padding-block-start: clamp(5rem, 1.5rem + 14vw, 12rem);
 }
 
 .hero-section .text-area h1,
@@ -1018,6 +1031,20 @@ main {
     max-width: 36ch;
   }
 }
+.quick-start-btn {
+  display: flex;
+  margin-block-start: 2rem;
+  font-size: 1.325rem;
+  padding-inline: 2rem;
+  padding-block: 0.5rem;
+  border: 1px solid var(--slick-border-clr);
+  border-radius: 100rem;
+  background-color: hsla(0, 0%, 50%, 0.1);
+}
+.quick-start-btn:hover {
+  background-color: hsla(0, 0%, 50%, 0.15);
+}
+
 .demo-code-area {
   border: 1px solid var(--slick-border-clr);
   border-radius: 0.4rem;
@@ -1166,6 +1193,258 @@ main {
 
 .ZeroIDE-keyword-2 {
   color: var(--ZeroIDE-keyword-2);
+}
+
+#features {
+  padding-block-start: clamp(3rem, 0.5rem + 10vw, 8rem);
+}
+
+.feature-header {
+  display: grid;
+  justify-items: center;
+  gap: 0.525rem;
+  margin-block-end: 3rem;
+}
+.feature-header h2 {
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: clamp(1.325rem, 0.9875rem + 1.35vw, 2rem);
+}
+.feature-header span {
+  text-align: center;
+  font-size: clamp(0.925rem, 0.8875rem + 0.15vw, 1rem);
+  opacity: 0.7;
+}
+
+.feature-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.625rem;
+}
+
+.each-feature-card {
+  border: 1px solid var(--sidebar-border-clr);
+  padding-block: 1.225rem;
+  padding-inline: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: hsla(0, 0%, 50%, 0.05);
+  transition: scale 400ms, opacity 300ms, filter 300ms;
+  position: relative;
+}
+.each-feature-card:hover {
+  border: 1px solid var(--slick-border-clr);
+}
+@media (pointer: fine) {
+  .each-feature-card:hover {
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+  }
+}
+@media (pointer: coarse) {
+  .each-feature-card {
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+    border: 1px solid var(--slick-border-clr);
+  }
+}
+
+.each-feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--body-clr);
+  -webkit-mask-image: linear-gradient(to right, transparent, #fff, #fff, transparent);
+          mask-image: linear-gradient(to right, transparent, #fff, #fff, transparent);
+  transition: width 400ms;
+}
+
+.each-feature-card:hover::before {
+  width: 100%;
+}
+
+.feature-container:hover .each-feature-card:not(:hover) {
+  opacity: 0.6;
+  scale: 0.98;
+}
+@media (pointer: fine) {
+  .feature-container:hover .each-feature-card:not(:hover) {
+    filter: blur(3px);
+  }
+}
+
+.feature-info {
+  letter-spacing: 0.3px;
+}
+.feature-info h3 {
+  margin: 0;
+  margin-block-end: 1rem;
+  font-weight: 500;
+  font-size: 1.225rem;
+}
+@media (width < 700px) {
+  .feature-info h3 {
+    text-align: center;
+  }
+}
+.feature-info p {
+  font-size: 0.9325rem;
+  font-weight: 300;
+  opacity: 0.8;
+  margin: 0;
+  margin-block-end: 1rem;
+  max-width: 38ch;
+}
+@media (width < 700px) {
+  .feature-info p {
+    text-align: center;
+    margin-inline: auto;
+  }
+}
+.feature-info h4 {
+  margin: 0;
+  font-weight: 400;
+}
+.feature-info span {
+  font-size: 0.925rem;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.other-features {
+  margin-block-start: 3rem;
+}
+.other-features h3 {
+  margin: 0;
+  margin-block-end: 0.5rem;
+  font-weight: 500;
+  font-size: 1.225rem;
+}
+.other-features h4 {
+  margin: 0;
+  font-weight: 500;
+}
+.other-features span {
+  display: block;
+  margin-block-end: 1rem;
+  font-size: 0.925rem;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.other-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-block-start: 3rem;
+}
+
+.mini-feature-card {
+  background-color: hsla(0, 0%, 50%, 0.05);
+  border: 1px solid var(--sidebar-border-clr);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: all 300ms;
+}
+@media (pointer: coarse) {
+  .mini-feature-card {
+    border: 1px solid var(--slick-border-clr);
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+  }
+}
+
+.other-features-grid:hover .mini-feature-card:not(:hover) {
+  opacity: 0.6;
+  scale: 0.98;
+}
+@media (pointer: fine) {
+  .other-features-grid:hover .mini-feature-card:not(:hover) {
+    filter: blur(3px);
+  }
+}
+
+.mini-feature-card:hover {
+  border: 1px solid var(--slick-border-clr);
+  transform: translateY(-4px);
+}
+@media (pointer: fine) {
+  .mini-feature-card:hover {
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+  }
+}
+
+.mini-feature-card h4 {
+  font-weight: 400;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.mini-feature-card p {
+  font-size: 0.925rem;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+.about-ZeroIDE {
+  margin: 4rem auto;
+  padding: 2rem;
+  background: hsla(0, 0%, 50%, 0.05);
+  border: 1px solid var(--sidebar-border-clr);
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  line-height: 1.8;
+  transition: 300ms;
+}
+.about-ZeroIDE:hover {
+  border: 1px solid var(--slick-border-clr);
+}
+@media (pointer: fine) {
+  .about-ZeroIDE:hover {
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+  }
+}
+@media (pointer: coarse) {
+  .about-ZeroIDE {
+    border: 1px solid var(--slick-border-clr);
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+  }
+}
+
+.about-ZeroIDE h2 {
+  font-size: clamp(1.325rem, 0.9875rem + 1.35vw, 2rem);
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.about-ZeroIDE p {
+  font-weight: 300;
+  letter-spacing: 0.2px;
+  margin-bottom: 1.2rem;
+}
+.about-ZeroIDE p strong {
+  font-weight: 500;
+}
+
+.site-footer {
+  text-align: center;
+  padding-block: 3rem 2rem;
+  margin-block-start: 4rem;
+  font-size: 0.875rem;
+  border-top: 1px solid var(--sidebar-border-clr);
+}
+
+.site-footer p {
+  font-weight: 300;
+  margin-block-end: 0.625rem;
 }
 
 .profile-page-wrapper {
@@ -2550,7 +2829,8 @@ form textarea::-webkit-scrollbar {
           user-select: none;
   pointer-events: none;
   opacity: 0.9;
-  text-wrap: nowrap;
+  text-align: center;
+  max-width: 200px;
   display: none;
   opacity: 0;
   transition-property: opacity;

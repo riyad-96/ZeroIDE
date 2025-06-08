@@ -1,46 +1,3 @@
-//! LocalStorage version/Migration control system
-// 2 Jun 2025
-function migrateTo_v0_0_1() {
-  const settingsObj = JSON.parse(localStorage.getItem('settings'));
-  if (settingsObj) {
-    settingsObj.editor.expandPanel = 'on';
-    localStorage.setItem('settings', JSON.stringify(settingsObj));
-  }
-}
-// 5 Jun 2025
-function migrateTo_v0_0_2() {
-  const savedCode = JSON.parse(localStorage.getItem('allSavedCode'));
-  if (savedCode) {
-    savedCode.forEach((obj) => {
-      obj.code.headTags = [];
-    });
-    localStorage.setItem('allSavedCode', JSON.stringify(savedCode));
-  }
-}
-
-// ----------
-const previousVersion = 'v0.0.1';
-const currentVersion = 'v0.0.2';
-const savedVersion = localStorage.getItem('version');
-
-if (!currentVersion || savedVersion !== currentVersion) {
-  // Resets
-  //2 Jun 2025
-  localStorage.removeItem('clean-tag');
-  // ----------
-
-  //2 Jun 2025
-  migrateTo_v0_0_1();
-
-  // 5 Jun 2025
-  if (savedVersion !== currentVersion) {
-    migrateTo_v0_0_2();
-  }
-
-  localStorage.setItem('version', currentVersion);
-}
-
-//! -----------------------------------------
 const allFormInDOM = document.querySelectorAll('form');
 allFormInDOM.forEach((form) => {
   form.addEventListener('submit', (e) => {
@@ -692,8 +649,17 @@ setTimeout(() => {
   particleContainer.style.opacity = '1';
 }, 1000);
 
+// home page nav
+document.addEventListener('click', (e) => {
+  const navBtn = e.target.closest('.nav-button');
+  if (navBtn) {
+    document.getElementById(navBtn.dataset.navPage).scrollIntoView({ behavior: 'smooth'});
+    pageChangeUpdate();
+  }
+});
+
 // Quick launch program
-document.querySelector('.quick-launch-btn').addEventListener('click', () => {
+document.querySelector('.quick-start-btn').addEventListener('click', () => {
   handleProjectCreate(true);
   document.querySelector('.disable-interactivity-layer').style.display = 'block';
   setTimeout(() => {
