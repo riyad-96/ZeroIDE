@@ -692,14 +692,14 @@ setTimeout(() => {
   particleContainer.style.opacity = '1';
 }, 1000);
 
-// // Quick launch program
-// document.querySelector('.quick-launch-btn').addEventListener('click', () => {
-//   handleProjectCreate(true);
-//   document.querySelector('.disable-interactivity-layer').style.display = 'block';
-//   setTimeout(() => {
-//     document.querySelector('.disable-interactivity-layer').style.display = 'none';
-//   }, 1400);
-// });
+// Quick launch program
+document.querySelector('.quick-launch-btn').addEventListener('click', () => {
+  handleProjectCreate(true);
+  document.querySelector('.disable-interactivity-layer').style.display = 'block';
+  setTimeout(() => {
+    document.querySelector('.disable-interactivity-layer').style.display = 'none';
+  }, 1400);
+});
 
 // print button
 document.querySelector('.print-button').addEventListener('click', () => {
