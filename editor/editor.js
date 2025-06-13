@@ -1,3 +1,10 @@
+const currentVersion = 'v1.0.0';
+const savedVersion = localStorage.getItem('version');
+if(!savedVersion) {
+  localStorage.setItem('version', currentVersion);
+}
+
+//! --------------------------------------------------
 //! Base functions
 document.querySelectorAll('form').forEach((form) => {
   form.addEventListener('submit', (e) => {

@@ -1,3 +1,10 @@
+const currentVersion = 'v1.0.0';
+const savedVersion = localStorage.getItem('version');
+if(!savedVersion) {
+  localStorage.setItem('version', currentVersion);
+}
+
+//! --------------------------------------------------
 const allFormInDOM = document.querySelectorAll('form');
 allFormInDOM.forEach((form) => {
   form.addEventListener('submit', (e) => {
@@ -653,7 +660,7 @@ setTimeout(() => {
 document.addEventListener('click', (e) => {
   const navBtn = e.target.closest('.nav-button');
   if (navBtn) {
-    document.getElementById(navBtn.dataset.navPage).scrollIntoView({ behavior: 'smooth'});
+    document.getElementById(navBtn.dataset.navPage).scrollIntoView({ behavior: 'smooth' });
     pageChangeUpdate();
   }
 });
