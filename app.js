@@ -1529,7 +1529,7 @@ projectPageProjectContainer.addEventListener('click', (e) => {
     previewTitleContainer.textContent = savedProjects[index].name;
     document.querySelector('.preview-project-description').textContent = savedProjects[index].des;
 
-    const thisProject = savedCode.find((project) => project.id === Number(id));
+    const thisProject = savedCode?.find((project) => project.id === Number(id));
     if (!thisProject) {
       updateIframe(previewIframe, projectNotFoundCode());
       return;
