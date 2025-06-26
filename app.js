@@ -941,7 +941,7 @@ const socialPlatforms = [
     id: 'linkedin-username',
     label: 'LinkedIn username',
     icon: '<i class="fa-brands fa-linkedin"></i>',
-    baseUrl: 'https://linkedin.com/',
+    baseUrl: 'https://linkedin.com/in/',
   },
   {
     name: 'codepen',
