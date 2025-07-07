@@ -1,8 +1,50 @@
-const currentVersion = 'v1.0.0';
-const savedVersion = localStorage.getItem('version');
-if(!savedVersion) {
-  localStorage.setItem('version', currentVersion);
-}
+import Migrate from "../migration/migrate";
+Migrate();
+
+// const versions = ['v1.0.0', 'v1.0.1'];
+
+// const appliedVersion = JSON.parse(localStorage.getItem('versions'));
+
+// //! Apply migration helper
+// function applyMigration(version, callback) {
+//   const isMigrated = appliedVersion.includes(version);
+//   if (!isMigrated) {
+//     callback();
+
+//     appliedVersion.push(version);
+//     localStorage.setItem('versions', JSON.stringify(appliedVersion));
+//   }
+// }
+
+// function patch_v1_0_1() {
+//   // zero-btn cdn link added in the starter tag
+//   // Jul 8 25;
+
+//   const patch = 'v1.0.1';
+//   applyMigration(patch, () => {
+//     const allSavedCode = JSON.parse(localStorage.getItem('allSavedCode')) || [];
+//     allSavedCode.forEach((obj) => {
+//       obj.code.headTags = [];
+//     });
+//     localStorage.setItem('allSavedCode', JSON.stringify(allSavedCode));
+//   });
+// }
+
+// function migrate() {
+//   patch_v1_0_1();
+// }
+
+// (function () {
+//   if (!appliedVersion) {
+//     localStorage.setItem('versions', JSON.stringify(versions));
+//     const oldVersionRecord = localStorage.getItem('version');
+//     if (oldVersionRecord) {
+//       localStorage.removeItem('version');
+//     }
+//     return;
+//   }
+//   migrate();
+// })();
 
 //! --------------------------------------------------
 //! Base functions
@@ -1053,6 +1095,7 @@ function randomCdnPlaceholder() {
 }
 function getSelectedStarterTag(btn) {
   const starterTags = {
+    zerobtn: 'https://cdn.jsdelivr.net/npm/zero-btn@1.2.0/zero-btn.min.js',
     tailwindcss: 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
     fontawesomeicon: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
     axios: 'https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js',
@@ -1629,7 +1672,6 @@ document.addEventListener('DOMContentLoaded', () => {
 const tooltipContainer = document.querySelector('.tooltip-container');
 const tooltipBottomContainer = document.querySelector('.tooltip-bottom-container');
 
-
 document.addEventListener('mouseover', (e) => {
   const target = e.target.closest('[data-tooltip]');
   if (target) {
@@ -1665,7 +1707,7 @@ document.addEventListener('mouseout', (e) => {
 
   const tooltipBottom = e.target.closest('[data-tooltip-bottom]');
   if (tooltipBottom) {
-    tooltipBottomContainer.classList.remove('show')
+    tooltipBottomContainer.classList.remove('show');
   }
 });
 

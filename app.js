@@ -1,8 +1,5 @@
-const currentVersion = 'v1.0.0';
-const savedVersion = localStorage.getItem('version');
-if(!savedVersion) {
-  localStorage.setItem('version', currentVersion);
-}
+import Migrate from './migration/migrate';
+Migrate();
 
 //! --------------------------------------------------
 const allFormInDOM = document.querySelectorAll('form');
