@@ -1,4 +1,4 @@
-import Migrate from './migration/migrate';
+import Migrate from './migration/migrate.js';
 Migrate();
 
 //! --------------------------------------------------

@@ -1,4 +1,4 @@
-import Migrate from "../migration/migrate";
+import Migrate from "../migration/migrate.js";
 Migrate();
 
 // const versions = ['v1.0.0', 'v1.0.1'];
