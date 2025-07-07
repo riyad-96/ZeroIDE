@@ -628,6 +628,10 @@ window.addEventListener('resize', () => {
 });
 
 //! ----------- Home page programs -------------
+const versionInfo = document.querySelector('[data-version-info-container]');
+const savedVersionArray = JSON.parse(localStorage.getItem('versions'));
+versionInfo.textContent = savedVersionArray[savedVersionArray.length - 1];
+
 const particleContainer = document.getElementById('particle-container');
 const particleCount = 50;
 

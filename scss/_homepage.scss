@@ -82,7 +82,7 @@
 .logo-text {
   display: inline-block;
   margin: 0;
-  line-height: 1.5lh;
+  line-height: clamp(1.625rem, 1.3606rem + 1.0577vw, 2.3125rem);
   font-size: clamp(1.425rem, 1.025rem + 1.6vw, 2.225rem);
   font-weight: 600;
   cursor: pointer;
@@ -389,7 +389,7 @@
   padding-inline: 1.5rem;
   border-radius: 0.5rem;
   background-color: hsla(0, 0%, 50%, 0.05);
-  transition: scale 400ms, opacity 300ms, filter 300ms;
+  transition: scale 400ms, opacity 300ms, filter 300ms, border-color 300ms;
   position: relative;
 
   &:hover {
