@@ -1,10 +1,10 @@
 function Migrate() {
-  const versions = ['v1.0.0', 'v1.0.1'];
+  const versions = ['v1.0.0', 'v1.0.1', 'v1.1.0'];
 
   const appliedVersion = JSON.parse(localStorage.getItem('versions'));
 
   //! Apply migration helper
-  function applyMigration(version, callback) {
+  function applyMigration(version, callback = () => {}) {
     const isMigrated = appliedVersion.includes(version);
     if (!isMigrated) {
       callback();
@@ -28,8 +28,17 @@ function Migrate() {
     });
   }
 
+  function patch_v1_1_0() {
+    // code download feature integrated
+    // Jul 13 25;
+
+    const minor = 'v1.1.0'
+    applyMigration(minor);
+  }
+
   function migrate() {
     patch_v1_0_1();
+    patch_v1_1_0();
   }
 
   if (!appliedVersion) {

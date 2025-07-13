@@ -65,10 +65,18 @@
     <link rel="stylesheet" href="@simonwep/pickr/dist/themes/nano.min.css" />
     <script src="@simonwep/pickr/dist/pickr.min.js"></script>
 
+    <!-- jszip lib -->
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
     <!-- <script src="https://unpkg.com/console.js"></script> -->
 
     <!-- Main css & js files -->
-    <link rel="stylesheet" href="./compiled.css">
+    <!-- <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/theme.css" />
+    <link rel="stylesheet" href="./styles/editor.css" />
+    <link rel="stylesheet" href="./styles/codemirror.css" /> -->
+
+    <link rel="stylesheet" href="./compiled.css" />
     <script defer type="module" src="./editor.js"></script>
   </head>
 
@@ -107,8 +115,34 @@
 
         <div class="navigation-area">
           <div class="basic-tools">
+            <div class="download-tool-container">
+              <button class="show-download-options-btn tool-btn" aria-label="download code button" data-tooltip-bottom="Download code">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M3 19H21V21H3V19ZM13 13.1716L19.0711 7.1005L20.4853 8.51472L12 17L3.51472 8.51472L4.92893 7.1005L11 13.1716V2H13V13.1716Z"></path></svg>
+              </button>
+
+              <div class="download-options-container">
+                <span>Download files</span>
+                <div>
+                  <label for="download-option-input">File type</label>
+                  <select id="download-option-input">
+                    <option value="single">Single html file</option>
+                    <option value="separate">Separate files</option>
+                    <option value="zip">Zip file (separated)</option>
+                  </select>
+                </div>
+                <div class="zip-file-name-container">
+                  <label for="zip-file-name">Zip name</label>
+                  <input type="text" id="zip-file-name" />
+                </div>
+                <button class="file-download-btn">
+                  <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M3 19H21V21H3V19ZM13 13.1716L19.0711 7.1005L20.4853 8.51472L12 17L3.51472 8.51472L4.92893 7.1005L11 13.1716V2H13V13.1716Z"></path></svg> -->
+                  <span>Download</span>
+                </button>
+              </div>
+            </div>
+
             <div class="color-picker-container">
-              <button class="color-picker-btn" data-tooltip-bottom="Color picker">
+              <button aria-label="color picker button" class="color-picker-btn tool-btn" data-tooltip-bottom="Color picker">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                   <path
                     d="M12 2C17.5222 2 22 5.97778 22 10.8889C22 13.9556 19.5111 16.4444 16.4444 16.4444H14.4778C13.5556 16.4444 12.8111 17.1889 12.8111 18.1111C12.8111 18.5333 12.9778 18.9222 13.2333 19.2111C13.5 19.5111 13.6667 19.9 13.6667 20.3333C13.6667 21.2556 12.9 22 12 22C6.47778 22 2 17.5222 2 12C2 6.47778 6.47778 2 12 2ZM10.8111 18.1111C10.8111 16.0843 12.451 14.4444 14.4778 14.4444H16.4444C18.4065 14.4444 20 12.851 20 10.8889C20 7.1392 16.4677 4 12 4C7.58235 4 4 7.58235 4 12C4 16.19 7.2226 19.6285 11.324 19.9718C10.9948 19.4168 10.8111 18.7761 10.8111 18.1111ZM7.5 12C6.67157 12 6 11.3284 6 10.5C6 9.67157 6.67157 9 7.5 9C8.32843 9 9 9.67157 9 10.5C9 11.3284 8.32843 12 7.5 12ZM16.5 12C15.6716 12 15 11.3284 15 10.5C15 9.67157 15.6716 9 16.5 9C17.3284 9 18 9.67157 18 10.5C18 11.3284 17.3284 12 16.5 12ZM12 9C11.1716 9 10.5 8.32843 10.5 7.5C10.5 6.67157 11.1716 6 12 6C12.8284 6 13.5 6.67157 13.5 7.5C13.5 8.32843 12.8284 9 12 9Z"
@@ -148,7 +182,7 @@
           </div>
 
           <nav>
-            <button class="run-code-btn" aria-label="Run code button"  data-tooltip-bottom="Run code (Ctrl + S or R)">
+            <button class="run-code-btn" aria-label="Run code button" data-tooltip-bottom="Run code (Ctrl + S or R)">
               <span>Run</span>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                 <path d="M16.3944 12.0001L10 7.7371V16.263L16.3944 12.0001ZM19.376 12.4161L8.77735 19.4818C8.54759 19.635 8.23715 19.5729 8.08397 19.3432C8.02922 19.261 8 19.1645 8 19.0658V4.93433C8 4.65818 8.22386 4.43433 8.5 4.43433C8.59871 4.43433 8.69522 4.46355 8.77735 4.5183L19.376 11.584C19.6057 11.7372 19.6678 12.0477 19.5146 12.2774C19.478 12.3323 19.4309 12.3795 19.376 12.4161Z"></path>
@@ -213,7 +247,7 @@
               </div>
 
               <div class="extra-options">
-                <button class="single-file-format-btn"  data-tooltip="Format CSS (Shift + Alt + F)" data-parser-type="css" data-toast-message="CSS file formatted" aria-label="format html">
+                <button class="single-file-format-btn" data-tooltip="Format CSS (Shift + Alt + F)" data-parser-type="css" data-toast-message="CSS file formatted" aria-label="format html">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3 4H21V6H3V4ZM3 19H17V21H3V19ZM3 14H21V16H3V14ZM3 9H17V11H3V9Z"></path></svg>
                 </button>
 
@@ -249,7 +283,7 @@
               </div>
 
               <div class="extra-options">
-                <button class="single-file-format-btn"  data-tooltip="Format JS (Shift + Alt + F)" data-parser-type="babel" data-toast-message="JS file formatted" aria-label="format html">
+                <button class="single-file-format-btn" data-tooltip="Format JS (Shift + Alt + F)" data-parser-type="babel" data-toast-message="JS file formatted" aria-label="format html">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M3 4H21V6H3V4ZM3 19H17V21H3V19ZM3 14H21V16H3V14ZM3 9H17V11H3V9Z"></path></svg>
                 </button>
 

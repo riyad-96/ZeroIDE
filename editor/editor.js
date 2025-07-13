@@ -1,4 +1,4 @@
-import Migrate from "../migration/migrate.js";
+import Migrate from '../migration/migrate.js';
 Migrate();
 
 //! --------------------------------------------------
@@ -626,7 +626,14 @@ function code() {
       return headTagsString;
     }
   }
+
+  function title() {
+    const project = freshProjectList().find((obj) => obj.id === hash);
+    return project?.name;
+  }
+
   return {
+    title: title(),
     headTags: headTags(),
     html: htmlCodeMirror.getValue(),
     css: cssCodeMirror.getValue(),
@@ -1666,4 +1673,160 @@ document.addEventListener('mouseout', (e) => {
   }
 });
 
-//! need to add download code feature that offer combined code and separated files.
+//! Download files feature
+const downloadOptionsContainer = document.querySelector('.download-options-container');
+const downloadTypeSelectInput = document.getElementById('download-option-input');
+const zipFileNameContainer = document.querySelector('.zip-file-name-container');
+const zipFileNameInput = zipFileNameContainer.querySelector('input');
+
+let downloadType = 'single';
+
+document.addEventListener('click', (e) => {
+  const showDownloadOptionBtn = e.target.closest('.show-download-options-btn');
+  if (showDownloadOptionBtn) {
+    downloadOptionsContainer.classList.toggle('show');
+    if (zipFileNameContainer.classList.contains('show')) {
+      zipFileNameInput.value = code().title;
+    }
+    return;
+  }
+  const downloadBtn = e.target.closest('.file-download-btn');
+  if (downloadBtn) {
+    downloadFile(downloadType);
+  }
+
+  if (!e.target.closest('.download-options-container') && downloadOptionsContainer.classList.contains('show')) {
+    downloadOptionsContainer.classList.remove('show');
+  }
+});
+
+// download functions
+function download(fileName, doc) {
+  const blob = new Blob([doc], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  console.log(url);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  a.style.display = 'none';
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+}
+
+// single file download logic
+function downloadInSingleHTMLFile() {
+  const fullCode = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${code().title ? code().title : 'Document'}</title>
+    ${code().headTags ? code().headTags : ''}
+    <style>
+      ${code().css}
+    </style>
+  </head>
+
+  <body>
+    ${code().html}
+    <script>
+      ${code().js}
+    </script>
+  </body>
+</html>`;
+
+  download('index.html', formatCode(fullCode, 'html'));
+}
+
+// separated files download logic
+function singleHTML() {
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${code().title ? code().title : 'Document'}</title>
+    ${code().headTags ? code().headTags : ''}
+    <link rel="stylesheet" href="./style.css" />
+    <script defer src="./script.js"></script>
+  </head>
+
+  <body>
+    ${code().html}
+  </body>
+</html>`;
+}
+
+function downloadSeparateFiles() {
+  const files = {
+    'index.html': formatCode(singleHTML(), 'html'),
+    'style.css': formatCode(code().css, 'css'),
+    'script.js': formatCode(code().js, 'babel'),
+  };
+
+  Object.entries(files).forEach(([fileName, code]) => {
+    download(fileName, code);
+  });
+}
+
+// zip download logic
+function sanitizeZipName(name) {
+  if (typeof name !== 'string') {
+    name = '';
+  }
+  const sanitized = name.trim().replace(/[\\\/:*?"<>|]/g, '_');
+
+  return sanitized || 'ZeroIDE-project';
+}
+
+async function downloadInZipFile() {
+  const zip = new JSZip();
+
+  zip.file('index.html', formatCode(singleHTML(), 'html'));
+  zip.file('style.css', formatCode(code().css, 'css'));
+  zip.file('script.js', formatCode(code().js, 'babel'));
+
+  const blob = await zip.generateAsync({ type: 'blob' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = sanitizeZipName(zipFileNameInput.value.trim()) + '.zip';
+  a.style.display = 'none';
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+}
+
+function downloadFile(type) {
+  if (type === 'single') {
+    downloadInSingleHTMLFile();
+    return;
+  }
+  if (type === 'separate') {
+    downloadSeparateFiles();
+    return;
+  }
+  if (type === 'zip') {
+    downloadInZipFile();
+  }
+}
+
+downloadTypeSelectInput.addEventListener('change', (e) => {
+  downloadType = e.target.value;
+  if (downloadType === 'zip') {
+    zipFileNameContainer.classList.add('show');
+    zipFileNameInput.value = code().title;
+    zipFileNameContainer.querySelector('input').focus();
+  } else {
+    zipFileNameContainer.classList.remove('show');
+  }
+});
