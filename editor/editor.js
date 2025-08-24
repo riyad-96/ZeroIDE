@@ -1057,7 +1057,7 @@ function randomCdnPlaceholder() {
 }
 function getSelectedStarterTag(btn) {
   const starterTags = {
-    kitzo: 'https://cdn.jsdelivr.net/npm/kitzo@1.0.5/dist/kitzo.umd.min.js',
+    kitzo: 'https://cdn.jsdelivr.net/npm/kitzo@1.1.0/dist/kitzo.umd.min.js',
     tailwindcss: 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
     fontawesomeicon: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
     axios: 'https://cdnjs.cloudflare.com/ajax/libs/axios/1.9.0/axios.min.js',
